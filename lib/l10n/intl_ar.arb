@@ -1,0 +1,9 @@
+{
+    "homeTitle" : "PROPER",
+    "homeButtonName": "الرئيسية" ,
+    "categories" : "الاقسام",
+    "favoritesTitle" : "المفضلة",
+    "cartTitle" : "السلة",
+    "ordersTitle" : "طلباتي",
+    "profileTitle" : "حسابي"
+}

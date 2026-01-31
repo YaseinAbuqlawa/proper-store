@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968085072868",
+    "project_id": "proper-store-eg",
+    "storage_bucket": "proper-store-eg.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968085072868:android:ea835052dc125cd65cf5f1",
+        "android_client_info": {
+          "package_name": "com.example.proper_store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmc4g8_4oVIOx2ZZ4ahR57nomkU06FJeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
