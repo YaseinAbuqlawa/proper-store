@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proper_store/core/widgets/initial_screen_widget.dart';
+import 'package:proper_store/core/shared_feature/presentation/widgets/temporary_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});

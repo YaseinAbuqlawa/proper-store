@@ -1,1 +1,20 @@
-{}
+{
+    "firebase_error_aborted": "The process was interrupted. Please try again.",
+    "firebase_error_already_exists": "This information already exists. Please double-check.",
+    "firebase_error_cancelled": "The operation was cancelled as requested.",
+    "firebase_error_data_loss": "We're sorry, some data was lost. Please contact support for assistance.",
+    "firebase_error_deadline_exceeded": "Request timed out. Please check your internet connection and try again.",
+    "firebase_error_failed_precondition": "This action cannot be completed right now. Please try again later.",
+    "firebase_error_internal": "A technical error occurred on our end. We are working to fix it.",
+    "firebase_error_invalid_argument": "Some information was entered incorrectly. Please review and try again.",
+    "firebase_error_not_found": "We couldn't find what you were looking for. Please make sure the details are correct.",
+    "firebase_error_ok": "Completed successfully. Thank you!",
+    "firebase_error_out_of_range": "The value entered is outside the allowed range.",
+    "firebase_error_permission_denied": "Sorry, you don't have the necessary permission for this action.",
+    "firebase_error_resource_exhausted": "The server is busy right now. Please wait a moment and try again.",
+    "firebase_error_unauthenticated": "Please sign in first to continue.",
+    "firebase_error_unavailable": "The service is temporarily unavailable. We'll be back shortly.",
+    "firebase_error_unimplemented": "This feature is not available yet. Stay tuned for future updates.",
+    "firebase_error_unknown": "An unexpected error occurred. Please try again.",
+    "firebase_error_unexpected": "An unexpected error occurred. Please try again or check your internet connection."
+}
