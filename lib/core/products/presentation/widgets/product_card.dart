@@ -6,8 +6,8 @@ import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/router/app_router.dart';
 import 'package:proper_store/core/router/app_routes.dart';
-import 'package:proper_store/core/shared_feature/presentation/widgets/app_network_image.dart';
-import 'package:proper_store/core/shared_feature/presentation/widgets/app_spacer.dart';
+import 'package:proper_store/core/widgets/app_network_image.dart';
+import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/generated/l10n.dart';
 
 class ProductCard extends StatelessWidget {

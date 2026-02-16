@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
 
-import '../../../design_system/colors/app_colors.dart';
-import '../../../design_system/spacing/app_spacing.dart';
-import '../../../design_system/typography/app_text_styles.dart';
+import '../design_system/colors/app_colors.dart';
+import '../design_system/spacing/app_spacing.dart';
+import '../design_system/typography/app_text_styles.dart';
 
 class AppBadgeCard extends StatelessWidget {
   final String text;

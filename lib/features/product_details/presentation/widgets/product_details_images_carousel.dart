@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
-import 'package:proper_store/core/shared_feature/presentation/widgets/app_network_image.dart';
+import 'package:proper_store/core/widgets/app_network_image.dart';
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart';
 
 class ProductDetailsImagesCarousel extends StatelessWidget {

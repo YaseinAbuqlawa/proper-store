@@ -13,14 +13,14 @@ import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:proper_store/core/di/injection_container.dart' as _i180;
-import 'package:proper_store/core/shared_feature/data/data_sources/products_remote_data_source.dart'
-    as _i435;
-import 'package:proper_store/core/shared_feature/data/repo/products_repo_impl.dart'
-    as _i449;
-import 'package:proper_store/core/shared_feature/domain/repo/products_repo.dart'
-    as _i126;
-import 'package:proper_store/core/shared_feature/domain/use_cases/get_product_with_id_use_case.dart'
-    as _i927;
+import 'package:proper_store/core/products/data/data_sources/products_remote_data_source.dart'
+    as _i122;
+import 'package:proper_store/core/products/data/repo/products_repo_impl.dart'
+    as _i614;
+import 'package:proper_store/core/products/domain/repo/products_repo.dart'
+    as _i1061;
+import 'package:proper_store/core/products/domain/use_cases/get_product_with_id_use_case.dart'
+    as _i1033;
 import 'package:proper_store/features/home/data/data_sources/home_remote_data_source.dart'
     as _i384;
 import 'package:proper_store/features/home/data/repo/home_repo_impl.dart'
@@ -52,8 +52,8 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final externalModules = _$ExternalModules();
     gh.lazySingleton<_i974.FirebaseFirestore>(() => externalModules.firestore);
-    gh.lazySingleton<_i435.ProductsRemoteDataSource>(
-      () => _i435.ProductsRemoteDataSource(
+    gh.lazySingleton<_i122.ProductsRemoteDataSource>(
+      () => _i122.ProductsRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
     );
@@ -71,10 +71,13 @@ extension GetItInjectableX on _i174.GetIt {
         remoteDataSource: gh<_i20.ProductDetailsRemoteDataSource>(),
       ),
     );
-    gh.lazySingleton<_i126.ProductsRepo>(
-      () => _i449.ProductsRepoImpl(
-        remoteDataSource: gh<_i435.ProductsRemoteDataSource>(),
+    gh.lazySingleton<_i1061.ProductsRepo>(
+      () => _i614.ProductsRepoImpl(
+        remoteDataSource: gh<_i122.ProductsRemoteDataSource>(),
       ),
+    );
+    gh.lazySingleton<_i1033.GetProductWithIdUseCase>(
+      () => _i1033.GetProductWithIdUseCase(repo: gh<_i1061.ProductsRepo>()),
     );
     gh.lazySingleton<_i66.GetRelatedProductsUseCase>(
       () =>
@@ -83,15 +86,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i147.HomeRepo>(
       () => _i697.HomeRepoImpl(
         homeDataSource: gh<_i384.HomeRemoteDataSource>(),
-        productsRemoteDataSource: gh<_i435.ProductsRemoteDataSource>(),
+        productsRemoteDataSource: gh<_i122.ProductsRemoteDataSource>(),
       ),
-    );
-    gh.lazySingleton<_i927.GetProductWithIdUseCase>(
-      () => _i927.GetProductWithIdUseCase(repo: gh<_i126.ProductsRepo>()),
     );
     gh.factory<_i846.ProductDetailsCubit>(
       () => _i846.ProductDetailsCubit(
-        getProductWithIdUseCase: gh<_i927.GetProductWithIdUseCase>(),
+        getProductWithIdUseCase: gh<_i1033.GetProductWithIdUseCase>(),
         getRelatedProductsUseCase: gh<_i66.GetRelatedProductsUseCase>(),
       ),
     );

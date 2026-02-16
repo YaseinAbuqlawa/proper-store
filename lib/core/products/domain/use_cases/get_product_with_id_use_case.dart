@@ -1,8 +1,8 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/failures/app_failures.dart';
-import 'package:proper_store/core/shared_feature/data/models/product_model.dart';
-import 'package:proper_store/core/shared_feature/domain/repo/products_repo.dart';
+import 'package:proper_store/core/products/data/models/product_model.dart';
+import 'package:proper_store/core/products/domain/repo/products_repo.dart';
 
 @lazySingleton
 class GetProductWithIdUseCase {

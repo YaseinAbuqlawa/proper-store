@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:proper_store/core/shared_feature/data/models/product_model.dart';
+import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/features/home/data/models/home_collection_banner_model.dart';
 import 'package:proper_store/features/home/domain/use_cases/get_home_offer_card_use_case.dart';
 import 'package:proper_store/features/home/domain/use_cases/get_most_sold_product_use_case.dart';

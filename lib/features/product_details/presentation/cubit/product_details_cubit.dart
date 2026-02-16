@@ -4,8 +4,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/failures/app_failures.dart';
-import 'package:proper_store/core/shared_feature/data/models/product_model.dart';
-import 'package:proper_store/core/shared_feature/domain/use_cases/get_product_with_id_use_case.dart';
+import 'package:proper_store/core/products/data/models/product_model.dart';
+import 'package:proper_store/core/products/domain/use_cases/get_product_with_id_use_case.dart';
 import 'package:proper_store/features/product_details/domain/use_cases/get_related_products_use_case.dart';
 
 part 'product_details_cubit.freezed.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
-import 'package:proper_store/core/shared_feature/presentation/widgets/app_spacer.dart';
+import 'package:proper_store/core/widgets/app_spacer.dart';
 
 class OfferEndTimeCounter extends StatefulWidget {
   final DateTime endDate;

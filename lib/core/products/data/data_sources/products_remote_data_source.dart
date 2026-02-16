@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/helpers/app_consts.dart';
-import 'package:proper_store/core/shared_feature/data/models/product_model.dart';
+import 'package:proper_store/core/products/data/models/product_model.dart';
 
 @lazySingleton
 class ProductsRemoteDataSource {
