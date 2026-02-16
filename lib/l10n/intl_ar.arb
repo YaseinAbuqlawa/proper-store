@@ -11,6 +11,7 @@
     "mainCollectionBannerButtonText": "تسوقي الان",
     "addToCartText" : "أضف للسلة",
     "currencySymbol" : " ج.م",
+    "productDetailsScreenTitle" : "تفاصيل المنتج",
     "firebase_error_aborted": "حصلت مشكلة بسيطة والعملية اتوقفت، ممكن تحاول مرة تانية؟",
     "firebase_error_already_exists": "البيانات دي موجودة عندنا بالفعل، يا ريت تتأكد منها.",
     "firebase_error_cancelled": "تم إلغاء العملية بناءً على طلبك.",

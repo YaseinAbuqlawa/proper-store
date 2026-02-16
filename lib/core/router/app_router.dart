@@ -8,6 +8,7 @@ import 'package:proper_store/features/categories/presentation/screens/categories
 import 'package:proper_store/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:proper_store/features/home/presentation/screens/home_screen.dart';
 import 'package:proper_store/features/orders/presentation/screens/orders_screen.dart';
+import 'package:proper_store/features/product_details/presentation/screens/product_details_screen.dart';
 import 'package:proper_store/features/profile/presentation/screens/profile_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigationKey = GlobalKey<NavigatorState>();
@@ -78,6 +79,17 @@ final GoRouter appRouter = GoRouter(
         context: context,
         child: OrdersScreen(),
       ),
+    ),
+
+    GoRoute(
+      path: AppRoutes.productDetails.path,
+      builder: (context, state) {
+        final id = state.pathParameters['id'];
+        return ProductDetailsScreen(
+          id: id!,
+          initialImageUrl: state.extra as String,
+        );
+      },
     ),
   ],
 );

@@ -88,6 +88,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage("وصل حديثاً"),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("طلباتي"),
+    "productDetailsScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل المنتج",
+    ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),
     "showAllText": MessageLookupByLibrary.simpleMessage("عرض الكل"),
   };

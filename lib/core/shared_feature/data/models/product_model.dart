@@ -10,6 +10,7 @@ abstract class ProductModel with _$ProductModel {
   const factory ProductModel({
     required String category,
     @ColorConverter() required List<Color> colors,
+    @ColorConverter() @Default(null) Color? selectedColor,
     required String description,
     required double discountPercentage,
     required double discountValue,

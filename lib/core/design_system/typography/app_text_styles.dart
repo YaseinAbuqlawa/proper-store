@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 
 class AppTextStyles {
-  // Large headlines (e.g., main page header)
   static final TextStyle heroHeadline = GoogleFonts.cairo(
     fontSize: 28,
     fontWeight: FontWeight.w900,
@@ -11,7 +10,6 @@ class AppTextStyles {
     height: 1.2,
   );
 
-  // Section titles (e.g., Saving Packages, Best Sellers)
   static final TextStyle sectionTitle = GoogleFonts.cairo(
     fontSize: 20,
     fontWeight: FontWeight.bold,
@@ -19,21 +17,24 @@ class AppTextStyles {
     letterSpacing: 0.5,
   );
 
-  // Product names in cards
   static final TextStyle productName = GoogleFonts.cairo(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: AppColors.whiteColor,
   );
 
-  // Current price (highlighted in gold)
+  static final TextStyle productDetailsName = GoogleFonts.cairo(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: AppColors.whiteColor,
+  );
+
   static final TextStyle priceNow = GoogleFonts.cairo(
     fontSize: 18,
     fontWeight: FontWeight.w800,
     color: AppColors.goldRoyal,
   );
 
-  // Old or strikethrough price (muted)
   static final TextStyle priceOld = GoogleFonts.cairo(
     fontSize: 14,
     fontWeight: FontWeight.w400,
@@ -41,21 +42,18 @@ class AppTextStyles {
     decoration: TextDecoration.lineThrough,
   );
 
-  // Button text (e.g., Buy Now, Add to Cart)
   static final TextStyle buttonText = GoogleFonts.cairo(
     fontSize: 16,
     fontWeight: FontWeight.bold,
     color: AppColors.blackDeep,
   );
 
-  // Badge or small alert text (e.g., Special Offer, New)
   static final TextStyle badgeText = GoogleFonts.cairo(
     fontSize: 12,
     fontWeight: FontWeight.w700,
     color: AppColors.blackDeep,
   );
 
-  // Long product description (body text)
   static final TextStyle bodyDescription = GoogleFonts.cairo(
     fontSize: 14,
     fontWeight: FontWeight.w400,
@@ -63,7 +61,6 @@ class AppTextStyles {
     height: 1.6,
   );
 
-  // Bottom navigation bar labels
   static final TextStyle navLabel = GoogleFonts.cairo(
     fontSize: 11,
     fontWeight: FontWeight.w600,

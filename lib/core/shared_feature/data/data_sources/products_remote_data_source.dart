@@ -29,4 +29,13 @@ class ProductsRemoteDataSource {
         .map((product) => ProductModel.fromJson(product.data()))
         .toList();
   }
+
+  Future<ProductModel> getProductWithId(String id) async {
+    final productData = await firestore
+        .collection(AppConsts.productsCollection)
+        .doc(id)
+        .get();
+
+    return ProductModel.fromJson(productData.data()!);
+  }
 }

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/failures/app_failures.dart';
+import 'package:proper_store/core/helpers/app_consts.dart';
 import 'package:proper_store/core/shared_feature/data/data_sources/products_remote_data_source.dart';
 import 'package:proper_store/core/shared_feature/data/models/product_model.dart';
 import 'package:proper_store/features/home/data/data_sources/home_remote_data_source.dart';
@@ -26,7 +27,7 @@ class HomeRepoImpl implements HomeRepo {
     } on FirebaseException catch (e) {
       return left(ServerFailure(code: e.code));
     } catch (e) {
-      return left(ServerFailure(code: "unexpected-error"));
+      return left(ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -38,7 +39,7 @@ class HomeRepoImpl implements HomeRepo {
     } on FirebaseException catch (e) {
       return left(ServerFailure(code: e.code));
     } catch (e) {
-      return left(ServerFailure(code: "unexpected-error"));
+      return left(ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 }

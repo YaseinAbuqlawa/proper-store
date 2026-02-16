@@ -107,8 +107,10 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final product = productsList[index];
                         return ProductCard(
+                          productId: product.id,
                           imageUrl: product.imageUrls[0],
                           name: product.name,
+                          discountPercentage: product.discountPercentage,
                           originalPrice: product.sellingPrice,
                           offerPrice: product.offerPrice(),
                           colors: product.colors,

@@ -9,14 +9,17 @@ class AppTheme {
     return ThemeData(
       brightness: Brightness.dark,
       primaryColor: AppColors.goldRoyal,
-      scaffoldBackgroundColor: AppColors.blackDeep,
+      scaffoldBackgroundColor: AppColors.blackCard,
       cardColor: AppColors.blackCard,
       colorScheme: ColorScheme.dark(
         primary: AppColors.goldRoyal,
         secondary: AppColors.goldMuted,
         surface: AppColors.blackCard,
       ),
-      appBarTheme: AppBarTheme(surfaceTintColor: AppColors.blackCard),
+      appBarTheme: AppBarTheme(
+        surfaceTintColor: AppColors.blackCard,
+        backgroundColor: AppColors.darkGray,
+      ),
       textTheme: TextTheme(
         displayLarge: GoogleFonts.cairo(
           color: AppColors.whiteColor,

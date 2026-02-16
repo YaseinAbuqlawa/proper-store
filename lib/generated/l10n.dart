@@ -124,6 +124,16 @@ class S {
     return Intl.message(' ج.م', name: 'currencySymbol', desc: '', args: []);
   }
 
+  /// `تفاصيل المنتج`
+  String get productDetailsScreenTitle {
+    return Intl.message(
+      'تفاصيل المنتج',
+      name: 'productDetailsScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `حصلت مشكلة بسيطة والعملية اتوقفت، ممكن تحاول مرة تانية؟`
   String get firebase_error_aborted {
     return Intl.message(

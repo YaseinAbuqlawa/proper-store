@@ -15,6 +15,12 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:proper_store/core/di/injection_container.dart' as _i180;
 import 'package:proper_store/core/shared_feature/data/data_sources/products_remote_data_source.dart'
     as _i435;
+import 'package:proper_store/core/shared_feature/data/repo/products_repo_impl.dart'
+    as _i449;
+import 'package:proper_store/core/shared_feature/domain/repo/products_repo.dart'
+    as _i126;
+import 'package:proper_store/core/shared_feature/domain/use_cases/get_product_with_id_use_case.dart'
+    as _i927;
 import 'package:proper_store/features/home/data/data_sources/home_remote_data_source.dart'
     as _i384;
 import 'package:proper_store/features/home/data/repo/home_repo_impl.dart'
@@ -26,6 +32,16 @@ import 'package:proper_store/features/home/domain/use_cases/get_most_sold_produc
     as _i71;
 import 'package:proper_store/features/home/presentation/cubit/home_cubit.dart'
     as _i1070;
+import 'package:proper_store/features/product_details/data/data_srouces/product_details_remote_data_source.dart'
+    as _i20;
+import 'package:proper_store/features/product_details/data/repo/product_details_repo_impl.dart'
+    as _i911;
+import 'package:proper_store/features/product_details/domain/repo/product_details_repo.dart'
+    as _i1064;
+import 'package:proper_store/features/product_details/domain/use_cases/get_related_products_use_case.dart'
+    as _i66;
+import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart'
+    as _i846;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -45,10 +61,38 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i384.HomeRemoteDataSource(firestore: gh<_i974.FirebaseFirestore>()),
     );
+    gh.lazySingleton<_i20.ProductDetailsRemoteDataSource>(
+      () => _i20.ProductDetailsRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+      ),
+    );
+    gh.lazySingleton<_i1064.ProductDetailsRepo>(
+      () => _i911.ProductDetailsRepoImpl(
+        remoteDataSource: gh<_i20.ProductDetailsRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i126.ProductsRepo>(
+      () => _i449.ProductsRepoImpl(
+        remoteDataSource: gh<_i435.ProductsRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i66.GetRelatedProductsUseCase>(
+      () =>
+          _i66.GetRelatedProductsUseCase(repo: gh<_i1064.ProductDetailsRepo>()),
+    );
     gh.lazySingleton<_i147.HomeRepo>(
       () => _i697.HomeRepoImpl(
         homeDataSource: gh<_i384.HomeRemoteDataSource>(),
         productsRemoteDataSource: gh<_i435.ProductsRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i927.GetProductWithIdUseCase>(
+      () => _i927.GetProductWithIdUseCase(repo: gh<_i126.ProductsRepo>()),
+    );
+    gh.factory<_i846.ProductDetailsCubit>(
+      () => _i846.ProductDetailsCubit(
+        getProductWithIdUseCase: gh<_i927.GetProductWithIdUseCase>(),
+        getRelatedProductsUseCase: gh<_i66.GetRelatedProductsUseCase>(),
       ),
     );
     gh.lazySingleton<_i683.GetMainCollectionBannerDataUseCase>(

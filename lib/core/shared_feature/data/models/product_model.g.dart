@@ -12,6 +12,12 @@ _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
       colors: (json['colors'] as List<dynamic>)
           .map((e) => const ColorConverter().fromJson((e as num).toInt()))
           .toList(),
+      selectedColor:
+          _$JsonConverterFromJson<int, Color>(
+            json['selectedColor'],
+            const ColorConverter().fromJson,
+          ) ??
+          null,
       description: json['description'] as String,
       discountPercentage: (json['discountPercentage'] as num).toDouble(),
       discountValue: (json['discountValue'] as num).toDouble(),
@@ -41,6 +47,10 @@ Map<String, dynamic> _$ProductModelToJson(_ProductModel instance) =>
     <String, dynamic>{
       'category': instance.category,
       'colors': instance.colors.map(const ColorConverter().toJson).toList(),
+      'selectedColor': _$JsonConverterToJson<int, Color>(
+        instance.selectedColor,
+        const ColorConverter().toJson,
+      ),
       'description': instance.description,
       'discountPercentage': instance.discountPercentage,
       'discountValue': instance.discountValue,
@@ -59,3 +69,13 @@ Map<String, dynamic> _$ProductModelToJson(_ProductModel instance) =>
       'stockQuantity': instance.stockQuantity,
       'videoUrls': instance.videoUrls,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);
