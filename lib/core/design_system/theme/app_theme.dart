@@ -17,6 +17,7 @@ class AppTheme {
         surface: AppColors.blackCard,
       ),
       appBarTheme: AppBarTheme(
+        centerTitle: true,
         surfaceTintColor: AppColors.blackCard,
         backgroundColor: AppColors.darkGray,
       ),
@@ -34,6 +35,7 @@ class AppTheme {
           backgroundColor: AppColors.goldRoyal,
           foregroundColor: AppColors.blackDeep,
           textStyle: AppTextStyles.buttonText,
+          shadowColor: AppColors.goldRoyal,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(
               AppSpacing.borderRadiusMedium,

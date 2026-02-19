@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/failures/app_failures.dart';
 import 'package:proper_store/core/helpers/app_consts.dart';
@@ -18,6 +18,17 @@ class ProductsRepoImpl implements ProductsRepo {
   ) async {
     try {
       return Right(await remoteDataSource.getProductWithId(id));
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(code: e.code));
+    } catch (e) {
+      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, List<ProductModel>>> getAllProducts() async {
+    try {
+      return Right(await remoteDataSource.getAllProducts());
     } on FirebaseException catch (e) {
       return Left(ServerFailure(code: e.code));
     } catch (e) {

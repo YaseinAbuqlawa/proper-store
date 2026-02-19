@@ -15,6 +15,9 @@ abstract class ProductModel with _$ProductModel {
     required double discountPercentage,
     required double discountValue,
     required String id,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    @Default(0)
+    int quantity,
     required List<String> imageUrls,
     @TimestampConverter() required DateTime lastPurchaseDate,
     required String material,
@@ -31,6 +34,8 @@ abstract class ProductModel with _$ProductModel {
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
 }
+
+enum ChangeQuantityType { increase, decrease }
 
 extension ProductModelX on ProductModel {
   double offerPrice() {

@@ -20,7 +20,7 @@ class ProductsRemoteDataSource {
         .toList();
   }
 
-  Future<List<ProductModel>> getProducts() async {
+  Future<List<ProductModel>> getAllProducts() async {
     final productsDocuments = await firestore
         .collection(AppConsts.productsCollection)
         .get();

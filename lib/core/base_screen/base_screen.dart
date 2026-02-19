@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
+import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/router/app_router.dart';
 import 'package:proper_store/core/router/app_routes.dart';
+import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/generated/l10n.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -25,7 +28,11 @@ class _BaseScreenState extends State<BaseScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    appRouter.go(screens[index]);
+    if (index == 2) {
+      appRouter.push(screens[index]);
+    } else {
+      appRouter.go(screens[index]);
+    }
   }
 
   @override
@@ -104,10 +111,46 @@ class _BaseScreenState extends State<BaseScreen> {
           elevation: 5,
           shape: const CircleBorder(),
           onPressed: () => _onItemTapped(2),
-          child: const Icon(
-            Icons.shopping_cart_outlined,
-            color: AppColors.blackDeep,
-            size: 30,
+          child: BlocSelector<CartCubit, CartState, int>(
+            selector: (state) {
+              return state.products.length;
+            },
+            builder: (context, productsLength) {
+              return Stack(
+                alignment: AlignmentGeometry.center,
+                children: [
+                  if (productsLength != 0)
+                    Align(
+                      alignment: AlignmentGeometry.topRight,
+                      child: Container(
+                        width: 27,
+                        height: 27,
+                        decoration: BoxDecoration(
+                          color: AppColors.lightRed,
+                          borderRadius: BorderRadius.circular(
+                            AppSpacing.borderRadiusFull,
+                          ),
+                          border: Border.all(width: 2),
+                        ),
+                        child: Text(
+                          "$productsLength",
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.buttonText.copyWith(
+                            color: AppColors.whiteColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  Icon(
+                    productsLength != 0
+                        ? Icons.shopping_cart
+                        : Icons.shopping_cart_outlined,
+                    color: AppColors.blackDeep,
+                    size: 30,
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

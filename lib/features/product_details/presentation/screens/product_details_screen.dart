@@ -4,8 +4,10 @@ import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
-import 'package:proper_store/core/widgets/app_spacer.dart';
+import 'package:proper_store/core/products/presentation/widgets/add_to_favorite.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
+import 'package:proper_store/core/products/presentation/widgets/product_price.dart';
+import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/core/widgets/shopping_bag_button.dart';
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/widgets/product_details_bottom_nav_bar_buttons.dart';
@@ -102,11 +104,10 @@ class ProductDetailsScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      const FavoriteWidget(), // Ensure this widget exists
+                                      const AddToFavorite(), // Ensure this widget exists
                                     ],
                                   ),
                                   ProductPrice(
-                                    showOfferHorizontal: true,
                                     discountPercentage:
                                         productDetails.discountPercentage,
                                     originalPrice: productDetails.sellingPrice,
@@ -134,7 +135,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                 children: [
                                   const Text("اللون المختار: "),
                                   const AppSpacer(height: 5),
-                                  _ColorsWidget(
+                                  ColorsRow(
                                     productColors: productDetails.colors,
                                   ),
                                   const Padding(
@@ -217,9 +218,9 @@ class ProductDetailsScreen extends StatelessWidget {
   }
 }
 
-class _ColorsWidget extends StatelessWidget {
+class ColorsRow extends StatelessWidget {
   final List<Color> productColors;
-  const _ColorsWidget({required this.productColors});
+  const ColorsRow({super.key, required this.productColors});
   @override
   Widget build(BuildContext context) {
     return BlocSelector<ProductDetailsCubit, ProductDetailsState, Color?>(
@@ -283,15 +284,9 @@ class _RelatedProductsList extends StatelessWidget {
         itemBuilder: (context, index) {
           final product = relatedProductsList[index];
           return ProductCard(
-            productId: product.id,
-            imageUrl: product.imageUrls.first,
-            colors: product.colors,
-            originalPrice: product.sellingPrice,
-            discountPercentage: product.discountPercentage,
-            name: product.name,
+            product: product,
             showAddToCart: false,
             enableHero: false,
-            offerPrice: product.offerPrice(),
           );
         },
       ),

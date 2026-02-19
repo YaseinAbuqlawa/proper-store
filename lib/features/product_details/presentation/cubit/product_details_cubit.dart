@@ -34,6 +34,10 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     );
   }
 
+  void setProduct(ProductModel product) {
+    emit(ProductDetailsState.success(productDetails: product));
+  }
+
   Future<void> getProductDetails(String productId) async {
     emit(ProductDetailsState.loading());
     final result = await getProductWithIdUseCase.call(productId);

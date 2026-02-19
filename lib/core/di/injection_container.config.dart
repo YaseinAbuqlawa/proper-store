@@ -19,8 +19,12 @@ import 'package:proper_store/core/products/data/repo/products_repo_impl.dart'
     as _i614;
 import 'package:proper_store/core/products/domain/repo/products_repo.dart'
     as _i1061;
+import 'package:proper_store/core/products/domain/use_cases/get_all_products_use_case.dart'
+    as _i714;
 import 'package:proper_store/core/products/domain/use_cases/get_product_with_id_use_case.dart'
     as _i1033;
+import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart'
+    as _i1006;
 import 'package:proper_store/features/home/data/data_sources/home_remote_data_source.dart'
     as _i384;
 import 'package:proper_store/features/home/data/repo/home_repo_impl.dart'
@@ -51,6 +55,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final externalModules = _$ExternalModules();
+    gh.factory<_i1006.CartCubit>(() => _i1006.CartCubit());
     gh.lazySingleton<_i974.FirebaseFirestore>(() => externalModules.firestore);
     gh.lazySingleton<_i122.ProductsRemoteDataSource>(
       () => _i122.ProductsRemoteDataSource(
@@ -75,6 +80,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i614.ProductsRepoImpl(
         remoteDataSource: gh<_i122.ProductsRemoteDataSource>(),
       ),
+    );
+    gh.lazySingleton<_i714.GetAllProductsUseCase>(
+      () => _i714.GetAllProductsUseCase(repo: gh<_i1061.ProductsRepo>()),
     );
     gh.lazySingleton<_i1033.GetProductWithIdUseCase>(
       () => _i1033.GetProductWithIdUseCase(repo: gh<_i1061.ProductsRepo>()),

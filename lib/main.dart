@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:proper_store/core/design_system/theme/app_theme.dart';
 import 'package:proper_store/core/di/injection_container.dart' as di;
 import 'package:proper_store/core/router/app_router.dart';
+import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/firebase_options.dart';
 import 'package:proper_store/generated/l10n.dart';
 
@@ -22,18 +24,21 @@ class ProperStoreApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      locale: Locale("ar"),
-      localizationsDelegates: [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      theme: AppTheme.dark(),
-      routerConfig: appRouter,
-      debugShowCheckedModeBanner: false,
+    return BlocProvider(
+      create: (context) => di.sl<CartCubit>(),
+      child: MaterialApp.router(
+        locale: Locale("ar"),
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        theme: AppTheme.dark(),
+        routerConfig: appRouter,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

@@ -37,14 +37,6 @@ final GoRouter appRouter = GoRouter(
           ),
         ),
         GoRoute(
-          path: AppRoutes.cart.path,
-          pageBuilder: (context, state) => _buildTransactionPage(
-            state: state,
-            context: context,
-            child: CartScreen(),
-          ),
-        ),
-        GoRoute(
           path: AppRoutes.categories.path,
           pageBuilder: (context, state) => _buildTransactionPage(
             state: state,
@@ -61,6 +53,15 @@ final GoRouter appRouter = GoRouter(
           ),
         ),
       ],
+    ),
+
+    GoRoute(
+      path: AppRoutes.cart.path,
+      pageBuilder: (context, state) => _buildTransactionPage(
+        state: state,
+        context: context,
+        child: CartScreen(),
+      ),
     ),
 
     GoRoute(

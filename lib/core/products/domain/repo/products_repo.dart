@@ -4,4 +4,5 @@ import 'package:proper_store/core/products/data/models/product_model.dart';
 
 abstract class ProductsRepo {
   Future<Either<ServerFailure, ProductModel>> getProductWithId(String id);
+  Future<Either<ServerFailure, List<ProductModel>>> getAllProducts();
 }
