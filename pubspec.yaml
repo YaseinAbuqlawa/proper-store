@@ -44,7 +44,8 @@ dependencies:
   smooth_page_indicator: ^2.0.1
   carousel_slider: ^5.1.2
   lottie: ^3.3.2
-
+  flutter_native_splash: ^2.4.7
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -63,5 +64,12 @@ flutter:
 flutter_intl:
   main_locale: ar
   enabled: true
+flutter_native_splash:
+    color: "#1E1E1E"
+    image: assets/images/proper_logo.png
+    fullscreen: true
+    web: true 
+    web_image_position: center
+    web_image_mode: contain
 assets:
     - assets/

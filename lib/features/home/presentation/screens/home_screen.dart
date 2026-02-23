@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
-import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
+import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/features/home/presentation/cubit/home_cubit.dart';
 import 'package:proper_store/features/home/presentation/widgets/home_main_collection_banner.dart';
 import 'package:proper_store/generated/l10n.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void didChangeDependencies() async {
+    FlutterNativeSplash.remove();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
