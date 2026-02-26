@@ -20,4 +20,10 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static const Gradient blackGradient = LinearGradient(
+    begin: Alignment.center,
+    end: Alignment.topCenter,
+    colors: [AppColors.blackCard, Colors.transparent],
+  );
 }

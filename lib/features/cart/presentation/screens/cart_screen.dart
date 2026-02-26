@@ -28,7 +28,12 @@ class CartScreen extends StatelessWidget {
           appBar: AppBar(title: Text(S.of(context).cartTitle)),
           body: SafeArea(
             child: products.isEmpty
-                ? Center(child: Lottie.asset("empty.json", fit: BoxFit.fill))
+                ? Center(
+                    child: Lottie.asset(
+                      "assets/lottie/empty.json",
+                      fit: BoxFit.fill,
+                    ),
+                  )
                 : CustomScrollView(
                     slivers: [
                       SliverGrid.builder(

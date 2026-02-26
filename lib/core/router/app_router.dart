@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/base_screen/base_screen.dart';
+import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/router/app_routes.dart';
-import 'package:proper_store/features/auth/presentation/screens/auth_screen.dart';
+import 'package:proper_store/features/auth/features/welcome_screen_presentation/welcome_screen.dart';
 import 'package:proper_store/features/cart/presentation/screens/cart_screen.dart';
 import 'package:proper_store/features/categories/presentation/screens/categories_screen.dart';
 import 'package:proper_store/features/favorites/presentation/screens/favorites_screen.dart';
@@ -14,8 +16,19 @@ import 'package:proper_store/features/profile/presentation/screens/profile_scree
 final GlobalKey<NavigatorState> rootNavigationKey = GlobalKey<NavigatorState>();
 
 final GoRouter appRouter = GoRouter(
+  redirect: (context, state) {
+    final isLoggedIn = sl<FirebaseAuth>().currentUser != null;
+    final isLoggingIn = state.fullPath == AppRoutes.welcome.path;
+
+    if (isLoggingIn) {
+      if (isLoggedIn) return AppRoutes.home.path;
+    } else {
+      if (!isLoggedIn) return AppRoutes.welcome.path;
+    }
+
+    return null;
+  },
   navigatorKey: rootNavigationKey,
-  initialLocation: AppRoutes.home.path,
   routes: [
     ShellRoute(
       builder: (context, state, child) => BaseScreen(child: child),
@@ -65,11 +78,11 @@ final GoRouter appRouter = GoRouter(
     ),
 
     GoRoute(
-      path: AppRoutes.auth.path,
+      path: AppRoutes.welcome.path,
       pageBuilder: (context, state) => _buildTransactionPage(
         state: state,
         context: context,
-        child: AuthScreen(),
+        child: WelcomeScreen(),
       ),
     ),
 

@@ -45,7 +45,12 @@ dependencies:
   carousel_slider: ^5.1.2
   lottie: ^3.3.2
   flutter_native_splash: ^2.4.7
-    
+  firebase_auth: ^6.1.4
+  cloud_functions: ^6.0.6
+  elegant_notification: ^2.5.1
+  awesome_dialog: ^3.3.0
+  flutter_svg: ^2.2.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,6 +69,7 @@ flutter:
   assets:
     - assets/images/
     - assets/lottie/
+    - assets/icons/
 flutter_intl:
   main_locale: ar
   enabled: true
