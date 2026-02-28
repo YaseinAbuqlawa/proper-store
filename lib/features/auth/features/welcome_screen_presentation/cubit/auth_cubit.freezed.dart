@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'welcome_screen_cubit.dart';
+part of 'auth_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,7 +12,7 @@ part of 'welcome_screen_cubit.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$WelcomeScreenState {
+mixin _$AuthState {
 
 
 
@@ -20,7 +20,7 @@ mixin _$WelcomeScreenState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WelcomeScreenState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState);
 }
 
 
@@ -29,20 +29,20 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'WelcomeScreenState()';
+  return 'AuthState()';
 }
 
 
 }
 
 /// @nodoc
-class $WelcomeScreenStateCopyWith<$Res>  {
-$WelcomeScreenStateCopyWith(WelcomeScreenState _, $Res Function(WelcomeScreenState) __);
+class $AuthStateCopyWith<$Res>  {
+$AuthStateCopyWith(AuthState _, $Res Function(AuthState) __);
 }
 
 
-/// Adds pattern-matching-related methods to [WelcomeScreenState].
-extension WelcomeScreenStatePatterns on WelcomeScreenState {
+/// Adds pattern-matching-related methods to [AuthState].
+extension AuthStatePatterns on AuthState {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -192,7 +192,7 @@ return failure(_that.failureMessage);case _:
 /// @nodoc
 
 
-class _Initial implements WelcomeScreenState {
+class _Initial implements AuthState {
   const _Initial();
   
 
@@ -212,7 +212,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'WelcomeScreenState.initial()';
+  return 'AuthState.initial()';
 }
 
 
@@ -224,7 +224,7 @@ String toString() {
 /// @nodoc
 
 
-class _Loading implements WelcomeScreenState {
+class _Loading implements AuthState {
   const _Loading();
   
 
@@ -244,7 +244,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'WelcomeScreenState.loading()';
+  return 'AuthState.loading()';
 }
 
 
@@ -256,7 +256,7 @@ String toString() {
 /// @nodoc
 
 
-class _Success implements WelcomeScreenState {
+class _Success implements AuthState {
   const _Success();
   
 
@@ -276,7 +276,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'WelcomeScreenState.success()';
+  return 'AuthState.success()';
 }
 
 
@@ -288,13 +288,13 @@ String toString() {
 /// @nodoc
 
 
-class _Failure implements WelcomeScreenState {
+class _Failure implements AuthState {
   const _Failure({required this.failureMessage});
   
 
  final  String failureMessage;
 
-/// Create a copy of WelcomeScreenState
+/// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -313,14 +313,14 @@ int get hashCode => Object.hash(runtimeType,failureMessage);
 
 @override
 String toString() {
-  return 'WelcomeScreenState.failure(failureMessage: $failureMessage)';
+  return 'AuthState.failure(failureMessage: $failureMessage)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<$Res> implements $WelcomeScreenStateCopyWith<$Res> {
+abstract mixin class _$FailureCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
   factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) = __$FailureCopyWithImpl;
 @useResult
 $Res call({
@@ -339,7 +339,7 @@ class __$FailureCopyWithImpl<$Res>
   final _Failure _self;
   final $Res Function(_Failure) _then;
 
-/// Create a copy of WelcomeScreenState
+/// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? failureMessage = null,}) {
   return _then(_Failure(

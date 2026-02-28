@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
-import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/helpers/app_dialog.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
-import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/welcome_screen_cubit.dart';
+import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/auth_cubit.dart';
+import 'package:proper_store/features/auth/features/welcome_screen_presentation/widgets/sign_in_with_identity_section.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/widgets/store_logo.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -40,10 +39,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.widthOf(context);
     return BlocProvider(
-      create: (context) => sl<WelcomeScreenCubit>(),
+      create: (context) => sl<AuthCubit>(),
       child: Builder(
         builder: (context) {
-          final welcomeScreenCubit = context.read<WelcomeScreenCubit>();
+          final authCubit = context.read<AuthCubit>();
           return Scaffold(
             body: SafeArea(
               child: Container(
@@ -87,59 +86,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             style: AppTextStyles.bodyDescription,
                             textAlign: TextAlign.center,
                           ),
-                          _SignInAnonymouslyButton(
-                            welcomeScreenCubit: welcomeScreenCubit,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Divider(
-                                  color: AppColors.textSecondary,
-                                  thickness: .25,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "او سجلي الدخول بسهولة",
-                                  style: AppTextStyles.bodyDescription,
-                                ),
-                              ),
-
-                              Expanded(
-                                child: Divider(
-                                  color: AppColors.textSecondary,
-                                  thickness: .25,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: _SignInWithIdentityButton(
-                                  welcomeScreenCubit: welcomeScreenCubit,
-                                  onPressed: () async {
-                                    await welcomeScreenCubit.signInWithGoogle();
-                                  },
-                                  assetName: "assets/icons/google_icon.svg",
-                                  buttonName: "جوجل",
-                                ),
-                              ),
-                              AppSpacer(width: 16),
-                              Expanded(
-                                child: _SignInWithIdentityButton(
-                                  welcomeScreenCubit: welcomeScreenCubit,
-                                  onPressed: () async {
-                                    await welcomeScreenCubit
-                                        .signInWithFacebook();
-                                  },
-                                  assetName: "assets/icons/facebook_icon.svg",
-                                  buttonName: "فيسبوك",
-                                ),
-                              ),
-                            ],
+                          _SignInAnonymouslyButton(authCubit: authCubit),
+                          SignInWithIdentitySection(
+                            text: "او سجلي الدخول بسهولة",
+                            authCubit: authCubit,
                           ),
                         ],
                       ),
@@ -155,51 +105,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 }
 
-class _SignInWithIdentityButton extends StatelessWidget {
-  final void Function()? onPressed;
-  final String assetName;
-  final String buttonName;
-  const _SignInWithIdentityButton({
-    required this.welcomeScreenCubit,
-    required this.onPressed,
-    required this.assetName,
-    required this.buttonName,
-  });
-
-  final WelcomeScreenCubit welcomeScreenCubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.darkGray,
-        shadowColor: AppColors.darkGray,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(assetName, width: 24, height: 24),
-          AppSpacer(width: 15),
-          Text(
-            buttonName,
-            style: AppTextStyles.buttonText.copyWith(
-              color: AppColors.whiteColor,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _SignInAnonymouslyButton extends StatelessWidget {
-  const _SignInAnonymouslyButton({required this.welcomeScreenCubit});
+  const _SignInAnonymouslyButton({required this.authCubit});
 
-  final WelcomeScreenCubit welcomeScreenCubit;
+  final AuthCubit authCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +117,7 @@ class _SignInAnonymouslyButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () async {
           AppDialog.showLoading(context);
-          await welcomeScreenCubit.signInAnonymously();
+          await authCubit.signInAnonymously();
         },
         child: Row(
           mainAxisSize: MainAxisSize.min,

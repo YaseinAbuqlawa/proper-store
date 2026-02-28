@@ -6,45 +6,43 @@ import 'package:proper_store/features/auth/domain/use_cases/sign_in_anonymously_
 import 'package:proper_store/features/auth/domain/use_cases/sign_in_with_facebook_use_case.dart';
 import 'package:proper_store/features/auth/domain/use_cases/sign_in_with_google_use_case.dart';
 
-part 'welcome_screen_cubit.freezed.dart';
-part 'welcome_screen_state.dart';
+part 'auth_cubit.freezed.dart';
+part 'auth_state.dart';
 
 @injectable
-class WelcomeScreenCubit extends Cubit<WelcomeScreenState> {
+class AuthCubit extends Cubit<AuthState> {
   SignInWithGoogleUseCase signInWithGoogleUseCase;
   SignInWithFacebookUseCase signInWithFacebookUseCase;
   SignInAnonymouslyUseCase signInAnonymouslyUseCase;
-  WelcomeScreenCubit({
+  AuthCubit({
     required this.signInWithFacebookUseCase,
     required this.signInWithGoogleUseCase,
     required this.signInAnonymouslyUseCase,
-  }) : super(WelcomeScreenState.initial());
+  }) : super(AuthState.initial());
 
   Future<void> signInAnonymously() async {
     await signInAnonymouslyUseCase.call();
   }
 
   Future<void> signInWithGoogle() async {
-    emit(WelcomeScreenState.loading());
+    emit(AuthState.loading());
     final result = await signInWithGoogleUseCase.call();
 
     result.fold(
-      (serverFailure) => emit(
-        WelcomeScreenState.failure(failureMessage: serverFailure.errorMessage),
-      ),
-      (_) => emit(WelcomeScreenState.success()),
+      (serverFailure) =>
+          emit(AuthState.failure(failureMessage: serverFailure.errorMessage)),
+      (_) => emit(AuthState.success()),
     );
   }
 
   Future<void> signInWithFacebook() async {
-    emit(WelcomeScreenState.loading());
+    emit(AuthState.loading());
     final result = await signInWithFacebookUseCase.call();
 
     result.fold(
-      (serverFailure) => emit(
-        WelcomeScreenState.failure(failureMessage: serverFailure.errorMessage),
-      ),
-      (_) => emit(WelcomeScreenState.success()),
+      (serverFailure) =>
+          emit(AuthState.failure(failureMessage: serverFailure.errorMessage)),
+      (_) => emit(AuthState.success()),
     );
   }
 }

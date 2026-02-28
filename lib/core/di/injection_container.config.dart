@@ -40,8 +40,8 @@ import 'package:proper_store/features/auth/domain/use_cases/sign_in_with_phone_n
     as _i1039;
 import 'package:proper_store/features/auth/features/phone_auth_screen_presentation/cubit/phone_auth_cubit.dart'
     as _i501;
-import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/welcome_screen_cubit.dart'
-    as _i628;
+import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/auth_cubit.dart'
+    as _i967;
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart'
     as _i1006;
 import 'package:proper_store/features/home/data/data_sources/home_remote_data_source.dart'
@@ -155,8 +155,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i71.GetMostSoldProductUseCase>(
       () => _i71.GetMostSoldProductUseCase(repo: gh<_i147.HomeRepo>()),
     );
-    gh.factory<_i628.WelcomeScreenCubit>(
-      () => _i628.WelcomeScreenCubit(
+    gh.factory<_i967.AuthCubit>(
+      () => _i967.AuthCubit(
         signInWithFacebookUseCase: gh<_i686.SignInWithFacebookUseCase>(),
         signInWithGoogleUseCase: gh<_i823.SignInWithGoogleUseCase>(),
         signInAnonymouslyUseCase: gh<_i932.SignInAnonymouslyUseCase>(),
