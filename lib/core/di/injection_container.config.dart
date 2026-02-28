@@ -38,6 +38,8 @@ import 'package:proper_store/features/auth/domain/use_cases/sign_in_with_google_
     as _i823;
 import 'package:proper_store/features/auth/domain/use_cases/sign_in_with_phone_number_use_case.dart'
     as _i1039;
+import 'package:proper_store/features/auth/domain/use_cases/sign_out_use_case.dart'
+    as _i128;
 import 'package:proper_store/features/auth/features/phone_auth_screen_presentation/cubit/phone_auth_cubit.dart'
     as _i501;
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/auth_cubit.dart'
@@ -65,6 +67,16 @@ import 'package:proper_store/features/product_details/domain/use_cases/get_relat
     as _i66;
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart'
     as _i846;
+import 'package:proper_store/features/profile/data/data_source/profile_remote_data_source.dart'
+    as _i360;
+import 'package:proper_store/features/profile/data/repo/profile_repo_impl.dart'
+    as _i1070;
+import 'package:proper_store/features/profile/domain/repo/profile_repo.dart'
+    as _i871;
+import 'package:proper_store/features/profile/domain/use_cases/get_customer_data_use_case.dart'
+    as _i596;
+import 'package:proper_store/features/profile/presentation/cubit/profile_cubit.dart'
+    as _i443;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -78,6 +90,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i974.FirebaseFirestore>(() => externalModules.firestore);
     gh.lazySingleton<_i59.FirebaseAuth>(() => externalModules.auth);
     gh.lazySingleton<_i809.FirebaseFunctions>(() => externalModules.functions);
+    gh.lazySingleton<_i360.ProfileRemoteDataSource>(
+      () => _i360.ProfileRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+        auth: gh<_i59.FirebaseAuth>(),
+      ),
+    );
+    gh.lazySingleton<_i871.ProfileRepo>(
+      () => _i1070.ProfileRepoImpl(
+        remoteDataSource: gh<_i360.ProfileRemoteDataSource>(),
+      ),
+    );
     gh.lazySingleton<_i122.ProductsRemoteDataSource>(
       () => _i122.ProductsRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -115,6 +138,9 @@ extension GetItInjectableX on _i174.GetIt {
         functions: gh<_i809.FirebaseFunctions>(),
       ),
     );
+    gh.lazySingleton<_i596.GetCustomerDataUseCase>(
+      () => _i596.GetCustomerDataUseCase(repo: gh<_i871.ProfileRepo>()),
+    );
     gh.lazySingleton<_i66.GetRelatedProductsUseCase>(
       () =>
           _i66.GetRelatedProductsUseCase(repo: gh<_i1064.ProductDetailsRepo>()),
@@ -148,6 +174,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1039.SignInWithPhoneNumberUseCase>(
       () => _i1039.SignInWithPhoneNumberUseCase(repo: gh<_i396.AuthRepo>()),
     );
+    gh.lazySingleton<_i128.SignOutUseCase>(
+      () => _i128.SignOutUseCase(repo: gh<_i396.AuthRepo>()),
+    );
     gh.lazySingleton<_i683.GetMainCollectionBannerDataUseCase>(
       () =>
           _i683.GetMainCollectionBannerDataUseCase(repo: gh<_i147.HomeRepo>()),
@@ -160,6 +189,12 @@ extension GetItInjectableX on _i174.GetIt {
         signInWithFacebookUseCase: gh<_i686.SignInWithFacebookUseCase>(),
         signInWithGoogleUseCase: gh<_i823.SignInWithGoogleUseCase>(),
         signInAnonymouslyUseCase: gh<_i932.SignInAnonymouslyUseCase>(),
+      ),
+    );
+    gh.factory<_i443.ProfileCubit>(
+      () => _i443.ProfileCubit(
+        getCustomerDataUseCase: gh<_i596.GetCustomerDataUseCase>(),
+        signOutUseCase: gh<_i128.SignOutUseCase>(),
       ),
     );
     gh.factory<_i501.PhoneAuthCubit>(

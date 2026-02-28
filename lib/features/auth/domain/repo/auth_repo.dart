@@ -21,4 +21,6 @@ abstract class AuthRepo {
   Future<Either<ServerFailure, void>> addNewCustomer({
     required CustomerModel customer,
   });
+
+  Future<Either<ServerFailure, void>> signOut();
 }

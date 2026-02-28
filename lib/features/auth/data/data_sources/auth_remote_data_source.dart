@@ -68,4 +68,8 @@ class AuthRemoteDataSource {
 
     await customerDoc.set(customer.toJson());
   }
+
+  Future<void> signOut() async {
+    await auth.signOut();
+  }
 }

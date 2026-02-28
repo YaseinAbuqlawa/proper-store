@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
@@ -79,6 +78,17 @@ class AuthRepoImpl implements AuthRepo {
   }) async {
     try {
       return Right(await remoteDataSource.addNewCustomer(customer: customer));
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(code: e.code));
+    } catch (e) {
+      return Left(ServerFailure(code: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, void>> signOut() async {
+    try {
+      return Right(await remoteDataSource.signOut());
     } on FirebaseException catch (e) {
       return Left(ServerFailure(code: e.code));
     } catch (e) {

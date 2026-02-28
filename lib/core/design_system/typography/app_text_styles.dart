@@ -65,4 +65,10 @@ class AppTextStyles {
     fontSize: 11,
     fontWeight: FontWeight.w600,
   );
+
+  static final TextStyle customerName = GoogleFonts.cairo(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: AppColors.goldRoyal,
+  );
 }
