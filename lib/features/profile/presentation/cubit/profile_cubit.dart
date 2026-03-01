@@ -11,7 +11,7 @@ import 'package:proper_store/features/profile/domain/use_cases/get_customer_data
 part 'profile_cubit.freezed.dart';
 part 'profile_state.dart';
 
-@injectable
+@lazySingleton
 class ProfileCubit extends Cubit<ProfileState> {
   final GetCustomerDataUseCase getCustomerDataUseCase;
   final SignOutUseCase signOutUseCase;
@@ -49,5 +49,9 @@ class ProfileCubit extends Cubit<ProfileState> {
       ),
       (customer) => emit(ProfileState.loaded(customer: customer)),
     );
+  }
+
+  void clearProfileData() {
+    emit(ProfileState.initial());
   }
 }

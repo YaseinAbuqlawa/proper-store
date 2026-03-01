@@ -6,7 +6,7 @@ import 'package:proper_store/core/products/data/models/product_model.dart';
 part 'cart_cubit.freezed.dart';
 part 'cart_state.dart';
 
-@injectable
+@lazySingleton
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartState(cartState: CartStates.initial));
 
@@ -48,5 +48,9 @@ class CartCubit extends Cubit<CartState> {
     }
 
     emit(state.copyWith(products: updatedProducts));
+  }
+
+  void clearCart() {
+    emit(state.copyWith(cartState: CartStates.initial, products: []));
   }
 }

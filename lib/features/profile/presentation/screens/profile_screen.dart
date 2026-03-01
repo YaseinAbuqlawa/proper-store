@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
-import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/helpers/app_dialog.dart';
 import 'package:proper_store/core/helpers/app_snackbar.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
@@ -19,145 +18,124 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => sl<ProfileCubit>()..getCustomerData(),
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthCubit, AuthState>(
+          listener: (context, state) {
+            state.whenOrNull(
+              loading: () {
+                AppDialog.showLoading(context);
+              },
+              failure: (failureMessage) {
+                if (!context.mounted) return;
+                Navigator.pop(context);
+                AppSnackbar.errorSnackbar(
+                  context: context,
+                  failureMessage: failureMessage,
+                );
+              },
+              success: () async {
+                if (!context.mounted) return;
+                Navigator.pop(context);
+                AppSnackbar.successSnackbar(
+                  context: context,
+                  message: "تم تسجيل الدخول بنجاح",
+                );
+                await context.read<ProfileCubit>().getCustomerData();
+              },
+            );
+          },
         ),
-        BlocProvider(create: (context) => sl<AuthCubit>()),
+        BlocListener<ProfileCubit, ProfileState>(
+          listener: (context, state) {
+            state.whenOrNull(
+              failure: (failureMessage) {
+                if (!context.mounted) return;
+                AppSnackbar.errorSnackbar(
+                  context: context,
+                  failureMessage: failureMessage,
+                );
+              },
+            );
+          },
+        ),
       ],
-      child: Builder(
-        builder: (context) {
-          return MultiBlocListener(
-            listeners: [
-              BlocListener<AuthCubit, AuthState>(
-                listener: (context, state) {
-                  state.whenOrNull(
-                    loading: () {
-                      AppDialog.showLoading(context);
-                    },
-                    failure: (failureMessage) {
-                      if (!context.mounted) return;
-                      Navigator.pop(context);
-                      AppSnackbar.errorSnackbar(
-                        context: context,
-                        failureMessage: failureMessage,
-                      );
-                    },
-                    success: () async {
-                      if (!context.mounted) return;
-                      Navigator.pop(context);
-                      AppSnackbar.successSnackbar(
-                        context: context,
-                        message: "تم تسجيل الدخول بنجاح",
-                      );
-                      await context.read<ProfileCubit>().getCustomerData();
-                    },
-                  );
-                },
-              ),
-              BlocListener<ProfileCubit, ProfileState>(
-                listener: (context, state) {
-                  state.whenOrNull(
-                    failure: (failureMessage) {
-                      if (!context.mounted) return;
-                      AppSnackbar.errorSnackbar(
-                        context: context,
-                        failureMessage: failureMessage,
-                      );
-                    },
-                  );
-                },
-              ),
-            ],
 
-            child: Scaffold(
-              appBar: AppBar(title: Text(S.of(context).profileTitle)),
-              body: SafeArea(
-                child: Padding(
-                  padding: AppSpacing.screenPadding,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      BlocBuilder<ProfileCubit, ProfileState>(
-                        builder: (context, state) {
-                          return state.maybeWhen(
-                            loading: () => Skeletonizer(
-                              enabled: true,
-                              child: _CustomerInfo(
-                                name: "customer name",
-                                email: "example@example.com",
-                                photoUrl: "",
-                              ),
-                            ),
-                            loaded: (customer) => _CustomerInfo(
-                              name: customer.name,
-                              email: customer.email,
-                              photoUrl: customer.photoUrl,
-                            ),
-                            anonymous: () => Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                ProfileUserImage(photoUrl: "", anonymous: true),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "سجلي دخولك لتحصلي على افضل خدمة ممكنة",
-                                    style: AppTextStyles.bodyDescription,
-                                  ),
-                                ),
-                                SignInWithIdentitySection(
-                                  text: "سجلي بسهولة عبر",
-                                  authCubit: context.read<AuthCubit>(),
-                                ),
-                              ],
-                            ),
-
-                            orElse: () => const SizedBox.shrink(),
-                          );
-                        },
+      child: Scaffold(
+        appBar: AppBar(title: Text(S.of(context).profileTitle)),
+        body: SafeArea(
+          child: Padding(
+            padding: AppSpacing.screenPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      loading: () => Skeletonizer(
+                        enabled: true,
+                        child: _CustomerInfo(
+                          name: "customer name",
+                          email: "example@example.com",
+                          photoUrl: "",
+                        ),
                       ),
-                      Column(
+                      loaded: (customer) => _CustomerInfo(
+                        name: customer.name,
+                        email: customer.email,
+                        photoUrl: customer.photoUrl,
+                      ),
+                      anonymous: () => Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          _ProfileButton(
-                            buttonName: "طلباتي",
-                            onPressed: () {},
+                          ProfileUserImage(photoUrl: "", anonymous: true),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "سجلي دخولك لتحصلي على افضل خدمة ممكنة",
+                              style: AppTextStyles.bodyDescription,
+                            ),
                           ),
-                          Divider(thickness: .05),
-                          AppSpacer(height: 10),
-                          _ProfileButton(
-                            buttonName: "عناويني",
-                            onPressed: () {},
+                          SignInWithIdentitySection(
+                            text: "سجلي بسهولة عبر",
+                            authCubit: context.read<AuthCubit>(),
                           ),
-                          Divider(thickness: .05),
-                          AppSpacer(height: 10),
-
-                          _ProfileButton(
-                            buttonName: "تواصل معنا",
-                            onPressed: () {},
-                          ),
-                          Divider(thickness: .05),
-                          AppSpacer(height: 10),
-
-                          _ProfileButton(
-                            buttonName: "سياسة الاسترجاع",
-                            onPressed: () {},
-                          ),
-                          Divider(thickness: .05),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 40),
-                        child: _SignOutButton(),
-                      ),
-                    ],
-                  ),
+
+                      orElse: () => const SizedBox.shrink(),
+                    );
+                  },
                 ),
-              ),
+                Column(
+                  children: [
+                    _ProfileButton(buttonName: "طلباتي", onPressed: () {}),
+                    Divider(thickness: .05),
+                    AppSpacer(height: 10),
+                    _ProfileButton(buttonName: "عناويني", onPressed: () {}),
+                    Divider(thickness: .05),
+                    AppSpacer(height: 10),
+
+                    _ProfileButton(buttonName: "تواصل معنا", onPressed: () {}),
+                    Divider(thickness: .05),
+                    AppSpacer(height: 10),
+
+                    _ProfileButton(
+                      buttonName: "سياسة الاسترجاع",
+                      onPressed: () {},
+                    ),
+                    Divider(thickness: .05),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 40),
+                  child: _SignOutButton(),
+                ),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

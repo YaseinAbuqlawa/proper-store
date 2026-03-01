@@ -9,6 +9,7 @@ import 'package:proper_store/core/products/presentation/widgets/product_card.dar
 import 'package:proper_store/core/products/presentation/widgets/product_price.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/core/widgets/shopping_bag_button.dart';
+import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/widgets/product_details_bottom_nav_bar_buttons.dart';
 import 'package:proper_store/features/product_details/presentation/widgets/product_details_images_carousel.dart';
@@ -105,8 +106,14 @@ class ProductDetailsScreen extends StatelessWidget {
                                         ),
                                       ),
                                       AddToFavorite(
-                                        isFavorite: false,
-                                        onPressed: () {},
+                                        productId: productDetails.id,
+                                        onPressed: () async {
+                                          await context
+                                              .read<FavoritesCubit>()
+                                              .toggleFavorite(
+                                                product: productDetails,
+                                              );
+                                        },
                                       ), // Ensure this widget exists
                                     ],
                                   ),

@@ -14,6 +14,7 @@ import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/core/widgets/app_network_image.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:proper_store/generated/l10n.dart';
 
 class ProductCard extends StatelessWidget {
@@ -66,7 +67,14 @@ class ProductCard extends StatelessWidget {
                             imageUrl: product.imageUrls[0],
                             height: constraints.maxHeight * .5,
                           ),
-                    AddToFavorite(isFavorite: false, onPressed: () {}),
+                    AddToFavorite(
+                      productId: product.id,
+                      onPressed: () async {
+                        await context.read<FavoritesCubit>().toggleFavorite(
+                          product: product,
+                        );
+                      },
+                    ),
                   ],
                 ),
                 Column(

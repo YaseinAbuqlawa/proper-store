@@ -46,6 +46,18 @@ import 'package:proper_store/features/auth/features/welcome_screen_presentation/
     as _i967;
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart'
     as _i1006;
+import 'package:proper_store/features/favorites/data/data_source/favorites_remote_data_source.dart'
+    as _i662;
+import 'package:proper_store/features/favorites/data/repo/favorites_repo_impl.dart'
+    as _i1071;
+import 'package:proper_store/features/favorites/domain/repo/favorites_repo.dart'
+    as _i206;
+import 'package:proper_store/features/favorites/domain/use_cases/get_favorite_products_use_case.dart'
+    as _i182;
+import 'package:proper_store/features/favorites/domain/use_cases/set_customer_favorites_use_case.dart'
+    as _i726;
+import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart'
+    as _i395;
 import 'package:proper_store/features/home/data/data_sources/home_remote_data_source.dart'
     as _i384;
 import 'package:proper_store/features/home/data/repo/home_repo_impl.dart'
@@ -86,10 +98,10 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final externalModules = _$ExternalModules();
-    gh.factory<_i1006.CartCubit>(() => _i1006.CartCubit());
     gh.lazySingleton<_i974.FirebaseFirestore>(() => externalModules.firestore);
     gh.lazySingleton<_i59.FirebaseAuth>(() => externalModules.auth);
     gh.lazySingleton<_i809.FirebaseFunctions>(() => externalModules.functions);
+    gh.lazySingleton<_i1006.CartCubit>(() => _i1006.CartCubit());
     gh.lazySingleton<_i360.ProfileRemoteDataSource>(
       () => _i360.ProfileRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -103,6 +115,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i122.ProductsRemoteDataSource>(
       () => _i122.ProductsRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+      ),
+    );
+    gh.lazySingleton<_i662.FavoritesRemoteDataSource>(
+      () => _i662.FavoritesRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
     );
@@ -145,6 +162,11 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i66.GetRelatedProductsUseCase(repo: gh<_i1064.ProductDetailsRepo>()),
     );
+    gh.lazySingleton<_i206.FavoritesRepo>(
+      () => _i1071.FavoritesRepoImpl(
+        remoteDataSource: gh<_i662.FavoritesRemoteDataSource>(),
+      ),
+    );
     gh.lazySingleton<_i147.HomeRepo>(
       () => _i697.HomeRepoImpl(
         homeDataSource: gh<_i384.HomeRemoteDataSource>(),
@@ -155,6 +177,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i223.AuthRepoImpl(
         remoteDataSource: gh<_i426.AuthRemoteDataSource>(),
       ),
+    );
+    gh.lazySingleton<_i182.GetFavoriteProductsUseCase>(
+      () => _i182.GetFavoriteProductsUseCase(repo: gh<_i206.FavoritesRepo>()),
+    );
+    gh.lazySingleton<_i726.SetCustomerFavoritesUseCase>(
+      () => _i726.SetCustomerFavoritesUseCase(repo: gh<_i206.FavoritesRepo>()),
     );
     gh.factory<_i846.ProductDetailsCubit>(
       () => _i846.ProductDetailsCubit(
@@ -177,6 +205,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i128.SignOutUseCase>(
       () => _i128.SignOutUseCase(repo: gh<_i396.AuthRepo>()),
     );
+    gh.lazySingleton<_i395.FavoritesCubit>(
+      () => _i395.FavoritesCubit(
+        setCustomerFavoritesUseCase: gh<_i726.SetCustomerFavoritesUseCase>(),
+        getFavoriteProductsUseCase: gh<_i182.GetFavoriteProductsUseCase>(),
+      ),
+    );
     gh.lazySingleton<_i683.GetMainCollectionBannerDataUseCase>(
       () =>
           _i683.GetMainCollectionBannerDataUseCase(repo: gh<_i147.HomeRepo>()),
@@ -191,7 +225,7 @@ extension GetItInjectableX on _i174.GetIt {
         signInAnonymouslyUseCase: gh<_i932.SignInAnonymouslyUseCase>(),
       ),
     );
-    gh.factory<_i443.ProfileCubit>(
+    gh.lazySingleton<_i443.ProfileCubit>(
       () => _i443.ProfileCubit(
         getCustomerDataUseCase: gh<_i596.GetCustomerDataUseCase>(),
         signOutUseCase: gh<_i128.SignOutUseCase>(),

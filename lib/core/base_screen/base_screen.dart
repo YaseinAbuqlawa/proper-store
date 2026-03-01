@@ -6,6 +6,8 @@ import 'package:proper_store/core/design_system/typography/app_text_styles.dart'
 import 'package:proper_store/core/router/app_router.dart';
 import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
+import 'package:proper_store/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:proper_store/generated/l10n.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -37,120 +39,133 @@ class _BaseScreenState extends State<BaseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: widget.child,
-      extendBody: true,
-      bottomNavigationBar: BottomAppBar(
-        color: AppColors.darkGray,
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        child: SizedBox(
+    return BlocListener<ProfileCubit, ProfileState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          loaded: (customer) {
+            if (customer.favoritesList.isNotEmpty) {
+              context.read<FavoritesCubit>().getFavoriteProducts(
+                favoritesList: customer.favoritesList,
+              );
+            }
+          },
+        );
+      },
+      child: Scaffold(
+        body: widget.child,
+        extendBody: true,
+        bottomNavigationBar: BottomAppBar(
+          color: AppColors.darkGray,
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 8.0,
+          child: SizedBox(
+            height: 65,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildNavItem(
+                        unSelectedIcon: Icons.home_outlined,
+                        selectedIcon: Icons.home,
+                        S.of(context).homeButtonName,
+                        0,
+                      ),
+                      _buildNavItem(
+                        unSelectedIcon: Icons.category_outlined,
+                        selectedIcon: Icons.category,
+                        S.of(context).categories,
+                        1,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 40),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildNavItem(
+                        unSelectedIcon: Icons.favorite_border,
+                        selectedIcon: Icons.favorite,
+                        S.of(context).favoritesTitle,
+                        3,
+                      ),
+                      _buildNavItem(
+                        unSelectedIcon: Icons.person_outline,
+                        selectedIcon: Icons.person,
+                        S.of(context).profileTitle,
+                        4,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Container(
           height: 65,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildNavItem(
-                      unSelectedIcon: Icons.home_outlined,
-                      selectedIcon: Icons.home,
-                      S.of(context).homeButtonName,
-                      0,
-                    ),
-                    _buildNavItem(
-                      unSelectedIcon: Icons.category_outlined,
-                      selectedIcon: Icons.category,
-                      S.of(context).categories,
-                      1,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 40),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildNavItem(
-                      unSelectedIcon: Icons.favorite_border,
-                      selectedIcon: Icons.favorite,
-                      S.of(context).favoritesTitle,
-                      3,
-                    ),
-                    _buildNavItem(
-                      unSelectedIcon: Icons.person_outline,
-                      selectedIcon: Icons.person,
-                      S.of(context).profileTitle,
-                      4,
-                    ),
-                  ],
-                ),
+          width: 65,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.goldRoyal.withOpacity(0.4),
+                blurRadius: 15,
+                spreadRadius: 2,
               ),
             ],
           ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        height: 65,
-        width: 65,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.goldRoyal.withOpacity(0.4),
-              blurRadius: 15,
-              spreadRadius: 2,
-            ),
-          ],
-        ),
-        child: FloatingActionButton(
-          backgroundColor: AppColors.goldRoyal,
-          elevation: 5,
-          shape: const CircleBorder(),
-          onPressed: () => _onItemTapped(2),
-          child: BlocSelector<CartCubit, CartState, int>(
-            selector: (state) {
-              return state.products.length;
-            },
-            builder: (context, productsLength) {
-              return Stack(
-                alignment: AlignmentGeometry.center,
-                children: [
-                  if (productsLength != 0)
-                    Align(
-                      alignment: AlignmentGeometry.topRight,
-                      child: Container(
-                        width: 27,
-                        height: 27,
-                        decoration: BoxDecoration(
-                          color: AppColors.lightRed,
-                          borderRadius: BorderRadius.circular(
-                            AppSpacing.borderRadiusFull,
+          child: FloatingActionButton(
+            backgroundColor: AppColors.goldRoyal,
+            elevation: 5,
+            shape: const CircleBorder(),
+            onPressed: () => _onItemTapped(2),
+            child: BlocSelector<CartCubit, CartState, int>(
+              selector: (state) {
+                return state.products.length;
+              },
+              builder: (context, productsLength) {
+                return Stack(
+                  alignment: AlignmentGeometry.center,
+                  children: [
+                    if (productsLength != 0)
+                      Align(
+                        alignment: AlignmentGeometry.topRight,
+                        child: Container(
+                          width: 27,
+                          height: 27,
+                          decoration: BoxDecoration(
+                            color: AppColors.lightRed,
+                            borderRadius: BorderRadius.circular(
+                              AppSpacing.borderRadiusFull,
+                            ),
+                            border: Border.all(width: 2),
                           ),
-                          border: Border.all(width: 2),
-                        ),
-                        child: Text(
-                          "$productsLength",
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.buttonText.copyWith(
-                            color: AppColors.whiteColor,
+                          child: Text(
+                            "$productsLength",
+                            textAlign: TextAlign.center,
+                            style: AppTextStyles.buttonText.copyWith(
+                              color: AppColors.whiteColor,
+                            ),
                           ),
                         ),
                       ),
+                    Icon(
+                      productsLength != 0
+                          ? Icons.shopping_cart
+                          : Icons.shopping_cart_outlined,
+                      color: AppColors.blackDeep,
+                      size: 30,
                     ),
-                  Icon(
-                    productsLength != 0
-                        ? Icons.shopping_cart
-                        : Icons.shopping_cart_outlined,
-                    color: AppColors.blackDeep,
-                    size: 30,
-                  ),
-                ],
-              );
-            },
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

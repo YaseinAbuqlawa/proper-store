@@ -10,6 +10,7 @@ abstract class CustomerModel with _$CustomerModel {
     required String name,
     required String email,
     @Default("") String photoUrl,
+    @Default([]) List<String> favoritesList,
   }) = _CustomerModel;
 
   factory CustomerModel.fromJson(Map<String, dynamic> json) =>

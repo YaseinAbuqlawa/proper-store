@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CustomerModel {
 
- String get id; String get name; String get email; String get photoUrl;
+ String get id; String get name; String get email; String get photoUrl; List<String> get favoritesList;
 /// Create a copy of CustomerModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $CustomerModelCopyWith<CustomerModel> get copyWith => _$CustomerModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other.favoritesList, favoritesList));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,photoUrl);
+int get hashCode => Object.hash(runtimeType,id,name,email,photoUrl,const DeepCollectionEquality().hash(favoritesList));
 
 @override
 String toString() {
-  return 'CustomerModel(id: $id, name: $name, email: $email, photoUrl: $photoUrl)';
+  return 'CustomerModel(id: $id, name: $name, email: $email, photoUrl: $photoUrl, favoritesList: $favoritesList)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $CustomerModelCopyWith<$Res>  {
   factory $CustomerModelCopyWith(CustomerModel value, $Res Function(CustomerModel) _then) = _$CustomerModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String email, String photoUrl
+ String id, String name, String email, String photoUrl, List<String> favoritesList
 });
 
 
@@ -65,13 +65,14 @@ class _$CustomerModelCopyWithImpl<$Res>
 
 /// Create a copy of CustomerModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? email = null,Object? photoUrl = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? email = null,Object? photoUrl = null,Object? favoritesList = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,photoUrl: null == photoUrl ? _self.photoUrl : photoUrl // ignore: cast_nullable_to_non_nullable
-as String,
+as String,favoritesList: null == favoritesList ? _self.favoritesList : favoritesList // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String photoUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String photoUrl,  List<String> favoritesList)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CustomerModel() when $default != null:
-return $default(_that.id,_that.name,_that.email,_that.photoUrl);case _:
+return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesList);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.id,_that.name,_that.email,_that.photoUrl);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String photoUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String photoUrl,  List<String> favoritesList)  $default,) {final _that = this;
 switch (_that) {
 case _CustomerModel():
-return $default(_that.id,_that.name,_that.email,_that.photoUrl);case _:
+return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesList);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.id,_that.name,_that.email,_that.photoUrl);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String email,  String photoUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String email,  String photoUrl,  List<String> favoritesList)?  $default,) {final _that = this;
 switch (_that) {
 case _CustomerModel() when $default != null:
-return $default(_that.id,_that.name,_that.email,_that.photoUrl);case _:
+return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesList);case _:
   return null;
 
 }
@@ -212,13 +213,20 @@ return $default(_that.id,_that.name,_that.email,_that.photoUrl);case _:
 @JsonSerializable()
 
 class _CustomerModel implements CustomerModel {
-  const _CustomerModel({required this.id, required this.name, required this.email, this.photoUrl = ""});
+  const _CustomerModel({required this.id, required this.name, required this.email, this.photoUrl = "", final  List<String> favoritesList = const []}): _favoritesList = favoritesList;
   factory _CustomerModel.fromJson(Map<String, dynamic> json) => _$CustomerModelFromJson(json);
 
 @override final  String id;
 @override final  String name;
 @override final  String email;
 @override@JsonKey() final  String photoUrl;
+ final  List<String> _favoritesList;
+@override@JsonKey() List<String> get favoritesList {
+  if (_favoritesList is EqualUnmodifiableListView) return _favoritesList;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_favoritesList);
+}
+
 
 /// Create a copy of CustomerModel
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other._favoritesList, _favoritesList));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,photoUrl);
+int get hashCode => Object.hash(runtimeType,id,name,email,photoUrl,const DeepCollectionEquality().hash(_favoritesList));
 
 @override
 String toString() {
-  return 'CustomerModel(id: $id, name: $name, email: $email, photoUrl: $photoUrl)';
+  return 'CustomerModel(id: $id, name: $name, email: $email, photoUrl: $photoUrl, favoritesList: $favoritesList)';
 }
 
 
@@ -253,7 +261,7 @@ abstract mixin class _$CustomerModelCopyWith<$Res> implements $CustomerModelCopy
   factory _$CustomerModelCopyWith(_CustomerModel value, $Res Function(_CustomerModel) _then) = __$CustomerModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String email, String photoUrl
+ String id, String name, String email, String photoUrl, List<String> favoritesList
 });
 
 
@@ -270,13 +278,14 @@ class __$CustomerModelCopyWithImpl<$Res>
 
 /// Create a copy of CustomerModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? email = null,Object? photoUrl = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? email = null,Object? photoUrl = null,Object? favoritesList = null,}) {
   return _then(_CustomerModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,photoUrl: null == photoUrl ? _self.photoUrl : photoUrl // ignore: cast_nullable_to_non_nullable
-as String,
+as String,favoritesList: null == favoritesList ? _self._favoritesList : favoritesList // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 

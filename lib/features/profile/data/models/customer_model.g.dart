@@ -12,6 +12,11 @@ _CustomerModel _$CustomerModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       email: json['email'] as String,
       photoUrl: json['photoUrl'] as String? ?? "",
+      favoritesList:
+          (json['favoritesList'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$CustomerModelToJson(_CustomerModel instance) =>
@@ -20,4 +25,5 @@ Map<String, dynamic> _$CustomerModelToJson(_CustomerModel instance) =>
       'name': instance.name,
       'email': instance.email,
       'photoUrl': instance.photoUrl,
+      'favoritesList': instance.favoritesList,
     };
