@@ -104,7 +104,10 @@ class ProductDetailsScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      const AddToFavorite(), // Ensure this widget exists
+                                      AddToFavorite(
+                                        isFavorite: false,
+                                        onPressed: () {},
+                                      ), // Ensure this widget exists
                                     ],
                                   ),
                                   ProductPrice(

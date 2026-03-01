@@ -66,7 +66,7 @@ class ProductCard extends StatelessWidget {
                             imageUrl: product.imageUrls[0],
                             height: constraints.maxHeight * .5,
                           ),
-                    AddToFavorite(),
+                    AddToFavorite(isFavorite: false, onPressed: () {}),
                   ],
                 ),
                 Column(
