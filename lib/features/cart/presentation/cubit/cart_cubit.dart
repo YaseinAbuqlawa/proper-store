@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 
 part 'cart_cubit.freezed.dart';
 part 'cart_state.dart';
@@ -10,8 +11,15 @@ part 'cart_state.dart';
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartState(cartState: CartStates.initial));
 
-  void addProductToCart(ProductModel product) {
-    emit(state.copyWith(products: [...state.products, product]));
+  void addProductToCart(CartItemModel product) {
+    if (state.products.any((p) => p.id == product.id)) {
+      changeProductQuantity(
+        changeQuantityType: ChangeQuantityType.increase,
+        productId: product.id,
+      );
+    } else {
+      emit(state.copyWith(products: [...state.products, product]));
+    }
   }
 
   void removeFromCart(String productId) {
@@ -26,7 +34,7 @@ class CartCubit extends Cubit<CartState> {
     required ChangeQuantityType changeQuantityType,
     required String productId,
   }) {
-    List<ProductModel> updatedProducts = List.from(state.products);
+    List<CartItemModel> updatedProducts = List.from(state.products);
     final index = updatedProducts.indexWhere((p) => p.id == productId);
 
     if (index == -1) return;

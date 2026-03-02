@@ -6,7 +6,7 @@ import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/helpers/extensions.dart';
-import 'package:proper_store/core/products/data/models/product_model.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/cart/presentation/widgets/cart_product_card.dart';
 import 'package:proper_store/features/cart/presentation/widgets/submit_cart_button.dart';
@@ -17,7 +17,7 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<CartCubit, CartState, List<ProductModel>>(
+    return BlocSelector<CartCubit, CartState, List<CartItemModel>>(
       selector: (state) {
         return state.products.where((p) => p.quantity > 0).toList();
       },
@@ -72,7 +72,7 @@ class CartScreen extends StatelessWidget {
 class _TotalsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<CartCubit, CartState, List<ProductModel>>(
+    return BlocSelector<CartCubit, CartState, List<CartItemModel>>(
       selector: (state) {
         return state.products.where((p) => p.quantity > 0).toList();
       },

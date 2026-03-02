@@ -4,6 +4,7 @@ import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/screens/product_details_screen.dart';
@@ -59,11 +60,12 @@ class SelectColorDialog extends StatelessWidget {
                   return ElevatedButton(
                     onPressed: () {
                       context.read<CartCubit>().addProductToCart(
-                        productDetails.copyWith(
-                          quantity: 1,
-                          selectedColor:
-                              productDetails.selectedColor ??
-                              productDetails.colors[0],
+                        CartItemModel.fromProductModel(
+                          productDetails.copyWith(
+                            selectedColor:
+                                productDetails.selectedColor ??
+                                productDetails.colors[0],
+                          ),
                         ),
                       );
                       Navigator.pop(context);

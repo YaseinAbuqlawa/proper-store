@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CartState {
 
- CartStates get cartState; List<ProductModel> get products;
+ CartStates get cartState; List<CartItemModel> get products;
 /// Create a copy of CartState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $CartStateCopyWith<$Res>  {
   factory $CartStateCopyWith(CartState value, $Res Function(CartState) _then) = _$CartStateCopyWithImpl;
 @useResult
 $Res call({
- CartStates cartState, List<ProductModel> products
+ CartStates cartState, List<CartItemModel> products
 });
 
 
@@ -66,7 +66,7 @@ class _$CartStateCopyWithImpl<$Res>
   return _then(_self.copyWith(
 cartState: null == cartState ? _self.cartState : cartState // ignore: cast_nullable_to_non_nullable
 as CartStates,products: null == products ? _self.products : products // ignore: cast_nullable_to_non_nullable
-as List<ProductModel>,
+as List<CartItemModel>,
   ));
 }
 
@@ -151,7 +151,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CartStates cartState,  List<ProductModel> products)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CartStates cartState,  List<CartItemModel> products)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CartState() when $default != null:
 return $default(_that.cartState,_that.products);case _:
@@ -172,7 +172,7 @@ return $default(_that.cartState,_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CartStates cartState,  List<ProductModel> products)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CartStates cartState,  List<CartItemModel> products)  $default,) {final _that = this;
 switch (_that) {
 case _CartState():
 return $default(_that.cartState,_that.products);case _:
@@ -192,7 +192,7 @@ return $default(_that.cartState,_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CartStates cartState,  List<ProductModel> products)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CartStates cartState,  List<CartItemModel> products)?  $default,) {final _that = this;
 switch (_that) {
 case _CartState() when $default != null:
 return $default(_that.cartState,_that.products);case _:
@@ -207,12 +207,12 @@ return $default(_that.cartState,_that.products);case _:
 
 
 class _CartState implements CartState {
-  const _CartState({required this.cartState, final  List<ProductModel> products = const []}): _products = products;
+  const _CartState({required this.cartState, final  List<CartItemModel> products = const []}): _products = products;
   
 
 @override final  CartStates cartState;
- final  List<ProductModel> _products;
-@override@JsonKey() List<ProductModel> get products {
+ final  List<CartItemModel> _products;
+@override@JsonKey() List<CartItemModel> get products {
   if (_products is EqualUnmodifiableListView) return _products;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_products);
@@ -249,7 +249,7 @@ abstract mixin class _$CartStateCopyWith<$Res> implements $CartStateCopyWith<$Re
   factory _$CartStateCopyWith(_CartState value, $Res Function(_CartState) _then) = __$CartStateCopyWithImpl;
 @override @useResult
 $Res call({
- CartStates cartState, List<ProductModel> products
+ CartStates cartState, List<CartItemModel> products
 });
 
 
@@ -270,7 +270,7 @@ class __$CartStateCopyWithImpl<$Res>
   return _then(_CartState(
 cartState: null == cartState ? _self.cartState : cartState // ignore: cast_nullable_to_non_nullable
 as CartStates,products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
-as List<ProductModel>,
+as List<CartItemModel>,
   ));
 }
 

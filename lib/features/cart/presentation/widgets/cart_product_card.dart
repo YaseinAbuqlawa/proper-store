@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
-import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/core/products/presentation/widgets/add_and_minus_row.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_price.dart';
 import 'package:proper_store/core/widgets/app_network_image.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 
 class CartProductCard extends StatelessWidget {
-  final ProductModel product;
+  final CartItemModel product;
   const CartProductCard({super.key, required this.product});
 
   @override
@@ -27,7 +27,7 @@ class CartProductCard extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: AppNetworkImage(imageUrl: product.imageUrls.first),
+            child: AppNetworkImage(imageUrl: product.imageUrl),
           ),
           Expanded(
             child: Column(
@@ -54,7 +54,7 @@ class CartProductCard extends StatelessWidget {
                               child: Container(
                                 width: 20,
                                 height: 20,
-                                color: product.selectedColor!,
+                                color: product.selectedColor,
                               ),
                             ),
                           ],
@@ -75,7 +75,7 @@ class CartProductCard extends StatelessWidget {
                     ProductPrice(
                       discountPercentage: 0,
                       originalPrice: product.sellingPrice,
-                      offerPrice: product.offerPrice(),
+                      offerPrice: product.offerPrice,
                     ),
                     AddAndMinusRow(
                       productId: product.id,

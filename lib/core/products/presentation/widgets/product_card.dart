@@ -5,7 +5,6 @@ import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
-import 'package:proper_store/core/products/presentation/widgets/add_and_minus_row.dart';
 import 'package:proper_store/core/products/presentation/widgets/add_to_favorite.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_price.dart';
 import 'package:proper_store/core/products/presentation/widgets/select_color_dialog.dart';
@@ -172,36 +171,52 @@ class AddToCart extends StatelessWidget {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         final cartProduct = state.products
-            .where((p) => p.id == product.id)
+            .where((p) => p.productId == product.id)
             .firstOrNull;
-        if (cartProduct != null) {
-          return AddAndMinusRow(
-            productId: product.id,
-            productQuantity: cartProduct.quantity,
-          );
-        } else {
-          return ElevatedButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => SelectColorDialog(product: product),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              padding: deviceType == DeviceType.smallPhone
-                  ? EdgeInsets.all(0)
-                  : EdgeInsets.all(5),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.shopping_cart),
-                AppSpacer(width: 10),
-                Text(S.of(context).addToCartText),
-              ],
-            ),
-          );
-        }
+
+        return ElevatedButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) => SelectColorDialog(product: product),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            padding: deviceType == DeviceType.smallPhone
+                ? EdgeInsets.all(0)
+                : EdgeInsets.all(5),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Icon(Icons.shopping_cart),
+                  if (cartProduct != null)
+                    Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: AppColors.blackDeep,
+                      ),
+                      child: Text(
+                        cartProduct.quantity.toString(),
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.bodyDescription.copyWith(
+                          color: AppColors.whiteColor,
+                          fontSize: 6,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              AppSpacer(width: 10),
+              Text(S.of(context).addToCartText),
+            ],
+          ),
+        );
       },
     );
   }

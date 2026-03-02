@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
 import 'package:proper_store/core/failures/app_failures.dart';
-import 'package:proper_store/core/products/data/models/product_model.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 
-extension ProductListExt on List<ProductModel> {
+extension CartListExt on List<CartItemModel> {
   double get totalPriceBeforeDiscount => fold(
     0,
     (pervious, current) => pervious + (current.sellingPrice * current.quantity),
@@ -14,7 +14,7 @@ extension ProductListExt on List<ProductModel> {
   );
   double get totalPriceAfterDiscount => fold(
     0,
-    (pervious, current) => pervious + (current.offerPrice() * current.quantity),
+    (pervious, current) => pervious + (current.offerPrice * current.quantity),
   );
 }
 

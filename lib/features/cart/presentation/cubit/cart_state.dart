@@ -4,7 +4,7 @@ part of 'cart_cubit.dart';
 abstract class CartState with _$CartState {
   const factory CartState({
     required CartStates cartState,
-    @Default([]) List<ProductModel> products,
+    @Default([]) List<CartItemModel> products,
   }) = _CartState;
 }
 
