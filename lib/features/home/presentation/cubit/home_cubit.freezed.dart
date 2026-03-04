@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
 
- HomeStates get bannerState; HomeStates get productsState; String get failureCode; HomeCollectionBannerModel? get homeCollectionBannerModel; List<ProductModel> get mostSoldProductsList;
+ HomeStates get bannerState; HomeStates get productsState; HomeStates get categoriesState; String get failureCode; HomeCollectionBannerModel get homeCollectionBannerModel; List<CategoryModel> get bagCategoriesList; List<ProductModel> get mostSoldProductsList;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.bannerState, bannerState) || other.bannerState == bannerState)&&(identical(other.productsState, productsState) || other.productsState == productsState)&&(identical(other.failureCode, failureCode) || other.failureCode == failureCode)&&(identical(other.homeCollectionBannerModel, homeCollectionBannerModel) || other.homeCollectionBannerModel == homeCollectionBannerModel)&&const DeepCollectionEquality().equals(other.mostSoldProductsList, mostSoldProductsList));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.bannerState, bannerState) || other.bannerState == bannerState)&&(identical(other.productsState, productsState) || other.productsState == productsState)&&(identical(other.categoriesState, categoriesState) || other.categoriesState == categoriesState)&&(identical(other.failureCode, failureCode) || other.failureCode == failureCode)&&(identical(other.homeCollectionBannerModel, homeCollectionBannerModel) || other.homeCollectionBannerModel == homeCollectionBannerModel)&&const DeepCollectionEquality().equals(other.bagCategoriesList, bagCategoriesList)&&const DeepCollectionEquality().equals(other.mostSoldProductsList, mostSoldProductsList));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,bannerState,productsState,failureCode,homeCollectionBannerModel,const DeepCollectionEquality().hash(mostSoldProductsList));
+int get hashCode => Object.hash(runtimeType,bannerState,productsState,categoriesState,failureCode,homeCollectionBannerModel,const DeepCollectionEquality().hash(bagCategoriesList),const DeepCollectionEquality().hash(mostSoldProductsList));
 
 @override
 String toString() {
-  return 'HomeState(bannerState: $bannerState, productsState: $productsState, failureCode: $failureCode, homeCollectionBannerModel: $homeCollectionBannerModel, mostSoldProductsList: $mostSoldProductsList)';
+  return 'HomeState(bannerState: $bannerState, productsState: $productsState, categoriesState: $categoriesState, failureCode: $failureCode, homeCollectionBannerModel: $homeCollectionBannerModel, bagCategoriesList: $bagCategoriesList, mostSoldProductsList: $mostSoldProductsList)';
 }
 
 
@@ -45,11 +45,11 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- HomeStates bannerState, HomeStates productsState, String failureCode, HomeCollectionBannerModel? homeCollectionBannerModel, List<ProductModel> mostSoldProductsList
+ HomeStates bannerState, HomeStates productsState, HomeStates categoriesState, String failureCode, HomeCollectionBannerModel homeCollectionBannerModel, List<CategoryModel> bagCategoriesList, List<ProductModel> mostSoldProductsList
 });
 
 
-
+$HomeCollectionBannerModelCopyWith<$Res> get homeCollectionBannerModel;
 
 }
 /// @nodoc
@@ -62,17 +62,28 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? bannerState = null,Object? productsState = null,Object? failureCode = null,Object? homeCollectionBannerModel = freezed,Object? mostSoldProductsList = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? bannerState = null,Object? productsState = null,Object? categoriesState = null,Object? failureCode = null,Object? homeCollectionBannerModel = null,Object? bagCategoriesList = null,Object? mostSoldProductsList = null,}) {
   return _then(_self.copyWith(
 bannerState: null == bannerState ? _self.bannerState : bannerState // ignore: cast_nullable_to_non_nullable
 as HomeStates,productsState: null == productsState ? _self.productsState : productsState // ignore: cast_nullable_to_non_nullable
+as HomeStates,categoriesState: null == categoriesState ? _self.categoriesState : categoriesState // ignore: cast_nullable_to_non_nullable
 as HomeStates,failureCode: null == failureCode ? _self.failureCode : failureCode // ignore: cast_nullable_to_non_nullable
-as String,homeCollectionBannerModel: freezed == homeCollectionBannerModel ? _self.homeCollectionBannerModel : homeCollectionBannerModel // ignore: cast_nullable_to_non_nullable
-as HomeCollectionBannerModel?,mostSoldProductsList: null == mostSoldProductsList ? _self.mostSoldProductsList : mostSoldProductsList // ignore: cast_nullable_to_non_nullable
+as String,homeCollectionBannerModel: null == homeCollectionBannerModel ? _self.homeCollectionBannerModel : homeCollectionBannerModel // ignore: cast_nullable_to_non_nullable
+as HomeCollectionBannerModel,bagCategoriesList: null == bagCategoriesList ? _self.bagCategoriesList : bagCategoriesList // ignore: cast_nullable_to_non_nullable
+as List<CategoryModel>,mostSoldProductsList: null == mostSoldProductsList ? _self.mostSoldProductsList : mostSoldProductsList // ignore: cast_nullable_to_non_nullable
 as List<ProductModel>,
   ));
 }
-
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$HomeCollectionBannerModelCopyWith<$Res> get homeCollectionBannerModel {
+  
+  return $HomeCollectionBannerModelCopyWith<$Res>(_self.homeCollectionBannerModel, (value) {
+    return _then(_self.copyWith(homeCollectionBannerModel: value));
+  });
+}
 }
 
 
@@ -154,10 +165,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( HomeStates bannerState,  HomeStates productsState,  String failureCode,  HomeCollectionBannerModel? homeCollectionBannerModel,  List<ProductModel> mostSoldProductsList)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( HomeStates bannerState,  HomeStates productsState,  HomeStates categoriesState,  String failureCode,  HomeCollectionBannerModel homeCollectionBannerModel,  List<CategoryModel> bagCategoriesList,  List<ProductModel> mostSoldProductsList)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.bannerState,_that.productsState,_that.failureCode,_that.homeCollectionBannerModel,_that.mostSoldProductsList);case _:
+return $default(_that.bannerState,_that.productsState,_that.categoriesState,_that.failureCode,_that.homeCollectionBannerModel,_that.bagCategoriesList,_that.mostSoldProductsList);case _:
   return orElse();
 
 }
@@ -175,10 +186,10 @@ return $default(_that.bannerState,_that.productsState,_that.failureCode,_that.ho
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( HomeStates bannerState,  HomeStates productsState,  String failureCode,  HomeCollectionBannerModel? homeCollectionBannerModel,  List<ProductModel> mostSoldProductsList)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( HomeStates bannerState,  HomeStates productsState,  HomeStates categoriesState,  String failureCode,  HomeCollectionBannerModel homeCollectionBannerModel,  List<CategoryModel> bagCategoriesList,  List<ProductModel> mostSoldProductsList)  $default,) {final _that = this;
 switch (_that) {
 case _HomeState():
-return $default(_that.bannerState,_that.productsState,_that.failureCode,_that.homeCollectionBannerModel,_that.mostSoldProductsList);case _:
+return $default(_that.bannerState,_that.productsState,_that.categoriesState,_that.failureCode,_that.homeCollectionBannerModel,_that.bagCategoriesList,_that.mostSoldProductsList);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +206,10 @@ return $default(_that.bannerState,_that.productsState,_that.failureCode,_that.ho
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( HomeStates bannerState,  HomeStates productsState,  String failureCode,  HomeCollectionBannerModel? homeCollectionBannerModel,  List<ProductModel> mostSoldProductsList)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( HomeStates bannerState,  HomeStates productsState,  HomeStates categoriesState,  String failureCode,  HomeCollectionBannerModel homeCollectionBannerModel,  List<CategoryModel> bagCategoriesList,  List<ProductModel> mostSoldProductsList)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.bannerState,_that.productsState,_that.failureCode,_that.homeCollectionBannerModel,_that.mostSoldProductsList);case _:
+return $default(_that.bannerState,_that.productsState,_that.categoriesState,_that.failureCode,_that.homeCollectionBannerModel,_that.bagCategoriesList,_that.mostSoldProductsList);case _:
   return null;
 
 }
@@ -210,13 +221,21 @@ return $default(_that.bannerState,_that.productsState,_that.failureCode,_that.ho
 
 
 class _HomeState implements HomeState {
-  const _HomeState({this.bannerState = HomeStates.initial, this.productsState = HomeStates.initial, this.failureCode = '', this.homeCollectionBannerModel, final  List<ProductModel> mostSoldProductsList = const []}): _mostSoldProductsList = mostSoldProductsList;
+  const _HomeState({this.bannerState = HomeStates.initial, this.productsState = HomeStates.initial, this.categoriesState = HomeStates.initial, this.failureCode = '', this.homeCollectionBannerModel = dummyBanner, final  List<CategoryModel> bagCategoriesList = const [], final  List<ProductModel> mostSoldProductsList = const []}): _bagCategoriesList = bagCategoriesList,_mostSoldProductsList = mostSoldProductsList;
   
 
 @override@JsonKey() final  HomeStates bannerState;
 @override@JsonKey() final  HomeStates productsState;
+@override@JsonKey() final  HomeStates categoriesState;
 @override@JsonKey() final  String failureCode;
-@override final  HomeCollectionBannerModel? homeCollectionBannerModel;
+@override@JsonKey() final  HomeCollectionBannerModel homeCollectionBannerModel;
+ final  List<CategoryModel> _bagCategoriesList;
+@override@JsonKey() List<CategoryModel> get bagCategoriesList {
+  if (_bagCategoriesList is EqualUnmodifiableListView) return _bagCategoriesList;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_bagCategoriesList);
+}
+
  final  List<ProductModel> _mostSoldProductsList;
 @override@JsonKey() List<ProductModel> get mostSoldProductsList {
   if (_mostSoldProductsList is EqualUnmodifiableListView) return _mostSoldProductsList;
@@ -235,16 +254,16 @@ _$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.bannerState, bannerState) || other.bannerState == bannerState)&&(identical(other.productsState, productsState) || other.productsState == productsState)&&(identical(other.failureCode, failureCode) || other.failureCode == failureCode)&&(identical(other.homeCollectionBannerModel, homeCollectionBannerModel) || other.homeCollectionBannerModel == homeCollectionBannerModel)&&const DeepCollectionEquality().equals(other._mostSoldProductsList, _mostSoldProductsList));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.bannerState, bannerState) || other.bannerState == bannerState)&&(identical(other.productsState, productsState) || other.productsState == productsState)&&(identical(other.categoriesState, categoriesState) || other.categoriesState == categoriesState)&&(identical(other.failureCode, failureCode) || other.failureCode == failureCode)&&(identical(other.homeCollectionBannerModel, homeCollectionBannerModel) || other.homeCollectionBannerModel == homeCollectionBannerModel)&&const DeepCollectionEquality().equals(other._bagCategoriesList, _bagCategoriesList)&&const DeepCollectionEquality().equals(other._mostSoldProductsList, _mostSoldProductsList));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,bannerState,productsState,failureCode,homeCollectionBannerModel,const DeepCollectionEquality().hash(_mostSoldProductsList));
+int get hashCode => Object.hash(runtimeType,bannerState,productsState,categoriesState,failureCode,homeCollectionBannerModel,const DeepCollectionEquality().hash(_bagCategoriesList),const DeepCollectionEquality().hash(_mostSoldProductsList));
 
 @override
 String toString() {
-  return 'HomeState(bannerState: $bannerState, productsState: $productsState, failureCode: $failureCode, homeCollectionBannerModel: $homeCollectionBannerModel, mostSoldProductsList: $mostSoldProductsList)';
+  return 'HomeState(bannerState: $bannerState, productsState: $productsState, categoriesState: $categoriesState, failureCode: $failureCode, homeCollectionBannerModel: $homeCollectionBannerModel, bagCategoriesList: $bagCategoriesList, mostSoldProductsList: $mostSoldProductsList)';
 }
 
 
@@ -255,11 +274,11 @@ abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- HomeStates bannerState, HomeStates productsState, String failureCode, HomeCollectionBannerModel? homeCollectionBannerModel, List<ProductModel> mostSoldProductsList
+ HomeStates bannerState, HomeStates productsState, HomeStates categoriesState, String failureCode, HomeCollectionBannerModel homeCollectionBannerModel, List<CategoryModel> bagCategoriesList, List<ProductModel> mostSoldProductsList
 });
 
 
-
+@override $HomeCollectionBannerModelCopyWith<$Res> get homeCollectionBannerModel;
 
 }
 /// @nodoc
@@ -272,18 +291,29 @@ class __$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? bannerState = null,Object? productsState = null,Object? failureCode = null,Object? homeCollectionBannerModel = freezed,Object? mostSoldProductsList = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? bannerState = null,Object? productsState = null,Object? categoriesState = null,Object? failureCode = null,Object? homeCollectionBannerModel = null,Object? bagCategoriesList = null,Object? mostSoldProductsList = null,}) {
   return _then(_HomeState(
 bannerState: null == bannerState ? _self.bannerState : bannerState // ignore: cast_nullable_to_non_nullable
 as HomeStates,productsState: null == productsState ? _self.productsState : productsState // ignore: cast_nullable_to_non_nullable
+as HomeStates,categoriesState: null == categoriesState ? _self.categoriesState : categoriesState // ignore: cast_nullable_to_non_nullable
 as HomeStates,failureCode: null == failureCode ? _self.failureCode : failureCode // ignore: cast_nullable_to_non_nullable
-as String,homeCollectionBannerModel: freezed == homeCollectionBannerModel ? _self.homeCollectionBannerModel : homeCollectionBannerModel // ignore: cast_nullable_to_non_nullable
-as HomeCollectionBannerModel?,mostSoldProductsList: null == mostSoldProductsList ? _self._mostSoldProductsList : mostSoldProductsList // ignore: cast_nullable_to_non_nullable
+as String,homeCollectionBannerModel: null == homeCollectionBannerModel ? _self.homeCollectionBannerModel : homeCollectionBannerModel // ignore: cast_nullable_to_non_nullable
+as HomeCollectionBannerModel,bagCategoriesList: null == bagCategoriesList ? _self._bagCategoriesList : bagCategoriesList // ignore: cast_nullable_to_non_nullable
+as List<CategoryModel>,mostSoldProductsList: null == mostSoldProductsList ? _self._mostSoldProductsList : mostSoldProductsList // ignore: cast_nullable_to_non_nullable
 as List<ProductModel>,
   ));
 }
 
-
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$HomeCollectionBannerModelCopyWith<$Res> get homeCollectionBannerModel {
+  
+  return $HomeCollectionBannerModelCopyWith<$Res>(_self.homeCollectionBannerModel, (value) {
+    return _then(_self.copyWith(homeCollectionBannerModel: value));
+  });
+}
 }
 
 // dart format on

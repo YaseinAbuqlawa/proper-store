@@ -89,10 +89,10 @@ class S {
     return Intl.message('حسابي', name: 'profileTitle', desc: '', args: []);
   }
 
-  /// `وصل حديثاً`
+  /// `الاكثر مبيعاً`
   String get mostSoldSectionTitle {
     return Intl.message(
-      'وصل حديثاً',
+      'الاكثر مبيعاً',
       name: 'mostSoldSectionTitle',
       desc: '',
       args: [],

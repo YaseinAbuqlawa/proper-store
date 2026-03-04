@@ -10,8 +10,10 @@ import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/features/home/presentation/cubit/home_cubit.dart';
+import 'package:proper_store/features/home/presentation/widgets/home_categories_list_view.dart';
 import 'package:proper_store/features/home/presentation/widgets/home_main_collection_banner.dart';
 import 'package:proper_store/generated/l10n.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,10 +23,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final HomeCubit _homeCubit;
+
   @override
-  void didChangeDependencies() async {
+  void initState() {
+    super.initState();
     FlutterNativeSplash.remove();
-    super.didChangeDependencies();
+
+    _homeCubit = sl<HomeCubit>()
+      ..getMostSoldProducts()
+      ..getMainCollectionBannerData()
+      ..getBagCategories();
   }
 
   @override
@@ -32,99 +41,134 @@ class _HomeScreenState extends State<HomeScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    late final double childAspectRatio;
-    late final int crossAxisCount;
-
     final DeviceType deviceType = AppSizes.getDeviceType(screenWidth);
 
-    switch (deviceType) {
-      case DeviceType.smallPhone:
-        childAspectRatio = 4 / 6;
-        crossAxisCount = 1;
-        break;
-      case DeviceType.mediumPhone:
-        childAspectRatio = 4 / 10;
-        crossAxisCount = 2;
-        break;
-      case DeviceType.largePhone:
-        childAspectRatio = 3 / 7;
-        crossAxisCount = 2;
-        break;
-      case DeviceType.tablet:
-        childAspectRatio = 4 / 7;
-        crossAxisCount = 3;
-        break;
-      case DeviceType.laptop:
-        childAspectRatio = 4 / 8;
-        crossAxisCount = 4;
-        break;
-    }
-    return BlocProvider(
-      create: (context) => sl<HomeCubit>()
-        ..getMostSoldProducts()
-        ..getMainCollectionBannerData(),
+    final (double childAspectRatio, int crossAxisCount) = switch (deviceType) {
+      DeviceType.smallPhone => (4 / 6, 1),
+      DeviceType.mediumPhone => (4 / 10, 2),
+      DeviceType.largePhone => (3 / 7, 2),
+      DeviceType.tablet => (4 / 7, 3),
+      DeviceType.laptop => (4 / 8, 4),
+    };
+
+    return BlocProvider.value(
+      value: _homeCubit,
       child: Scaffold(
         backgroundColor: AppColors.blackCard,
         appBar: _appBar(context),
         body: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverPadding(
-                padding: EdgeInsets.all(20),
-                sliver: SliverToBoxAdapter(
+          child: Skeleton.keep(
+            child: CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding: const EdgeInsets.only(
+                    top: 20,
+                    right: 20,
+                    left: 20,
+                    bottom: 10,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: HomeMainCollectionBanner(
+                      screenHeight: screenHeight,
+                      screenWidth: screenWidth,
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HomeMainCollectionBanner(
-                        screenHeight: screenHeight,
-                        screenWidth: screenWidth,
-                      ),
-                      AppSpacer(height: AppSpacing.large),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            S.of(context).mostSoldSectionTitle,
-                            style: AppTextStyles.sectionTitle.copyWith(
-                              color: AppColors.whiteColor,
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          S.of(context).categories,
+                          style: AppTextStyles.sectionTitle.copyWith(
+                            color: AppColors.whiteColor,
                           ),
-                          Text(
-                            S.of(context).showAllText,
-                            style: AppTextStyles.navLabel.copyWith(
-                              color: AppColors.goldRoyal,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
+                      const AppSpacer(height: AppSpacing.small),
+                      HomeCategoriesListView(),
                     ],
                   ),
                 ),
-              ),
-              SliverPadding(
-                padding: EdgeInsets.only(bottom: 30, right: 10, left: 10),
-                sliver: BlocSelector<HomeCubit, HomeState, List<ProductModel>>(
-                  selector: (state) {
-                    return state.mostSoldProductsList;
-                  },
-                  builder: (context, productsList) {
-                    return SliverGrid.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        childAspectRatio: childAspectRatio,
-                      ),
-                      itemCount: productsList.length,
-                      itemBuilder: (context, index) {
-                        final product = productsList[index];
-                        return ProductCard(product: product);
-                      },
-                    );
-                  },
+                SliverPadding(
+                  padding: const EdgeInsets.only(
+                    top: 20,
+                    right: 20,
+                    left: 20,
+                    bottom: 10,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          S.of(context).mostSoldSectionTitle,
+                          style: AppTextStyles.sectionTitle.copyWith(
+                            color: AppColors.whiteColor,
+                          ),
+                        ),
+                        Text(
+                          S.of(context).showAllText,
+                          style: AppTextStyles.navLabel.copyWith(
+                            color: AppColors.goldRoyal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ],
+
+                SliverPadding(
+                  padding: EdgeInsets.only(bottom: 30, right: 10, left: 10),
+                  sliver:
+                      BlocSelector<
+                        HomeCubit,
+                        HomeState,
+                        ({List<ProductModel> products, bool isLoading})
+                      >(
+                        selector: (state) => (
+                          products: state.mostSoldProductsList,
+                          isLoading: state.productsState.name == "loading",
+                        ),
+                        builder: (context, data) {
+                          // Show placeholder skeletons while loading
+                          final displayList = data.isLoading
+                              ? List.filled(6, ProductModel.placeholder())
+                              : data.products;
+
+                          if (!data.isLoading && displayList.isEmpty) {
+                            return const SliverFillRemaining(
+                              child: Center(
+                                child: Text('No products available'),
+                              ),
+                            );
+                          }
+
+                          return Skeletonizer.sliver(
+                            enabled: data.isLoading,
+                            child: SliverGrid.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: crossAxisCount,
+                                    childAspectRatio: childAspectRatio,
+                                  ),
+                              itemCount: displayList.length,
+                              itemBuilder: (context, index) {
+                                return ProductCard(
+                                  product: displayList[index],
+                                  enableHero: !data.isLoading,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -135,11 +179,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       backgroundColor: AppColors.darkGray,
       title: Text(S.of(context).homeTitle),
-      leading: Padding(
-        padding: AppSpacing.cardPadding,
-        child: IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+      shape: const BorderDirectional(
+        bottom: BorderSide(color: AppColors.darkGray),
       ),
-      shape: BorderDirectional(bottom: BorderSide(color: AppColors.darkGray)),
+      elevation: 0,
     );
   }
 }

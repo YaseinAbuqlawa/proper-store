@@ -63,6 +63,8 @@ import 'package:proper_store/features/home/data/data_sources/home_remote_data_so
 import 'package:proper_store/features/home/data/repo/home_repo_impl.dart'
     as _i697;
 import 'package:proper_store/features/home/domain/repo/home_repo.dart' as _i147;
+import 'package:proper_store/features/home/domain/use_cases/get_bag_categories_use_case.dart'
+    as _i924;
 import 'package:proper_store/features/home/domain/use_cases/get_home_offer_card_use_case.dart'
     as _i683;
 import 'package:proper_store/features/home/domain/use_cases/get_most_sold_product_use_case.dart'
@@ -211,6 +213,9 @@ extension GetItInjectableX on _i174.GetIt {
         getFavoriteProductsUseCase: gh<_i182.GetFavoriteProductsUseCase>(),
       ),
     );
+    gh.lazySingleton<_i924.GetBagCategoriesUseCase>(
+      () => _i924.GetBagCategoriesUseCase(repo: gh<_i147.HomeRepo>()),
+    );
     gh.lazySingleton<_i683.GetMainCollectionBannerDataUseCase>(
       () =>
           _i683.GetMainCollectionBannerDataUseCase(repo: gh<_i147.HomeRepo>()),
@@ -238,6 +243,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1070.HomeCubit>(
       () => _i1070.HomeCubit(
+        getBagCategoriesUseCase: gh<_i924.GetBagCategoriesUseCase>(),
         mainCollectionBannerDataUseCase:
             gh<_i683.GetMainCollectionBannerDataUseCase>(),
         getMostSoldProductUseCase: gh<_i71.GetMostSoldProductUseCase>(),

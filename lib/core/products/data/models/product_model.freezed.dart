@@ -226,8 +226,8 @@ return $default(_that.category,_that.colors,_that.selectedColor,_that.descriptio
 /// @nodoc
 @JsonSerializable()
 
-class _ProductModel implements ProductModel {
-  const _ProductModel({required this.category, @ColorConverter() required final  List<Color> colors, @ColorConverter() this.selectedColor = null, required this.description, required this.discountPercentage, required this.discountValue, required this.id, @JsonKey(includeToJson: false, includeFromJson: false) this.quantity = 0, required final  List<String> imageUrls, @TimestampConverter() required this.lastPurchaseDate, required this.material, required this.name, required this.refundedQuantity, required this.section, required this.sellingPrice, required final  List<double> sizes, required this.soldQuantity, required this.stockQuantity, required final  List<String> videoUrls}): _colors = colors,_imageUrls = imageUrls,_sizes = sizes,_videoUrls = videoUrls;
+class _ProductModel extends ProductModel {
+  const _ProductModel({required this.category, @ColorConverter() required final  List<Color> colors, @ColorConverter() this.selectedColor = null, required this.description, required this.discountPercentage, required this.discountValue, required this.id, @JsonKey(includeToJson: false, includeFromJson: false) this.quantity = 0, required final  List<String> imageUrls, @TimestampConverter() required this.lastPurchaseDate, required this.material, required this.name, required this.refundedQuantity, required this.section, required this.sellingPrice, required final  List<double> sizes, required this.soldQuantity, required this.stockQuantity, required final  List<String> videoUrls}): _colors = colors,_imageUrls = imageUrls,_sizes = sizes,_videoUrls = videoUrls,super._();
   factory _ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 
 @override final  String category;

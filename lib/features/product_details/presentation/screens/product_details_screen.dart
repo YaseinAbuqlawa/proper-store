@@ -121,7 +121,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                     discountPercentage:
                                         productDetails.discountPercentage,
                                     originalPrice: productDetails.sellingPrice,
-                                    offerPrice: productDetails.offerPrice(),
+                                    offerPrice: productDetails.offerPrice,
                                   ),
                                 ],
                               ),

@@ -15,6 +15,7 @@ import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:proper_store/generated/l10n.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
@@ -62,9 +63,13 @@ class ProductCard extends StatelessWidget {
                               height: constraints.maxHeight * .5,
                             ),
                           )
-                        : AppNetworkImage(
-                            imageUrl: product.imageUrls[0],
+                        : Skeleton.replace(
+                            width: double.infinity,
                             height: constraints.maxHeight * .5,
+                            child: AppNetworkImage(
+                              imageUrl: product.imageUrls[0],
+                              height: constraints.maxHeight * .5,
+                            ),
                           ),
                     AddToFavorite(
                       productId: product.id,
@@ -89,7 +94,7 @@ class ProductCard extends StatelessWidget {
                     AppSpacer(height: 10),
                     ProductPrice(
                       originalPrice: product.sellingPrice,
-                      offerPrice: product.offerPrice(),
+                      offerPrice: product.offerPrice,
                       discountPercentage: product.discountPercentage,
                     ),
                     AppSpacer(height: 10),

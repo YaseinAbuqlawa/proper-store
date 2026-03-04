@@ -6,6 +6,7 @@ import 'package:proper_store/core/helpers/app_consts.dart';
 import 'package:proper_store/core/products/data/data_sources/products_remote_data_source.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/features/home/data/data_sources/home_remote_data_source.dart';
+import 'package:proper_store/features/home/data/models/category_model.dart';
 import 'package:proper_store/features/home/data/models/home_collection_banner_model.dart';
 import 'package:proper_store/features/home/domain/repo/home_repo.dart';
 
@@ -23,11 +24,11 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<ServerFailure, HomeCollectionBannerModel>>
   getMainCollectionBannerData() async {
     try {
-      return right(await homeDataSource.getMainCollectionBannerData());
+      return Right(await homeDataSource.getMainCollectionBannerData());
     } on FirebaseException catch (e) {
-      return left(ServerFailure(code: e.code));
+      return Left(ServerFailure(code: e.code));
     } catch (e) {
-      return left(ServerFailure(code: AppConsts.unexpectedErrorText));
+      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -35,11 +36,22 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<ServerFailure, List<ProductModel>>>
   getMostSoldProducts() async {
     try {
-      return right(await productsRemoteDataSource.getMostSoldProducts());
+      return Right(await productsRemoteDataSource.getMostSoldProducts());
     } on FirebaseException catch (e) {
-      return left(ServerFailure(code: e.code));
+      return Left(ServerFailure(code: e.code));
     } catch (e) {
-      return left(ServerFailure(code: AppConsts.unexpectedErrorText));
+      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, List<CategoryModel>>> getBagCategories() async {
+    try {
+      return Right(await homeDataSource.getBagCategories());
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(code: e.code));
+    } catch (e) {
+      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 }

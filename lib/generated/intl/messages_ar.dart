@@ -86,7 +86,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "تسوقي الان",
     ),
-    "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage("وصل حديثاً"),
+    "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "الاكثر مبيعاً",
+    ),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("طلباتي"),
     "productDetailsScreenTitle": MessageLookupByLibrary.simpleMessage(
       "تفاصيل المنتج",
