@@ -5,6 +5,7 @@ import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/helpers/extensions.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:proper_store/generated/l10n.dart';
 
 class SubmitCartButton extends StatelessWidget {
   const SubmitCartButton({super.key});
@@ -22,7 +23,7 @@ class SubmitCartButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "إتمام الشراء",
+              S.of(context).completeCheckout,
               style: AppTextStyles.productDetailsName.copyWith(
                 color: AppColors.blackDeep,
                 fontWeight: FontWeight.normal,

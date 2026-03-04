@@ -10,6 +10,7 @@ import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/auth_cubit.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/widgets/sign_in_with_identity_section.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/widgets/store_logo.dart';
+import 'package:proper_store/generated/l10n.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -19,8 +20,13 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  bool _initialized = false;
+
   @override
   Future<void> didChangeDependencies() async {
+    super.didChangeDependencies();
+    if (_initialized) return;
+    _initialized = true;
     try {
       await Future.wait([
         precacheImage(AssetImage("assets/images/proper_logo.webp"), context),
@@ -32,11 +38,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     } finally {
       FlutterNativeSplash.remove();
     }
-    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     final screenWidth = MediaQuery.widthOf(context);
     return BlocProvider(
       create: (context) => sl<AuthCubit>(),
@@ -70,9 +76,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             TextSpan(
                               style: AppTextStyles.heroHeadline,
                               children: [
-                                TextSpan(text: "جودة عالية\n"),
+                                TextSpan(text: "${s.highQuality}\n"),
                                 TextSpan(
-                                  text: "بأسعار تناسبك",
+                                  text: s.pricesSuitYou,
                                   style: AppTextStyles.heroHeadline.copyWith(
                                     color: AppColors.goldRoyal,
                                   ),
@@ -82,13 +88,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            "اكتشفي أحدث صيحات الموضة من الأحذية والحقائب في مصر بجودة عالمية.",
+                            s.discoverLatestFashion,
                             style: AppTextStyles.bodyDescription,
                             textAlign: TextAlign.center,
                           ),
                           _SignInAnonymouslyButton(authCubit: authCubit),
                           SignInWithIdentitySection(
-                            text: "او سجلي الدخول بسهولة",
+                            text: s.orSignInEasily,
                             authCubit: authCubit,
                           ),
                         ],
@@ -123,7 +129,7 @@ class _SignInAnonymouslyButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("التسوق كزائرة", style: AppTextStyles.buttonText),
+            Text(S.of(context).shopAsGuest, style: AppTextStyles.buttonText),
             AppSpacer(width: 20),
             Icon(Icons.arrow_forward, size: AppSizes.iconSizeLarge),
           ],

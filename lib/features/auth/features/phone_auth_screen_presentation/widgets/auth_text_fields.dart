@@ -5,6 +5,7 @@ import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/features/auth/features/phone_auth_screen_presentation/cubit/phone_auth_cubit.dart';
+import 'package:proper_store/generated/l10n.dart';
 
 class AuthTextField extends StatelessWidget {
   final String? Function(String?)? validator;
@@ -70,6 +71,7 @@ class PhoneAuthTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocBuilder<PhoneAuthCubit, PhoneAuthState>(
       builder: (context, state) {
         final titleRowButton = InkWell(
@@ -77,7 +79,7 @@ class PhoneAuthTextField extends StatelessWidget {
             context.read<PhoneAuthCubit>().backToInitialState();
           },
           child: Text(
-            "تغيير الرقم",
+            s.changePhoneNumber,
             style: AppTextStyles.buttonText.copyWith(
               color: AppColors.goldRoyal,
             ),
@@ -85,7 +87,7 @@ class PhoneAuthTextField extends StatelessWidget {
         );
 
         return AuthTextField(
-          title: 'رقم الهاتف',
+          title: s.phoneNumberLabel,
           hint: '×××××××××1',
           icon: Icons.phone,
           prefixIcon: Center(
@@ -100,10 +102,10 @@ class PhoneAuthTextField extends StatelessWidget {
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "هذا الحقل مطلوب";
+              return s.fieldRequired;
             }
-            if (value.length != 10) {
-              return "رقم الهاتف يجب أن يتكون من 10 أرقام";
+            if (!RegExp(r'^\d{10}$').hasMatch(value)) {
+              return s.phoneNumberMustBe10Digits;
             }
             return null;
           },
@@ -135,15 +137,16 @@ class OtpAuthTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocBuilder<PhoneAuthCubit, PhoneAuthState>(
       builder: (context, state) {
         final otpField = AuthTextField(
-          title: 'رمز التحقق',
+          title: s.otpCodeLabel,
           hint: '------',
           icon: Icons.check,
           validator: (value) {
             if (value!.length < 6) {
-              return "رمز التحقق يجب ان يكون 6 ارقام على الاقل";
+              return s.otpMustBe6Digits;
             }
             return null;
           },

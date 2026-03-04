@@ -143,16 +143,18 @@ class ProductDetailsScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text("اللون المختار: "),
+                                  Text(S.of(context).selectedColor),
                                   const AppSpacer(height: 5),
                                   ColorsRow(
                                     productColors: productDetails.colors,
                                   ),
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
                                       vertical: 8.0,
                                     ),
-                                    child: Text("الوصف والتفاصيل"),
+                                    child: Text(
+                                      S.of(context).descriptionAndDetails,
+                                    ),
                                   ),
                                   Text(
                                     productDetails.description,
@@ -181,14 +183,14 @@ class ProductDetailsScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "منتجات مشابهة",
+                                      S.of(context).similarProducts,
                                       style: AppTextStyles.buttonText.copyWith(
                                         color: AppColors.whiteColor,
                                       ),
                                     ),
 
                                     Text(
-                                      "عرض الكل",
+                                      S.of(context).showAllText,
                                       style: AppTextStyles.navLabel.copyWith(
                                         color: AppColors.goldRoyal,
                                       ),

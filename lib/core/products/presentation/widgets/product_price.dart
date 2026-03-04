@@ -54,7 +54,7 @@ class ProductPrice extends StatelessWidget {
               ),
             ),
             child: Text(
-              "خصم $discountPercentage%",
+              S.of(context).discountLabel(discountPercentage),
               style: AppTextStyles.badgeText.copyWith(
                 color: AppColors.lightRed,
                 fontSize: 10,

@@ -20,8 +20,39 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(percentage) => "Discount ${percentage}%";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addToCartButton": MessageLookupByLibrary.simpleMessage("Add to cart"),
+    "addToCartText": MessageLookupByLibrary.simpleMessage("Add to cart"),
+    "buyNow": MessageLookupByLibrary.simpleMessage("Buy now"),
+    "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
+    "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+    "changePhoneNumber": MessageLookupByLibrary.simpleMessage("Change number"),
+    "completeCheckout": MessageLookupByLibrary.simpleMessage(
+      "Complete checkout",
+    ),
+    "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "Confirm number",
+    ),
+    "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
+    "currencySymbol": MessageLookupByLibrary.simpleMessage(" EGP"),
+    "descriptionAndDetails": MessageLookupByLibrary.simpleMessage(
+      "Description and details",
+    ),
+    "discountLabel": m0,
+    "discoverLatestFashion": MessageLookupByLibrary.simpleMessage(
+      "Discover the latest fashion trends in shoes and bags in Egypt with world-class quality.",
+    ),
+    "enterFullNameHint": MessageLookupByLibrary.simpleMessage(
+      "Enter your full name",
+    ),
+    "errorTitle": MessageLookupByLibrary.simpleMessage("Error"),
+    "favoritesTitle": MessageLookupByLibrary.simpleMessage("Favorites"),
+    "fieldRequired": MessageLookupByLibrary.simpleMessage(
+      "This field is required",
+    ),
     "firebase_error_aborted": MessageLookupByLibrary.simpleMessage(
       "The process was interrupted. Please try again.",
     ),
@@ -76,5 +107,60 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_unknown": MessageLookupByLibrary.simpleMessage(
       "An unexpected error occurred. Please try again.",
     ),
+    "fullNameLabel": MessageLookupByLibrary.simpleMessage("Full name"),
+    "highQuality": MessageLookupByLibrary.simpleMessage("High quality"),
+    "homeButtonName": MessageLookupByLibrary.simpleMessage("Home"),
+    "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "loginSuccess": MessageLookupByLibrary.simpleMessage(
+      "Logged in successfully",
+    ),
+    "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
+      "Shop now",
+    ),
+    "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "Best Sellers",
+    ),
+    "myAddresses": MessageLookupByLibrary.simpleMessage("My addresses"),
+    "nameMustBeMoreThan2Chars": MessageLookupByLibrary.simpleMessage(
+      "Name must be more than 2 characters",
+    ),
+    "orSignInEasily": MessageLookupByLibrary.simpleMessage("Or sign in easily"),
+    "ordersTitle": MessageLookupByLibrary.simpleMessage("My Orders"),
+    "otpCodeLabel": MessageLookupByLibrary.simpleMessage("Verification code"),
+    "otpMustBe6Digits": MessageLookupByLibrary.simpleMessage(
+      "Verification code must be at least 6 digits",
+    ),
+    "otpSentSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Verification code sent",
+    ),
+    "phoneNumberLabel": MessageLookupByLibrary.simpleMessage("Phone number"),
+    "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
+      "Phone number must be 10 digits",
+    ),
+    "pricesSuitYou": MessageLookupByLibrary.simpleMessage(
+      "Prices that suit you",
+    ),
+    "productDetailsScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Product details",
+    ),
+    "profileTitle": MessageLookupByLibrary.simpleMessage("My Account"),
+    "returnPolicy": MessageLookupByLibrary.simpleMessage("Return policy"),
+    "selectedColor": MessageLookupByLibrary.simpleMessage("Selected color:"),
+    "shopAsGuest": MessageLookupByLibrary.simpleMessage("Shop as guest"),
+    "showAllText": MessageLookupByLibrary.simpleMessage("Show all"),
+    "signInEasilyVia": MessageLookupByLibrary.simpleMessage(
+      "Sign in easily via",
+    ),
+    "signInForBestService": MessageLookupByLibrary.simpleMessage(
+      "Sign in for the best experience",
+    ),
+    "signInToFollowLatestFashion": MessageLookupByLibrary.simpleMessage(
+      "Sign in to follow the latest fashion trends",
+    ),
+    "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
+    "similarProducts": MessageLookupByLibrary.simpleMessage("Similar products"),
+    "successTitle": MessageLookupByLibrary.simpleMessage("Success"),
+    "verifyCode": MessageLookupByLibrary.simpleMessage("Verify code"),
+    "welcomeMessage": MessageLookupByLibrary.simpleMessage("Welcome"),
   };
 }

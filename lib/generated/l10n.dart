@@ -134,6 +134,316 @@ class S {
     );
   }
 
+  /// `هذا الحقل مطلوب`
+  String get fieldRequired {
+    return Intl.message(
+      'هذا الحقل مطلوب',
+      name: 'fieldRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رقم الهاتف يجب أن يتكون من 10 أرقام`
+  String get phoneNumberMustBe10Digits {
+    return Intl.message(
+      'رقم الهاتف يجب أن يتكون من 10 أرقام',
+      name: 'phoneNumberMustBe10Digits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تغيير الرقم`
+  String get changePhoneNumber {
+    return Intl.message(
+      'تغيير الرقم',
+      name: 'changePhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رقم الهاتف`
+  String get phoneNumberLabel {
+    return Intl.message(
+      'رقم الهاتف',
+      name: 'phoneNumberLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رمز التحقق`
+  String get otpCodeLabel {
+    return Intl.message('رمز التحقق', name: 'otpCodeLabel', desc: '', args: []);
+  }
+
+  /// `رمز التحقق يجب ان يكون 6 ارقام على الاقل`
+  String get otpMustBe6Digits {
+    return Intl.message(
+      'رمز التحقق يجب ان يكون 6 ارقام على الاقل',
+      name: 'otpMustBe6Digits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مرحباً بكِ`
+  String get welcomeMessage {
+    return Intl.message(
+      'مرحباً بكِ',
+      name: 'welcomeMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سجلي الدخول لمتابعة أحدث صيحات الموضة`
+  String get signInToFollowLatestFashion {
+    return Intl.message(
+      'سجلي الدخول لمتابعة أحدث صيحات الموضة',
+      name: 'signInToFollowLatestFashion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الاسم الكامل`
+  String get fullNameLabel {
+    return Intl.message(
+      'الاسم الكامل',
+      name: 'fullNameLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ادخلي اسمك الكامل`
+  String get enterFullNameHint {
+    return Intl.message(
+      'ادخلي اسمك الكامل',
+      name: 'enterFullNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الاسم يجب أن يكون أكثر من حرفين`
+  String get nameMustBeMoreThan2Chars {
+    return Intl.message(
+      'الاسم يجب أن يكون أكثر من حرفين',
+      name: 'nameMustBeMoreThan2Chars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم ارسال رمز التحقق`
+  String get otpSentSuccessfully {
+    return Intl.message(
+      'تم ارسال رمز التحقق',
+      name: 'otpSentSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `التحقق من الرمز`
+  String get verifyCode {
+    return Intl.message(
+      'التحقق من الرمز',
+      name: 'verifyCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تاكيد الرقم`
+  String get confirmPhoneNumber {
+    return Intl.message(
+      'تاكيد الرقم',
+      name: 'confirmPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `خطأ`
+  String get errorTitle {
+    return Intl.message('خطأ', name: 'errorTitle', desc: '', args: []);
+  }
+
+  /// `نجاح`
+  String get successTitle {
+    return Intl.message('نجاح', name: 'successTitle', desc: '', args: []);
+  }
+
+  /// `إتمام الشراء`
+  String get completeCheckout {
+    return Intl.message(
+      'إتمام الشراء',
+      name: 'completeCheckout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `شراء الان`
+  String get buyNow {
+    return Intl.message('شراء الان', name: 'buyNow', desc: '', args: []);
+  }
+
+  /// `إضافة للسلة`
+  String get addToCartButton {
+    return Intl.message(
+      'إضافة للسلة',
+      name: 'addToCartButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `خصم {percentage}%`
+  String discountLabel(double percentage) {
+    return Intl.message(
+      'خصم $percentage%',
+      name: 'discountLabel',
+      desc: '',
+      args: [percentage],
+    );
+  }
+
+  /// `تم تسجيل الدخول بنجاح`
+  String get loginSuccess {
+    return Intl.message(
+      'تم تسجيل الدخول بنجاح',
+      name: 'loginSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سجلي دخولك لتحصلي على افضل خدمة ممكنة`
+  String get signInForBestService {
+    return Intl.message(
+      'سجلي دخولك لتحصلي على افضل خدمة ممكنة',
+      name: 'signInForBestService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سجلي بسهولة عبر`
+  String get signInEasilyVia {
+    return Intl.message(
+      'سجلي بسهولة عبر',
+      name: 'signInEasilyVia',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `عناويني`
+  String get myAddresses {
+    return Intl.message('عناويني', name: 'myAddresses', desc: '', args: []);
+  }
+
+  /// `تواصل معنا`
+  String get contactUs {
+    return Intl.message('تواصل معنا', name: 'contactUs', desc: '', args: []);
+  }
+
+  /// `سياسة الاسترجاع`
+  String get returnPolicy {
+    return Intl.message(
+      'سياسة الاسترجاع',
+      name: 'returnPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تسجيل الخروج`
+  String get signOut {
+    return Intl.message('تسجيل الخروج', name: 'signOut', desc: '', args: []);
+  }
+
+  /// `اللون المختار:`
+  String get selectedColor {
+    return Intl.message(
+      'اللون المختار:',
+      name: 'selectedColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الوصف والتفاصيل`
+  String get descriptionAndDetails {
+    return Intl.message(
+      'الوصف والتفاصيل',
+      name: 'descriptionAndDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `منتجات مشابهة`
+  String get similarProducts {
+    return Intl.message(
+      'منتجات مشابهة',
+      name: 'similarProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `جودة عالية`
+  String get highQuality {
+    return Intl.message('جودة عالية', name: 'highQuality', desc: '', args: []);
+  }
+
+  /// `بأسعار تناسبك`
+  String get pricesSuitYou {
+    return Intl.message(
+      'بأسعار تناسبك',
+      name: 'pricesSuitYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اكتشفي أحدث صيحات الموضة من الأحذية والحقائب في مصر بجودة عالمية.`
+  String get discoverLatestFashion {
+    return Intl.message(
+      'اكتشفي أحدث صيحات الموضة من الأحذية والحقائب في مصر بجودة عالمية.',
+      name: 'discoverLatestFashion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `التسوق كزائر`
+  String get shopAsGuest {
+    return Intl.message(
+      'التسوق كزائر',
+      name: 'shopAsGuest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `او سجلي الدخول بسهولة`
+  String get orSignInEasily {
+    return Intl.message(
+      'او سجلي الدخول بسهولة',
+      name: 'orSignInEasily',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `حصلت مشكلة بسيطة والعملية اتوقفت، ممكن تحاول مرة تانية؟`
   String get firebase_error_aborted {
     return Intl.message(

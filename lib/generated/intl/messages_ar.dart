@@ -20,13 +20,33 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(percentage) => "خصم ${percentage}%";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addToCartButton": MessageLookupByLibrary.simpleMessage("إضافة للسلة"),
     "addToCartText": MessageLookupByLibrary.simpleMessage("أضف للسلة"),
+    "buyNow": MessageLookupByLibrary.simpleMessage("شراء الان"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("السلة"),
     "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
+    "changePhoneNumber": MessageLookupByLibrary.simpleMessage("تغيير الرقم"),
+    "completeCheckout": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
+    "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage("تاكيد الرقم"),
+    "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" ج.م"),
+    "descriptionAndDetails": MessageLookupByLibrary.simpleMessage(
+      "الوصف والتفاصيل",
+    ),
+    "discountLabel": m0,
+    "discoverLatestFashion": MessageLookupByLibrary.simpleMessage(
+      "اكتشفي أحدث صيحات الموضة من الأحذية والحقائب في مصر بجودة عالمية.",
+    ),
+    "enterFullNameHint": MessageLookupByLibrary.simpleMessage(
+      "ادخلي اسمك الكامل",
+    ),
+    "errorTitle": MessageLookupByLibrary.simpleMessage("خطأ"),
     "favoritesTitle": MessageLookupByLibrary.simpleMessage("المفضلة"),
+    "fieldRequired": MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
     "firebase_error_aborted": MessageLookupByLibrary.simpleMessage(
       "حصلت مشكلة بسيطة والعملية اتوقفت، ممكن تحاول مرة تانية؟",
     ),
@@ -81,19 +101,58 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_unknown": MessageLookupByLibrary.simpleMessage(
       "حصل خطأ غير متوقع، يا ريت تحاول مرة تانية.",
     ),
+    "fullNameLabel": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
+    "highQuality": MessageLookupByLibrary.simpleMessage("جودة عالية"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "loginSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تسجيل الدخول بنجاح",
+    ),
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "تسوقي الان",
     ),
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
       "الاكثر مبيعاً",
     ),
+    "myAddresses": MessageLookupByLibrary.simpleMessage("عناويني"),
+    "nameMustBeMoreThan2Chars": MessageLookupByLibrary.simpleMessage(
+      "الاسم يجب أن يكون أكثر من حرفين",
+    ),
+    "orSignInEasily": MessageLookupByLibrary.simpleMessage(
+      "او سجلي الدخول بسهولة",
+    ),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("طلباتي"),
+    "otpCodeLabel": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
+    "otpMustBe6Digits": MessageLookupByLibrary.simpleMessage(
+      "رمز التحقق يجب ان يكون 6 ارقام على الاقل",
+    ),
+    "otpSentSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم ارسال رمز التحقق",
+    ),
+    "phoneNumberLabel": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+    "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
+      "رقم الهاتف يجب أن يتكون من 10 أرقام",
+    ),
+    "pricesSuitYou": MessageLookupByLibrary.simpleMessage("بأسعار تناسبك"),
     "productDetailsScreenTitle": MessageLookupByLibrary.simpleMessage(
       "تفاصيل المنتج",
     ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),
+    "returnPolicy": MessageLookupByLibrary.simpleMessage("سياسة الاسترجاع"),
+    "selectedColor": MessageLookupByLibrary.simpleMessage("اللون المختار:"),
+    "shopAsGuest": MessageLookupByLibrary.simpleMessage("التسوق كزائر"),
     "showAllText": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "signInEasilyVia": MessageLookupByLibrary.simpleMessage("سجلي بسهولة عبر"),
+    "signInForBestService": MessageLookupByLibrary.simpleMessage(
+      "سجلي دخولك لتحصلي على افضل خدمة ممكنة",
+    ),
+    "signInToFollowLatestFashion": MessageLookupByLibrary.simpleMessage(
+      "سجلي الدخول لمتابعة أحدث صيحات الموضة",
+    ),
+    "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+    "similarProducts": MessageLookupByLibrary.simpleMessage("منتجات مشابهة"),
+    "successTitle": MessageLookupByLibrary.simpleMessage("نجاح"),
+    "verifyCode": MessageLookupByLibrary.simpleMessage("التحقق من الرمز"),
+    "welcomeMessage": MessageLookupByLibrary.simpleMessage("مرحباً بكِ"),
   };
 }

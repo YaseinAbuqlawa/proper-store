@@ -8,6 +8,7 @@ import 'package:proper_store/core/helpers/app_snackbar.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/features/auth/features/phone_auth_screen_presentation/cubit/phone_auth_cubit.dart';
 import 'package:proper_store/features/auth/features/phone_auth_screen_presentation/widgets/auth_text_fields.dart';
+import 'package:proper_store/generated/l10n.dart';
 
 class PhoneAuthScreen extends StatefulWidget {
   const PhoneAuthScreen({super.key});
@@ -40,6 +41,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocProvider(
       create: (context) => sl<PhoneAuthCubit>(),
       child: Scaffold(
@@ -49,9 +51,11 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
               listener: (context, state) {
                 state.whenOrNull(
                   otpLoading: () {
+                    if (!context.mounted) return;
                     AppDialog.showLoading(context);
                   },
                   phoneLoading: () {
+                    if (!context.mounted) return;
                     AppDialog.showLoading(context);
                   },
                   phoneIssue: (failureMessage) {
@@ -67,7 +71,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     Navigator.pop(context);
                     AppSnackbar.successSnackbar(
                       context: context,
-                      message: "تم ارسال رمز التحقق",
+                      message: s.otpSentSuccessfully,
                     );
                   },
                   otpIssue: (failureMessage) {
@@ -101,28 +105,28 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                           children: [
                             Image.asset("assets/images/proper_logo.png"),
                             Text(
-                              "مرحباً بكِ",
+                              s.welcomeMessage,
                               style: AppTextStyles.heroHeadline.copyWith(
                                 fontSize: 35,
                               ),
                             ),
                             AppSpacer(height: 5),
                             Text(
-                              "سجلي الدخول لمتابعة أحدث صيحات الموضة",
+                              s.signInToFollowLatestFashion,
                               style: AppTextStyles.bodyDescription,
                             ),
 
                             AuthTextField(
-                              title: 'الاسم الكامل',
-                              hint: 'ادخلي اسمك الكامل',
+                              title: s.fullNameLabel,
+                              hint: s.enterFullNameHint,
                               icon: Icons.person,
                               controller: nameController,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "هذا الحقل مطلوب";
+                                  return s.fieldRequired;
                                 }
                                 if (value.length < 3) {
-                                  return "الاسم يجب أن يكون أكثر من حرفين";
+                                  return s.nameMustBeMoreThan2Chars;
                                 }
                                 return null;
                               },
@@ -164,6 +168,7 @@ class _AuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocBuilder<PhoneAuthCubit, PhoneAuthState>(
       builder: (context, state) {
         return ElevatedButton(
@@ -184,10 +189,10 @@ class _AuthButton extends StatelessWidget {
             }
           },
           child: state.maybeWhen(
-            otpLoading: () => Text("التحقق من الرمز"),
-            otpSent: () => Text("التحقق من الرمز"),
-            otpIssue: (_) => Text("التحقق من الرمز"),
-            orElse: () => Text("تاكيد الرقم"),
+            otpLoading: () => Text(s.verifyCode),
+            otpSent: () => Text(s.verifyCode),
+            otpIssue: (_) => Text(s.verifyCode),
+            orElse: () => Text(s.confirmPhoneNumber),
           ),
         );
       },

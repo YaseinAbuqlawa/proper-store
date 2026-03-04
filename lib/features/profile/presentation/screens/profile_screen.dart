@@ -18,6 +18,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return MultiBlocListener(
       listeners: [
         BlocListener<AuthCubit, AuthState>(
@@ -39,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
                 Navigator.pop(context);
                 AppSnackbar.successSnackbar(
                   context: context,
-                  message: "تم تسجيل الدخول بنجاح",
+                  message: s.loginSuccess,
                 );
                 await context.read<ProfileCubit>().getCustomerData();
               },
@@ -62,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
       ],
 
       child: Scaffold(
-        appBar: AppBar(title: Text(S.of(context).profileTitle)),
+        appBar: AppBar(title: Text(s.profileTitle)),
         body: SafeArea(
           child: Padding(
             padding: AppSpacing.screenPadding,
@@ -93,12 +94,12 @@ class ProfileScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "سجلي دخولك لتحصلي على افضل خدمة ممكنة",
+                              s.signInForBestService,
                               style: AppTextStyles.bodyDescription,
                             ),
                           ),
                           SignInWithIdentitySection(
-                            text: "سجلي بسهولة عبر",
+                            text: s.signInEasilyVia,
                             authCubit: context.read<AuthCubit>(),
                           ),
                         ],
@@ -110,19 +111,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    _ProfileButton(buttonName: "طلباتي", onPressed: () {}),
+                    _ProfileButton(buttonName: s.ordersTitle, onPressed: () {}),
                     Divider(thickness: .05),
                     AppSpacer(height: 10),
-                    _ProfileButton(buttonName: "عناويني", onPressed: () {}),
+                    _ProfileButton(buttonName: s.myAddresses, onPressed: () {}),
                     Divider(thickness: .05),
                     AppSpacer(height: 10),
 
-                    _ProfileButton(buttonName: "تواصل معنا", onPressed: () {}),
+                    _ProfileButton(buttonName: s.contactUs, onPressed: () {}),
                     Divider(thickness: .05),
                     AppSpacer(height: 10),
 
                     _ProfileButton(
-                      buttonName: "سياسة الاسترجاع",
+                      buttonName: s.returnPolicy,
                       onPressed: () {},
                     ),
                     Divider(thickness: .05),
@@ -195,7 +196,7 @@ class _SignOutButton extends StatelessWidget {
                 ),
               ),
               Text(
-                "تسجيل الخروج",
+                S.of(context).signOut,
                 style: AppTextStyles.buttonText.copyWith(
                   color: anonymous
                       ? AppColors.textSecondary
