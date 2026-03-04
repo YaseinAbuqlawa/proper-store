@@ -31,6 +31,14 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
   }
 
   @override
+  void dispose() {
+    nameController.dispose();
+    phoneController.dispose();
+    otpController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<PhoneAuthCubit>(),

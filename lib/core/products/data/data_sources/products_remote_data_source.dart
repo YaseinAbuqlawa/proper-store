@@ -36,6 +36,9 @@ class ProductsRemoteDataSource {
         .doc(id)
         .get();
 
+    if (!productData.exists || productData.data() == null) {
+      throw Exception('Product not found: $id');
+    }
     return ProductModel.fromJson(productData.data()!);
   }
 }

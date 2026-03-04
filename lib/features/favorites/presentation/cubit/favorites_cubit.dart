@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,7 +23,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   }) : super(FavoritesState(favoriteProducts: []));
 
   Future<void> toggleFavorite({required ProductModel product}) async {
-    if (sl<FirebaseAuth>().currentUser!.isAnonymous) {
+    final user = sl<FirebaseAuth>().currentUser;
+    if (user == null || user.isAnonymous) {
       return emit(
         state.copyWith(
           failureMessage: "يجب تسجيل الدخول للاستفادة من هذه الميزة",
@@ -42,7 +45,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
     try {
       await setCustomerFavorites();
-    } catch (_) {
+    } catch (e) {
+      debugPrint('FavoritesCubit.toggleFavorite failed: $e');
       emit(
         state.copyWith(
           favoriteProducts: oldFavorites,
@@ -53,8 +57,9 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   }
 
   Future<void> setCustomerFavorites() async {
-    if (sl<FirebaseAuth>().currentUser!.isAnonymous) return;
-    final customerId = sl<FirebaseAuth>().currentUser!.uid;
+    final user = sl<FirebaseAuth>().currentUser;
+    if (user == null || user.isAnonymous) return;
+    final customerId = user.uid;
     final favoritesList = state.favoriteProducts.map((p) => p.id).toList();
 
     await setCustomerFavoritesUseCase.call(

@@ -34,12 +34,13 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> getCustomerData() async {
-    if (sl<FirebaseAuth>().currentUser!.isAnonymous) {
+    final user = sl<FirebaseAuth>().currentUser;
+    if (user == null || user.isAnonymous) {
       return emit(ProfileState.anonymous());
     }
 
     emit(ProfileState.loading());
-    final customerUid = sl<FirebaseAuth>().currentUser!.uid;
+    final customerUid = user.uid;
 
     final result = await getCustomerDataUseCase.call(customerId: customerUid);
 

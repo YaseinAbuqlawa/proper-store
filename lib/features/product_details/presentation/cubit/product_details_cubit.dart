@@ -44,6 +44,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
 
     //? wait for the hero animation
     await Future.delayed(Duration(milliseconds: 500));
+    if (isClosed) return;
     result.fold(
       (serverFailure) =>
           emit(ProductDetailsState.failure(code: serverFailure.code)),

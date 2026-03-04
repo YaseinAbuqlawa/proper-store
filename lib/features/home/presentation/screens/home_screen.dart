@@ -127,13 +127,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       BlocSelector<
                         HomeCubit,
                         HomeState,
-                        ({List<ProductModel> products, bool isLoading})
+                        ({
+                          List<ProductModel> products,
+                          bool isLoading,
+                          bool isFailure,
+                        })
                       >(
                         selector: (state) => (
                           products: state.mostSoldProductsList,
-                          isLoading: state.productsState.name == "loading",
+                          isLoading: state.productsState == HomeStates.loading,
+                          isFailure: state.productsState == HomeStates.failure,
                         ),
                         builder: (context, data) {
+                          if (data.isFailure) {
+                            return SliverFillRemaining(
+                              child: Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text('حدث خطأ، يرجى المحاولة مرة أخرى'),
+                                    TextButton(
+                                      onPressed: () => context
+                                          .read<HomeCubit>()
+                                          .getMostSoldProducts(),
+                                      child: const Text('إعادة المحاولة'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+
                           // Show placeholder skeletons while loading
                           final displayList = data.isLoading
                               ? List.filled(6, ProductModel.placeholder())

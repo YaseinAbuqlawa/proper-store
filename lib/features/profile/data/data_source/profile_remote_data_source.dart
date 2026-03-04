@@ -16,6 +16,9 @@ class ProfileRemoteDataSource {
         .doc(customerId)
         .get();
 
+    if (!customerDoc.exists || customerDoc.data() == null) {
+      throw Exception('Customer not found: $customerId');
+    }
     return CustomerModel.fromJson(customerDoc.data()!);
   }
 }

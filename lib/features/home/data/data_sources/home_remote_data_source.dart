@@ -16,9 +16,10 @@ class HomeRemoteDataSource {
         .doc(AppConsts.storeConfigMainCollectionBannerDoc)
         .get();
 
-    final firstCardData = (offerCards.data()!);
-
-    return HomeCollectionBannerModel.fromJson(firstCardData);
+    if (!offerCards.exists || offerCards.data() == null) {
+      throw Exception('Banner config document not found');
+    }
+    return HomeCollectionBannerModel.fromJson(offerCards.data()!);
   }
 
   Future<List<CategoryModel>> getBagCategories() async {

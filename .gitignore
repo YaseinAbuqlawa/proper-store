@@ -19,6 +19,7 @@ migrate_working_dir/
 .idea/
 
 CLAUDE.md
+execution_plan.md
 
 # Flutter/Dart/Pub related
 **/doc/api/
