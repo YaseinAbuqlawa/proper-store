@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/helpers/extensions.dart';
 import 'package:proper_store/features/auth/domain/use_cases/sign_out_use_case.dart';
 import 'package:proper_store/features/profile/data/models/customer_model.dart';
@@ -15,10 +14,14 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   final GetCustomerDataUseCase getCustomerDataUseCase;
   final SignOutUseCase signOutUseCase;
+  final FirebaseAuth _auth;
+
   ProfileCubit({
     required this.getCustomerDataUseCase,
     required this.signOutUseCase,
-  }) : super(ProfileState.initial());
+    required FirebaseAuth auth,
+  })  : _auth = auth,
+        super(ProfileState.initial());
 
   Future<void> signOut() async {
     emit(ProfileState.loading());
@@ -34,7 +37,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> getCustomerData() async {
-    final user = sl<FirebaseAuth>().currentUser;
+    final user = _auth.currentUser;
     if (user == null || user.isAnonymous) {
       return emit(ProfileState.anonymous());
     }

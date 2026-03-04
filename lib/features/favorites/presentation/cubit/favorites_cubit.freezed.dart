@@ -12,7 +12,7 @@ part of 'favorites_cubit.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$FavoritesState {
+mixin _$FavoritesState implements DiagnosticableTreeMixin {
 
  List<ProductModel> get favoriteProducts; String get failureMessage;
 /// Create a copy of FavoritesState
@@ -22,6 +22,12 @@ mixin _$FavoritesState {
 $FavoritesStateCopyWith<FavoritesState> get copyWith => _$FavoritesStateCopyWithImpl<FavoritesState>(this as FavoritesState, _$identity);
 
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'FavoritesState'))
+    ..add(DiagnosticsProperty('favoriteProducts', favoriteProducts))..add(DiagnosticsProperty('failureMessage', failureMessage));
+}
 
 @override
 bool operator ==(Object other) {
@@ -33,7 +39,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(favoriteProducts),failureMessage);
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'FavoritesState(favoriteProducts: $favoriteProducts, failureMessage: $failureMessage)';
 }
 
@@ -206,7 +212,7 @@ return $default(_that.favoriteProducts,_that.failureMessage);case _:
 /// @nodoc
 
 
-class _FavoritesState implements FavoritesState {
+class _FavoritesState with DiagnosticableTreeMixin implements FavoritesState {
   const _FavoritesState({required final  List<ProductModel> favoriteProducts, this.failureMessage = ""}): _favoriteProducts = favoriteProducts;
   
 
@@ -226,6 +232,12 @@ class _FavoritesState implements FavoritesState {
 _$FavoritesStateCopyWith<_FavoritesState> get copyWith => __$FavoritesStateCopyWithImpl<_FavoritesState>(this, _$identity);
 
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'FavoritesState'))
+    ..add(DiagnosticsProperty('favoriteProducts', favoriteProducts))..add(DiagnosticsProperty('failureMessage', failureMessage));
+}
 
 @override
 bool operator ==(Object other) {
@@ -237,7 +249,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_favoriteProducts),failureMessage);
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'FavoritesState(favoriteProducts: $favoriteProducts, failureMessage: $failureMessage)';
 }
 

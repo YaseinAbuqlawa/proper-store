@@ -25,6 +25,8 @@ import 'package:proper_store/core/products/domain/use_cases/get_all_products_use
     as _i714;
 import 'package:proper_store/core/products/domain/use_cases/get_product_with_id_use_case.dart'
     as _i1033;
+import 'package:proper_store/core/services/auth_orchestration_service.dart'
+    as _i47;
 import 'package:proper_store/features/auth/data/data_sources/auth_remote_data_source.dart'
     as _i426;
 import 'package:proper_store/features/auth/data/repo/auth_repo_impl.dart'
@@ -192,6 +194,13 @@ extension GetItInjectableX on _i174.GetIt {
         getRelatedProductsUseCase: gh<_i66.GetRelatedProductsUseCase>(),
       ),
     );
+    gh.lazySingleton<_i395.FavoritesCubit>(
+      () => _i395.FavoritesCubit(
+        setCustomerFavoritesUseCase: gh<_i726.SetCustomerFavoritesUseCase>(),
+        getFavoriteProductsUseCase: gh<_i182.GetFavoriteProductsUseCase>(),
+        auth: gh<_i59.FirebaseAuth>(),
+      ),
+    );
     gh.lazySingleton<_i932.SignInAnonymouslyUseCase>(
       () => _i932.SignInAnonymouslyUseCase(repo: gh<_i396.AuthRepo>()),
     );
@@ -206,12 +215,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i128.SignOutUseCase>(
       () => _i128.SignOutUseCase(repo: gh<_i396.AuthRepo>()),
-    );
-    gh.lazySingleton<_i395.FavoritesCubit>(
-      () => _i395.FavoritesCubit(
-        setCustomerFavoritesUseCase: gh<_i726.SetCustomerFavoritesUseCase>(),
-        getFavoriteProductsUseCase: gh<_i182.GetFavoriteProductsUseCase>(),
-      ),
     );
     gh.lazySingleton<_i924.GetBagCategoriesUseCase>(
       () => _i924.GetBagCategoriesUseCase(repo: gh<_i147.HomeRepo>()),
@@ -230,12 +233,6 @@ extension GetItInjectableX on _i174.GetIt {
         signInAnonymouslyUseCase: gh<_i932.SignInAnonymouslyUseCase>(),
       ),
     );
-    gh.lazySingleton<_i443.ProfileCubit>(
-      () => _i443.ProfileCubit(
-        getCustomerDataUseCase: gh<_i596.GetCustomerDataUseCase>(),
-        signOutUseCase: gh<_i128.SignOutUseCase>(),
-      ),
-    );
     gh.factory<_i501.PhoneAuthCubit>(
       () => _i501.PhoneAuthCubit(
         signInWithPhoneNumberUseCase: gh<_i1039.SignInWithPhoneNumberUseCase>(),
@@ -247,6 +244,21 @@ extension GetItInjectableX on _i174.GetIt {
         mainCollectionBannerDataUseCase:
             gh<_i683.GetMainCollectionBannerDataUseCase>(),
         getMostSoldProductUseCase: gh<_i71.GetMostSoldProductUseCase>(),
+      ),
+    );
+    gh.lazySingleton<_i443.ProfileCubit>(
+      () => _i443.ProfileCubit(
+        getCustomerDataUseCase: gh<_i596.GetCustomerDataUseCase>(),
+        signOutUseCase: gh<_i128.SignOutUseCase>(),
+        auth: gh<_i59.FirebaseAuth>(),
+      ),
+    );
+    gh.lazySingleton<_i47.AuthOrchestrationService>(
+      () => _i47.AuthOrchestrationService(
+        auth: gh<_i59.FirebaseAuth>(),
+        profileCubit: gh<_i443.ProfileCubit>(),
+        favoritesCubit: gh<_i395.FavoritesCubit>(),
+        cartCubit: gh<_i1006.CartCubit>(),
       ),
     );
     return this;

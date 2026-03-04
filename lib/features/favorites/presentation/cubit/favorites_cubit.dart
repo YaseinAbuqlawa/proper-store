@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/helpers/extensions.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/features/favorites/domain/use_cases/get_favorite_products_use_case.dart';
@@ -17,13 +16,17 @@ part 'favorites_state.dart';
 class FavoritesCubit extends Cubit<FavoritesState> {
   final SetCustomerFavoritesUseCase setCustomerFavoritesUseCase;
   final GetFavoriteProductsUseCase getFavoriteProductsUseCase;
+  final FirebaseAuth _auth;
+
   FavoritesCubit({
     required this.setCustomerFavoritesUseCase,
     required this.getFavoriteProductsUseCase,
-  }) : super(FavoritesState(favoriteProducts: []));
+    required FirebaseAuth auth,
+  })  : _auth = auth,
+        super(FavoritesState(favoriteProducts: []));
 
   Future<void> toggleFavorite({required ProductModel product}) async {
-    final user = sl<FirebaseAuth>().currentUser;
+    final user = _auth.currentUser;
     if (user == null || user.isAnonymous) {
       return emit(
         state.copyWith(
@@ -57,7 +60,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   }
 
   Future<void> setCustomerFavorites() async {
-    final user = sl<FirebaseAuth>().currentUser;
+    final user = _auth.currentUser;
     if (user == null || user.isAnonymous) return;
     final customerId = user.uid;
     final favoritesList = state.favoriteProducts.map((p) => p.id).toList();
