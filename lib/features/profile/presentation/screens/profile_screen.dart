@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
+import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/helpers/app_dialog.dart';
@@ -114,7 +116,7 @@ class ProfileScreen extends StatelessWidget {
                     _ProfileButton(buttonName: s.ordersTitle, onPressed: () {}),
                     Divider(thickness: .05),
                     AppSpacer(height: 10),
-                    _ProfileButton(buttonName: s.myAddresses, onPressed: () {}),
+                    _ProfileButton(buttonName: s.myAddresses, onPressed: () => context.push(AppRoutes.addresses.path)),
                     Divider(thickness: .05),
                     AppSpacer(height: 10),
 

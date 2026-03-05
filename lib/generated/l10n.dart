@@ -623,6 +623,176 @@ class S {
       args: [],
     );
   }
+
+  /// `إضافة عنوان`
+  String get addAddressTitle {
+    return Intl.message(
+      'إضافة عنوان',
+      name: 'addAddressTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا توجد عناوين بعد`
+  String get noAddressesYet {
+    return Intl.message(
+      'لا توجد عناوين بعد',
+      name: 'noAddressesYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أضف عنوانك الأول للبدء`
+  String get addFirstAddress {
+    return Intl.message(
+      'أضف عنوانك الأول للبدء',
+      name: 'addFirstAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `نوع العنوان`
+  String get addressLabelLabel {
+    return Intl.message(
+      'نوع العنوان',
+      name: 'addressLabelLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مثال: المنزل، العمل`
+  String get addressLabelHint {
+    return Intl.message(
+      'مثال: المنزل، العمل',
+      name: 'addressLabelHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `المدينة`
+  String get cityLabel {
+    return Intl.message('المدينة', name: 'cityLabel', desc: '', args: []);
+  }
+
+  /// `المنطقة / الحي`
+  String get areaLabel {
+    return Intl.message(
+      'المنطقة / الحي',
+      name: 'areaLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الشارع`
+  String get streetLabel {
+    return Intl.message('الشارع', name: 'streetLabel', desc: '', args: []);
+  }
+
+  /// `رقم المبنى`
+  String get buildingNumberLabel {
+    return Intl.message(
+      'رقم المبنى',
+      name: 'buildingNumberLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الدور`
+  String get floorLabel {
+    return Intl.message('الدور', name: 'floorLabel', desc: '', args: []);
+  }
+
+  /// `رقم الشقة`
+  String get apartmentLabel {
+    return Intl.message(
+      'رقم الشقة',
+      name: 'apartmentLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تعيين كعنوان افتراضي`
+  String get setAsDefault {
+    return Intl.message(
+      'تعيين كعنوان افتراضي',
+      name: 'setAsDefault',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حفظ العنوان`
+  String get saveAddress {
+    return Intl.message('حفظ العنوان', name: 'saveAddress', desc: '', args: []);
+  }
+
+  /// `تم حفظ العنوان بنجاح`
+  String get addressSaved {
+    return Intl.message(
+      'تم حفظ العنوان بنجاح',
+      name: 'addressSaved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم حذف العنوان`
+  String get addressDeleted {
+    return Intl.message(
+      'تم حذف العنوان',
+      name: 'addressDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `افتراضي`
+  String get defaultBadge {
+    return Intl.message('افتراضي', name: 'defaultBadge', desc: '', args: []);
+  }
+
+  /// `هل أنت متأكد من حذف هذا العنوان؟`
+  String get deleteAddressConfirm {
+    return Intl.message(
+      'هل أنت متأكد من حذف هذا العنوان؟',
+      name: 'deleteAddressConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إلغاء`
+  String get cancel {
+    return Intl.message('إلغاء', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `حذف`
+  String get delete {
+    return Intl.message('حذف', name: 'delete', desc: '', args: []);
+  }
+
+  /// `رقم الهاتف يجب أن يتكون من 11 أرقام`
+  String get phoneNumberMustBe11Digits {
+    return Intl.message(
+      'رقم الهاتف يجب أن يتكون من 11 أرقام',
+      name: 'phoneNumberMustBe11Digits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إعادة المحاولة`
+  String get retry {
+    return Intl.message('إعادة المحاولة', name: 'retry', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

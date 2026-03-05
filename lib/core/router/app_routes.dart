@@ -6,7 +6,9 @@ enum AppRoutes {
   categories('/categories'),
   cart('/cart'),
   favorites('/favorites'),
-  profile('/profile');
+  profile('/profile'),
+  addresses('/addresses'),
+  addAddress('/addAddress');
 
   final String path;
   const AppRoutes(this.path);

@@ -20,20 +20,42 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(Object percentage) => "خصم ${percentage}%";
+  static String m0(percentage) => "خصم ${percentage}%";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addAddressTitle": MessageLookupByLibrary.simpleMessage("إضافة عنوان"),
+    "addFirstAddress": MessageLookupByLibrary.simpleMessage(
+      "أضف عنوانك الأول للبدء",
+    ),
     "addToCartButton": MessageLookupByLibrary.simpleMessage("إضافة للسلة"),
     "addToCartText": MessageLookupByLibrary.simpleMessage("أضف للسلة"),
+    "addressDeleted": MessageLookupByLibrary.simpleMessage("تم حذف العنوان"),
+    "addressLabelHint": MessageLookupByLibrary.simpleMessage(
+      "مثال: المنزل، العمل",
+    ),
+    "addressLabelLabel": MessageLookupByLibrary.simpleMessage("نوع العنوان"),
+    "addressSaved": MessageLookupByLibrary.simpleMessage(
+      "تم حفظ العنوان بنجاح",
+    ),
+    "apartmentLabel": MessageLookupByLibrary.simpleMessage("رقم الشقة"),
+    "areaLabel": MessageLookupByLibrary.simpleMessage("المنطقة / الحي"),
+    "buildingNumberLabel": MessageLookupByLibrary.simpleMessage("رقم المبنى"),
     "buyNow": MessageLookupByLibrary.simpleMessage("شراء الان"),
+    "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("السلة"),
     "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("تغيير الرقم"),
+    "cityLabel": MessageLookupByLibrary.simpleMessage("المدينة"),
     "completeCheckout": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage("تاكيد الرقم"),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" ج.م"),
+    "defaultBadge": MessageLookupByLibrary.simpleMessage("افتراضي"),
+    "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+    "deleteAddressConfirm": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد من حذف هذا العنوان؟",
+    ),
     "descriptionAndDetails": MessageLookupByLibrary.simpleMessage(
       "الوصف والتفاصيل",
     ),
@@ -101,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_unknown": MessageLookupByLibrary.simpleMessage(
       "حصل خطأ غير متوقع، يا ريت تحاول مرة تانية.",
     ),
+    "floorLabel": MessageLookupByLibrary.simpleMessage("الدور"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
     "highQuality": MessageLookupByLibrary.simpleMessage("جودة عالية"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("الرئيسية"),
@@ -118,6 +141,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameMustBeMoreThan2Chars": MessageLookupByLibrary.simpleMessage(
       "الاسم يجب أن يكون أكثر من حرفين",
     ),
+    "noAddressesYet": MessageLookupByLibrary.simpleMessage(
+      "لا توجد عناوين بعد",
+    ),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage(
       "او سجلي الدخول بسهولة",
     ),
@@ -133,13 +159,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
       "رقم الهاتف يجب أن يتكون من 10 أرقام",
     ),
+    "phoneNumberMustBe11Digits": MessageLookupByLibrary.simpleMessage(
+      "رقم الهاتف يجب أن يتكون من 11 أرقام",
+    ),
     "pricesSuitYou": MessageLookupByLibrary.simpleMessage("بأسعار تناسبك"),
     "productDetailsScreenTitle": MessageLookupByLibrary.simpleMessage(
       "تفاصيل المنتج",
     ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),
+    "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("سياسة الاسترجاع"),
+    "saveAddress": MessageLookupByLibrary.simpleMessage("حفظ العنوان"),
     "selectedColor": MessageLookupByLibrary.simpleMessage("اللون المختار:"),
+    "setAsDefault": MessageLookupByLibrary.simpleMessage(
+      "تعيين كعنوان افتراضي",
+    ),
     "shopAsGuest": MessageLookupByLibrary.simpleMessage("التسوق كزائر"),
     "showAllText": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "signInEasilyVia": MessageLookupByLibrary.simpleMessage("سجلي بسهولة عبر"),
@@ -151,6 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("منتجات مشابهة"),
+    "streetLabel": MessageLookupByLibrary.simpleMessage("الشارع"),
     "successTitle": MessageLookupByLibrary.simpleMessage("نجاح"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("التحقق من الرمز"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("مرحباً بكِ"),

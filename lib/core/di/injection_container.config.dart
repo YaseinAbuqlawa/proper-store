@@ -27,6 +27,20 @@ import 'package:proper_store/core/products/domain/use_cases/get_product_with_id_
     as _i1033;
 import 'package:proper_store/core/services/auth_orchestration_service.dart'
     as _i47;
+import 'package:proper_store/features/addresses/data/data_sources/addresses_remote_data_source.dart'
+    as _i472;
+import 'package:proper_store/features/addresses/data/repo/addresses_repo_impl.dart'
+    as _i720;
+import 'package:proper_store/features/addresses/domain/repo/addresses_repo.dart'
+    as _i979;
+import 'package:proper_store/features/addresses/domain/use_cases/add_address_use_case.dart'
+    as _i268;
+import 'package:proper_store/features/addresses/domain/use_cases/delete_address_use_case.dart'
+    as _i880;
+import 'package:proper_store/features/addresses/domain/use_cases/get_addresses_use_case.dart'
+    as _i1013;
+import 'package:proper_store/features/addresses/presentation/cubit/addresses_cubit.dart'
+    as _i1010;
 import 'package:proper_store/features/auth/data/data_sources/auth_remote_data_source.dart'
     as _i426;
 import 'package:proper_store/features/auth/data/repo/auth_repo_impl.dart'
@@ -122,6 +136,11 @@ extension GetItInjectableX on _i174.GetIt {
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
     );
+    gh.lazySingleton<_i472.AddressesRemoteDataSource>(
+      () => _i472.AddressesRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+      ),
+    );
     gh.lazySingleton<_i662.FavoritesRemoteDataSource>(
       () => _i662.FavoritesRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -162,6 +181,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i596.GetCustomerDataUseCase>(
       () => _i596.GetCustomerDataUseCase(repo: gh<_i871.ProfileRepo>()),
     );
+    gh.lazySingleton<_i979.AddressesRepo>(
+      () => _i720.AddressesRepoImpl(
+        remoteDataSource: gh<_i472.AddressesRemoteDataSource>(),
+      ),
+    );
     gh.lazySingleton<_i66.GetRelatedProductsUseCase>(
       () =>
           _i66.GetRelatedProductsUseCase(repo: gh<_i1064.ProductDetailsRepo>()),
@@ -181,6 +205,15 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i223.AuthRepoImpl(
         remoteDataSource: gh<_i426.AuthRemoteDataSource>(),
       ),
+    );
+    gh.lazySingleton<_i268.AddAddressUseCase>(
+      () => _i268.AddAddressUseCase(repo: gh<_i979.AddressesRepo>()),
+    );
+    gh.lazySingleton<_i880.DeleteAddressUseCase>(
+      () => _i880.DeleteAddressUseCase(repo: gh<_i979.AddressesRepo>()),
+    );
+    gh.lazySingleton<_i1013.GetAddressesUseCase>(
+      () => _i1013.GetAddressesUseCase(repo: gh<_i979.AddressesRepo>()),
     );
     gh.lazySingleton<_i182.GetFavoriteProductsUseCase>(
       () => _i182.GetFavoriteProductsUseCase(repo: gh<_i206.FavoritesRepo>()),
@@ -225,6 +258,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i71.GetMostSoldProductUseCase>(
       () => _i71.GetMostSoldProductUseCase(repo: gh<_i147.HomeRepo>()),
+    );
+    gh.lazySingleton<_i1010.AddressesCubit>(
+      () => _i1010.AddressesCubit(
+        getAddressesUseCase: gh<_i1013.GetAddressesUseCase>(),
+        addAddressUseCase: gh<_i268.AddAddressUseCase>(),
+        deleteAddressUseCase: gh<_i880.DeleteAddressUseCase>(),
+        auth: gh<_i59.FirebaseAuth>(),
+      ),
     );
     gh.factory<_i967.AuthCubit>(
       () => _i967.AuthCubit(

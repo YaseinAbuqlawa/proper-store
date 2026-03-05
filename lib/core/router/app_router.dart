@@ -11,6 +11,8 @@ import 'package:proper_store/features/favorites/presentation/screens/favorites_s
 import 'package:proper_store/features/home/presentation/screens/home_screen.dart';
 import 'package:proper_store/features/orders/presentation/screens/orders_screen.dart';
 import 'package:proper_store/features/product_details/presentation/screens/product_details_screen.dart';
+import 'package:proper_store/features/addresses/presentation/screens/add_address_screen.dart';
+import 'package:proper_store/features/addresses/presentation/screens/addresses_screen.dart';
 import 'package:proper_store/features/profile/presentation/screens/profile_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigationKey = GlobalKey<NavigatorState>();
@@ -70,6 +72,20 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.orders.path,
       pageBuilder: (context, state) =>
           _buildTransitionPage(state: state, child: const OrdersScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.addresses.path,
+      pageBuilder: (context, state) => _buildTransitionPage(
+        state: state,
+        child: const AddressesScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.addAddress.path,
+      pageBuilder: (context, state) => _buildTransitionPage(
+        state: state,
+        child: const AddAddressScreen(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.productDetails.path,

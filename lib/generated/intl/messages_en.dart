@@ -20,16 +20,33 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(Object percentage) => "Discount ${percentage}%";
+  static String m0(percentage) => "Discount ${percentage}%";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addAddressTitle": MessageLookupByLibrary.simpleMessage("Add address"),
+    "addFirstAddress": MessageLookupByLibrary.simpleMessage(
+      "Add your first address to get started",
+    ),
     "addToCartButton": MessageLookupByLibrary.simpleMessage("Add to cart"),
     "addToCartText": MessageLookupByLibrary.simpleMessage("Add to cart"),
+    "addressDeleted": MessageLookupByLibrary.simpleMessage("Address deleted"),
+    "addressLabelHint": MessageLookupByLibrary.simpleMessage("e.g. Home, Work"),
+    "addressLabelLabel": MessageLookupByLibrary.simpleMessage("Address label"),
+    "addressSaved": MessageLookupByLibrary.simpleMessage(
+      "Address saved successfully",
+    ),
+    "apartmentLabel": MessageLookupByLibrary.simpleMessage("Apartment number"),
+    "areaLabel": MessageLookupByLibrary.simpleMessage("Area / Neighborhood"),
+    "buildingNumberLabel": MessageLookupByLibrary.simpleMessage(
+      "Building number",
+    ),
     "buyNow": MessageLookupByLibrary.simpleMessage("Buy now"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("Change number"),
+    "cityLabel": MessageLookupByLibrary.simpleMessage("City"),
     "completeCheckout": MessageLookupByLibrary.simpleMessage(
       "Complete checkout",
     ),
@@ -38,6 +55,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" EGP"),
+    "defaultBadge": MessageLookupByLibrary.simpleMessage("Default"),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteAddressConfirm": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this address?",
+    ),
     "descriptionAndDetails": MessageLookupByLibrary.simpleMessage(
       "Description and details",
     ),
@@ -107,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_unknown": MessageLookupByLibrary.simpleMessage(
       "An unexpected error occurred. Please try again.",
     ),
+    "floorLabel": MessageLookupByLibrary.simpleMessage("Floor"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("Full name"),
     "highQuality": MessageLookupByLibrary.simpleMessage("High quality"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("Home"),
@@ -124,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameMustBeMoreThan2Chars": MessageLookupByLibrary.simpleMessage(
       "Name must be more than 2 characters",
     ),
+    "noAddressesYet": MessageLookupByLibrary.simpleMessage("No addresses yet"),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage("Or sign in easily"),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("My Orders"),
     "otpCodeLabel": MessageLookupByLibrary.simpleMessage("Verification code"),
@@ -137,6 +161,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
       "Phone number must be 10 digits",
     ),
+    "phoneNumberMustBe11Digits": MessageLookupByLibrary.simpleMessage(
+      "Phone number must be 11 digits",
+    ),
     "pricesSuitYou": MessageLookupByLibrary.simpleMessage(
       "Prices that suit you",
     ),
@@ -144,8 +171,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Product details",
     ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("My Account"),
+    "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("Return policy"),
+    "saveAddress": MessageLookupByLibrary.simpleMessage("Save address"),
     "selectedColor": MessageLookupByLibrary.simpleMessage("Selected color:"),
+    "setAsDefault": MessageLookupByLibrary.simpleMessage(
+      "Set as default address",
+    ),
     "shopAsGuest": MessageLookupByLibrary.simpleMessage("Shop as guest"),
     "showAllText": MessageLookupByLibrary.simpleMessage("Show all"),
     "signInEasilyVia": MessageLookupByLibrary.simpleMessage(
@@ -159,6 +191,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("Similar products"),
+    "streetLabel": MessageLookupByLibrary.simpleMessage("Street"),
     "successTitle": MessageLookupByLibrary.simpleMessage("Success"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("Verify code"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("Welcome"),
