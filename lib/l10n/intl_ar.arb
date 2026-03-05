@@ -92,5 +92,20 @@
     "cancel": "إلغاء",
     "delete": "حذف",
     "phoneNumberMustBe11Digits": "رقم الهاتف يجب أن يتكون من 11 أرقام",
-    "retry": "إعادة المحاولة"
+    "retry": "إعادة المحاولة",
+    "noOrdersYet": "لا توجد طلبات بعد",
+    "noOrdersYetMessage": "طلباتك ستظهر هنا بعد أول عملية شراء",
+    "orderStatusPending": "قيد الانتظار",
+    "orderStatusConfirmed": "مؤكد",
+    "orderStatusShipped": "تم الشحن",
+    "orderStatusDelivered": "تم التسليم",
+    "orderStatusCancelled": "ملغي",
+    "orderTotalLabel": "الإجمالي",
+    "paymentCOD": "الدفع عند الاستلام",
+    "orderNumberLabel": "رقم الطلب",
+    "orderDetails": "عرض التفاصيل",
+    "orderStepPreparing": "تجهيز",
+    "orderStepShipping": "شحن",
+    "orderStepDelivery": "توصيل",
+    "orderedOnLabel": "تم الطلب:"
 }

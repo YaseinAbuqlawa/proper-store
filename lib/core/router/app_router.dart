@@ -52,6 +52,11 @@ final GoRouter appRouter = GoRouter(
           ),
         ),
         GoRoute(
+          path: AppRoutes.orders.path,
+          pageBuilder: (context, state) =>
+              _buildTransitionPage(state: state, child: const OrdersScreen()),
+        ),
+        GoRoute(
           path: AppRoutes.profile.path,
           pageBuilder: (context, state) =>
               _buildTransitionPage(state: state, child: const ProfileScreen()),
@@ -67,11 +72,6 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.welcome.path,
       pageBuilder: (context, state) =>
           _buildTransitionPage(state: state, child: const WelcomeScreen()),
-    ),
-    GoRoute(
-      path: AppRoutes.orders.path,
-      pageBuilder: (context, state) =>
-          _buildTransitionPage(state: state, child: const OrdersScreen()),
     ),
     GoRoute(
       path: AppRoutes.addresses.path,

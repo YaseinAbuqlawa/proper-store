@@ -793,6 +793,146 @@ class S {
   String get retry {
     return Intl.message('إعادة المحاولة', name: 'retry', desc: '', args: []);
   }
+
+  /// `لا توجد طلبات بعد`
+  String get noOrdersYet {
+    return Intl.message(
+      'لا توجد طلبات بعد',
+      name: 'noOrdersYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `طلباتك ستظهر هنا بعد أول عملية شراء`
+  String get noOrdersYetMessage {
+    return Intl.message(
+      'طلباتك ستظهر هنا بعد أول عملية شراء',
+      name: 'noOrdersYetMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `قيد الانتظار`
+  String get orderStatusPending {
+    return Intl.message(
+      'قيد الانتظار',
+      name: 'orderStatusPending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مؤكد`
+  String get orderStatusConfirmed {
+    return Intl.message(
+      'مؤكد',
+      name: 'orderStatusConfirmed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم الشحن`
+  String get orderStatusShipped {
+    return Intl.message(
+      'تم الشحن',
+      name: 'orderStatusShipped',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم التسليم`
+  String get orderStatusDelivered {
+    return Intl.message(
+      'تم التسليم',
+      name: 'orderStatusDelivered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ملغي`
+  String get orderStatusCancelled {
+    return Intl.message(
+      'ملغي',
+      name: 'orderStatusCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الإجمالي`
+  String get orderTotalLabel {
+    return Intl.message(
+      'الإجمالي',
+      name: 'orderTotalLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الدفع عند الاستلام`
+  String get paymentCOD {
+    return Intl.message(
+      'الدفع عند الاستلام',
+      name: 'paymentCOD',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رقم الطلب`
+  String get orderNumberLabel {
+    return Intl.message(
+      'رقم الطلب',
+      name: 'orderNumberLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `عرض التفاصيل`
+  String get orderDetails {
+    return Intl.message(
+      'عرض التفاصيل',
+      name: 'orderDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تجهيز`
+  String get orderStepPreparing {
+    return Intl.message(
+      'تجهيز',
+      name: 'orderStepPreparing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `شحن`
+  String get orderStepShipping {
+    return Intl.message('شحن', name: 'orderStepShipping', desc: '', args: []);
+  }
+
+  /// `توصيل`
+  String get orderStepDelivery {
+    return Intl.message('توصيل', name: 'orderStepDelivery', desc: '', args: []);
+  }
+
+  /// `تم الطلب:`
+  String get orderedOnLabel {
+    return Intl.message(
+      'تم الطلب:',
+      name: 'orderedOnLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

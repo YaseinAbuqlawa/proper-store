@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/base_screen/widgets/bottom_nav_bar_cart_button.dart';
 import 'package:proper_store/core/base_screen/widgets/bottom_nav_bar_item.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
@@ -18,28 +19,31 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-  int _selectedIndex = 0;
-  int _previousIndex = 0;
-
   static const _routes = [
     AppRoutes.home,
-    AppRoutes.categories,
-    AppRoutes.cart,
     AppRoutes.favorites,
+    AppRoutes.cart,
+    AppRoutes.orders,
     AppRoutes.profile,
   ];
 
-  void _onItemTapped(int index) {
-    if (_selectedIndex == index) return;
+  int _indexFromPath(String path) {
+    if (path.startsWith(AppRoutes.orders.path)) return 3;
+    if (path.startsWith(AppRoutes.cart.path)) return 2;
+    if (path.startsWith(AppRoutes.favorites.path)) return 1;
+    if (path.startsWith(AppRoutes.profile.path) ||
+        path.startsWith(AppRoutes.addresses.path) ||
+        path.startsWith(AppRoutes.addAddress.path))
+      return 4;
+    return 0;
+  }
+
+  void _onItemTapped(int index, int currentIndex) {
+    if (currentIndex == index) return;
 
     if (index == 2) {
-      setState(() => _selectedIndex = index);
-      appRouter.push(_routes[index].path).then((_) {
-        if (mounted) setState(() => _selectedIndex = _previousIndex);
-      });
+      appRouter.push(_routes[index].path);
     } else {
-      _previousIndex = index;
-      setState(() => _selectedIndex = index);
       appRouter.go(_routes[index].path);
     }
   }
@@ -47,6 +51,7 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final selectedIndex = _indexFromPath(GoRouterState.of(context).uri.path);
     return BlocListener<ProfileCubit, ProfileState>(
       listener: (context, state) => state.whenOrNull(
         loaded: (customer) {
@@ -62,18 +67,18 @@ class _BaseScreenState extends State<BaseScreen> {
         extendBody: true,
         body: widget.child,
         bottomNavigationBar: _BottomBar(
-          selectedIndex: _selectedIndex,
-          onTap: _onItemTapped,
+          selectedIndex: selectedIndex,
+          onTap: (index) => _onItemTapped(index, selectedIndex),
           labels: [
             s.homeButtonName,
-            s.categories,
+            s.ordersTitle,
             s.favoritesTitle,
             s.profileTitle,
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: BottomNavBarCartButton(
-          onTap: () => _onItemTapped(2),
+          onTap: () => _onItemTapped(2, selectedIndex),
         ),
       ),
     );
@@ -114,8 +119,8 @@ class _BottomBar extends StatelessWidget {
                     onTap: onTap,
                   ),
                   BottomNavBarItem(
-                    icon: Icons.category,
-                    label: labels[1],
+                    icon: Icons.favorite,
+                    label: labels[2],
                     index: 1,
                     selectedIndex: selectedIndex,
                     onTap: onTap,
@@ -129,8 +134,8 @@ class _BottomBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   BottomNavBarItem(
-                    icon: Icons.favorite,
-                    label: labels[2],
+                    icon: Icons.receipt_long,
+                    label: labels[1],
                     index: 3,
                     selectedIndex: selectedIndex,
                     onTap: onTap,

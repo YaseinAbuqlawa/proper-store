@@ -6,4 +6,5 @@ class AppConsts {
       "mainCollectionBannerData";
   static const String productsCollection = "products";
   static const String unexpectedErrorText = "unexpected-error";
+  static const String ordersCollection = "orders";
 }

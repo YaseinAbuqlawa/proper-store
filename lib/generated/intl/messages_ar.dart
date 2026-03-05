@@ -144,9 +144,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "noAddressesYet": MessageLookupByLibrary.simpleMessage(
       "لا توجد عناوين بعد",
     ),
+    "noOrdersYet": MessageLookupByLibrary.simpleMessage("لا توجد طلبات بعد"),
+    "noOrdersYetMessage": MessageLookupByLibrary.simpleMessage(
+      "طلباتك ستظهر هنا بعد أول عملية شراء",
+    ),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage(
       "او سجلي الدخول بسهولة",
     ),
+    "orderDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
+    "orderNumberLabel": MessageLookupByLibrary.simpleMessage("رقم الطلب"),
+    "orderStatusCancelled": MessageLookupByLibrary.simpleMessage("ملغي"),
+    "orderStatusConfirmed": MessageLookupByLibrary.simpleMessage("مؤكد"),
+    "orderStatusDelivered": MessageLookupByLibrary.simpleMessage("تم التسليم"),
+    "orderStatusPending": MessageLookupByLibrary.simpleMessage("قيد الانتظار"),
+    "orderStatusShipped": MessageLookupByLibrary.simpleMessage("تم الشحن"),
+    "orderStepDelivery": MessageLookupByLibrary.simpleMessage("توصيل"),
+    "orderStepPreparing": MessageLookupByLibrary.simpleMessage("تجهيز"),
+    "orderStepShipping": MessageLookupByLibrary.simpleMessage("شحن"),
+    "orderTotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي"),
+    "orderedOnLabel": MessageLookupByLibrary.simpleMessage("تم الطلب:"),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("طلباتي"),
     "otpCodeLabel": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
     "otpMustBe6Digits": MessageLookupByLibrary.simpleMessage(
@@ -155,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpSentSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم ارسال رمز التحقق",
     ),
+    "paymentCOD": MessageLookupByLibrary.simpleMessage("الدفع عند الاستلام"),
     "phoneNumberLabel": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
       "رقم الهاتف يجب أن يتكون من 10 أرقام",

@@ -148,7 +148,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "Name must be more than 2 characters",
     ),
     "noAddressesYet": MessageLookupByLibrary.simpleMessage("No addresses yet"),
+    "noOrdersYet": MessageLookupByLibrary.simpleMessage("No orders yet"),
+    "noOrdersYetMessage": MessageLookupByLibrary.simpleMessage(
+      "Your orders will appear here after your first purchase",
+    ),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage("Or sign in easily"),
+    "orderDetails": MessageLookupByLibrary.simpleMessage("View details"),
+    "orderNumberLabel": MessageLookupByLibrary.simpleMessage("Order number"),
+    "orderStatusCancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
+    "orderStatusConfirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
+    "orderStatusDelivered": MessageLookupByLibrary.simpleMessage("Delivered"),
+    "orderStatusPending": MessageLookupByLibrary.simpleMessage("Pending"),
+    "orderStatusShipped": MessageLookupByLibrary.simpleMessage("Shipped"),
+    "orderStepDelivery": MessageLookupByLibrary.simpleMessage("Delivery"),
+    "orderStepPreparing": MessageLookupByLibrary.simpleMessage("Preparing"),
+    "orderStepShipping": MessageLookupByLibrary.simpleMessage("Shipping"),
+    "orderTotalLabel": MessageLookupByLibrary.simpleMessage("Total"),
+    "orderedOnLabel": MessageLookupByLibrary.simpleMessage("Ordered on:"),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("My Orders"),
     "otpCodeLabel": MessageLookupByLibrary.simpleMessage("Verification code"),
     "otpMustBe6Digits": MessageLookupByLibrary.simpleMessage(
@@ -157,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpSentSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Verification code sent",
     ),
+    "paymentCOD": MessageLookupByLibrary.simpleMessage("Cash on delivery"),
     "phoneNumberLabel": MessageLookupByLibrary.simpleMessage("Phone number"),
     "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
       "Phone number must be 10 digits",

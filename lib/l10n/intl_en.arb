@@ -92,5 +92,20 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "phoneNumberMustBe11Digits": "Phone number must be 11 digits",
-    "retry": "Retry"
+    "retry": "Retry",
+    "noOrdersYet": "No orders yet",
+    "noOrdersYetMessage": "Your orders will appear here after your first purchase",
+    "orderStatusPending": "Pending",
+    "orderStatusConfirmed": "Confirmed",
+    "orderStatusShipped": "Shipped",
+    "orderStatusDelivered": "Delivered",
+    "orderStatusCancelled": "Cancelled",
+    "orderTotalLabel": "Total",
+    "paymentCOD": "Cash on delivery",
+    "orderNumberLabel": "Order number",
+    "orderDetails": "View details",
+    "orderStepPreparing": "Preparing",
+    "orderStepShipping": "Shipping",
+    "orderStepDelivery": "Delivery",
+    "orderedOnLabel": "Ordered on:"
 }

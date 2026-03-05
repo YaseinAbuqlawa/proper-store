@@ -9,6 +9,7 @@ import 'package:proper_store/core/router/app_router.dart';
 import 'package:proper_store/core/services/auth_orchestration_service.dart';
 import 'package:proper_store/features/addresses/presentation/cubit/addresses_cubit.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/auth_cubit.dart';
+import 'package:proper_store/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:proper_store/features/profile/presentation/cubit/profile_cubit.dart';
@@ -40,6 +41,7 @@ class ProperStoreApp extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<FavoritesCubit>()),
         BlocProvider(create: (context) => di.sl<ProfileCubit>()),
         BlocProvider(create: (context) => di.sl<AddressesCubit>()),
+        BlocProvider(create: (context) => di.sl<OrdersCubit>()),
         BlocProvider(create: (context) => di.sl<AuthCubit>()),
       ],
       child: MaterialApp.router(

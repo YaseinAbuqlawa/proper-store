@@ -87,6 +87,18 @@ import 'package:proper_store/features/home/domain/use_cases/get_most_sold_produc
     as _i71;
 import 'package:proper_store/features/home/presentation/cubit/home_cubit.dart'
     as _i1070;
+import 'package:proper_store/features/orders/data/data_sources/orders_remote_data_source.dart'
+    as _i766;
+import 'package:proper_store/features/orders/data/repo/orders_repo_impl.dart'
+    as _i308;
+import 'package:proper_store/features/orders/domain/repo/orders_repo.dart'
+    as _i333;
+import 'package:proper_store/features/orders/domain/use_cases/create_order_use_case.dart'
+    as _i347;
+import 'package:proper_store/features/orders/domain/use_cases/get_customer_orders_use_case.dart'
+    as _i39;
+import 'package:proper_store/features/orders/presentation/cubit/orders_cubit.dart'
+    as _i769;
 import 'package:proper_store/features/product_details/data/data_srouces/product_details_remote_data_source.dart'
     as _i20;
 import 'package:proper_store/features/product_details/data/repo/product_details_repo_impl.dart'
@@ -150,6 +162,11 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i384.HomeRemoteDataSource(firestore: gh<_i974.FirebaseFirestore>()),
     );
+    gh.lazySingleton<_i766.OrdersRemoteDataSource>(
+      () => _i766.OrdersRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+      ),
+    );
     gh.lazySingleton<_i20.ProductDetailsRemoteDataSource>(
       () => _i20.ProductDetailsRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -193,6 +210,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i206.FavoritesRepo>(
       () => _i1071.FavoritesRepoImpl(
         remoteDataSource: gh<_i662.FavoritesRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i333.OrdersRepo>(
+      () => _i308.OrdersRepoImpl(
+        remoteDataSource: gh<_i766.OrdersRemoteDataSource>(),
       ),
     );
     gh.lazySingleton<_i147.HomeRepo>(
@@ -259,6 +281,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i71.GetMostSoldProductUseCase>(
       () => _i71.GetMostSoldProductUseCase(repo: gh<_i147.HomeRepo>()),
     );
+    gh.lazySingleton<_i347.CreateOrderUseCase>(
+      () => _i347.CreateOrderUseCase(repo: gh<_i333.OrdersRepo>()),
+    );
+    gh.lazySingleton<_i39.GetCustomerOrdersUseCase>(
+      () => _i39.GetCustomerOrdersUseCase(repo: gh<_i333.OrdersRepo>()),
+    );
     gh.lazySingleton<_i1010.AddressesCubit>(
       () => _i1010.AddressesCubit(
         getAddressesUseCase: gh<_i1013.GetAddressesUseCase>(),
@@ -300,6 +328,13 @@ extension GetItInjectableX on _i174.GetIt {
         profileCubit: gh<_i443.ProfileCubit>(),
         favoritesCubit: gh<_i395.FavoritesCubit>(),
         cartCubit: gh<_i1006.CartCubit>(),
+      ),
+    );
+    gh.lazySingleton<_i769.OrdersCubit>(
+      () => _i769.OrdersCubit(
+        getCustomerOrdersUseCase: gh<_i39.GetCustomerOrdersUseCase>(),
+        createOrderUseCase: gh<_i347.CreateOrderUseCase>(),
+        auth: gh<_i59.FirebaseAuth>(),
       ),
     );
     return this;
