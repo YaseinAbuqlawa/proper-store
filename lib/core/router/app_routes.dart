@@ -12,7 +12,9 @@ enum AppRoutes {
   checkout('/checkout'),
   orderConfirmation('/orderConfirmation'),
   orderDetails('/orderDetails'),
-  products('/products');
+  products('/products'),
+  contactUs('/contactUs'),
+  returnPolicy('/returnPolicy');
 
   final String path;
   const AppRoutes(this.path);

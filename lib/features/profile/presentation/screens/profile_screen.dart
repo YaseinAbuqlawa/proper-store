@@ -126,13 +126,17 @@ class ProfileScreen extends StatelessWidget {
                     Divider(thickness: .05),
                     AppSpacer(height: 10),
 
-                    _ProfileButton(buttonName: s.contactUs, onPressed: () {}),
+                    _ProfileButton(
+                      buttonName: s.contactUs,
+                      onPressed: () => context.push(AppRoutes.contactUs.path),
+                    ),
                     Divider(thickness: .05),
                     AppSpacer(height: 10),
 
                     _ProfileButton(
                       buttonName: s.returnPolicy,
-                      onPressed: () {},
+                      onPressed: () =>
+                          context.push(AppRoutes.returnPolicy.path),
                     ),
                     Divider(thickness: .05),
                   ],

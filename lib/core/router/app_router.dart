@@ -23,7 +23,9 @@ import 'package:proper_store/features/product_details/presentation/screens/produ
 import 'package:proper_store/features/products/presentation/cubit/products_screen_cubit.dart';
 import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
 import 'package:proper_store/features/products/presentation/screens/products_screen.dart';
+import 'package:proper_store/features/profile/presentation/screens/contact_us_screen.dart';
 import 'package:proper_store/features/profile/presentation/screens/profile_screen.dart';
+import 'package:proper_store/features/profile/presentation/screens/return_policy_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigationKey = GlobalKey<NavigatorState>();
 
@@ -135,6 +137,14 @@ final GoRouter appRouter = GoRouter(
           child: ProductsScreen(title: args.title),
         );
       },
+    ),
+    GoRoute(
+      path: AppRoutes.contactUs.path,
+      builder: (context, state) => const ContactUsScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.returnPolicy.path,
+      builder: (context, state) => const ReturnPolicyScreen(),
     ),
     GoRoute(
       path: AppRoutes.productDetails.path,
