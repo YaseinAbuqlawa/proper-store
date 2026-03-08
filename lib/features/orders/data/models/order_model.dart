@@ -32,10 +32,13 @@ abstract class OrderModel with _$OrderModel {
     OrderStatus status,
     @Default(0) int createdAt,
     @Default('COD') String paymentMethod,
+    @Default(0.0) double shippingCost,
   }) = _OrderModel;
 
   factory OrderModel.fromJson(Map<String, dynamic> json) =>
       _$OrderModelFromJson(json);
 
   DateTime get createdAtDate => DateTime.fromMillisecondsSinceEpoch(createdAt);
+
+  double get grandTotal => netTotal + shippingCost;
 }

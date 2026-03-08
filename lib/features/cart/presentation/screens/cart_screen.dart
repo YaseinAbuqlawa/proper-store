@@ -77,9 +77,10 @@ class _TotalsCard extends StatelessWidget {
         return state.products.where((p) => p.quantity > 0).toList();
       },
       builder: (context, products) {
+        final s = S.of(context);
         return Container(
-          padding: EdgeInsets.all(20),
-          margin: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
             color: AppColors.darkGray,
@@ -87,18 +88,20 @@ class _TotalsCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              if (products.totalDiscount != 0) ...[
+                _TotalRow(
+                  text: s.subtotalLabel,
+                  value: products.totalPriceBeforeDiscount,
+                ),
+                _TotalRow(
+                  text: s.discountAmountLabel,
+                  valueColor: AppColors.successGreen,
+                  value: products.totalDiscount,
+                ),
+                const Divider(thickness: .25, color: AppColors.textSecondary),
+              ],
               _TotalRow(
-                text: "الاجمالي قبل الخصم",
-                value: products.totalPriceBeforeDiscount,
-              ),
-              _TotalRow(
-                text: "اجمالي الخصم",
-                valueColor: AppColors.successGreen,
-                value: products.totalDiscount,
-              ),
-              Divider(thickness: .25, color: AppColors.textSecondary),
-              _TotalRow(
-                text: "الاجمالي",
+                text: s.orderTotalLabel,
                 value: products.totalPriceAfterDiscount,
                 isNetTotal: true,
               ),

@@ -8,7 +8,9 @@ enum AppRoutes {
   favorites('/favorites'),
   profile('/profile'),
   addresses('/addresses'),
-  addAddress('/addAddress');
+  addAddress('/addAddress'),
+  checkout('/checkout'),
+  orderConfirmation('/orderConfirmation');
 
   final String path;
   const AppRoutes(this.path);

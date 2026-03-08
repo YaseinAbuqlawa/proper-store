@@ -11,16 +11,19 @@ class OrdersRemoteDataSource {
   OrdersRemoteDataSource({required this.firestore});
 
   Future<String> createOrder({required OrderModel order}) async {
-    final docRef = firestore.collection(AppConsts.ordersCollection).doc();
+    final docRef = order.id.isNotEmpty
+        ? firestore.collection(AppConsts.ordersCollection).doc(order.id)
+        : firestore.collection(AppConsts.ordersCollection).doc();
     await docRef.set({
       'customerId': order.customerId,
       'products': order.products.map((p) => p.toJson()).toList(),
       'totalPrice': order.totalPrice,
       'discountTotal': order.discountTotal,
       'netTotal': order.netTotal,
+      'shippingCost': order.shippingCost,
       'shippingAddress': order.shippingAddress.toJson(),
       'status': order.status.name,
-      'createdAt': Timestamp.now().millisecondsSinceEpoch,
+      'createdAt': FieldValue.serverTimestamp(),
       'paymentMethod': order.paymentMethod,
     });
     return docRef.id;

@@ -1,14 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/di/injection_container.dart';
+import 'package:proper_store/core/helpers/app_snackbar.dart';
+import 'package:proper_store/core/helpers/auth_guard_dialog.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/core/products/presentation/widgets/add_to_favorite.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_price.dart';
+import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/core/widgets/shopping_bag_button.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
+import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/widgets/product_details_bottom_nav_bar_buttons.dart';
@@ -217,9 +224,19 @@ class ProductDetailsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Expanded(flex: 3, child: AddToCartButton(onPressed: () {})),
+                  Expanded(
+                    flex: 3,
+                    child: AddToCartButton(
+                      onPressed: () => _addToCart(context),
+                    ),
+                  ),
                   const SizedBox(width: 10),
-                  Expanded(flex: 4, child: BuyNowButton(onPressed: () {})),
+                  Expanded(
+                    flex: 4,
+                    child: BuyNowButton(
+                      onPressed: () => _buyNow(context),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -227,6 +244,47 @@ class ProductDetailsScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  ProductModel? _currentProduct(BuildContext context) {
+    return context.read<ProductDetailsCubit>().state.maybeWhen(
+      success: (product, _, _) => product,
+      orElse: () => null,
+    );
+  }
+
+  CartItemModel? _buildCartItem(ProductModel product) {
+    final color = product.selectedColor ?? product.colors.firstOrNull;
+    if (color == null) return null;
+    return CartItemModel.fromProductModel(product.copyWith(selectedColor: color));
+  }
+
+  void _addToCart(BuildContext context) {
+    final product = _currentProduct(context);
+    if (product == null) return;
+    final item = _buildCartItem(product);
+    if (item == null) return;
+    context.read<CartCubit>().addProductToCart(item);
+    AppSnackbar.successSnackbar(
+      context: context,
+      message: S.of(context).addedToCart,
+    );
+  }
+
+  Future<void> _buyNow(BuildContext context) async {
+    final product = _currentProduct(context);
+    if (product == null) return;
+    final item = _buildCartItem(product);
+    if (item == null) return;
+
+    final isAnonymous = sl<FirebaseAuth>().currentUser?.isAnonymous ?? true;
+    if (isAnonymous) {
+      final proceed = await AuthGuardDialog.show(context);
+      if (!proceed || !context.mounted) return;
+    }
+    if (context.mounted) {
+      context.push(AppRoutes.checkout.path, extra: [item]);
+    }
   }
 }
 

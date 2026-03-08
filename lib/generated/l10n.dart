@@ -933,6 +933,226 @@ class S {
       args: [],
     );
   }
+
+  /// `إتمام الشراء`
+  String get checkoutTitle {
+    return Intl.message(
+      'إتمام الشراء',
+      name: 'checkoutTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ملخص الطلب`
+  String get orderSummaryTitle {
+    return Intl.message(
+      'ملخص الطلب',
+      name: 'orderSummaryTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `عنوان الشحن`
+  String get shippingAddressTitle {
+    return Intl.message(
+      'عنوان الشحن',
+      name: 'shippingAddressTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `طريقة الدفع`
+  String get paymentMethodTitle {
+    return Intl.message(
+      'طريقة الدفع',
+      name: 'paymentMethodTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تأكيد الطلب`
+  String get placeOrderButton {
+    return Intl.message(
+      'تأكيد الطلب',
+      name: 'placeOrderButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `يرجى اختيار عنوان للشحن`
+  String get noAddressSelected {
+    return Intl.message(
+      'يرجى اختيار عنوان للشحن',
+      name: 'noAddressSelected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إضافة عنوان جديد`
+  String get addNewAddress {
+    return Intl.message(
+      'إضافة عنوان جديد',
+      name: 'addNewAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مجاني`
+  String get shippingFree {
+    return Intl.message('مجاني', name: 'shippingFree', desc: '', args: []);
+  }
+
+  /// `الشحن`
+  String get shippingLabel {
+    return Intl.message('الشحن', name: 'shippingLabel', desc: '', args: []);
+  }
+
+  /// `غير متاح لهذه المنطقة`
+  String get shippingNotAvailable {
+    return Intl.message(
+      'غير متاح لهذه المنطقة',
+      name: 'shippingNotAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الإجمالي قبل الخصم`
+  String get subtotalLabel {
+    return Intl.message(
+      'الإجمالي قبل الخصم',
+      name: 'subtotalLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الخصم`
+  String get discountAmountLabel {
+    return Intl.message(
+      'الخصم',
+      name: 'discountAmountLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم تأكيد طلبك!`
+  String get orderConfirmedTitle {
+    return Intl.message(
+      'تم تأكيد طلبك!',
+      name: 'orderConfirmedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سيتم التواصل معك قريباً لتأكيد موعد التوصيل`
+  String get orderConfirmedMessage {
+    return Intl.message(
+      'سيتم التواصل معك قريباً لتأكيد موعد التوصيل',
+      name: 'orderConfirmedMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `متابعة التسوق`
+  String get continueShopping {
+    return Intl.message(
+      'متابعة التسوق',
+      name: 'continueShopping',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سجلي دخولك`
+  String get loginToCheckout {
+    return Intl.message(
+      'سجلي دخولك',
+      name: 'loginToCheckout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سجلي دخولك لمتابعة طلباتك والاستمتاع بأفضل تجربة تسوق`
+  String get loginToCheckoutMessage {
+    return Intl.message(
+      'سجلي دخولك لمتابعة طلباتك والاستمتاع بأفضل تجربة تسوق',
+      name: 'loginToCheckoutMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تمت الإضافة للسلة بنجاح`
+  String get addedToCart {
+    return Intl.message(
+      'تمت الإضافة للسلة بنجاح',
+      name: 'addedToCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تسجيل الدخول بجوجل`
+  String get signInWithGoogle {
+    return Intl.message(
+      'تسجيل الدخول بجوجل',
+      name: 'signInWithGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تسجيل الدخول بفيسبوك`
+  String get signInWithFacebook {
+    return Intl.message(
+      'تسجيل الدخول بفيسبوك',
+      name: 'signInWithFacebook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الإجمالي النهائي`
+  String get grandTotalLabel {
+    return Intl.message(
+      'الإجمالي النهائي',
+      name: 'grandTotalLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الكمية: {count}`
+  String quantityLabel(int count) {
+    return Intl.message(
+      'الكمية: $count',
+      name: 'quantityLabel',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `+{count} منتجات أخرى`
+  String moreProductsLabel(int count) {
+    return Intl.message(
+      '+$count منتجات أخرى',
+      name: 'moreProductsLabel',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

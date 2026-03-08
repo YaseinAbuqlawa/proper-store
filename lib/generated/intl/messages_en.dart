@@ -22,14 +22,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(percentage) => "Discount ${percentage}%";
 
+  static String m1(count) => "+${count} more items";
+
+  static String m2(count) => "Qty: ${count}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "addAddressTitle": MessageLookupByLibrary.simpleMessage("Add address"),
     "addFirstAddress": MessageLookupByLibrary.simpleMessage(
       "Add your first address to get started",
     ),
+    "addNewAddress": MessageLookupByLibrary.simpleMessage("Add new address"),
     "addToCartButton": MessageLookupByLibrary.simpleMessage("Add to cart"),
     "addToCartText": MessageLookupByLibrary.simpleMessage("Add to cart"),
+    "addedToCart": MessageLookupByLibrary.simpleMessage(
+      "Added to cart successfully",
+    ),
     "addressDeleted": MessageLookupByLibrary.simpleMessage("Address deleted"),
     "addressLabelHint": MessageLookupByLibrary.simpleMessage("e.g. Home, Work"),
     "addressLabelLabel": MessageLookupByLibrary.simpleMessage("Address label"),
@@ -46,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("Change number"),
+    "checkoutTitle": MessageLookupByLibrary.simpleMessage("Checkout"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("City"),
     "completeCheckout": MessageLookupByLibrary.simpleMessage(
       "Complete checkout",
@@ -54,6 +63,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirm number",
     ),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
+    "continueShopping": MessageLookupByLibrary.simpleMessage(
+      "Continue Shopping",
+    ),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" EGP"),
     "defaultBadge": MessageLookupByLibrary.simpleMessage("Default"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
@@ -63,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "descriptionAndDetails": MessageLookupByLibrary.simpleMessage(
       "Description and details",
     ),
+    "discountAmountLabel": MessageLookupByLibrary.simpleMessage("Discount"),
     "discountLabel": m0,
     "discoverLatestFashion": MessageLookupByLibrary.simpleMessage(
       "Discover the latest fashion trends in shoes and bags in Egypt with world-class quality.",
@@ -131,15 +144,21 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "floorLabel": MessageLookupByLibrary.simpleMessage("Floor"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("Full name"),
+    "grandTotalLabel": MessageLookupByLibrary.simpleMessage("Grand Total"),
     "highQuality": MessageLookupByLibrary.simpleMessage("High quality"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("Home"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
     "loginSuccess": MessageLookupByLibrary.simpleMessage(
       "Logged in successfully",
     ),
+    "loginToCheckout": MessageLookupByLibrary.simpleMessage("Sign in"),
+    "loginToCheckoutMessage": MessageLookupByLibrary.simpleMessage(
+      "Sign in to track your orders and enjoy a better shopping experience",
+    ),
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "Shop now",
     ),
+    "moreProductsLabel": m1,
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
       "Best Sellers",
     ),
@@ -147,12 +166,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameMustBeMoreThan2Chars": MessageLookupByLibrary.simpleMessage(
       "Name must be more than 2 characters",
     ),
+    "noAddressSelected": MessageLookupByLibrary.simpleMessage(
+      "Please select a shipping address",
+    ),
     "noAddressesYet": MessageLookupByLibrary.simpleMessage("No addresses yet"),
     "noOrdersYet": MessageLookupByLibrary.simpleMessage("No orders yet"),
     "noOrdersYetMessage": MessageLookupByLibrary.simpleMessage(
       "Your orders will appear here after your first purchase",
     ),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage("Or sign in easily"),
+    "orderConfirmedMessage": MessageLookupByLibrary.simpleMessage(
+      "We\'ll contact you soon to confirm your delivery time",
+    ),
+    "orderConfirmedTitle": MessageLookupByLibrary.simpleMessage(
+      "Order Confirmed!",
+    ),
     "orderDetails": MessageLookupByLibrary.simpleMessage("View details"),
     "orderNumberLabel": MessageLookupByLibrary.simpleMessage("Order number"),
     "orderStatusCancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
@@ -163,6 +191,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orderStepDelivery": MessageLookupByLibrary.simpleMessage("Delivery"),
     "orderStepPreparing": MessageLookupByLibrary.simpleMessage("Preparing"),
     "orderStepShipping": MessageLookupByLibrary.simpleMessage("Shipping"),
+    "orderSummaryTitle": MessageLookupByLibrary.simpleMessage("Order summary"),
     "orderTotalLabel": MessageLookupByLibrary.simpleMessage("Total"),
     "orderedOnLabel": MessageLookupByLibrary.simpleMessage("Ordered on:"),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("My Orders"),
@@ -174,6 +203,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Verification code sent",
     ),
     "paymentCOD": MessageLookupByLibrary.simpleMessage("Cash on delivery"),
+    "paymentMethodTitle": MessageLookupByLibrary.simpleMessage(
+      "Payment method",
+    ),
     "phoneNumberLabel": MessageLookupByLibrary.simpleMessage("Phone number"),
     "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
       "Phone number must be 10 digits",
@@ -181,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumberMustBe11Digits": MessageLookupByLibrary.simpleMessage(
       "Phone number must be 11 digits",
     ),
+    "placeOrderButton": MessageLookupByLibrary.simpleMessage("Place order"),
     "pricesSuitYou": MessageLookupByLibrary.simpleMessage(
       "Prices that suit you",
     ),
@@ -188,12 +221,21 @@ class MessageLookup extends MessageLookupByLibrary {
       "Product details",
     ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("My Account"),
+    "quantityLabel": m2,
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("Return policy"),
     "saveAddress": MessageLookupByLibrary.simpleMessage("Save address"),
     "selectedColor": MessageLookupByLibrary.simpleMessage("Selected color:"),
     "setAsDefault": MessageLookupByLibrary.simpleMessage(
       "Set as default address",
+    ),
+    "shippingAddressTitle": MessageLookupByLibrary.simpleMessage(
+      "Shipping address",
+    ),
+    "shippingFree": MessageLookupByLibrary.simpleMessage("Free"),
+    "shippingLabel": MessageLookupByLibrary.simpleMessage("Shipping"),
+    "shippingNotAvailable": MessageLookupByLibrary.simpleMessage(
+      "Not available for this area",
     ),
     "shopAsGuest": MessageLookupByLibrary.simpleMessage("Shop as guest"),
     "showAllText": MessageLookupByLibrary.simpleMessage("Show all"),
@@ -206,9 +248,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "signInToFollowLatestFashion": MessageLookupByLibrary.simpleMessage(
       "Sign in to follow the latest fashion trends",
     ),
+    "signInWithFacebook": MessageLookupByLibrary.simpleMessage(
+      "Sign in with Facebook",
+    ),
+    "signInWithGoogle": MessageLookupByLibrary.simpleMessage(
+      "Sign in with Google",
+    ),
     "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("Similar products"),
     "streetLabel": MessageLookupByLibrary.simpleMessage("Street"),
+    "subtotalLabel": MessageLookupByLibrary.simpleMessage("Subtotal"),
     "successTitle": MessageLookupByLibrary.simpleMessage("Success"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("Verify code"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("Welcome"),

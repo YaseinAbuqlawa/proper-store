@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/base_screen/screen/base_screen.dart';
 import 'package:proper_store/core/di/injection_container.dart';
@@ -7,6 +8,10 @@ import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/welcome_screen.dart';
 import 'package:proper_store/features/cart/presentation/screens/cart_screen.dart';
 import 'package:proper_store/features/categories/presentation/screens/categories_screen.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
+import 'package:proper_store/features/checkout/presentation/cubit/checkout_cubit.dart';
+import 'package:proper_store/features/checkout/presentation/screens/checkout_screen.dart';
+import 'package:proper_store/features/checkout/presentation/screens/order_confirmation_screen.dart';
 import 'package:proper_store/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:proper_store/features/home/presentation/screens/home_screen.dart';
 import 'package:proper_store/features/orders/presentation/screens/orders_screen.dart';
@@ -86,6 +91,33 @@ final GoRouter appRouter = GoRouter(
         state: state,
         child: const AddAddressScreen(),
       ),
+    ),
+    GoRoute(
+      path: AppRoutes.checkout.path,
+      redirect: (context, state) {
+        final user = sl<FirebaseAuth>().currentUser;
+        if (user == null || user.isAnonymous) return AppRoutes.welcome.path;
+        return null;
+      },
+      pageBuilder: (context, state) {
+        final extra = state.extra;
+        final buyNowItems =
+            extra is List<CartItemModel> ? extra : null;
+        return _buildTransitionPage(
+          state: state,
+          child: BlocProvider(
+            create: (_) => sl<CheckoutCubit>(),
+            child: CheckoutScreen(buyNowItems: buyNowItems),
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.orderConfirmation.path,
+      builder: (context, state) {
+        final orderId = state.extra is String ? state.extra as String : '';
+        return OrderConfirmationScreen(orderId: orderId);
+      },
     ),
     GoRoute(
       path: AppRoutes.productDetails.path,

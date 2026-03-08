@@ -107,5 +107,42 @@
     "orderStepPreparing": "تجهيز",
     "orderStepShipping": "شحن",
     "orderStepDelivery": "توصيل",
-    "orderedOnLabel": "تم الطلب:"
+    "orderedOnLabel": "تم الطلب:",
+    "checkoutTitle": "إتمام الشراء",
+    "orderSummaryTitle": "ملخص الطلب",
+    "shippingAddressTitle": "عنوان الشحن",
+    "paymentMethodTitle": "طريقة الدفع",
+    "placeOrderButton": "تأكيد الطلب",
+    "noAddressSelected": "يرجى اختيار عنوان للشحن",
+    "addNewAddress": "إضافة عنوان جديد",
+    "shippingFree": "مجاني",
+    "shippingLabel": "الشحن",
+    "shippingNotAvailable": "غير متاح لهذه المنطقة",
+    "subtotalLabel": "الإجمالي قبل الخصم",
+    "discountAmountLabel": "الخصم",
+    "orderConfirmedTitle": "تم تأكيد طلبك!",
+    "orderConfirmedMessage": "سيتم التواصل معك قريباً لتأكيد موعد التوصيل",
+    "continueShopping": "متابعة التسوق",
+    "loginToCheckout": "سجلي دخولك",
+    "loginToCheckoutMessage": "سجلي دخولك لمتابعة طلباتك والاستمتاع بأفضل تجربة تسوق",
+    "addedToCart": "تمت الإضافة للسلة بنجاح",
+    "signInWithGoogle": "تسجيل الدخول بجوجل",
+    "signInWithFacebook": "تسجيل الدخول بفيسبوك",
+    "grandTotalLabel": "الإجمالي النهائي",
+    "quantityLabel": "الكمية: {count}",
+    "@quantityLabel": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "moreProductsLabel": "+{count} منتجات أخرى",
+    "@moreProductsLabel": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }

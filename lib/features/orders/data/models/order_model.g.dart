@@ -23,6 +23,7 @@ _OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => _OrderModel(
       : _statusFromJson(json['status']),
   createdAt: (json['createdAt'] as num?)?.toInt() ?? 0,
   paymentMethod: json['paymentMethod'] as String? ?? 'COD',
+  shippingCost: (json['shippingCost'] as num?)?.toDouble() ?? 0.0,
 );
 
 Map<String, dynamic> _$OrderModelToJson(_OrderModel instance) =>
@@ -37,4 +38,5 @@ Map<String, dynamic> _$OrderModelToJson(_OrderModel instance) =>
       'status': _statusToJson(instance.status),
       'createdAt': instance.createdAt,
       'paymentMethod': instance.paymentMethod,
+      'shippingCost': instance.shippingCost,
     };

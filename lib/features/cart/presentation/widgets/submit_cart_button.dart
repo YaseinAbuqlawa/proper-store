@@ -1,9 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
+import 'package:proper_store/core/di/injection_container.dart';
+import 'package:proper_store/core/helpers/auth_guard_dialog.dart';
 import 'package:proper_store/core/helpers/extensions.dart';
+import 'package:proper_store/core/router/app_routes.dart';
+import 'package:proper_store/features/addresses/presentation/cubit/addresses_cubit.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/generated/l10n.dart';
 
@@ -18,7 +24,7 @@ class SubmitCartButton extends StatelessWidget {
       ),
       margin: const EdgeInsets.only(right: 10, left: 10, top: 10, bottom: 40),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => _onCheckout(context),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -45,17 +51,30 @@ class SubmitCartButton extends StatelessWidget {
                   },
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                   height: 20,
                   width: .5,
                   color: AppColors.blackCard,
                 ),
-                Icon(Icons.arrow_back, size: AppSizes.iconSizeMedium),
+                const Icon(Icons.arrow_back, size: AppSizes.iconSizeMedium),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _onCheckout(BuildContext context) async {
+    final products = context.read<CartCubit>().state.products;
+    if (products.isEmpty) return;
+
+    final isAnonymous = sl<FirebaseAuth>().currentUser?.isAnonymous ?? true;
+    if (isAnonymous) {
+      final proceed = await AuthGuardDialog.show(context);
+      if (!proceed || !context.mounted) return;
+    }
+    await context.read<AddressesCubit>().getAddresses();
+    if (context.mounted) context.push(AppRoutes.checkout.path);
   }
 }

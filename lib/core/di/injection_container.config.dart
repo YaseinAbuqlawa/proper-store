@@ -62,6 +62,16 @@ import 'package:proper_store/features/auth/features/welcome_screen_presentation/
     as _i967;
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart'
     as _i1006;
+import 'package:proper_store/features/checkout/data/data_sources/shipping_cost_remote_data_source.dart'
+    as _i380;
+import 'package:proper_store/features/checkout/data/repo/shipping_cost_repo_impl.dart'
+    as _i1001;
+import 'package:proper_store/features/checkout/domain/repo/shipping_cost_repo.dart'
+    as _i579;
+import 'package:proper_store/features/checkout/domain/use_cases/get_shipping_cost_use_case.dart'
+    as _i890;
+import 'package:proper_store/features/checkout/presentation/cubit/checkout_cubit.dart'
+    as _i541;
 import 'package:proper_store/features/favorites/data/data_source/favorites_remote_data_source.dart'
     as _i662;
 import 'package:proper_store/features/favorites/data/repo/favorites_repo_impl.dart'
@@ -153,6 +163,11 @@ extension GetItInjectableX on _i174.GetIt {
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
     );
+    gh.lazySingleton<_i380.ShippingCostRemoteDataSource>(
+      () => _i380.ShippingCostRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+      ),
+    );
     gh.lazySingleton<_i662.FavoritesRemoteDataSource>(
       () => _i662.FavoritesRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -180,6 +195,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1061.ProductsRepo>(
       () => _i614.ProductsRepoImpl(
         remoteDataSource: gh<_i122.ProductsRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i579.ShippingCostRepo>(
+      () => _i1001.ShippingCostRepoImpl(
+        remoteDataSource: gh<_i380.ShippingCostRemoteDataSource>(),
       ),
     );
     gh.lazySingleton<_i714.GetAllProductsUseCase>(
@@ -227,6 +247,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i223.AuthRepoImpl(
         remoteDataSource: gh<_i426.AuthRemoteDataSource>(),
       ),
+    );
+    gh.lazySingleton<_i890.GetShippingCostUseCase>(
+      () => _i890.GetShippingCostUseCase(repo: gh<_i579.ShippingCostRepo>()),
     );
     gh.lazySingleton<_i268.AddAddressUseCase>(
       () => _i268.AddAddressUseCase(repo: gh<_i979.AddressesRepo>()),
@@ -313,6 +336,13 @@ extension GetItInjectableX on _i174.GetIt {
         mainCollectionBannerDataUseCase:
             gh<_i683.GetMainCollectionBannerDataUseCase>(),
         getMostSoldProductUseCase: gh<_i71.GetMostSoldProductUseCase>(),
+      ),
+    );
+    gh.factory<_i541.CheckoutCubit>(
+      () => _i541.CheckoutCubit(
+        createOrderUseCase: gh<_i347.CreateOrderUseCase>(),
+        getShippingCostUseCase: gh<_i890.GetShippingCostUseCase>(),
+        auth: gh<_i59.FirebaseAuth>(),
       ),
     );
     gh.lazySingleton<_i443.ProfileCubit>(

@@ -7,4 +7,5 @@ class AppConsts {
   static const String productsCollection = "products";
   static const String unexpectedErrorText = "unexpected-error";
   static const String ordersCollection = "orders";
+  static const String shippingAreasCostDoc = "shippingAreasCost";
 }

@@ -41,7 +41,7 @@ class OrderCard extends StatelessWidget {
                     style: AppTextStyles.bodyDescription,
                   ),
                   Text(
-                    '#${order.id.substring(0, 6).toUpperCase()}',
+                    '#${order.id}',
                     style: AppTextStyles.productName,
                   ),
                 ],
@@ -55,7 +55,7 @@ class OrderCard extends StatelessWidget {
                     style: AppTextStyles.bodyDescription,
                   ),
                   Text(
-                    '${order.netTotal.toStringAsFixed(0)}${s.currencySymbol}',
+                    '${order.grandTotal.toStringAsFixed(0)}${s.currencySymbol}',
                     style: AppTextStyles.priceNow,
                   ),
                 ],
@@ -102,7 +102,7 @@ class OrderCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'الكمية: ${firstProduct.quantity}',
+                      s.quantityLabel(firstProduct.quantity),
                       style: AppTextStyles.bodyDescription,
                     ),
                     const SizedBox(height: 2),
@@ -112,7 +112,7 @@ class OrderCard extends StatelessWidget {
                     ),
                     if (extraCount > 0)
                       Text(
-                        '+$extraCount منتجات أخرى',
+                        s.moreProductsLabel(extraCount),
                         style: AppTextStyles.bodyDescription
                             .copyWith(color: AppColors.goldMuted),
                       ),

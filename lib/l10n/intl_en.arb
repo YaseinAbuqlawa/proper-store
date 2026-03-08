@@ -107,5 +107,42 @@
     "orderStepPreparing": "Preparing",
     "orderStepShipping": "Shipping",
     "orderStepDelivery": "Delivery",
-    "orderedOnLabel": "Ordered on:"
+    "orderedOnLabel": "Ordered on:",
+    "checkoutTitle": "Checkout",
+    "orderSummaryTitle": "Order summary",
+    "shippingAddressTitle": "Shipping address",
+    "paymentMethodTitle": "Payment method",
+    "placeOrderButton": "Place order",
+    "noAddressSelected": "Please select a shipping address",
+    "addNewAddress": "Add new address",
+    "shippingFree": "Free",
+    "shippingLabel": "Shipping",
+    "shippingNotAvailable": "Not available for this area",
+    "subtotalLabel": "Subtotal",
+    "discountAmountLabel": "Discount",
+    "orderConfirmedTitle": "Order Confirmed!",
+    "orderConfirmedMessage": "We'll contact you soon to confirm your delivery time",
+    "continueShopping": "Continue Shopping",
+    "loginToCheckout": "Sign in",
+    "loginToCheckoutMessage": "Sign in to track your orders and enjoy a better shopping experience",
+    "addedToCart": "Added to cart successfully",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithFacebook": "Sign in with Facebook",
+    "grandTotalLabel": "Grand Total",
+    "quantityLabel": "Qty: {count}",
+    "@quantityLabel": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "moreProductsLabel": "+{count} more items",
+    "@moreProductsLabel": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }

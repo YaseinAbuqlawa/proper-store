@@ -22,14 +22,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(percentage) => "خصم ${percentage}%";
 
+  static String m1(count) => "+${count} منتجات أخرى";
+
+  static String m2(count) => "الكمية: ${count}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "addAddressTitle": MessageLookupByLibrary.simpleMessage("إضافة عنوان"),
     "addFirstAddress": MessageLookupByLibrary.simpleMessage(
       "أضف عنوانك الأول للبدء",
     ),
+    "addNewAddress": MessageLookupByLibrary.simpleMessage("إضافة عنوان جديد"),
     "addToCartButton": MessageLookupByLibrary.simpleMessage("إضافة للسلة"),
     "addToCartText": MessageLookupByLibrary.simpleMessage("أضف للسلة"),
+    "addedToCart": MessageLookupByLibrary.simpleMessage(
+      "تمت الإضافة للسلة بنجاح",
+    ),
     "addressDeleted": MessageLookupByLibrary.simpleMessage("تم حذف العنوان"),
     "addressLabelHint": MessageLookupByLibrary.simpleMessage(
       "مثال: المنزل، العمل",
@@ -46,10 +54,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "cartTitle": MessageLookupByLibrary.simpleMessage("السلة"),
     "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("تغيير الرقم"),
+    "checkoutTitle": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("المدينة"),
     "completeCheckout": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage("تاكيد الرقم"),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
+    "continueShopping": MessageLookupByLibrary.simpleMessage("متابعة التسوق"),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" ج.م"),
     "defaultBadge": MessageLookupByLibrary.simpleMessage("افتراضي"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
@@ -59,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "descriptionAndDetails": MessageLookupByLibrary.simpleMessage(
       "الوصف والتفاصيل",
     ),
+    "discountAmountLabel": MessageLookupByLibrary.simpleMessage("الخصم"),
     "discountLabel": m0,
     "discoverLatestFashion": MessageLookupByLibrary.simpleMessage(
       "اكتشفي أحدث صيحات الموضة من الأحذية والحقائب في مصر بجودة عالمية.",
@@ -125,21 +136,30 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "floorLabel": MessageLookupByLibrary.simpleMessage("الدور"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
+    "grandTotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي النهائي"),
     "highQuality": MessageLookupByLibrary.simpleMessage("جودة عالية"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
     "loginSuccess": MessageLookupByLibrary.simpleMessage(
       "تم تسجيل الدخول بنجاح",
     ),
+    "loginToCheckout": MessageLookupByLibrary.simpleMessage("سجلي دخولك"),
+    "loginToCheckoutMessage": MessageLookupByLibrary.simpleMessage(
+      "سجلي دخولك لمتابعة طلباتك والاستمتاع بأفضل تجربة تسوق",
+    ),
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "تسوقي الان",
     ),
+    "moreProductsLabel": m1,
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
       "الاكثر مبيعاً",
     ),
     "myAddresses": MessageLookupByLibrary.simpleMessage("عناويني"),
     "nameMustBeMoreThan2Chars": MessageLookupByLibrary.simpleMessage(
       "الاسم يجب أن يكون أكثر من حرفين",
+    ),
+    "noAddressSelected": MessageLookupByLibrary.simpleMessage(
+      "يرجى اختيار عنوان للشحن",
     ),
     "noAddressesYet": MessageLookupByLibrary.simpleMessage(
       "لا توجد عناوين بعد",
@@ -151,6 +171,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "orSignInEasily": MessageLookupByLibrary.simpleMessage(
       "او سجلي الدخول بسهولة",
     ),
+    "orderConfirmedMessage": MessageLookupByLibrary.simpleMessage(
+      "سيتم التواصل معك قريباً لتأكيد موعد التوصيل",
+    ),
+    "orderConfirmedTitle": MessageLookupByLibrary.simpleMessage(
+      "تم تأكيد طلبك!",
+    ),
     "orderDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
     "orderNumberLabel": MessageLookupByLibrary.simpleMessage("رقم الطلب"),
     "orderStatusCancelled": MessageLookupByLibrary.simpleMessage("ملغي"),
@@ -161,6 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orderStepDelivery": MessageLookupByLibrary.simpleMessage("توصيل"),
     "orderStepPreparing": MessageLookupByLibrary.simpleMessage("تجهيز"),
     "orderStepShipping": MessageLookupByLibrary.simpleMessage("شحن"),
+    "orderSummaryTitle": MessageLookupByLibrary.simpleMessage("ملخص الطلب"),
     "orderTotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي"),
     "orderedOnLabel": MessageLookupByLibrary.simpleMessage("تم الطلب:"),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("طلباتي"),
@@ -172,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم ارسال رمز التحقق",
     ),
     "paymentCOD": MessageLookupByLibrary.simpleMessage("الدفع عند الاستلام"),
+    "paymentMethodTitle": MessageLookupByLibrary.simpleMessage("طريقة الدفع"),
     "phoneNumberLabel": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
       "رقم الهاتف يجب أن يتكون من 10 أرقام",
@@ -179,17 +207,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumberMustBe11Digits": MessageLookupByLibrary.simpleMessage(
       "رقم الهاتف يجب أن يتكون من 11 أرقام",
     ),
+    "placeOrderButton": MessageLookupByLibrary.simpleMessage("تأكيد الطلب"),
     "pricesSuitYou": MessageLookupByLibrary.simpleMessage("بأسعار تناسبك"),
     "productDetailsScreenTitle": MessageLookupByLibrary.simpleMessage(
       "تفاصيل المنتج",
     ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),
+    "quantityLabel": m2,
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("سياسة الاسترجاع"),
     "saveAddress": MessageLookupByLibrary.simpleMessage("حفظ العنوان"),
     "selectedColor": MessageLookupByLibrary.simpleMessage("اللون المختار:"),
     "setAsDefault": MessageLookupByLibrary.simpleMessage(
       "تعيين كعنوان افتراضي",
+    ),
+    "shippingAddressTitle": MessageLookupByLibrary.simpleMessage("عنوان الشحن"),
+    "shippingFree": MessageLookupByLibrary.simpleMessage("مجاني"),
+    "shippingLabel": MessageLookupByLibrary.simpleMessage("الشحن"),
+    "shippingNotAvailable": MessageLookupByLibrary.simpleMessage(
+      "غير متاح لهذه المنطقة",
     ),
     "shopAsGuest": MessageLookupByLibrary.simpleMessage("التسوق كزائر"),
     "showAllText": MessageLookupByLibrary.simpleMessage("عرض الكل"),
@@ -200,9 +236,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "signInToFollowLatestFashion": MessageLookupByLibrary.simpleMessage(
       "سجلي الدخول لمتابعة أحدث صيحات الموضة",
     ),
+    "signInWithFacebook": MessageLookupByLibrary.simpleMessage(
+      "تسجيل الدخول بفيسبوك",
+    ),
+    "signInWithGoogle": MessageLookupByLibrary.simpleMessage(
+      "تسجيل الدخول بجوجل",
+    ),
     "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("منتجات مشابهة"),
     "streetLabel": MessageLookupByLibrary.simpleMessage("الشارع"),
+    "subtotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي قبل الخصم"),
     "successTitle": MessageLookupByLibrary.simpleMessage("نجاح"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("التحقق من الرمز"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("مرحباً بكِ"),
