@@ -10,7 +10,8 @@ enum AppRoutes {
   addresses('/addresses'),
   addAddress('/addAddress'),
   checkout('/checkout'),
-  orderConfirmation('/orderConfirmation');
+  orderConfirmation('/orderConfirmation'),
+  orderDetails('/orderDetails');
 
   final String path;
   const AppRoutes(this.path);

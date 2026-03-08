@@ -14,6 +14,8 @@ import 'package:proper_store/features/checkout/presentation/screens/checkout_scr
 import 'package:proper_store/features/checkout/presentation/screens/order_confirmation_screen.dart';
 import 'package:proper_store/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:proper_store/features/home/presentation/screens/home_screen.dart';
+import 'package:proper_store/features/orders/data/models/order_model.dart';
+import 'package:proper_store/features/orders/presentation/screens/order_details_screen.dart';
 import 'package:proper_store/features/orders/presentation/screens/orders_screen.dart';
 import 'package:proper_store/features/product_details/presentation/screens/product_details_screen.dart';
 import 'package:proper_store/features/addresses/presentation/screens/add_address_screen.dart';
@@ -117,6 +119,13 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final orderId = state.extra is String ? state.extra as String : '';
         return OrderConfirmationScreen(orderId: orderId);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.orderDetails.path,
+      builder: (context, state) {
+        final order = state.extra as OrderModel;
+        return OrderDetailsScreen(order: order);
       },
     ),
     GoRoute(

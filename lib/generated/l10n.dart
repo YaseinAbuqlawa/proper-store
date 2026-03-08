@@ -904,6 +904,26 @@ class S {
     );
   }
 
+  /// `تفاصيل الطلب`
+  String get orderDetailsTitle {
+    return Intl.message(
+      'تفاصيل الطلب',
+      name: 'orderDetailsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حالة الطلب`
+  String get orderStatusTitle {
+    return Intl.message(
+      'حالة الطلب',
+      name: 'orderStatusTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `تجهيز`
   String get orderStepPreparing {
     return Intl.message(

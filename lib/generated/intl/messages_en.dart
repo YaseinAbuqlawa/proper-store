@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(percentage) => "Discount ${percentage}%";
+  static String m0(Object percentage) => "Discount ${percentage}%";
 
   static String m1(count) => "+${count} more items";
 
@@ -182,12 +182,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Order Confirmed!",
     ),
     "orderDetails": MessageLookupByLibrary.simpleMessage("View details"),
+    "orderDetailsTitle": MessageLookupByLibrary.simpleMessage("Order Details"),
     "orderNumberLabel": MessageLookupByLibrary.simpleMessage("Order number"),
     "orderStatusCancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
     "orderStatusConfirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
     "orderStatusDelivered": MessageLookupByLibrary.simpleMessage("Delivered"),
     "orderStatusPending": MessageLookupByLibrary.simpleMessage("Pending"),
     "orderStatusShipped": MessageLookupByLibrary.simpleMessage("Shipped"),
+    "orderStatusTitle": MessageLookupByLibrary.simpleMessage("Order Status"),
     "orderStepDelivery": MessageLookupByLibrary.simpleMessage("Delivery"),
     "orderStepPreparing": MessageLookupByLibrary.simpleMessage("Preparing"),
     "orderStepShipping": MessageLookupByLibrary.simpleMessage("Shipping"),

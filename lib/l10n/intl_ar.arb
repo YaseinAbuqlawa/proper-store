@@ -104,6 +104,8 @@
     "paymentCOD": "الدفع عند الاستلام",
     "orderNumberLabel": "رقم الطلب",
     "orderDetails": "عرض التفاصيل",
+    "orderDetailsTitle": "تفاصيل الطلب",
+    "orderStatusTitle": "حالة الطلب",
     "orderStepPreparing": "تجهيز",
     "orderStepShipping": "شحن",
     "orderStepDelivery": "توصيل",

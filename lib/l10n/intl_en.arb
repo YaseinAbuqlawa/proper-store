@@ -104,6 +104,8 @@
     "paymentCOD": "Cash on delivery",
     "orderNumberLabel": "Order number",
     "orderDetails": "View details",
+    "orderDetailsTitle": "Order Details",
+    "orderStatusTitle": "Order Status",
     "orderStepPreparing": "Preparing",
     "orderStepShipping": "Shipping",
     "orderStepDelivery": "Delivery",
