@@ -794,6 +794,16 @@ class S {
     return Intl.message('إعادة المحاولة', name: 'retry', desc: '', args: []);
   }
 
+  /// `لا توجد منتجات`
+  String get noProductsYet {
+    return Intl.message(
+      'لا توجد منتجات',
+      name: 'noProductsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `لا توجد طلبات بعد`
   String get noOrdersYet {
     return Intl.message(

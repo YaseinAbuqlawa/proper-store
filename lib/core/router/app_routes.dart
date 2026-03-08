@@ -11,7 +11,8 @@ enum AppRoutes {
   addAddress('/addAddress'),
   checkout('/checkout'),
   orderConfirmation('/orderConfirmation'),
-  orderDetails('/orderDetails');
+  orderDetails('/orderDetails'),
+  products('/products');
 
   final String path;
   const AppRoutes(this.path);

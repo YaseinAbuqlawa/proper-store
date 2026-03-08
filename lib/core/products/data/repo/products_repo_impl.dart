@@ -35,4 +35,17 @@ class ProductsRepoImpl implements ProductsRepo {
       return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
+
+  @override
+  Future<Either<ServerFailure, List<ProductModel>>> getProductsByCategory(
+    String category,
+  ) async {
+    try {
+      return Right(await remoteDataSource.getProductsByCategory(category));
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(code: e.code));
+    } catch (e) {
+      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
+    }
+  }
 }

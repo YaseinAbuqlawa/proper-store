@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/base_screen/screen/base_screen.dart';
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/router/app_routes.dart';
+import 'package:proper_store/features/addresses/presentation/screens/add_address_screen.dart';
+import 'package:proper_store/features/addresses/presentation/screens/addresses_screen.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/welcome_screen.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/cart/presentation/screens/cart_screen.dart';
 import 'package:proper_store/features/categories/presentation/screens/categories_screen.dart';
-import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:proper_store/features/checkout/presentation/screens/checkout_screen.dart';
 import 'package:proper_store/features/checkout/presentation/screens/order_confirmation_screen.dart';
@@ -18,8 +20,9 @@ import 'package:proper_store/features/orders/data/models/order_model.dart';
 import 'package:proper_store/features/orders/presentation/screens/order_details_screen.dart';
 import 'package:proper_store/features/orders/presentation/screens/orders_screen.dart';
 import 'package:proper_store/features/product_details/presentation/screens/product_details_screen.dart';
-import 'package:proper_store/features/addresses/presentation/screens/add_address_screen.dart';
-import 'package:proper_store/features/addresses/presentation/screens/addresses_screen.dart';
+import 'package:proper_store/features/products/presentation/cubit/products_screen_cubit.dart';
+import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
+import 'package:proper_store/features/products/presentation/screens/products_screen.dart';
 import 'package:proper_store/features/profile/presentation/screens/profile_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigationKey = GlobalKey<NavigatorState>();
@@ -82,17 +85,13 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.addresses.path,
-      pageBuilder: (context, state) => _buildTransitionPage(
-        state: state,
-        child: const AddressesScreen(),
-      ),
+      pageBuilder: (context, state) =>
+          _buildTransitionPage(state: state, child: const AddressesScreen()),
     ),
     GoRoute(
       path: AppRoutes.addAddress.path,
-      pageBuilder: (context, state) => _buildTransitionPage(
-        state: state,
-        child: const AddAddressScreen(),
-      ),
+      pageBuilder: (context, state) =>
+          _buildTransitionPage(state: state, child: const AddAddressScreen()),
     ),
     GoRoute(
       path: AppRoutes.checkout.path,
@@ -103,8 +102,7 @@ final GoRouter appRouter = GoRouter(
       },
       pageBuilder: (context, state) {
         final extra = state.extra;
-        final buyNowItems =
-            extra is List<CartItemModel> ? extra : null;
+        final buyNowItems = extra is List<CartItemModel> ? extra : null;
         return _buildTransitionPage(
           state: state,
           child: BlocProvider(
@@ -126,6 +124,16 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final order = state.extra as OrderModel;
         return OrderDetailsScreen(order: order);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.products.path,
+      builder: (context, state) {
+        final args = state.extra as ProductsScreenArgs;
+        return BlocProvider(
+          create: (_) => sl<ProductsScreenCubit>()..loadProducts(args.filter),
+          child: ProductsScreen(title: args.title),
+        );
       },
     ),
     GoRoute(

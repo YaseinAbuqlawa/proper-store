@@ -25,6 +25,8 @@ import 'package:proper_store/core/products/domain/use_cases/get_all_products_use
     as _i714;
 import 'package:proper_store/core/products/domain/use_cases/get_product_with_id_use_case.dart'
     as _i1033;
+import 'package:proper_store/core/products/domain/use_cases/get_products_by_category_use_case.dart'
+    as _i869;
 import 'package:proper_store/core/services/auth_orchestration_service.dart'
     as _i47;
 import 'package:proper_store/features/addresses/data/data_sources/addresses_remote_data_source.dart'
@@ -119,6 +121,8 @@ import 'package:proper_store/features/product_details/domain/use_cases/get_relat
     as _i66;
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart'
     as _i846;
+import 'package:proper_store/features/products/presentation/cubit/products_screen_cubit.dart'
+    as _i397;
 import 'package:proper_store/features/profile/data/data_source/profile_remote_data_source.dart'
     as _i360;
 import 'package:proper_store/features/profile/data/repo/profile_repo_impl.dart'
@@ -208,11 +212,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.GetProductWithIdUseCase>(
       () => _i1033.GetProductWithIdUseCase(repo: gh<_i1061.ProductsRepo>()),
     );
+    gh.lazySingleton<_i869.GetProductsByCategoryUseCase>(
+      () => _i869.GetProductsByCategoryUseCase(repo: gh<_i1061.ProductsRepo>()),
+    );
     gh.lazySingleton<_i426.AuthRemoteDataSource>(
       () => _i426.AuthRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
         auth: gh<_i59.FirebaseAuth>(),
         functions: gh<_i809.FirebaseFunctions>(),
+      ),
+    );
+    gh.factory<_i397.ProductsScreenCubit>(
+      () => _i397.ProductsScreenCubit(
+        getAllProductsUseCase: gh<_i714.GetAllProductsUseCase>(),
+        getProductsByCategoryUseCase: gh<_i869.GetProductsByCategoryUseCase>(),
       ),
     );
     gh.lazySingleton<_i596.GetCustomerDataUseCase>(

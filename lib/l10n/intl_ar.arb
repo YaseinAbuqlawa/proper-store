@@ -93,6 +93,7 @@
     "delete": "حذف",
     "phoneNumberMustBe11Digits": "رقم الهاتف يجب أن يتكون من 11 أرقام",
     "retry": "إعادة المحاولة",
+    "noProductsYet": "لا توجد منتجات",
     "noOrdersYet": "لا توجد طلبات بعد",
     "noOrdersYetMessage": "طلباتك ستظهر هنا بعد أول عملية شراء",
     "orderStatusPending": "قيد الانتظار",

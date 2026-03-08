@@ -93,6 +93,7 @@
     "delete": "Delete",
     "phoneNumberMustBe11Digits": "Phone number must be 11 digits",
     "retry": "Retry",
+    "noProductsYet": "No products found",
     "noOrdersYet": "No orders yet",
     "noOrdersYetMessage": "Your orders will appear here after your first purchase",
     "orderStatusPending": "Pending",

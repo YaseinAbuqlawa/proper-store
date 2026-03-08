@@ -1,10 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
+import 'package:proper_store/core/products/domain/entities/product_filter.dart';
+import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/home/data/models/category_model.dart';
 import 'package:proper_store/features/home/presentation/cubit/home_cubit.dart';
+import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeCategoriesListView extends StatelessWidget {
@@ -47,7 +51,17 @@ class HomeCategoriesListView extends StatelessWidget {
                 final CategoryModel categoryModel = displayList[index];
                 return _CategoryButton(
                   categoryModel: categoryModel,
-                  onTap: () {},
+                  onTap: data.isLoading
+                      ? null
+                      : () => context.push(
+                            AppRoutes.products.path,
+                            extra: ProductsScreenArgs(
+                              title: categoryModel.name,
+                              filter: ProductFilterByCategory(
+                                categoryModel.name,
+                              ),
+                            ),
+                          ),
                 );
               },
             ),

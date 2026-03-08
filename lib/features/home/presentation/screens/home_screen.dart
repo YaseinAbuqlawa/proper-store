@@ -10,9 +10,13 @@ import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/features/home/presentation/cubit/home_cubit.dart';
+import 'package:proper_store/core/products/domain/entities/product_filter.dart';
 import 'package:proper_store/features/home/presentation/widgets/home_categories_list_view.dart';
+import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
 import 'package:proper_store/features/home/presentation/widgets/home_main_collection_banner.dart';
 import 'package:proper_store/generated/l10n.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proper_store/core/router/app_routes.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -110,10 +114,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: AppColors.whiteColor,
                           ),
                         ),
-                        Text(
-                          S.of(context).showAllText,
-                          style: AppTextStyles.navLabel.copyWith(
-                            color: AppColors.goldRoyal,
+                        GestureDetector(
+                          onTap: () => context.push(
+                            AppRoutes.products.path,
+                            extra: ProductsScreenArgs(
+                              title: S.of(context).mostSoldSectionTitle,
+                              filter: const ProductFilterAll(),
+                            ),
+                          ),
+                          child: Text(
+                            S.of(context).showAllText,
+                            style: AppTextStyles.navLabel.copyWith(
+                              color: AppColors.goldRoyal,
+                            ),
                           ),
                         ),
                       ],

@@ -20,6 +20,17 @@ class ProductsRemoteDataSource {
         .toList();
   }
 
+  Future<List<ProductModel>> getProductsByCategory(String category) async {
+    final productsDocuments = await firestore
+        .collection(AppConsts.productsCollection)
+        .where('category', isEqualTo: category)
+        .get();
+
+    return productsDocuments.docs
+        .map((product) => ProductModel.fromJson(product.data()))
+        .toList();
+  }
+
   Future<List<ProductModel>> getAllProducts() async {
     final productsDocuments = await firestore
         .collection(AppConsts.productsCollection)

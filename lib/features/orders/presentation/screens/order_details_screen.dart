@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/orders/data/models/order_model.dart';
 import 'package:proper_store/features/orders/presentation/widgets/order_status_widgets.dart';
 import 'package:proper_store/generated/l10n.dart';
@@ -107,7 +108,7 @@ class _SectionHeader extends StatelessWidget {
 // ── Single product row ────────────────────────────────────────────────────────
 
 class _ProductRow extends StatelessWidget {
-  final item;
+  final CartItemModel item;
   final S s;
 
   const _ProductRow({required this.item, required this.s});

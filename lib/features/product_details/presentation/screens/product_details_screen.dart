@@ -12,7 +12,9 @@ import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/core/products/presentation/widgets/add_to_favorite.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_price.dart';
+import 'package:proper_store/core/products/domain/entities/product_filter.dart';
 import 'package:proper_store/core/router/app_routes.dart';
+import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/core/widgets/shopping_bag_button.dart';
 import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
@@ -234,8 +236,15 @@ class ProductDetailsScreen extends StatelessWidget {
                                       style: AppTextStyles.sectionTitle,
                                     ),
                                     GestureDetector(
-                                      // TODO(Step 11b): navigate to ProductsScreen with byCategory filter
-                                      onTap: () {},
+                                      onTap: () => context.push(
+                                        AppRoutes.products.path,
+                                        extra: ProductsScreenArgs(
+                                          title: productDetails.category,
+                                          filter: ProductFilterByCategory(
+                                            productDetails.category,
+                                          ),
+                                        ),
+                                      ),
                                       child: Text(
                                         S.of(context).showAllText,
                                         style: AppTextStyles.navLabel.copyWith(
