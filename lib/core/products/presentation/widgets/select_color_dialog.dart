@@ -64,7 +64,7 @@ class SelectColorDialog extends StatelessWidget {
                           productDetails.copyWith(
                             selectedColor:
                                 productDetails.selectedColor ??
-                                productDetails.colors[0],
+                                productDetails.colors.firstOrNull,
                           ),
                         ),
                       );

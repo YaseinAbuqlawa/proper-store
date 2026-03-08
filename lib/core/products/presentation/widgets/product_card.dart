@@ -111,7 +111,7 @@ class ProductCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(
                                 AppSpacing.borderRadiusFull,
                               ),
-                              color: product.colors[0],
+                              color: product.colors[0].color,
                             ),
                             width: 20,
                             height: 20,
@@ -127,7 +127,7 @@ class ProductCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(
                                   AppSpacing.borderRadiusFull,
                                 ),
-                                color: product.colors[1],
+                                color: product.colors[1].color,
                               ),
                               width: 20,
                               height: 20,

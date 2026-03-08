@@ -10,12 +10,16 @@ _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
     _ProductModel(
       category: json['category'] as String,
       colors: (json['colors'] as List<dynamic>)
-          .map((e) => const ColorConverter().fromJson((e as num).toInt()))
+          .map(
+            (e) => const ColorOptionConverter().fromJson(
+              e as Map<String, dynamic>,
+            ),
+          )
           .toList(),
       selectedColor:
-          _$JsonConverterFromJson<int, Color>(
+          _$JsonConverterFromJson<Map<String, dynamic>, ColorOption>(
             json['selectedColor'],
-            const ColorConverter().fromJson,
+            const ColorOptionConverter().fromJson,
           ) ??
           null,
       description: json['description'] as String,
@@ -43,32 +47,33 @@ _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$ProductModelToJson(_ProductModel instance) =>
-    <String, dynamic>{
-      'category': instance.category,
-      'colors': instance.colors.map(const ColorConverter().toJson).toList(),
-      'selectedColor': _$JsonConverterToJson<int, Color>(
-        instance.selectedColor,
-        const ColorConverter().toJson,
-      ),
-      'description': instance.description,
-      'discountPercentage': instance.discountPercentage,
-      'discountValue': instance.discountValue,
-      'id': instance.id,
-      'imageUrls': instance.imageUrls,
-      'lastPurchaseDate': const TimestampConverter().toJson(
-        instance.lastPurchaseDate,
-      ),
-      'material': instance.material,
-      'name': instance.name,
-      'refundedQuantity': instance.refundedQuantity,
-      'section': instance.section,
-      'sellingPrice': instance.sellingPrice,
-      'sizes': instance.sizes,
-      'soldQuantity': instance.soldQuantity,
-      'stockQuantity': instance.stockQuantity,
-      'videoUrls': instance.videoUrls,
-    };
+Map<String, dynamic> _$ProductModelToJson(
+  _ProductModel instance,
+) => <String, dynamic>{
+  'category': instance.category,
+  'colors': instance.colors.map(const ColorOptionConverter().toJson).toList(),
+  'selectedColor': _$JsonConverterToJson<Map<String, dynamic>, ColorOption>(
+    instance.selectedColor,
+    const ColorOptionConverter().toJson,
+  ),
+  'description': instance.description,
+  'discountPercentage': instance.discountPercentage,
+  'discountValue': instance.discountValue,
+  'id': instance.id,
+  'imageUrls': instance.imageUrls,
+  'lastPurchaseDate': const TimestampConverter().toJson(
+    instance.lastPurchaseDate,
+  ),
+  'material': instance.material,
+  'name': instance.name,
+  'refundedQuantity': instance.refundedQuantity,
+  'section': instance.section,
+  'sellingPrice': instance.sellingPrice,
+  'sizes': instance.sizes,
+  'soldQuantity': instance.soldQuantity,
+  'stockQuantity': instance.stockQuantity,
+  'videoUrls': instance.videoUrls,
+};
 
 Value? _$JsonConverterFromJson<Json, Value>(
   Object? json,

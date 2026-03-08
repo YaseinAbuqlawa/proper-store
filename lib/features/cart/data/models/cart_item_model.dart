@@ -29,11 +29,12 @@ abstract class CartItemModel with _$CartItemModel {
     ProductModel product, {
     int quantity = 1,
   }) {
+    final colorOption = product.selectedColor!;
     return CartItemModel(
-      id: product.id + product.selectedColor!.toString(),
+      id: product.id + colorOption.color.toARGB32().toString(),
       productId: product.id,
       name: product.name,
-      selectedColor: product.selectedColor!,
+      selectedColor: colorOption.color,
       imageUrl: product.imageUrls[0],
       sellingPrice: product.sellingPrice,
       discountValue: product.discountValue,

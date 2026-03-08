@@ -7,6 +7,7 @@ import 'package:proper_store/core/design_system/typography/app_text_styles.dart'
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/helpers/app_snackbar.dart';
 import 'package:proper_store/core/helpers/auth_guard_dialog.dart';
+import 'package:proper_store/core/products/data/models/color_option.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/core/products/presentation/widgets/add_to_favorite.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
@@ -86,13 +87,18 @@ class ProductDetailsScreen extends StatelessWidget {
 
                           SliverToBoxAdapter(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Flexible(
                                         child: Column(
@@ -104,6 +110,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                               style: AppTextStyles
                                                   .productDetailsName,
                                             ),
+                                            const SizedBox(height: 4),
                                             Text(
                                               "${productDetails.section} - ${productDetails.category}",
                                               style:
@@ -121,9 +128,10 @@ class ProductDetailsScreen extends StatelessWidget {
                                                 product: productDetails,
                                               );
                                         },
-                                      ), // Ensure this widget exists
+                                      ),
                                     ],
                                   ),
+                                  const SizedBox(height: 8),
                                   ProductPrice(
                                     discountPercentage:
                                         productDetails.discountPercentage,
@@ -145,24 +153,53 @@ class ProductDetailsScreen extends StatelessWidget {
                           SliverToBoxAdapter(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
+                                horizontal: 16,
+                                vertical: 12,
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(S.of(context).selectedColor),
-                                  const AppSpacer(height: 5),
+                                  // "اللون المختار: [name]" row
+                                  BlocSelector<ProductDetailsCubit,
+                                      ProductDetailsState, String?>(
+                                    selector: (state) => state.maybeWhen(
+                                      orElse: () => null,
+                                      success: (p, _, _) =>
+                                          (p?.selectedColor ??
+                                                  p?.colors.firstOrNull)
+                                              ?.name,
+                                    ),
+                                    builder: (context, colorName) {
+                                      return Row(
+                                        children: [
+                                          Text(
+                                            S.of(context).selectedColor,
+                                            style: AppTextStyles.sectionTitle,
+                                          ),
+                                          if (colorName != null) ...[
+                                            const SizedBox(width: 8),
+                                            Text(
+                                              colorName,
+                                              style: AppTextStyles.bodyDescription
+                                                  .copyWith(
+                                                color: AppColors.goldRoyal,
+                                              ),
+                                            ),
+                                          ],
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                  const AppSpacer(height: 8),
                                   ColorsRow(
                                     productColors: productDetails.colors,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 8.0,
-                                    ),
-                                    child: Text(
-                                      S.of(context).descriptionAndDetails,
-                                    ),
+                                  const SizedBox(height: 16),
+                                  Text(
+                                    S.of(context).descriptionAndDetails,
+                                    style: AppTextStyles.sectionTitle,
                                   ),
+                                  const SizedBox(height: 8),
                                   Text(
                                     productDetails.description,
                                     style: AppTextStyles.bodyDescription,
@@ -184,22 +221,26 @@ class ProductDetailsScreen extends StatelessWidget {
 
                             SliverToBoxAdapter(
                               child: Padding(
-                                padding: EdgeInsets.only(right: 10, left: 10),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       S.of(context).similarProducts,
-                                      style: AppTextStyles.buttonText.copyWith(
-                                        color: AppColors.whiteColor,
-                                      ),
+                                      style: AppTextStyles.sectionTitle,
                                     ),
-
-                                    Text(
-                                      S.of(context).showAllText,
-                                      style: AppTextStyles.navLabel.copyWith(
-                                        color: AppColors.goldRoyal,
+                                    GestureDetector(
+                                      // TODO(Step 11b): navigate to ProductsScreen with byCategory filter
+                                      onTap: () {},
+                                      child: Text(
+                                        S.of(context).showAllText,
+                                        style: AppTextStyles.navLabel.copyWith(
+                                          color: AppColors.goldRoyal,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -254,9 +295,11 @@ class ProductDetailsScreen extends StatelessWidget {
   }
 
   CartItemModel? _buildCartItem(ProductModel product) {
-    final color = product.selectedColor ?? product.colors.firstOrNull;
-    if (color == null) return null;
-    return CartItemModel.fromProductModel(product.copyWith(selectedColor: color));
+    final colorOption = product.selectedColor ?? product.colors.firstOrNull;
+    if (colorOption == null) return null;
+    return CartItemModel.fromProductModel(
+      product.copyWith(selectedColor: colorOption),
+    );
   }
 
   void _addToCart(BuildContext context) {
@@ -289,11 +332,12 @@ class ProductDetailsScreen extends StatelessWidget {
 }
 
 class ColorsRow extends StatelessWidget {
-  final List<Color> productColors;
+  final List<ColorOption> productColors;
   const ColorsRow({super.key, required this.productColors});
+
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<ProductDetailsCubit, ProductDetailsState, Color?>(
+    return BlocSelector<ProductDetailsCubit, ProductDetailsState, ColorOption?>(
       selector: (state) {
         return state.maybeWhen(
           orElse: () => null,
@@ -306,30 +350,46 @@ class ColorsRow extends StatelessWidget {
           children: List.generate(productColors.length, (index) {
             selectedColor ??= productColors[0];
             final productColor = productColors[index];
-            return InkWell(
-              onTap: () {
-                context.read<ProductDetailsCubit>().selectColor(productColor);
-              },
-              overlayColor: WidgetStatePropertyAll(Colors.transparent),
-              child: AnimatedContainer(
-                duration: Duration(milliseconds: 250),
-                margin: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    if (productColor == selectedColor)
-                      const BoxShadow(
-                        color: AppColors.goldRoyal,
-                        blurRadius: 5,
-                      ),
-                  ],
-                  border: productColor == selectedColor
-                      ? Border.all(color: AppColors.goldRoyal)
+            final isSelected = productColor == selectedColor;
+            return Tooltip(
+              message: productColor.name,
+              child: InkWell(
+                onTap: () {
+                  context
+                      .read<ProductDetailsCubit>()
+                      .selectColor(productColor);
+                },
+                overlayColor:
+                    const WidgetStatePropertyAll(Colors.transparent),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  margin: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      if (isSelected)
+                        const BoxShadow(
+                          color: AppColors.goldRoyal,
+                          blurRadius: 5,
+                        ),
+                    ],
+                    border: isSelected
+                        ? Border.all(color: AppColors.goldRoyal)
+                        : null,
+                    borderRadius: BorderRadius.circular(50),
+                    color: productColor.color,
+                  ),
+                  width: 30,
+                  height: 30,
+                  child: isSelected
+                      ? Icon(
+                          Icons.check,
+                          size: 16,
+                          color: productColor.color.computeLuminance() > 0.5
+                              ? Colors.black
+                              : Colors.white,
+                        )
                       : null,
-                  borderRadius: BorderRadius.circular(50),
-                  color: productColor,
                 ),
-                width: 25,
-                height: 25,
               ),
             );
           }),

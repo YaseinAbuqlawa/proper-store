@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart' show Color;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:proper_store/core/helpers/json_convertors.dart';
+import 'package:proper_store/core/products/data/models/color_option.dart';
 
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
@@ -11,8 +12,8 @@ abstract class ProductModel with _$ProductModel {
 
   const factory ProductModel({
     required String category,
-    @ColorConverter() required List<Color> colors,
-    @ColorConverter() @Default(null) Color? selectedColor,
+    @ColorOptionConverter() required List<ColorOption> colors,
+    @ColorOptionConverter() @Default(null) ColorOption? selectedColor,
     required String description,
     required double discountPercentage,
     required double discountValue,
@@ -38,7 +39,7 @@ abstract class ProductModel with _$ProductModel {
 
   factory ProductModel.placeholder() => ProductModel(
     category: 'Category',
-    colors: const [Color(0xFFBDBDBD)],
+    colors: const [ColorOption(name: 'رمادي', color: Color(0xFFBDBDBD))],
     description: 'Product description placeholder text here',
     discountPercentage: 0,
     discountValue: 0,

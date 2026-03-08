@@ -113,10 +113,16 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    _ProfileButton(buttonName: s.ordersTitle, onPressed: () => context.go(AppRoutes.orders.path)),
+                    _ProfileButton(
+                      buttonName: s.ordersTitle,
+                      onPressed: () => context.go(AppRoutes.orders.path),
+                    ),
                     Divider(thickness: .05),
                     AppSpacer(height: 10),
-                    _ProfileButton(buttonName: s.myAddresses, onPressed: () => context.push(AppRoutes.addresses.path)),
+                    _ProfileButton(
+                      buttonName: s.myAddresses,
+                      onPressed: () => context.push(AppRoutes.addresses.path),
+                    ),
                     Divider(thickness: .05),
                     AppSpacer(height: 10),
 

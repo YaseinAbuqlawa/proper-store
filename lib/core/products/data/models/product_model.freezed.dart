@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductModel {
 
- String get category;@ColorConverter() List<Color> get colors;@ColorConverter() Color? get selectedColor; String get description; double get discountPercentage; double get discountValue; String get id;@JsonKey(includeToJson: false, includeFromJson: false) int get quantity; List<String> get imageUrls;@TimestampConverter() DateTime get lastPurchaseDate; String get material; String get name; int get refundedQuantity; String get section; double get sellingPrice; List<double> get sizes; int get soldQuantity; int get stockQuantity; List<String> get videoUrls;
+ String get category;@ColorOptionConverter() List<ColorOption> get colors;@ColorOptionConverter() ColorOption? get selectedColor; String get description; double get discountPercentage; double get discountValue; String get id;@JsonKey(includeToJson: false, includeFromJson: false) int get quantity; List<String> get imageUrls;@TimestampConverter() DateTime get lastPurchaseDate; String get material; String get name; int get refundedQuantity; String get section; double get sellingPrice; List<double> get sizes; int get soldQuantity; int get stockQuantity; List<String> get videoUrls;
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ProductModelCopyWith<$Res>  {
   factory $ProductModelCopyWith(ProductModel value, $Res Function(ProductModel) _then) = _$ProductModelCopyWithImpl;
 @useResult
 $Res call({
- String category,@ColorConverter() List<Color> colors,@ColorConverter() Color? selectedColor, String description, double discountPercentage, double discountValue, String id,@JsonKey(includeToJson: false, includeFromJson: false) int quantity, List<String> imageUrls,@TimestampConverter() DateTime lastPurchaseDate, String material, String name, int refundedQuantity, String section, double sellingPrice, List<double> sizes, int soldQuantity, int stockQuantity, List<String> videoUrls
+ String category,@ColorOptionConverter() List<ColorOption> colors,@ColorOptionConverter() ColorOption? selectedColor, String description, double discountPercentage, double discountValue, String id,@JsonKey(includeToJson: false, includeFromJson: false) int quantity, List<String> imageUrls,@TimestampConverter() DateTime lastPurchaseDate, String material, String name, int refundedQuantity, String section, double sellingPrice, List<double> sizes, int soldQuantity, int stockQuantity, List<String> videoUrls
 });
 
 
@@ -69,8 +69,8 @@ class _$ProductModelCopyWithImpl<$Res>
   return _then(_self.copyWith(
 category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,colors: null == colors ? _self.colors : colors // ignore: cast_nullable_to_non_nullable
-as List<Color>,selectedColor: freezed == selectedColor ? _self.selectedColor : selectedColor // ignore: cast_nullable_to_non_nullable
-as Color?,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as List<ColorOption>,selectedColor: freezed == selectedColor ? _self.selectedColor : selectedColor // ignore: cast_nullable_to_non_nullable
+as ColorOption?,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,discountPercentage: null == discountPercentage ? _self.discountPercentage : discountPercentage // ignore: cast_nullable_to_non_nullable
 as double,discountValue: null == discountValue ? _self.discountValue : discountValue // ignore: cast_nullable_to_non_nullable
 as double,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
@@ -171,7 +171,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String category, @ColorConverter()  List<Color> colors, @ColorConverter()  Color? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String category, @ColorOptionConverter()  List<ColorOption> colors, @ColorOptionConverter()  ColorOption? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
 return $default(_that.category,_that.colors,_that.selectedColor,_that.description,_that.discountPercentage,_that.discountValue,_that.id,_that.quantity,_that.imageUrls,_that.lastPurchaseDate,_that.material,_that.name,_that.refundedQuantity,_that.section,_that.sellingPrice,_that.sizes,_that.soldQuantity,_that.stockQuantity,_that.videoUrls);case _:
@@ -192,7 +192,7 @@ return $default(_that.category,_that.colors,_that.selectedColor,_that.descriptio
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String category, @ColorConverter()  List<Color> colors, @ColorConverter()  Color? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String category, @ColorOptionConverter()  List<ColorOption> colors, @ColorOptionConverter()  ColorOption? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel():
 return $default(_that.category,_that.colors,_that.selectedColor,_that.description,_that.discountPercentage,_that.discountValue,_that.id,_that.quantity,_that.imageUrls,_that.lastPurchaseDate,_that.material,_that.name,_that.refundedQuantity,_that.section,_that.sellingPrice,_that.sizes,_that.soldQuantity,_that.stockQuantity,_that.videoUrls);case _:
@@ -212,7 +212,7 @@ return $default(_that.category,_that.colors,_that.selectedColor,_that.descriptio
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String category, @ColorConverter()  List<Color> colors, @ColorConverter()  Color? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String category, @ColorOptionConverter()  List<ColorOption> colors, @ColorOptionConverter()  ColorOption? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)?  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
 return $default(_that.category,_that.colors,_that.selectedColor,_that.description,_that.discountPercentage,_that.discountValue,_that.id,_that.quantity,_that.imageUrls,_that.lastPurchaseDate,_that.material,_that.name,_that.refundedQuantity,_that.section,_that.sellingPrice,_that.sizes,_that.soldQuantity,_that.stockQuantity,_that.videoUrls);case _:
@@ -227,18 +227,18 @@ return $default(_that.category,_that.colors,_that.selectedColor,_that.descriptio
 @JsonSerializable()
 
 class _ProductModel extends ProductModel {
-  const _ProductModel({required this.category, @ColorConverter() required final  List<Color> colors, @ColorConverter() this.selectedColor = null, required this.description, required this.discountPercentage, required this.discountValue, required this.id, @JsonKey(includeToJson: false, includeFromJson: false) this.quantity = 0, required final  List<String> imageUrls, @TimestampConverter() required this.lastPurchaseDate, required this.material, required this.name, required this.refundedQuantity, required this.section, required this.sellingPrice, required final  List<double> sizes, required this.soldQuantity, required this.stockQuantity, required final  List<String> videoUrls}): _colors = colors,_imageUrls = imageUrls,_sizes = sizes,_videoUrls = videoUrls,super._();
+  const _ProductModel({required this.category, @ColorOptionConverter() required final  List<ColorOption> colors, @ColorOptionConverter() this.selectedColor = null, required this.description, required this.discountPercentage, required this.discountValue, required this.id, @JsonKey(includeToJson: false, includeFromJson: false) this.quantity = 0, required final  List<String> imageUrls, @TimestampConverter() required this.lastPurchaseDate, required this.material, required this.name, required this.refundedQuantity, required this.section, required this.sellingPrice, required final  List<double> sizes, required this.soldQuantity, required this.stockQuantity, required final  List<String> videoUrls}): _colors = colors,_imageUrls = imageUrls,_sizes = sizes,_videoUrls = videoUrls,super._();
   factory _ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 
 @override final  String category;
- final  List<Color> _colors;
-@override@ColorConverter() List<Color> get colors {
+ final  List<ColorOption> _colors;
+@override@ColorOptionConverter() List<ColorOption> get colors {
   if (_colors is EqualUnmodifiableListView) return _colors;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_colors);
 }
 
-@override@JsonKey()@ColorConverter() final  Color? selectedColor;
+@override@JsonKey()@ColorOptionConverter() final  ColorOption? selectedColor;
 @override final  String description;
 @override final  double discountPercentage;
 @override final  double discountValue;
@@ -307,7 +307,7 @@ abstract mixin class _$ProductModelCopyWith<$Res> implements $ProductModelCopyWi
   factory _$ProductModelCopyWith(_ProductModel value, $Res Function(_ProductModel) _then) = __$ProductModelCopyWithImpl;
 @override @useResult
 $Res call({
- String category,@ColorConverter() List<Color> colors,@ColorConverter() Color? selectedColor, String description, double discountPercentage, double discountValue, String id,@JsonKey(includeToJson: false, includeFromJson: false) int quantity, List<String> imageUrls,@TimestampConverter() DateTime lastPurchaseDate, String material, String name, int refundedQuantity, String section, double sellingPrice, List<double> sizes, int soldQuantity, int stockQuantity, List<String> videoUrls
+ String category,@ColorOptionConverter() List<ColorOption> colors,@ColorOptionConverter() ColorOption? selectedColor, String description, double discountPercentage, double discountValue, String id,@JsonKey(includeToJson: false, includeFromJson: false) int quantity, List<String> imageUrls,@TimestampConverter() DateTime lastPurchaseDate, String material, String name, int refundedQuantity, String section, double sellingPrice, List<double> sizes, int soldQuantity, int stockQuantity, List<String> videoUrls
 });
 
 
@@ -328,8 +328,8 @@ class __$ProductModelCopyWithImpl<$Res>
   return _then(_ProductModel(
 category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,colors: null == colors ? _self._colors : colors // ignore: cast_nullable_to_non_nullable
-as List<Color>,selectedColor: freezed == selectedColor ? _self.selectedColor : selectedColor // ignore: cast_nullable_to_non_nullable
-as Color?,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as List<ColorOption>,selectedColor: freezed == selectedColor ? _self.selectedColor : selectedColor // ignore: cast_nullable_to_non_nullable
+as ColorOption?,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,discountPercentage: null == discountPercentage ? _self.discountPercentage : discountPercentage // ignore: cast_nullable_to_non_nullable
 as double,discountValue: null == discountValue ? _self.discountValue : discountValue // ignore: cast_nullable_to_non_nullable
 as double,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable

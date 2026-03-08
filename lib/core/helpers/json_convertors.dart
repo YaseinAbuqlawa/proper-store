@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart' show Color;
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:proper_store/core/products/data/models/color_option.dart';
 
 class TimestampConverter implements JsonConverter<DateTime, dynamic> {
   const TimestampConverter();
@@ -28,4 +29,16 @@ class ColorConverter implements JsonConverter<Color, int> {
 
   @override
   int toJson(Color object) => object.value;
+}
+
+class ColorOptionConverter
+    implements JsonConverter<ColorOption, Map<String, dynamic>> {
+  const ColorOptionConverter();
+
+  @override
+  ColorOption fromJson(Map<String, dynamic> json) =>
+      ColorOption.fromJson(json);
+
+  @override
+  Map<String, dynamic> toJson(ColorOption option) => option.toJson();
 }
