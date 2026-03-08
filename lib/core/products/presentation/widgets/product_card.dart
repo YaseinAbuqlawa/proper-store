@@ -12,6 +12,7 @@ import 'package:proper_store/core/router/app_router.dart';
 import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/core/widgets/app_network_image.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
+import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:proper_store/generated/l10n.dart';
@@ -30,6 +31,13 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final deviceType = AppSizes.getDeviceType(screenWidth);
+
+    final EdgeInsets cardEdge = deviceType == DeviceType.smallPhone
+        ? const EdgeInsets.all(AppSpacing.extraSmall)
+        : AppSpacing.cardPadding;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return GestureDetector(
@@ -40,8 +48,8 @@ class ProductCard extends StatelessWidget {
             );
           },
           child: Container(
-            padding: AppSpacing.cardPadding,
-            margin: AppSpacing.cardPadding,
+            padding: cardEdge,
+            margin: cardEdge,
             decoration: BoxDecoration(
               color: AppColors.darkGray,
               borderRadius: BorderRadius.circular(
@@ -85,24 +93,24 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    AppSpacer(height: 10),
+                    const AppSpacer(height: 10),
                     Text(
                       product.name,
                       style: AppTextStyles.productName,
                       maxLines: 1,
                     ),
-                    AppSpacer(height: 10),
+                    const AppSpacer(height: 10),
                     ProductPrice(
                       originalPrice: product.sellingPrice,
                       offerPrice: product.offerPrice,
                       discountPercentage: product.discountPercentage,
                     ),
-                    AppSpacer(height: 10),
+                    const AppSpacer(height: 10),
                     if (product.colors.isNotEmpty && showAddToCart) ...[
                       Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.symmetric(horizontal: 3),
+                            margin: const EdgeInsets.symmetric(horizontal: 3),
                             decoration: BoxDecoration(
                               border: Border.all(
                                 width: .25,
@@ -118,7 +126,7 @@ class ProductCard extends StatelessWidget {
                           ),
                           if (product.colors.length > 2)
                             Container(
-                              margin: EdgeInsets.symmetric(horizontal: 3),
+                              margin: const EdgeInsets.symmetric(horizontal: 3),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   width: .25,
@@ -135,7 +143,7 @@ class ProductCard extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.add, size: 8),
+                                  const Icon(Icons.add, size: 8),
                                   Align(
                                     alignment: Alignment.topCenter,
                                     child: Text(
@@ -150,7 +158,7 @@ class ProductCard extends StatelessWidget {
                             ),
                         ],
                       ),
-                      AppSpacer(height: 10),
+                      const AppSpacer(height: 10),
                       AddToCart(product: product),
                     ],
                   ],
@@ -173,12 +181,10 @@ class AddToCart extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final DeviceType deviceType = AppSizes.getDeviceType(screenWidth);
 
-    return BlocBuilder<CartCubit, CartState>(
-      builder: (context, state) {
-        final cartProduct = state.products
-            .where((p) => p.productId == product.id)
-            .firstOrNull;
-
+    return BlocSelector<CartCubit, CartState, CartItemModel?>(
+      selector: (state) =>
+          state.products.where((p) => p.productId == product.id).firstOrNull,
+      builder: (context, cartProduct) {
         return ElevatedButton(
           onPressed: () {
             showDialog(
@@ -188,8 +194,8 @@ class AddToCart extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
             padding: deviceType == DeviceType.smallPhone
-                ? EdgeInsets.all(0)
-                : EdgeInsets.all(5),
+                ? EdgeInsets.zero
+                : const EdgeInsets.all(5),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -197,7 +203,7 @@ class AddToCart extends StatelessWidget {
               Stack(
                 alignment: Alignment.topCenter,
                 children: [
-                  Icon(Icons.shopping_cart),
+                  const Icon(Icons.shopping_cart),
                   if (cartProduct != null)
                     Container(
                       width: 10,
@@ -217,7 +223,7 @@ class AddToCart extends StatelessWidget {
                     ),
                 ],
               ),
-              AppSpacer(width: 10),
+              const AppSpacer(width: 10),
               Text(S.of(context).addToCartText),
             ],
           ),

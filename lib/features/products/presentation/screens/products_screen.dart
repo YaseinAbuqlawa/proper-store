@@ -27,10 +27,7 @@ class ProductsScreen extends StatelessWidget {
     };
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        actions: const [ShoppingBagButton()],
-      ),
+      appBar: AppBar(title: Text(title), actions: const [ShoppingBagButton()]),
       body: BlocBuilder<ProductsScreenCubit, ProductsScreenState>(
         builder: (context, state) {
           return state.when(
@@ -89,10 +86,8 @@ class ProductsScreen extends StatelessWidget {
           childAspectRatio: childAspectRatio,
         ),
         itemCount: products.length,
-        itemBuilder: (context, index) => ProductCard(
-          product: products[index],
-          enableHero: !isLoading,
-        ),
+        itemBuilder: (context, index) =>
+            ProductCard(product: products[index], enableHero: !isLoading),
       ),
     );
   }

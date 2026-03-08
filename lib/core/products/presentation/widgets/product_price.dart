@@ -29,19 +29,23 @@ class ProductPrice extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (haveOffer)
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (haveOffer)
+                Text(
+                  originalPriceFormatted + S.of(context).currencySymbol,
+                  style: AppTextStyles.priceOld,
+                  overflow: TextOverflow.ellipsis,
+                ),
               Text(
-                originalPriceFormatted + S.of(context).currencySymbol,
-                style: AppTextStyles.priceOld,
+                offerPriceFormatted + S.of(context).currencySymbol,
+                style: AppTextStyles.priceNow,
+                overflow: TextOverflow.ellipsis,
               ),
-            Text(
-              offerPriceFormatted + S.of(context).currencySymbol,
-              style: AppTextStyles.priceNow,
-            ),
-          ],
+            ],
+          ),
         ),
         if (discountPercentage != 0)
           Container(
