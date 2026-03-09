@@ -14,12 +14,13 @@ class ProductDetailsRemoteDataSource {
   }) async {
     final productsDocs = await firestore
         .collection(AppConsts.productsCollection)
-        .where("id", isNotEqualTo: currentProductId)
         .where("category", isEqualTo: productCategory)
+        .limit(10)
         .get();
 
     return productsDocs.docs
         .map((product) => ProductModel.fromJson(product.data()))
+        .where((p) => p.id != currentProductId)
         .toList();
   }
 }
