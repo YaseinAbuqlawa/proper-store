@@ -99,7 +99,7 @@ class _ContactTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.medium),
       child: Material(
-        color: AppColors.darkGray,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
         child: InkWell(
           onTap: onTap,

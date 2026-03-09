@@ -67,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Continue Shopping",
     ),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" EGP"),
+    "darkModeLabel": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "defaultBadge": MessageLookupByLibrary.simpleMessage("Default"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteAddressConfirm": MessageLookupByLibrary.simpleMessage(
@@ -80,6 +81,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "discoverLatestFashion": MessageLookupByLibrary.simpleMessage(
       "Discover the latest fashion trends in shoes and bags in Egypt with world-class quality.",
     ),
+    "emptyCartMessage": MessageLookupByLibrary.simpleMessage(
+      "Your cart is empty, add products you love!",
+    ),
+    "emptyCartShopNow": MessageLookupByLibrary.simpleMessage("Shop Now"),
+    "emptyFavoritesMessage": MessageLookupByLibrary.simpleMessage(
+      "Your favorites list is empty, save what you love!",
+    ),
+    "emptyFavoritesShopNow": MessageLookupByLibrary.simpleMessage("Shop Now"),
     "enterFullNameHint": MessageLookupByLibrary.simpleMessage(
       "Enter your full name",
     ),

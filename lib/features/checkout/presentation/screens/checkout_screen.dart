@@ -6,6 +6,7 @@ import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/helpers/app_snackbar.dart';
+import 'package:proper_store/core/widgets/section_title.dart';
 import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/addresses/data/models/address_model.dart';
 import 'package:proper_store/features/addresses/presentation/cubit/addresses_cubit.dart';
@@ -199,12 +200,12 @@ class _PaymentMethodSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(s.paymentMethodTitle, style: AppTextStyles.sectionTitle),
+        SectionTitle(title: s.paymentMethodTitle),
         AppSpacing.verticalSpaceSmall,
         Container(
           padding: const EdgeInsets.all(AppSpacing.medium),
           decoration: BoxDecoration(
-            color: AppColors.darkGray,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
             border: Border.all(
               color: AppColors.goldRoyal.withValues(alpha: 0.4),

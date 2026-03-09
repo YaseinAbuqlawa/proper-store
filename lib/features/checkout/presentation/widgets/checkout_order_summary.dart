@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
+import 'package:proper_store/core/widgets/section_title.dart';
 import 'package:proper_store/core/helpers/extensions.dart';
 import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
@@ -39,14 +40,15 @@ class CheckoutOrderSummary extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(s.orderSummaryTitle, style: AppTextStyles.sectionTitle),
+            SectionTitle(title: s.orderSummaryTitle),
             AppSpacing.verticalSpaceSmall,
             Container(
               decoration: BoxDecoration(
-                color: AppColors.darkGray,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(
                   AppSpacing.borderRadiusMedium,
                 ),
+                boxShadow: AppColors.cardShadow,
               ),
               padding: const EdgeInsets.all(AppSpacing.medium),
               child: Column(
@@ -136,7 +138,7 @@ class _ProductRow extends StatelessWidget {
               errorWidget: (_, _, _) => Container(
                 width: 44,
                 height: 44,
-                color: AppColors.blackCard,
+                color: Theme.of(context).cardColor,
                 child: const Icon(
                   Icons.image_not_supported_outlined,
                   size: 20,

@@ -57,7 +57,7 @@ class OrderConfirmationScreen extends StatelessWidget {
                     vertical: AppSpacing.small,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.darkGray,
+                    color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(
                       AppSpacing.borderRadiusMedium,
                     ),

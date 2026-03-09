@@ -6,6 +6,7 @@ import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/di/injection_container.dart';
+import 'package:proper_store/core/widgets/section_title.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/core/products/domain/entities/product_filter.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocProvider.value(
       value: _homeCubit,
       child: Scaffold(
-        backgroundColor: AppColors.blackCard,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: _appBar(context),
         body: SafeArea(
           child: Skeleton.keep(
@@ -82,12 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          S.of(context).categories,
-                          style: AppTextStyles.sectionTitle.copyWith(
-                            color: AppColors.whiteColor,
-                          ),
-                        ),
+                        child: SectionTitle(title: S.of(context).categories),
                       ),
                       const AppSpacer(height: AppSpacing.small),
                       HomeCategoriesListView(),
@@ -106,12 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          S.of(context).mostSoldSectionTitle,
-                          style: AppTextStyles.sectionTitle.copyWith(
-                            color: AppColors.whiteColor,
-                          ),
-                        ),
+                        SectionTitle(title: S.of(context).mostSoldSectionTitle),
                         GestureDetector(
                           onTap: () => context.push(
                             AppRoutes.products.path,
@@ -214,12 +205,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar _appBar(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.darkGray,
+      backgroundColor: Theme.of(context).cardColor,
       title: Text(S.of(context).homeTitle),
-      shape: const BorderDirectional(
-        bottom: BorderSide(color: AppColors.darkGray),
-      ),
-      elevation: 0,
     );
   }
 }

@@ -112,8 +112,11 @@ class _OrdersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomInset = MediaQuery.of(context).padding.bottom +
+        kBottomNavigationBarHeight +
+        AppSpacing.medium;
     return ListView.separated(
-      padding: AppSpacing.screenPadding,
+      padding: AppSpacing.screenPadding.copyWith(bottom: bottomInset),
       itemCount: orders.length,
       separatorBuilder: (_, _) => AppSpacing.verticalSpaceSmall,
       itemBuilder: (_, index) => OrderCard(order: orders[index]),

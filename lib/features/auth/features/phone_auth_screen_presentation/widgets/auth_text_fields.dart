@@ -172,7 +172,7 @@ InputDecoration _authTextFieldDecoration({
   Widget? prefixIcon,
 }) {
   return InputDecoration(
-    fillColor: AppColors.darkGray.withValues(alpha: .75),
+    fillColor: AppColors.lightSurface,
     filled: true,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),

@@ -22,7 +22,10 @@ class BottomNavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = _isSelected ? AppColors.goldRoyal : AppColors.textSecondary;
+    final unselectedColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.textSecondary
+        : AppColors.textSubtle;
+    final color = _isSelected ? AppColors.goldRoyal : unselectedColor;
     return Material(
       color: Colors.transparent,
       child: InkWell(

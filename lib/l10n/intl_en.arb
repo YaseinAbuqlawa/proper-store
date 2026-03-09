@@ -140,6 +140,10 @@
             }
         }
     },
+    "emptyCartMessage": "Your cart is empty, add products you love!",
+    "emptyCartShopNow": "Shop Now",
+    "emptyFavoritesMessage": "Your favorites list is empty, save what you love!",
+    "emptyFavoritesShopNow": "Shop Now",
     "moreProductsLabel": "+{count} more items",
     "@moreProductsLabel": {
         "placeholders": {
@@ -147,5 +151,6 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "darkModeLabel": "Dark Mode"
 }

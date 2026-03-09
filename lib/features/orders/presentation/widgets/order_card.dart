@@ -22,9 +22,10 @@ class OrderCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.darkGray,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.07)),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.07)),
+        boxShadow: AppColors.cardShadow,
       ),
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -76,7 +77,7 @@ class OrderCard extends StatelessWidget {
                   errorBuilder: (_, _, _) => Container(
                     width: 82,
                     height: 82,
-                    color: AppColors.blackCard,
+                    color: Theme.of(context).cardColor,
                     child: const Icon(
                       Icons.image_not_supported_outlined,
                       color: AppColors.textSecondary,

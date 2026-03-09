@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
+import 'package:proper_store/core/design_system/theme/app_theme.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/helpers/app_dialog.dart';
@@ -65,7 +66,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     StoreLogo(),
-                    Container(
+                    Theme(
+                      data: AppTheme.dark(),
+                      child: Container(
                       padding: EdgeInsets.all(screenWidth * .04),
                       decoration: BoxDecoration(
                         gradient: AppColors.blackGradient,
@@ -74,7 +77,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         children: [
                           Text.rich(
                             TextSpan(
-                              style: AppTextStyles.heroHeadline,
+                              style: AppTextStyles.heroHeadline.copyWith(
+                                color: AppColors.whiteColor,
+                              ),
                               children: [
                                 TextSpan(text: "${s.highQuality}\n"),
                                 TextSpan(
@@ -89,7 +94,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           ),
                           Text(
                             s.discoverLatestFashion,
-                            style: AppTextStyles.bodyDescription,
+                            style: AppTextStyles.bodyDescription.copyWith(
+                              color: AppColors.whiteColor,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                           _SignInAnonymouslyButton(authCubit: authCubit),
@@ -100,6 +107,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ],
                       ),
                     ),
+                    ), // Theme
                   ],
                 ),
               ),

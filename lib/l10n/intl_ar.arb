@@ -140,6 +140,10 @@
             }
         }
     },
+    "emptyCartMessage": "سلة التسوق فارغة، أضف منتجات تعجبك!",
+    "emptyCartShopNow": "تسوقي الآن",
+    "emptyFavoritesMessage": "قائمة المفضلة فارغة، احفظي ما يعجبك!",
+    "emptyFavoritesShopNow": "تسوقي الآن",
     "moreProductsLabel": "+{count} منتجات أخرى",
     "@moreProductsLabel": {
         "placeholders": {
@@ -147,5 +151,6 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "darkModeLabel": "الوضع الداكن"
 }

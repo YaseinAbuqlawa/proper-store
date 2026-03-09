@@ -8,6 +8,7 @@ import 'package:proper_store/core/design_system/typography/app_text_styles.dart'
 import 'package:proper_store/core/helpers/app_dialog.dart';
 import 'package:proper_store/core/helpers/app_snackbar.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
+import 'package:proper_store/core/theme/theme_cubit.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/auth_cubit.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/widgets/sign_in_with_identity_section.dart';
 import 'package:proper_store/features/profile/presentation/cubit/profile_cubit.dart';
@@ -67,11 +68,13 @@ class ProfileScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(title: Text(s.profileTitle)),
         body: SafeArea(
-          child: Padding(
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Padding(
             padding: AppSpacing.screenPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 BlocBuilder<ProfileCubit, ProfileState>(
                   builder: (context, state) {
@@ -139,6 +142,9 @@ class ProfileScreen extends StatelessWidget {
                           context.push(AppRoutes.returnPolicy.path),
                     ),
                     Divider(thickness: .05),
+                    AppSpacer(height: 10),
+                    _ThemeToggleRow(),
+                    Divider(thickness: .05),
                   ],
                 ),
                 Padding(
@@ -147,6 +153,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
+          ),
           ),
         ),
       ),
@@ -173,6 +180,39 @@ class _CustomerInfo extends StatelessWidget {
         Text(name, style: AppTextStyles.customerName),
         Text(email, style: AppTextStyles.bodyDescription),
       ],
+    );
+  }
+}
+
+class _ThemeToggleRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final s = S.of(context);
+    return BlocBuilder<ThemeCubit, ThemeMode>(
+      builder: (context, themeMode) {
+        final isDark = themeMode == ThemeMode.dark;
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                s.darkModeLabel,
+                style: AppTextStyles.buttonText.copyWith(
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                ),
+              ),
+              Switch(
+                value: isDark,
+                activeThumbColor: AppColors.goldRoyal,
+                activeTrackColor: AppColors.goldMuted,
+                onChanged: (_) =>
+                    context.read<ThemeCubit>().toggleTheme(),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -249,7 +289,7 @@ class _ProfileButton extends StatelessWidget {
                 style: AppTextStyles.buttonText.copyWith(
                   color: anonymous
                       ? AppColors.textSecondary
-                      : AppColors.whiteColor,
+                      : Theme.of(context).textTheme.bodyMedium?.color,
                 ),
               ),
               Icon(

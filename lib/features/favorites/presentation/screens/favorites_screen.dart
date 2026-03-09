@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
+import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/helpers/app_snackbar.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
+import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:proper_store/generated/l10n.dart';
 
@@ -55,9 +58,29 @@ class FavoritesScreen extends StatelessWidget {
           );
         },
         builder: (context, state) {
+          final screenHeight = MediaQuery.sizeOf(context).height;
           if (state.favoriteProducts.isEmpty) {
+            final s = S.of(context);
             return Center(
-              child: Lottie.asset("assets/lottie/wishlist_empty.json"),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset(
+                    "assets/lottie/wishlist_empty.json",
+                    height: screenHeight * .5,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    s.emptyFavoritesMessage,
+                    style: AppTextStyles.bodyDescription,
+                  ),
+                  const SizedBox(height: 16),
+                  TextButton(
+                    onPressed: () => context.go(AppRoutes.home.path),
+                    child: Text(s.emptyFavoritesShopNow),
+                  ),
+                ],
+              ),
             );
           }
           return GridView.builder(

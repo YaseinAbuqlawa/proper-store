@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
+import 'package:proper_store/core/widgets/section_title.dart';
 import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/addresses/data/models/address_model.dart';
 import 'package:proper_store/features/addresses/presentation/cubit/addresses_cubit.dart';
@@ -26,7 +27,7 @@ class CheckoutAddressSelector extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(s.shippingAddressTitle, style: AppTextStyles.sectionTitle),
+        SectionTitle(title: s.shippingAddressTitle),
         AppSpacing.verticalSpaceSmall,
         BlocBuilder<AddressesCubit, AddressesState>(
           builder: (context, state) {
@@ -100,7 +101,7 @@ class _AddressOption extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: AppSpacing.small),
         padding: const EdgeInsets.all(AppSpacing.medium),
         decoration: BoxDecoration(
-          color: AppColors.darkGray,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
           border: Border.all(
             color:

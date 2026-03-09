@@ -143,16 +143,17 @@ class _StepCircle extends StatelessWidget {
     final Color iconColor;
     final Color borderColor;
 
+    final cardColor = Theme.of(context).cardColor;
     if (isActive) {
       bgColor = AppColors.goldRoyal;
       iconColor = AppColors.blackDeep;
       borderColor = AppColors.goldRoyal;
     } else if (isCompleted) {
-      bgColor = AppColors.blackCard;
+      bgColor = cardColor;
       iconColor = AppColors.goldMuted;
       borderColor = AppColors.goldMuted;
     } else {
-      bgColor = AppColors.blackCard;
+      bgColor = cardColor;
       iconColor = AppColors.textSecondary;
       borderColor = AppColors.textSecondary.withValues(alpha: 0.3);
     }

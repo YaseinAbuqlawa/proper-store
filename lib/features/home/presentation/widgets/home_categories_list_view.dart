@@ -54,14 +54,12 @@ class HomeCategoriesListView extends StatelessWidget {
                   onTap: data.isLoading
                       ? null
                       : () => context.push(
-                            AppRoutes.products.path,
-                            extra: ProductsScreenArgs(
-                              title: categoryModel.name,
-                              filter: ProductFilterByCategory(
-                                categoryModel.name,
-                              ),
-                            ),
+                          AppRoutes.products.path,
+                          extra: ProductsScreenArgs(
+                            title: categoryModel.name,
+                            filter: ProductFilterByCategory(categoryModel.name),
                           ),
+                        ),
                 );
               },
             ),
@@ -87,7 +85,7 @@ class _CategoryButton extends StatelessWidget {
         height: 100,
         margin: const EdgeInsets.only(left: 10),
         decoration: const BoxDecoration(
-          color: AppColors.darkGray,
+          color: AppColors.lightSurface,
           shape: BoxShape.circle,
         ),
         clipBehavior: Clip.antiAlias,

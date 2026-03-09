@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
+import 'package:proper_store/core/widgets/section_title.dart';
 import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/orders/data/models/order_model.dart';
 import 'package:proper_store/features/orders/presentation/widgets/order_status_widgets.dart';
@@ -101,7 +102,7 @@ class _SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: AppTextStyles.sectionTitle);
+    return SectionTitle(title: title);
   }
 }
 
@@ -130,7 +131,7 @@ class _ProductRow extends StatelessWidget {
               errorBuilder: (_, _, _) => Container(
                 width: 72,
                 height: 72,
-                color: AppColors.blackCard,
+                color: Theme.of(context).cardColor,
                 child: const Icon(
                   Icons.image_not_supported_outlined,
                   color: AppColors.textSecondary,
@@ -181,9 +182,9 @@ class _PriceBreakdown extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.darkGray,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.07)),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.07)),
       ),
       child: Column(
         children: [
@@ -279,9 +280,9 @@ class _AddressCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: AppColors.darkGray,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.07)),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.07)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,9 +312,9 @@ class _InfoCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-        color: AppColors.darkGray,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.07)),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.07)),
       ),
       child: Row(
         children: [

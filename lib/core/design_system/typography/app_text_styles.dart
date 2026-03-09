@@ -6,7 +6,6 @@ class AppTextStyles {
     fontFamily: 'Cairo',
     fontSize: 28,
     fontWeight: FontWeight.w900,
-    color: AppColors.whiteColor,
     height: 1.2,
   );
 
@@ -14,7 +13,6 @@ class AppTextStyles {
     fontFamily: 'Cairo',
     fontSize: 20,
     fontWeight: FontWeight.bold,
-    color: AppColors.goldRoyal,
     letterSpacing: 0.5,
   );
 
@@ -22,14 +20,12 @@ class AppTextStyles {
     fontFamily: 'Cairo',
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: AppColors.whiteColor,
   );
 
   static const TextStyle productDetailsName = TextStyle(
     fontFamily: 'Cairo',
     fontSize: 20,
     fontWeight: FontWeight.bold,
-    color: AppColors.whiteColor,
   );
 
   static const TextStyle priceNow = TextStyle(
@@ -43,7 +39,7 @@ class AppTextStyles {
     fontFamily: 'Cairo',
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: AppColors.textSecondary,
+    color: AppColors.textSubtle,
     decoration: TextDecoration.lineThrough,
   );
 
@@ -65,7 +61,7 @@ class AppTextStyles {
     fontFamily: 'Cairo',
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: AppColors.textSecondary,
+    color: AppColors.textSubtle,
     height: 1.6,
   );
 

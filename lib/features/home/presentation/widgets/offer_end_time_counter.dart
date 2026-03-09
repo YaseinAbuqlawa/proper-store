@@ -106,7 +106,13 @@ class _TimerColumn extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(number, style: AppTextStyles.sectionTitle.copyWith(height: 1)),
+          Text(
+            number,
+            style: AppTextStyles.sectionTitle.copyWith(
+              height: 1,
+              color: AppColors.goldRoyal,
+            ),
+          ),
           Text(
             label,
             style: AppTextStyles.bodyDescription.copyWith(

@@ -4,13 +4,13 @@ import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/helpers/egypt_governorates.dart';
 import 'package:proper_store/generated/l10n.dart';
 
-InputDecoration _addressInputDecoration(String label) {
+InputDecoration _addressInputDecoration(String label, Color fillColor) {
   const radius = BorderRadius.all(Radius.circular(AppSpacing.borderRadiusMedium));
   const border = OutlineInputBorder(borderRadius: radius, borderSide: BorderSide.none);
   return InputDecoration(
     labelText: label,
     filled: true,
-    fillColor: AppColors.darkGray,
+    fillColor: fillColor,
     border: border,
     enabledBorder: border,
     disabledBorder: border,
@@ -46,8 +46,8 @@ class GovernorateDropdown extends StatelessWidget {
     final s = S.of(context);
     return DropdownButtonFormField<String>(
       initialValue: value,
-      decoration: _addressInputDecoration(label),
-      dropdownColor: AppColors.darkGray,
+      decoration: _addressInputDecoration(label, Theme.of(context).cardColor),
+      dropdownColor: Theme.of(context).cardColor,
       items: egyptGovernorates.keys
           .map((gov) => DropdownMenuItem(value: gov, child: Text(gov)))
           .toList(),

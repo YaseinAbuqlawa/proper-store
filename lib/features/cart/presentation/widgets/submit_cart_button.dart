@@ -54,7 +54,7 @@ class SubmitCartButton extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   height: 20,
                   width: .5,
-                  color: AppColors.blackCard,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                 ),
                 const Icon(Icons.arrow_back, size: AppSizes.iconSizeMedium),
               ],

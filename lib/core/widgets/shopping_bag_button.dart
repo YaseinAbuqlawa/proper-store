@@ -38,7 +38,7 @@ class ShoppingBagButton extends StatelessWidget {
                   '$count',
                   textAlign: TextAlign.center,
                   style: AppTextStyles.badgeText.copyWith(
-                    color: AppColors.blackCard,
+                    color: AppColors.blackDeep,
                     fontSize: 10,
                   ),
                 ),

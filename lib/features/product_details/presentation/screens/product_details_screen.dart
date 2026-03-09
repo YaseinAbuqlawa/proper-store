@@ -16,6 +16,7 @@ import 'package:proper_store/core/products/domain/entities/product_filter.dart';
 import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
+import 'package:proper_store/core/widgets/section_title.dart';
 import 'package:proper_store/core/widgets/shopping_bag_button.dart';
 import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
@@ -197,9 +198,8 @@ class ProductDetailsScreen extends StatelessWidget {
                                     productColors: productDetails.colors,
                                   ),
                                   const SizedBox(height: 16),
-                                  Text(
-                                    S.of(context).descriptionAndDetails,
-                                    style: AppTextStyles.sectionTitle,
+                                  SectionTitle(
+                                    title: S.of(context).descriptionAndDetails,
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
@@ -231,9 +231,8 @@ class ProductDetailsScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      S.of(context).similarProducts,
-                                      style: AppTextStyles.sectionTitle,
+                                    SectionTitle(
+                                      title: S.of(context).similarProducts,
                                     ),
                                     GestureDetector(
                                       onTap: () => context.push(

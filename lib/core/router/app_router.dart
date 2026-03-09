@@ -32,6 +32,8 @@ final GlobalKey<NavigatorState> rootNavigationKey = GlobalKey<NavigatorState>();
 final GoRouter appRouter = GoRouter(
   navigatorKey: rootNavigationKey,
   redirect: (context, state) {
+    if (state.error != null) return AppRoutes.home.path;
+
     final isLoggedIn = sl<FirebaseAuth>().currentUser != null;
     final isLoggingIn = state.fullPath == AppRoutes.welcome.path;
 
@@ -123,6 +125,8 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.orderDetails.path,
+      redirect: (context, state) =>
+          state.extra is OrderModel ? null : AppRoutes.home.path,
       builder: (context, state) {
         final order = state.extra as OrderModel;
         return OrderDetailsScreen(order: order);
@@ -130,6 +134,8 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.products.path,
+      redirect: (context, state) =>
+          state.extra is ProductsScreenArgs ? null : AppRoutes.home.path,
       builder: (context, state) {
         final args = state.extra as ProductsScreenArgs;
         return BlocProvider(
@@ -162,6 +168,7 @@ final GoRouter appRouter = GoRouter(
     ),
   ],
 );
+
 
 CustomTransitionPage<void> _buildTransitionPage({
   required GoRouterState state,

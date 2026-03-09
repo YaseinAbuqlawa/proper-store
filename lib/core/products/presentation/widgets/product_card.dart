@@ -51,10 +51,11 @@ class ProductCard extends StatelessWidget {
             padding: cardEdge,
             margin: cardEdge,
             decoration: BoxDecoration(
-              color: AppColors.darkGray,
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(
                 AppSpacing.borderRadiusMedium,
               ),
+              boxShadow: AppColors.cardShadow,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

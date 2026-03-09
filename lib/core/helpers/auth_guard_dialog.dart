@@ -48,7 +48,7 @@ class _AuthGuardDialogContent extends StatelessWidget {
 
         return AlertDialog(
           insetPadding: EdgeInsets.all(10),
-          backgroundColor: AppColors.darkGray,
+          backgroundColor: Theme.of(context).cardColor,
           title: Text(s.loginToCheckout, style: AppTextStyles.productName),
           content: Column(
             mainAxisSize: MainAxisSize.min,

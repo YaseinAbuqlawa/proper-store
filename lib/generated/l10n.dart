@@ -1174,6 +1174,46 @@ class S {
     );
   }
 
+  /// `سلة التسوق فارغة، أضف منتجات تعجبك!`
+  String get emptyCartMessage {
+    return Intl.message(
+      'سلة التسوق فارغة، أضف منتجات تعجبك!',
+      name: 'emptyCartMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تسوقي الآن`
+  String get emptyCartShopNow {
+    return Intl.message(
+      'تسوقي الآن',
+      name: 'emptyCartShopNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `قائمة المفضلة فارغة، احفظي ما يعجبك!`
+  String get emptyFavoritesMessage {
+    return Intl.message(
+      'قائمة المفضلة فارغة، احفظي ما يعجبك!',
+      name: 'emptyFavoritesMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تسوقي الآن`
+  String get emptyFavoritesShopNow {
+    return Intl.message(
+      'تسوقي الآن',
+      name: 'emptyFavoritesShopNow',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `+{count} منتجات أخرى`
   String moreProductsLabel(int count) {
     return Intl.message(
@@ -1181,6 +1221,16 @@ class S {
       name: 'moreProductsLabel',
       desc: '',
       args: [count],
+    );
+  }
+
+  /// `الوضع الداكن`
+  String get darkModeLabel {
+    return Intl.message(
+      'الوضع الداكن',
+      name: 'darkModeLabel',
+      desc: '',
+      args: [],
     );
   }
 }

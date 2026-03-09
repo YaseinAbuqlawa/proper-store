@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
+import 'package:proper_store/core/widgets/section_title.dart';
 import 'package:proper_store/generated/l10n.dart';
 
 class ReturnPolicyScreen extends StatelessWidget {
@@ -78,13 +78,13 @@ class _PolicySection extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.medium),
         decoration: BoxDecoration(
-          color: AppColors.darkGray,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: AppTextStyles.sectionTitle),
+            SectionTitle(title: title),
             const SizedBox(height: AppSpacing.small),
             Text(
               body,

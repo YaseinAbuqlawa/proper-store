@@ -11,9 +11,22 @@ class AppColors {
   static const Color whiteColor = Color(0xFFF5F5F5);
   static const Color textSecondary = Color(0xFFA0A0A0);
 
+  // Light theme surfaces
+  static const Color lightBackground = Color(0xFFF8F7F4);
+  static const Color lightSurface = Color(0xFFFFFFFF);
+
+  // Light theme text
+  static const Color textPrimary = Color(0xFF1A1A1A);
+  static const Color textSubtle = Color(0xFF757575);
+
   static const Color errorRed = Color(0xFFCF6679);
   static const Color lightRed = Color.fromARGB(255, 255, 50, 88);
   static const Color successGreen = Color(0xFF4CAF50);
+
+  // Light theme shadow — subtle depth on white/light surfaces
+  static const List<BoxShadow> cardShadow = [
+    BoxShadow(color: Color(0x12000000), blurRadius: 8, offset: Offset(0, 2)),
+  ];
 
   static const Gradient goldGradient = LinearGradient(
     colors: [Color(0xFFD4AF37), Color(0xFFF5E0A3), Color(0xFFC5A028)],

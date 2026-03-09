@@ -22,7 +22,7 @@ class AddressCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
         side: BorderSide(color: AppColors.goldMuted),
       ),
-      color: AppColors.blackCard,
+      color: Theme.of(context).cardColor,
       child: Padding(
         padding: AppSpacing.cardPadding,
         child: Row(
@@ -67,7 +67,7 @@ class AddressCard extends StatelessWidget {
     showDialog<void>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        backgroundColor: AppColors.darkGray,
+        backgroundColor: Theme.of(context).cardColor,
         title: Text(s.delete, style: AppTextStyles.productName),
         content: Text(s.deleteAddressConfirm, style: AppTextStyles.bodyDescription),
         actions: [

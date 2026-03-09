@@ -26,10 +26,14 @@ class ProfileUserImage extends StatelessWidget {
                   _ImageFrame(
                     child: CachedNetworkImage(
                       imageUrl: photoUrl,
-                      errorWidget: (_, _, _) => const CircleAvatar(
+                      errorWidget: (_, _, _) => CircleAvatar(
                         radius: 45,
                         backgroundColor: Colors.transparent,
-                        child: Icon(Icons.person, size: 48),
+                        child: Icon(
+                          Icons.person,
+                          size: 48,
+                          color: Theme.of(context).cardColor,
+                        ),
                       ),
                       width: 90,
                       height: 90,
@@ -52,7 +56,7 @@ class ProfileUserImage extends StatelessWidget {
                       ),
                       icon: Icon(
                         Icons.edit,
-                        color: AppColors.blackCard,
+                        color: AppColors.blackDeep,
                         size: AppSizes.iconSizeSmall,
                       ),
                     ),
@@ -76,7 +80,7 @@ class _ImageFrame extends StatelessWidget {
       height: 90,
       decoration: BoxDecoration(
         border: Border.all(
-          color: anonymous ? AppColors.darkGray : AppColors.goldRoyal,
+          color: anonymous ? AppColors.textSubtle : AppColors.goldRoyal,
           width: 3,
         ),
         borderRadius: BorderRadius.circular(50),

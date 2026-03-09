@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "continueShopping": MessageLookupByLibrary.simpleMessage("متابعة التسوق"),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" ج.م"),
+    "darkModeLabel": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "defaultBadge": MessageLookupByLibrary.simpleMessage("افتراضي"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "deleteAddressConfirm": MessageLookupByLibrary.simpleMessage(
@@ -74,6 +75,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "discoverLatestFashion": MessageLookupByLibrary.simpleMessage(
       "اكتشفي أحدث صيحات الموضة من الأحذية والحقائب في مصر بجودة عالمية.",
     ),
+    "emptyCartMessage": MessageLookupByLibrary.simpleMessage(
+      "سلة التسوق فارغة، أضف منتجات تعجبك!",
+    ),
+    "emptyCartShopNow": MessageLookupByLibrary.simpleMessage("تسوقي الآن"),
+    "emptyFavoritesMessage": MessageLookupByLibrary.simpleMessage(
+      "قائمة المفضلة فارغة، احفظي ما يعجبك!",
+    ),
+    "emptyFavoritesShopNow": MessageLookupByLibrary.simpleMessage("تسوقي الآن"),
     "enterFullNameHint": MessageLookupByLibrary.simpleMessage(
       "ادخلي اسمك الكامل",
     ),

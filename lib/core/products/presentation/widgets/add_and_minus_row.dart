@@ -20,7 +20,9 @@ class AddAndMinusRow extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 3, horizontal: 4),
       decoration: BoxDecoration(
-        color: AppColors.blackDeep,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? AppColors.blackDeep
+            : AppColors.lightBackground,
         borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
       ),
       child: Row(
@@ -48,7 +50,7 @@ class AddAndMinusRow extends StatelessWidget {
                 productId: productId,
               );
             },
-            backgroundColor: AppColors.darkGray,
+            backgroundColor: Theme.of(context).cardColor,
             icon: Icons.remove,
           ),
         ],

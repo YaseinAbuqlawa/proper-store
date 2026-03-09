@@ -78,8 +78,8 @@ class _SignInWithIdentityButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.darkGray,
-        shadowColor: AppColors.darkGray,
+        backgroundColor: Theme.of(context).cardColor,
+        shadowColor: Theme.of(context).cardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
         ),
@@ -92,7 +92,7 @@ class _SignInWithIdentityButton extends StatelessWidget {
           Text(
             buttonName,
             style: AppTextStyles.buttonText.copyWith(
-              color: AppColors.whiteColor,
+              color: Theme.of(context).textTheme.bodyMedium?.color,
             ),
           ),
         ],

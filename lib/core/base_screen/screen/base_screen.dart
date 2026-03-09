@@ -4,7 +4,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/base_screen/widgets/bottom_nav_bar_cart_button.dart';
 import 'package:proper_store/core/base_screen/widgets/bottom_nav_bar_item.dart';
-import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/router/app_router.dart';
 import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
@@ -106,7 +105,7 @@ class _BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      color: AppColors.darkGray,
+      color: Theme.of(context).cardColor,
       shape: const CircularNotchedRectangle(),
       notchMargin: 8.0,
       child: SizedBox(

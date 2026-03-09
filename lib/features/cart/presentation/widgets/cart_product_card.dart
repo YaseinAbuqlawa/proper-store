@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/products/presentation/widgets/add_and_minus_row.dart';
@@ -19,7 +18,7 @@ class CartProductCard extends StatelessWidget {
       padding: AppSpacing.cardPadding,
       margin: AppSpacing.cardPadding,
       decoration: BoxDecoration(
-        color: AppColors.darkGray,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
       ),
       child: Row(

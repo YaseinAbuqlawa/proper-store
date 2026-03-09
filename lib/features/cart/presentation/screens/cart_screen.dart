@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
 import 'package:proper_store/core/helpers/extensions.dart';
+import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/cart/data/models/cart_item_model.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/cart/presentation/widgets/cart_product_card.dart';
@@ -28,12 +30,7 @@ class CartScreen extends StatelessWidget {
           appBar: AppBar(title: Text(S.of(context).cartTitle)),
           body: SafeArea(
             child: products.isEmpty
-                ? Center(
-                    child: Lottie.asset(
-                      "assets/lottie/empty.json",
-                      fit: BoxFit.fill,
-                    ),
-                  )
+                ? _EmptyCart()
                 : CustomScrollView(
                     slivers: [
                       SliverGrid.builder(
@@ -69,6 +66,29 @@ class CartScreen extends StatelessWidget {
   }
 }
 
+class _EmptyCart extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.sizeOf(context).height;
+    final s = S.of(context);
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset("assets/lottie/empty.json", height: screenHeight * .5),
+          const SizedBox(height: 16),
+          Text(s.emptyCartMessage, style: AppTextStyles.bodyDescription),
+          const SizedBox(height: 16),
+          TextButton(
+            onPressed: () => context.go(AppRoutes.home.path),
+            child: Text(s.emptyCartShopNow),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _TotalsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -83,7 +103,8 @@ class _TotalsCard extends StatelessWidget {
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
-            color: AppColors.darkGray,
+            color: Theme.of(context).cardColor,
+            boxShadow: AppColors.cardShadow,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
