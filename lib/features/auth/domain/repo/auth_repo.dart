@@ -18,6 +18,10 @@ abstract class AuthRepo {
 
   Future<Either<ServerFailure, UserCredential>> signInWithFacebook();
 
+  /// Returns the pending [UserCredential] from a previous [signInWithRedirect]
+  /// call, or null if no redirect was pending. Web-only.
+  Future<Either<ServerFailure, UserCredential?>> getRedirectResult();
+
   Future<Either<ServerFailure, void>> addNewCustomer({
     required CustomerModel customer,
   });

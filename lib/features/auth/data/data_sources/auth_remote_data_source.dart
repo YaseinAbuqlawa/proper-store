@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/helpers/app_consts.dart';
 import 'package:proper_store/features/profile/data/models/customer_model.dart';
@@ -16,6 +17,13 @@ class AuthRemoteDataSource {
     required this.functions,
   });
   ConfirmationResult? _confirmationResult;
+
+  /// Returns true when running on a mobile browser (Android/iOS).
+  /// Flutter for web sets [defaultTargetPlatform] based on the user-agent.
+  bool _isMobileWeb() =>
+      kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.android ||
+          defaultTargetPlatform == TargetPlatform.iOS);
 
   Future<void> signInAnonymously() async {
     await auth.signInAnonymously();
@@ -51,14 +59,29 @@ class AuthRemoteDataSource {
   }
 
   Future<UserCredential> signInWithFacebook() async {
-    FacebookAuthProvider facebookAuthProvider = FacebookAuthProvider();
+    final provider = FacebookAuthProvider();
+      provider.addScope('public_profile');
+      provider.addScope('email');
+      provider.setCustomParameters({'prompt': 'select_account'});
 
-    facebookAuthProvider.addScope('public_profile');
-    facebookAuthProvider.addScope('email');
+    if (_isMobileWeb()) {
+      // signInWithPopup opens an external browser on Android/iOS where
+      // window.opener is null — Firebase cannot send the result back.
+      // signInWithRedirect stores state in IndexedDB (survives the navigation)
+      // and is the correct approach for mobile web.
+      await auth.signInWithRedirect(provider);
+      // The browser navigates away before this line; throw satisfies return type.
+      throw StateError('unreachable: page navigated away for Facebook redirect');
+    }
 
-    facebookAuthProvider.setCustomParameters({'prompt': 'select_account'});
+    return await auth.signInWithPopup(provider);
+  }
 
-    return await auth.signInWithPopup(facebookAuthProvider);
+  /// Returns the pending redirect credential after a [signInWithRedirect] flow,
+  /// or null if no redirect was pending.
+  Future<UserCredential?> getRedirectResult() async {
+    final result = await auth.getRedirectResult();
+    return result.user != null ? result : null;
   }
 
   Future<void> addNewCustomer({required CustomerModel customer}) async {

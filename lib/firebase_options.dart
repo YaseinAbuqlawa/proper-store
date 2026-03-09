@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
     appId: '1:968085072868:web:c8bf02111e2bcf385cf5f1',
     messagingSenderId: '968085072868',
     projectId: 'proper-store-eg',
-    authDomain: 'proper-store-eg.firebaseapp.com',
+    authDomain: 'theproperstore.com',
     storageBucket: 'proper-store-eg.firebasestorage.app',
     measurementId: 'G-S4X9PGLK2Q',
   );

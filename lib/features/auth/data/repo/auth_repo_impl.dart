@@ -73,6 +73,17 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
+  Future<Either<ServerFailure, UserCredential?>> getRedirectResult() async {
+    try {
+      return Right(await remoteDataSource.getRedirectResult());
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(code: e.code));
+    } catch (e) {
+      return Left(ServerFailure(code: e.toString()));
+    }
+  }
+
+  @override
   Future<Either<ServerFailure, void>> addNewCustomer({
     required CustomerModel customer,
   }) async {

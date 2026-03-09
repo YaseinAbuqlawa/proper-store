@@ -28,7 +28,7 @@ Future<void> main() async {
 
   di.configureDependencies();
 
-  di.sl<AuthOrchestrationService>().init();
+  await di.sl<AuthOrchestrationService>().init();
 
   runApp(const ProperStoreApp());
 }

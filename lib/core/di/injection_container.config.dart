@@ -48,6 +48,8 @@ import 'package:proper_store/features/auth/data/data_sources/auth_remote_data_so
 import 'package:proper_store/features/auth/data/repo/auth_repo_impl.dart'
     as _i223;
 import 'package:proper_store/features/auth/domain/repo/auth_repo.dart' as _i396;
+import 'package:proper_store/features/auth/domain/use_cases/resume_facebook_redirect_use_case.dart'
+    as _i795;
 import 'package:proper_store/features/auth/domain/use_cases/sign_in_anonymously_use_case.dart'
     as _i932;
 import 'package:proper_store/features/auth/domain/use_cases/sign_in_with_facebook_use_case.dart'
@@ -292,6 +294,9 @@ extension GetItInjectableX on _i174.GetIt {
         auth: gh<_i59.FirebaseAuth>(),
       ),
     );
+    gh.lazySingleton<_i795.ResumeFacebookRedirectUseCase>(
+      () => _i795.ResumeFacebookRedirectUseCase(repo: gh<_i396.AuthRepo>()),
+    );
     gh.lazySingleton<_i932.SignInAnonymouslyUseCase>(
       () => _i932.SignInAnonymouslyUseCase(repo: gh<_i396.AuthRepo>()),
     );
@@ -365,19 +370,20 @@ extension GetItInjectableX on _i174.GetIt {
         auth: gh<_i59.FirebaseAuth>(),
       ),
     );
+    gh.lazySingleton<_i769.OrdersCubit>(
+      () => _i769.OrdersCubit(
+        getCustomerOrdersUseCase: gh<_i39.GetCustomerOrdersUseCase>(),
+        createOrderUseCase: gh<_i347.CreateOrderUseCase>(),
+        auth: gh<_i59.FirebaseAuth>(),
+      ),
+    );
     gh.lazySingleton<_i47.AuthOrchestrationService>(
       () => _i47.AuthOrchestrationService(
         auth: gh<_i59.FirebaseAuth>(),
         profileCubit: gh<_i443.ProfileCubit>(),
         favoritesCubit: gh<_i395.FavoritesCubit>(),
         cartCubit: gh<_i1006.CartCubit>(),
-      ),
-    );
-    gh.lazySingleton<_i769.OrdersCubit>(
-      () => _i769.OrdersCubit(
-        getCustomerOrdersUseCase: gh<_i39.GetCustomerOrdersUseCase>(),
-        createOrderUseCase: gh<_i347.CreateOrderUseCase>(),
-        auth: gh<_i59.FirebaseAuth>(),
+        resumeFacebookRedirect: gh<_i795.ResumeFacebookRedirectUseCase>(),
       ),
     );
     return this;
