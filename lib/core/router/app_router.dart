@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,14 +26,18 @@ import 'package:proper_store/features/products/presentation/models/products_scre
 import 'package:proper_store/features/products/presentation/screens/products_screen.dart';
 import 'package:proper_store/features/profile/presentation/screens/contact_us_screen.dart';
 import 'package:proper_store/features/profile/presentation/screens/profile_screen.dart';
+import 'package:proper_store/core/widgets/not_found_screen.dart';
 import 'package:proper_store/features/profile/presentation/screens/return_policy_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigationKey = GlobalKey<NavigatorState>();
 
 final GoRouter appRouter = GoRouter(
   navigatorKey: rootNavigationKey,
+  initialLocation: AppRoutes.home.path,
+  errorBuilder: (context, state) => const NotFoundScreen(),
+  observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
   redirect: (context, state) {
-    if (state.error != null) return AppRoutes.home.path;
+    if (state.error != null) return null;
 
     final isLoggedIn = sl<FirebaseAuth>().currentUser != null;
     final isLoggingIn = state.fullPath == AppRoutes.welcome.path;

@@ -1,5 +1,6 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:proper_store/core/design_system/theme/app_theme.dart';
 import 'package:proper_store/core/di/injection_container.dart' as di;
+import 'package:proper_store/core/helpers/app_error_handler.dart';
 import 'package:proper_store/core/router/app_router.dart';
 import 'package:proper_store/core/services/auth_orchestration_service.dart';
 import 'package:proper_store/core/theme/theme_cubit.dart';
@@ -29,13 +31,15 @@ Future<void> main() async {
 
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  registerGlobalErrorHandlers();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await FirebaseAppCheck.instance.activate(
-    providerWeb: ReCaptchaV3Provider(
-      '6LfMQoUsAAAAAEwfGD7XYPpUqYnUJnz69VfQqKjZ',
-    ),
-  );
+  if (!kDebugMode) {
+    await FirebaseAppCheck.instance.activate(
+      providerWeb: ReCaptchaV3Provider('6LfMQoUsAAAAAEwfGD7XYPpUqYnUJnz69VfQqKjZ'),
+    );
+  }
 
   di.configureDependencies();
 

@@ -1,12 +1,13 @@
 {
-    "name": "proper_store",
-    "short_name": "proper_store",
-    "start_url": ".",
+    "name": "The Proper Store",
+    "short_name": "Proper Store",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#1E1E1E",
     "theme_color": "#1E1E1E",
-    "description": "A new Flutter project.",
+    "description": "متجر The Proper Store — حقائب بجودة عالية واسعار لا تقاوم",
     "orientation": "portrait-primary",
+    "lang": "ar",
     "prefer_related_applications": false,
     "icons": [
         {
