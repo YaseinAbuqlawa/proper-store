@@ -31,7 +31,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       await Future.wait([
         precacheImage(AssetImage("assets/images/proper_logo.webp"), context),
         precacheImage(
-          AssetImage("assets/images/welcome_page_background.png"),
+          AssetImage("assets/images/welcome_page_background.webp"),
           context,
         ),
       ]);
@@ -55,7 +55,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
-                      "assets/images/welcome_page_background.png",
+                      "assets/images/welcome_page_background.webp",
                     ),
                     fit: BoxFit.cover,
                     alignment: Alignment.center,

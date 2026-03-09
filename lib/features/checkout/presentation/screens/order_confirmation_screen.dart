@@ -26,7 +26,15 @@ class OrderConfirmationScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(),
-                Lottie.asset("assets/lottie/done.json"),
+                RepaintBoundary(
+                  child: Lottie.asset(
+                    'assets/lottie/done.json',
+                    frameRate: FrameRate(30),
+                    repeat: false,
+                    width: 200,
+                    height: 200,
+                  ),
+                ),
                 AppSpacing.verticalSpaceLarge,
                 Text(
                   s.orderConfirmedTitle,

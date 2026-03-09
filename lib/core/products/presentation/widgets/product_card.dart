@@ -31,7 +31,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.sizeOf(context).width;
     final deviceType = AppSizes.getDeviceType(screenWidth);
 
     final EdgeInsets cardEdge = deviceType == DeviceType.smallPhone
@@ -178,7 +178,7 @@ class AddToCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.sizeOf(context).width;
     final DeviceType deviceType = AppSizes.getDeviceType(screenWidth);
 
     return BlocSelector<CartCubit, CartState, CartItemModel?>(

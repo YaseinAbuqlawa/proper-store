@@ -19,6 +19,9 @@ import 'package:proper_store/generated/l10n.dart';
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
+  PaintingBinding.instance.imageCache.maximumSizeBytes = 100 << 20; // 100 MB
+  PaintingBinding.instance.imageCache.maximumSize = 150;
+
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

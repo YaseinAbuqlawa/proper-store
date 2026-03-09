@@ -26,11 +26,10 @@ class ProfileUserImage extends StatelessWidget {
                   _ImageFrame(
                     child: CachedNetworkImage(
                       imageUrl: photoUrl,
-                      errorWidget: (context, url, error) => Image.asset(
-                        "assets/images/profile_image.png",
-                        width: 90,
-                        height: 90,
-                        fit: BoxFit.cover,
+                      errorWidget: (_, _, _) => const CircleAvatar(
+                        radius: 45,
+                        backgroundColor: Colors.transparent,
+                        child: Icon(Icons.person, size: 48),
                       ),
                       width: 90,
                       height: 90,

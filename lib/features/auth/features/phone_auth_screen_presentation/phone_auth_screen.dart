@@ -89,59 +89,48 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   key: formKey,
                   child: Container(
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/auth_background.png"),
-                        fit: BoxFit.cover,
-                        alignment: Alignment.center,
-                      ),
+                      gradient: AppColors.blackGradient,
                     ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: AppColors.blackGradient,
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image.asset("assets/images/proper_logo.png"),
-                            Text(
-                              s.welcomeMessage,
-                              style: AppTextStyles.heroHeadline.copyWith(
-                                fontSize: 35,
-                              ),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset("assets/images/proper_logo.png"),
+                          Text(
+                            s.welcomeMessage,
+                            style: AppTextStyles.heroHeadline.copyWith(
+                              fontSize: 35,
                             ),
-                            AppSpacer(height: 5),
-                            Text(
-                              s.signInToFollowLatestFashion,
-                              style: AppTextStyles.bodyDescription,
-                            ),
+                          ),
+                          AppSpacer(height: 5),
+                          Text(
+                            s.signInToFollowLatestFashion,
+                            style: AppTextStyles.bodyDescription,
+                          ),
 
-                            AuthTextField(
-                              title: s.fullNameLabel,
-                              hint: s.enterFullNameHint,
-                              icon: Icons.person,
-                              controller: nameController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return s.fieldRequired;
-                                }
-                                if (value.length < 3) {
-                                  return s.nameMustBeMoreThan2Chars;
-                                }
-                                return null;
-                              },
-                            ),
-                            PhoneAuthTextField(
-                              phoneController: phoneController,
-                            ),
-                            OtpAuthTextField(otpController: otpController),
-                            _AuthButton(
-                              formKey: formKey,
-                              phoneController: phoneController,
-                              otpController: otpController,
-                            ),
-                          ],
-                        ),
+                          AuthTextField(
+                            title: s.fullNameLabel,
+                            hint: s.enterFullNameHint,
+                            icon: Icons.person,
+                            controller: nameController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return s.fieldRequired;
+                              }
+                              if (value.length < 3) {
+                                return s.nameMustBeMoreThan2Chars;
+                              }
+                              return null;
+                            },
+                          ),
+                          PhoneAuthTextField(phoneController: phoneController),
+                          OtpAuthTextField(otpController: otpController),
+                          _AuthButton(
+                            formKey: formKey,
+                            phoneController: phoneController,
+                            otpController: otpController,
+                          ),
+                        ],
                       ),
                     ),
                   ),

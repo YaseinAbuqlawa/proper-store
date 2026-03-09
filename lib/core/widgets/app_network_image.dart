@@ -17,19 +17,23 @@ class AppNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(radius),
-      child: CachedNetworkImage(
-        width: width,
-        height: height,
-        imageUrl: imageUrl,
-        placeholder: (context, url) =>
-            Center(child: CircularProgressIndicator()),
-        errorWidget: (context, url, error) => Container(
-          color: Colors.grey[200],
-          child: Icon(Icons.broken_image, size: 40, color: Colors.grey),
+    return RepaintBoundary(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(radius),
+        child: CachedNetworkImage(
+          width: width,
+          height: height,
+          imageUrl: imageUrl,
+          memCacheWidth: 800,
+          memCacheHeight: 800,
+          placeholder: (context, url) =>
+              Center(child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) => Container(
+            color: Colors.grey[200],
+            child: Icon(Icons.broken_image, size: 40, color: Colors.grey),
+          ),
+          fit: BoxFit.cover,
         ),
-        fit: BoxFit.cover,
       ),
     );
   }

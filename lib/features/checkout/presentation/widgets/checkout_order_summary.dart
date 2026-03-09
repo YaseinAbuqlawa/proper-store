@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
@@ -26,13 +27,15 @@ class CheckoutOrderSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
-    return BlocBuilder<CartCubit, CartState>(
-      builder: (context, state) {
-        final products = buyNowItems ??
-            state.products.where((p) => p.quantity > 0).toList();
+    return BlocSelector<CartCubit, CartState, List<CartItemModel>>(
+      selector: (state) => state.products,
+      builder: (context, cartProducts) {
+        final products =
+            buyNowItems ?? cartProducts.where((p) => p.quantity > 0).toList();
         final netTotal = products.totalPriceAfterDiscount;
-        final grandTotal =
-            shippingCost != null ? netTotal + shippingCost! : null;
+        final grandTotal = shippingCost != null
+            ? netTotal + shippingCost!
+            : null;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,13 +83,13 @@ class CheckoutOrderSummary extends StatelessWidget {
                       value: shippingCost == null
                           ? s.shippingNotAvailable
                           : shippingCost == 0
-                              ? s.shippingFree
-                              : shippingCost!.toCurrency(),
+                          ? s.shippingFree
+                          : shippingCost!.toCurrency(),
                       valueColor: shippingCost == null
                           ? AppColors.errorRed
                           : shippingCost == 0
-                              ? AppColors.successGreen
-                              : null,
+                          ? AppColors.successGreen
+                          : null,
                     ),
                     if (grandTotal != null) ...[
                       const Divider(
@@ -123,12 +126,14 @@ class _ProductRow extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(AppSpacing.borderRadiusSmall),
-            child: Image.network(
-              product.imageUrl,
+            child: CachedNetworkImage(
+              imageUrl: product.imageUrl,
               width: 44,
               height: 44,
+              memCacheWidth: 88,
+              memCacheHeight: 88,
               fit: BoxFit.cover,
-              errorBuilder: (_, _, _) => Container(
+              errorWidget: (_, _, _) => Container(
                 width: 44,
                 height: 44,
                 color: AppColors.blackCard,

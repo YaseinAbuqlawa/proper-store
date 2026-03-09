@@ -12,7 +12,10 @@ class StoreLogo extends StatelessWidget {
           colors: [AppColors.blackDeep, Colors.transparent],
         ),
       ),
-      child: Image.asset("assets/images/proper_logo.png"),
+      child: Image.asset(
+        "assets/images/proper_logo.png",
+        height: MediaQuery.of(context).size.height * .4,
+      ),
     );
   }
 }

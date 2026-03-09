@@ -72,10 +72,12 @@ class CartProductCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ProductPrice(
-                      discountPercentage: 0,
-                      originalPrice: product.sellingPrice,
-                      offerPrice: product.offerPrice,
+                    Flexible(
+                      child: ProductPrice(
+                        discountPercentage: 0,
+                        originalPrice: product.sellingPrice,
+                        offerPrice: product.offerPrice,
+                      ),
                     ),
                     AddAndMinusRow(
                       productId: product.id,
