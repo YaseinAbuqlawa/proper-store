@@ -55,7 +55,7 @@ class AddressTextField extends StatelessWidget {
       validator: (value) {
         if (value == null || value.trim().isEmpty) return s.fieldRequired;
         if (isPhone && !RegExp(r'^01\d{9}$').hasMatch(value.trim())) {
-          return s.phoneNumberMustBe10Digits;
+          return s.phoneNumberMustBe11Digits;
         }
         return null;
       },

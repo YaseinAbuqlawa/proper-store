@@ -22,8 +22,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     required this.setCustomerFavoritesUseCase,
     required this.getFavoriteProductsUseCase,
     required FirebaseAuth auth,
-  })  : _auth = auth,
-        super(FavoritesState(favoriteProducts: []));
+  }) : _auth = auth,
+       super(FavoritesState(favoriteProducts: []));
 
   Future<void> toggleFavorite({required ProductModel product}) async {
     final user = _auth.currentUser;
@@ -49,7 +49,6 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     try {
       await setCustomerFavorites();
     } catch (e) {
-      debugPrint('FavoritesCubit.toggleFavorite failed: $e');
       emit(
         state.copyWith(
           favoriteProducts: oldFavorites,

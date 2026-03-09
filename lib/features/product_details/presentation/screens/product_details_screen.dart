@@ -264,7 +264,29 @@ class ProductDetailsScreen extends StatelessWidget {
                           ],
                         ],
                       ),
-                  orElse: () => Container(),
+                  failure: (code) => Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.error_outline, size: 64, color: AppColors.textSecondary),
+                          const SizedBox(height: 16),
+                          Text(
+                            S.of(context).firebase_error_unexpected,
+                            textAlign: TextAlign.center,
+                            style: AppTextStyles.bodyDescription,
+                          ),
+                          const SizedBox(height: 16),
+                          TextButton(
+                            onPressed: () => context.read<ProductDetailsCubit>().getProductDetails(id),
+                            child: Text(S.of(context).retry),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  orElse: () => const SizedBox.shrink(),
                 );
               },
             ),
