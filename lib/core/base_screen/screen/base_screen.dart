@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/base_screen/widgets/bottom_nav_bar_cart_button.dart';
 import 'package:proper_store/core/base_screen/widgets/bottom_nav_bar_item.dart';
@@ -19,6 +20,12 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
+  @override
+  void initState() {
+    super.initState();
+    FlutterNativeSplash.remove();
+  }
+
   static const _routes = [
     AppRoutes.home,
     AppRoutes.favorites,
