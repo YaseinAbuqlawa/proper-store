@@ -1,6 +1,4 @@
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -36,15 +34,13 @@ Future<void> main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  if (!kDebugMode) {
-    await FirebaseAppCheck.instance.activate(
-      providerWeb: ReCaptchaV3Provider('6LfMQoUsAAAAAEwfGD7XYPpUqYnUJnz69VfQqKjZ'),
-    );
-  }
-
   di.configureDependencies();
 
-  await di.sl<AuthOrchestrationService>().init();
+  try {
+    await di.sl<AuthOrchestrationService>().init();
+  } catch (_) {
+    // Auth orchestration failure must not block startup.
+  }
 
   final themeCubit = await ThemeCubit.create();
 
@@ -69,21 +65,23 @@ class ProperStoreApp extends StatelessWidget {
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, themeMode) {
-          return OfflineBanner(child: MaterialApp.router(
-            locale: const Locale("ar"),
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            theme: AppTheme.light(),
-            darkTheme: AppTheme.dark(),
-            themeMode: themeMode,
-            routerConfig: appRouter,
-            debugShowCheckedModeBanner: false,
-          ));
+          return OfflineBanner(
+            child: MaterialApp.router(
+              locale: const Locale("ar"),
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              theme: AppTheme.light(),
+              darkTheme: AppTheme.dark(),
+              themeMode: themeMode,
+              routerConfig: appRouter,
+              debugShowCheckedModeBanner: false,
+            ),
+          );
         },
       ),
     );
