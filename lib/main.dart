@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,11 +38,13 @@ Future<void> main() async {
 
   di.configureDependencies();
 
-  try {
-    await di.sl<AuthOrchestrationService>().init();
-  } catch (_) {
-    // Auth orchestration failure must not block startup.
-  }
+  // Auth orchestration fires immediately but does NOT block runApp.
+  // The router reads FirebaseAuth().currentUser synchronously — available
+  // right after Firebase.initializeApp() — so routing is correct before
+  // init() completes. appRouter.refresh() inside the listener is idempotent.
+  unawaited(
+    di.sl<AuthOrchestrationService>().init().catchError((_) {}),
+  );
 
   final themeCubit = await ThemeCubit.create();
 

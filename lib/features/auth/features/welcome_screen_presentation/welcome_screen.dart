@@ -24,20 +24,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   bool _initialized = false;
 
   @override
-  Future<void> didChangeDependencies() async {
+  void didChangeDependencies() {
     super.didChangeDependencies();
     if (_initialized) return;
     _initialized = true;
+    FlutterNativeSplash.remove();
+    _precacheWelcomeImages();
+  }
+
+  Future<void> _precacheWelcomeImages() async {
+    if (!mounted) return;
     try {
       await Future.wait([
-        precacheImage(AssetImage("assets/images/proper_logo.webp"), context),
         precacheImage(
-          AssetImage("assets/images/welcome_page_background.webp"),
+          const AssetImage('assets/images/proper_logo.webp'),
+          context,
+        ),
+        precacheImage(
+          const AssetImage('assets/images/welcome_page_background.webp'),
           context,
         ),
       ]);
-    } finally {
-      FlutterNativeSplash.remove();
+    } catch (_) {
+      // Non-fatal — images load on demand as fallback.
     }
   }
 
