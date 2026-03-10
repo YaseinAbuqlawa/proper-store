@@ -77,7 +77,6 @@ class _IconButton extends StatelessWidget {
       onPressed: onPressed,
       style: IconButton.styleFrom(
         padding: EdgeInsets.zero,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         minimumSize: const Size(25, 25),
         fixedSize: const Size(25, 25),
         shape: RoundedRectangleBorder(

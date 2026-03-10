@@ -110,7 +110,13 @@ class _CategoryButton extends StatelessWidget {
                   ),
                 ),
                 placeholder: (context, url) => const SizedBox.shrink(),
-                errorWidget: (context, url, error) => const SizedBox.shrink(),
+                errorWidget: (context, url, error) => const Center(
+                  child: Icon(
+                    Icons.image_not_supported_outlined,
+                    color: Colors.grey,
+                    size: 32,
+                  ),
+                ),
               ),
             ),
             Center(

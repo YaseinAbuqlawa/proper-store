@@ -11,6 +11,7 @@ import 'package:proper_store/core/di/injection_container.dart' as di;
 import 'package:proper_store/core/helpers/app_error_handler.dart';
 import 'package:proper_store/core/router/app_router.dart';
 import 'package:proper_store/core/services/auth_orchestration_service.dart';
+import 'package:proper_store/core/widgets/offline_banner.dart';
 import 'package:proper_store/core/theme/theme_cubit.dart';
 import 'package:proper_store/features/addresses/presentation/cubit/addresses_cubit.dart';
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/auth_cubit.dart';
@@ -68,7 +69,7 @@ class ProperStoreApp extends StatelessWidget {
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, themeMode) {
-          return MaterialApp.router(
+          return OfflineBanner(child: MaterialApp.router(
             locale: const Locale("ar"),
             localizationsDelegates: const [
               S.delegate,
@@ -82,7 +83,7 @@ class ProperStoreApp extends StatelessWidget {
             themeMode: themeMode,
             routerConfig: appRouter,
             debugShowCheckedModeBanner: false,
-          );
+          ));
         },
       ),
     );
