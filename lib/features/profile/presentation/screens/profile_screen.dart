@@ -16,8 +16,29 @@ import 'package:proper_store/features/profile/presentation/widgets/profile_user_
 import 'package:proper_store/generated/l10n.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  bool _isLoadingDialogShowing = false;
+
+  void _showLoadingDialog() {
+    _isLoadingDialogShowing = true;
+    AppDialog.showLoading(context).then((_) {
+      _isLoadingDialogShowing = false;
+    });
+  }
+
+  void _dismissLoadingDialog() {
+    if (_isLoadingDialogShowing) {
+      _isLoadingDialogShowing = false;
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +49,11 @@ class ProfileScreen extends StatelessWidget {
           listener: (context, state) {
             state.whenOrNull(
               loading: () {
-                AppDialog.showLoading(context);
+                _showLoadingDialog();
               },
               failure: (failureMessage) {
                 if (!context.mounted) return;
-                Navigator.pop(context);
+                _dismissLoadingDialog();
                 AppSnackbar.errorSnackbar(
                   context: context,
                   failureMessage: failureMessage,
@@ -40,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
               },
               success: () async {
                 if (!context.mounted) return;
-                Navigator.pop(context);
+                _dismissLoadingDialog();
                 AppSnackbar.successSnackbar(
                   context: context,
                   message: s.loginSuccess,

@@ -47,10 +47,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final screenWidth = MediaQuery.widthOf(context);
     return BlocProvider(
       create: (context) => sl<AuthCubit>(),
-      child: Builder(
-        builder: (context) {
-          final authCubit = context.read<AuthCubit>();
-          return Scaffold(
+      child: BlocListener<AuthCubit, AuthState>(
+        listener: (context, state) {
+          state.whenOrNull(
+            loading: () => AppDialog.showLoading(context),
+            failure: (failureMessage) {
+              if (!context.mounted) return;
+              Navigator.pop(context);
+            },
+          );
+        },
+        child: Builder(
+          builder: (context) {
+            final authCubit = context.read<AuthCubit>();
+            return Scaffold(
             body: SafeArea(
               child: Container(
                 decoration: BoxDecoration(
@@ -112,8 +122,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ),
             ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
