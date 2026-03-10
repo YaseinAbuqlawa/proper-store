@@ -48,4 +48,58 @@ class ProductsRepoImpl implements ProductsRepo {
       return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
+
+  @override
+  Future<Either<ServerFailure, (List<ProductModel>, DocumentSnapshot?)>>
+  getAllProductsPaginated({DocumentSnapshot? startAfter}) async {
+    try {
+      return Right(
+        await remoteDataSource.getAllProductsPaginated(startAfter: startAfter),
+      );
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(code: e.code));
+    } catch (e) {
+      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, (List<ProductModel>, DocumentSnapshot?)>>
+  getProductsByCategoryPaginated(
+    String category, {
+    DocumentSnapshot? startAfter,
+  }) async {
+    try {
+      return Right(
+        await remoteDataSource.getProductsByCategoryPaginated(
+          category,
+          startAfter: startAfter,
+        ),
+      );
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(code: e.code));
+    } catch (e) {
+      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, (List<ProductModel>, DocumentSnapshot?)>>
+  getProductsByCollectionPaginated(
+    String collection, {
+    DocumentSnapshot? startAfter,
+  }) async {
+    try {
+      return Right(
+        await remoteDataSource.getProductsByCollectionPaginated(
+          collection,
+          startAfter: startAfter,
+        ),
+      );
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(code: e.code));
+    } catch (e) {
+      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
+    }
+  }
 }

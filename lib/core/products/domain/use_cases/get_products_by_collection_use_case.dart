@@ -6,11 +6,13 @@ import 'package:proper_store/core/products/data/models/product_model.dart';
 import 'package:proper_store/core/products/domain/repo/products_repo.dart';
 
 @lazySingleton
-class GetAllProductsUseCase {
+class GetProductsByCollectionUseCase {
   final ProductsRepo repo;
-  GetAllProductsUseCase({required this.repo});
+  GetProductsByCollectionUseCase({required this.repo});
 
-  Future<Either<ServerFailure, (List<ProductModel>, DocumentSnapshot?)>> call({
+  Future<Either<ServerFailure, (List<ProductModel>, DocumentSnapshot?)>> call(
+    String collection, {
     DocumentSnapshot? startAfter,
-  }) => repo.getAllProductsPaginated(startAfter: startAfter);
+  }) =>
+      repo.getProductsByCollectionPaginated(collection, startAfter: startAfter);
 }

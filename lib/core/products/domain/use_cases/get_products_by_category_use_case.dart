@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/failures/app_failures.dart';
@@ -9,6 +10,8 @@ class GetProductsByCategoryUseCase {
   final ProductsRepo repo;
   GetProductsByCategoryUseCase({required this.repo});
 
-  Future<Either<ServerFailure, List<ProductModel>>> call(String category) =>
-      repo.getProductsByCategory(category);
+  Future<Either<ServerFailure, (List<ProductModel>, DocumentSnapshot?)>> call(
+    String category, {
+    DocumentSnapshot? startAfter,
+  }) => repo.getProductsByCategoryPaginated(category, startAfter: startAfter);
 }

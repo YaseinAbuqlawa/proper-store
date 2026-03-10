@@ -10,3 +10,8 @@ final class ProductFilterByCategory extends ProductFilter {
   final String category;
   const ProductFilterByCategory(this.category);
 }
+
+final class ProductFilterByCollection extends ProductFilter {
+  final String collection;
+  const ProductFilterByCollection(this.collection);
+}

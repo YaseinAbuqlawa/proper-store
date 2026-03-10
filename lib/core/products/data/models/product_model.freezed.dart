@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductModel {
 
- String get category;@ColorOptionConverter() List<ColorOption> get colors;@ColorOptionConverter() ColorOption? get selectedColor; String get description; double get discountPercentage; double get discountValue; String get id;@JsonKey(includeToJson: false, includeFromJson: false) int get quantity; List<String> get imageUrls;@TimestampConverter() DateTime get lastPurchaseDate; String get material; String get name; int get refundedQuantity; String get section; double get sellingPrice; List<double> get sizes; int get soldQuantity; int get stockQuantity; List<String> get videoUrls;
+ String get category;@ColorOptionConverter() List<ColorOption> get colors;@ColorOptionConverter() ColorOption? get selectedColor; String get description; double get discountPercentage; double get discountValue; String get id;@JsonKey(includeToJson: false, includeFromJson: false) int get quantity; List<String> get imageUrls;@TimestampConverter() DateTime get lastPurchaseDate; String get material; String get name; int get refundedQuantity; String? get collection; String get section; double get sellingPrice; List<double> get sizes; int get soldQuantity; int get stockQuantity; List<String> get videoUrls;
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ProductModelCopyWith<ProductModel> get copyWith => _$ProductModelCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductModel&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other.colors, colors)&&(identical(other.selectedColor, selectedColor) || other.selectedColor == selectedColor)&&(identical(other.description, description) || other.description == description)&&(identical(other.discountPercentage, discountPercentage) || other.discountPercentage == discountPercentage)&&(identical(other.discountValue, discountValue) || other.discountValue == discountValue)&&(identical(other.id, id) || other.id == id)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other.imageUrls, imageUrls)&&(identical(other.lastPurchaseDate, lastPurchaseDate) || other.lastPurchaseDate == lastPurchaseDate)&&(identical(other.material, material) || other.material == material)&&(identical(other.name, name) || other.name == name)&&(identical(other.refundedQuantity, refundedQuantity) || other.refundedQuantity == refundedQuantity)&&(identical(other.section, section) || other.section == section)&&(identical(other.sellingPrice, sellingPrice) || other.sellingPrice == sellingPrice)&&const DeepCollectionEquality().equals(other.sizes, sizes)&&(identical(other.soldQuantity, soldQuantity) || other.soldQuantity == soldQuantity)&&(identical(other.stockQuantity, stockQuantity) || other.stockQuantity == stockQuantity)&&const DeepCollectionEquality().equals(other.videoUrls, videoUrls));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductModel&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other.colors, colors)&&(identical(other.selectedColor, selectedColor) || other.selectedColor == selectedColor)&&(identical(other.description, description) || other.description == description)&&(identical(other.discountPercentage, discountPercentage) || other.discountPercentage == discountPercentage)&&(identical(other.discountValue, discountValue) || other.discountValue == discountValue)&&(identical(other.id, id) || other.id == id)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other.imageUrls, imageUrls)&&(identical(other.lastPurchaseDate, lastPurchaseDate) || other.lastPurchaseDate == lastPurchaseDate)&&(identical(other.material, material) || other.material == material)&&(identical(other.name, name) || other.name == name)&&(identical(other.refundedQuantity, refundedQuantity) || other.refundedQuantity == refundedQuantity)&&(identical(other.collection, collection) || other.collection == collection)&&(identical(other.section, section) || other.section == section)&&(identical(other.sellingPrice, sellingPrice) || other.sellingPrice == sellingPrice)&&const DeepCollectionEquality().equals(other.sizes, sizes)&&(identical(other.soldQuantity, soldQuantity) || other.soldQuantity == soldQuantity)&&(identical(other.stockQuantity, stockQuantity) || other.stockQuantity == stockQuantity)&&const DeepCollectionEquality().equals(other.videoUrls, videoUrls));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,category,const DeepCollectionEquality().hash(colors),selectedColor,description,discountPercentage,discountValue,id,quantity,const DeepCollectionEquality().hash(imageUrls),lastPurchaseDate,material,name,refundedQuantity,section,sellingPrice,const DeepCollectionEquality().hash(sizes),soldQuantity,stockQuantity,const DeepCollectionEquality().hash(videoUrls)]);
+int get hashCode => Object.hashAll([runtimeType,category,const DeepCollectionEquality().hash(colors),selectedColor,description,discountPercentage,discountValue,id,quantity,const DeepCollectionEquality().hash(imageUrls),lastPurchaseDate,material,name,refundedQuantity,collection,section,sellingPrice,const DeepCollectionEquality().hash(sizes),soldQuantity,stockQuantity,const DeepCollectionEquality().hash(videoUrls)]);
 
 @override
 String toString() {
-  return 'ProductModel(category: $category, colors: $colors, selectedColor: $selectedColor, description: $description, discountPercentage: $discountPercentage, discountValue: $discountValue, id: $id, quantity: $quantity, imageUrls: $imageUrls, lastPurchaseDate: $lastPurchaseDate, material: $material, name: $name, refundedQuantity: $refundedQuantity, section: $section, sellingPrice: $sellingPrice, sizes: $sizes, soldQuantity: $soldQuantity, stockQuantity: $stockQuantity, videoUrls: $videoUrls)';
+  return 'ProductModel(category: $category, colors: $colors, selectedColor: $selectedColor, description: $description, discountPercentage: $discountPercentage, discountValue: $discountValue, id: $id, quantity: $quantity, imageUrls: $imageUrls, lastPurchaseDate: $lastPurchaseDate, material: $material, name: $name, refundedQuantity: $refundedQuantity, collection: $collection, section: $section, sellingPrice: $sellingPrice, sizes: $sizes, soldQuantity: $soldQuantity, stockQuantity: $stockQuantity, videoUrls: $videoUrls)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ProductModelCopyWith<$Res>  {
   factory $ProductModelCopyWith(ProductModel value, $Res Function(ProductModel) _then) = _$ProductModelCopyWithImpl;
 @useResult
 $Res call({
- String category,@ColorOptionConverter() List<ColorOption> colors,@ColorOptionConverter() ColorOption? selectedColor, String description, double discountPercentage, double discountValue, String id,@JsonKey(includeToJson: false, includeFromJson: false) int quantity, List<String> imageUrls,@TimestampConverter() DateTime lastPurchaseDate, String material, String name, int refundedQuantity, String section, double sellingPrice, List<double> sizes, int soldQuantity, int stockQuantity, List<String> videoUrls
+ String category,@ColorOptionConverter() List<ColorOption> colors,@ColorOptionConverter() ColorOption? selectedColor, String description, double discountPercentage, double discountValue, String id,@JsonKey(includeToJson: false, includeFromJson: false) int quantity, List<String> imageUrls,@TimestampConverter() DateTime lastPurchaseDate, String material, String name, int refundedQuantity, String? collection, String section, double sellingPrice, List<double> sizes, int soldQuantity, int stockQuantity, List<String> videoUrls
 });
 
 
@@ -65,7 +65,7 @@ class _$ProductModelCopyWithImpl<$Res>
 
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? category = null,Object? colors = null,Object? selectedColor = freezed,Object? description = null,Object? discountPercentage = null,Object? discountValue = null,Object? id = null,Object? quantity = null,Object? imageUrls = null,Object? lastPurchaseDate = null,Object? material = null,Object? name = null,Object? refundedQuantity = null,Object? section = null,Object? sellingPrice = null,Object? sizes = null,Object? soldQuantity = null,Object? stockQuantity = null,Object? videoUrls = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? category = null,Object? colors = null,Object? selectedColor = freezed,Object? description = null,Object? discountPercentage = null,Object? discountValue = null,Object? id = null,Object? quantity = null,Object? imageUrls = null,Object? lastPurchaseDate = null,Object? material = null,Object? name = null,Object? refundedQuantity = null,Object? collection = freezed,Object? section = null,Object? sellingPrice = null,Object? sizes = null,Object? soldQuantity = null,Object? stockQuantity = null,Object? videoUrls = null,}) {
   return _then(_self.copyWith(
 category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,colors: null == colors ? _self.colors : colors // ignore: cast_nullable_to_non_nullable
@@ -80,7 +80,8 @@ as List<String>,lastPurchaseDate: null == lastPurchaseDate ? _self.lastPurchaseD
 as DateTime,material: null == material ? _self.material : material // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,refundedQuantity: null == refundedQuantity ? _self.refundedQuantity : refundedQuantity // ignore: cast_nullable_to_non_nullable
-as int,section: null == section ? _self.section : section // ignore: cast_nullable_to_non_nullable
+as int,collection: freezed == collection ? _self.collection : collection // ignore: cast_nullable_to_non_nullable
+as String?,section: null == section ? _self.section : section // ignore: cast_nullable_to_non_nullable
 as String,sellingPrice: null == sellingPrice ? _self.sellingPrice : sellingPrice // ignore: cast_nullable_to_non_nullable
 as double,sizes: null == sizes ? _self.sizes : sizes // ignore: cast_nullable_to_non_nullable
 as List<double>,soldQuantity: null == soldQuantity ? _self.soldQuantity : soldQuantity // ignore: cast_nullable_to_non_nullable
@@ -171,10 +172,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String category, @ColorOptionConverter()  List<ColorOption> colors, @ColorOptionConverter()  ColorOption? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String category, @ColorOptionConverter()  List<ColorOption> colors, @ColorOptionConverter()  ColorOption? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String? collection,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
-return $default(_that.category,_that.colors,_that.selectedColor,_that.description,_that.discountPercentage,_that.discountValue,_that.id,_that.quantity,_that.imageUrls,_that.lastPurchaseDate,_that.material,_that.name,_that.refundedQuantity,_that.section,_that.sellingPrice,_that.sizes,_that.soldQuantity,_that.stockQuantity,_that.videoUrls);case _:
+return $default(_that.category,_that.colors,_that.selectedColor,_that.description,_that.discountPercentage,_that.discountValue,_that.id,_that.quantity,_that.imageUrls,_that.lastPurchaseDate,_that.material,_that.name,_that.refundedQuantity,_that.collection,_that.section,_that.sellingPrice,_that.sizes,_that.soldQuantity,_that.stockQuantity,_that.videoUrls);case _:
   return orElse();
 
 }
@@ -192,10 +193,10 @@ return $default(_that.category,_that.colors,_that.selectedColor,_that.descriptio
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String category, @ColorOptionConverter()  List<ColorOption> colors, @ColorOptionConverter()  ColorOption? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String category, @ColorOptionConverter()  List<ColorOption> colors, @ColorOptionConverter()  ColorOption? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String? collection,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel():
-return $default(_that.category,_that.colors,_that.selectedColor,_that.description,_that.discountPercentage,_that.discountValue,_that.id,_that.quantity,_that.imageUrls,_that.lastPurchaseDate,_that.material,_that.name,_that.refundedQuantity,_that.section,_that.sellingPrice,_that.sizes,_that.soldQuantity,_that.stockQuantity,_that.videoUrls);case _:
+return $default(_that.category,_that.colors,_that.selectedColor,_that.description,_that.discountPercentage,_that.discountValue,_that.id,_that.quantity,_that.imageUrls,_that.lastPurchaseDate,_that.material,_that.name,_that.refundedQuantity,_that.collection,_that.section,_that.sellingPrice,_that.sizes,_that.soldQuantity,_that.stockQuantity,_that.videoUrls);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -212,10 +213,10 @@ return $default(_that.category,_that.colors,_that.selectedColor,_that.descriptio
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String category, @ColorOptionConverter()  List<ColorOption> colors, @ColorOptionConverter()  ColorOption? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String category, @ColorOptionConverter()  List<ColorOption> colors, @ColorOptionConverter()  ColorOption? selectedColor,  String description,  double discountPercentage,  double discountValue,  String id, @JsonKey(includeToJson: false, includeFromJson: false)  int quantity,  List<String> imageUrls, @TimestampConverter()  DateTime lastPurchaseDate,  String material,  String name,  int refundedQuantity,  String? collection,  String section,  double sellingPrice,  List<double> sizes,  int soldQuantity,  int stockQuantity,  List<String> videoUrls)?  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
-return $default(_that.category,_that.colors,_that.selectedColor,_that.description,_that.discountPercentage,_that.discountValue,_that.id,_that.quantity,_that.imageUrls,_that.lastPurchaseDate,_that.material,_that.name,_that.refundedQuantity,_that.section,_that.sellingPrice,_that.sizes,_that.soldQuantity,_that.stockQuantity,_that.videoUrls);case _:
+return $default(_that.category,_that.colors,_that.selectedColor,_that.description,_that.discountPercentage,_that.discountValue,_that.id,_that.quantity,_that.imageUrls,_that.lastPurchaseDate,_that.material,_that.name,_that.refundedQuantity,_that.collection,_that.section,_that.sellingPrice,_that.sizes,_that.soldQuantity,_that.stockQuantity,_that.videoUrls);case _:
   return null;
 
 }
@@ -227,7 +228,7 @@ return $default(_that.category,_that.colors,_that.selectedColor,_that.descriptio
 @JsonSerializable()
 
 class _ProductModel extends ProductModel {
-  const _ProductModel({required this.category, @ColorOptionConverter() required final  List<ColorOption> colors, @ColorOptionConverter() this.selectedColor = null, required this.description, required this.discountPercentage, required this.discountValue, required this.id, @JsonKey(includeToJson: false, includeFromJson: false) this.quantity = 0, required final  List<String> imageUrls, @TimestampConverter() required this.lastPurchaseDate, required this.material, required this.name, required this.refundedQuantity, required this.section, required this.sellingPrice, required final  List<double> sizes, required this.soldQuantity, required this.stockQuantity, required final  List<String> videoUrls}): _colors = colors,_imageUrls = imageUrls,_sizes = sizes,_videoUrls = videoUrls,super._();
+  const _ProductModel({required this.category, @ColorOptionConverter() required final  List<ColorOption> colors, @ColorOptionConverter() this.selectedColor = null, required this.description, required this.discountPercentage, required this.discountValue, required this.id, @JsonKey(includeToJson: false, includeFromJson: false) this.quantity = 0, required final  List<String> imageUrls, @TimestampConverter() required this.lastPurchaseDate, required this.material, required this.name, required this.refundedQuantity, this.collection = null, required this.section, required this.sellingPrice, required final  List<double> sizes, required this.soldQuantity, required this.stockQuantity, required final  List<String> videoUrls}): _colors = colors,_imageUrls = imageUrls,_sizes = sizes,_videoUrls = videoUrls,super._();
   factory _ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 
 @override final  String category;
@@ -255,6 +256,7 @@ class _ProductModel extends ProductModel {
 @override final  String material;
 @override final  String name;
 @override final  int refundedQuantity;
+@override@JsonKey() final  String? collection;
 @override final  String section;
 @override final  double sellingPrice;
  final  List<double> _sizes;
@@ -287,16 +289,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductModel&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other._colors, _colors)&&(identical(other.selectedColor, selectedColor) || other.selectedColor == selectedColor)&&(identical(other.description, description) || other.description == description)&&(identical(other.discountPercentage, discountPercentage) || other.discountPercentage == discountPercentage)&&(identical(other.discountValue, discountValue) || other.discountValue == discountValue)&&(identical(other.id, id) || other.id == id)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other._imageUrls, _imageUrls)&&(identical(other.lastPurchaseDate, lastPurchaseDate) || other.lastPurchaseDate == lastPurchaseDate)&&(identical(other.material, material) || other.material == material)&&(identical(other.name, name) || other.name == name)&&(identical(other.refundedQuantity, refundedQuantity) || other.refundedQuantity == refundedQuantity)&&(identical(other.section, section) || other.section == section)&&(identical(other.sellingPrice, sellingPrice) || other.sellingPrice == sellingPrice)&&const DeepCollectionEquality().equals(other._sizes, _sizes)&&(identical(other.soldQuantity, soldQuantity) || other.soldQuantity == soldQuantity)&&(identical(other.stockQuantity, stockQuantity) || other.stockQuantity == stockQuantity)&&const DeepCollectionEquality().equals(other._videoUrls, _videoUrls));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductModel&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other._colors, _colors)&&(identical(other.selectedColor, selectedColor) || other.selectedColor == selectedColor)&&(identical(other.description, description) || other.description == description)&&(identical(other.discountPercentage, discountPercentage) || other.discountPercentage == discountPercentage)&&(identical(other.discountValue, discountValue) || other.discountValue == discountValue)&&(identical(other.id, id) || other.id == id)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other._imageUrls, _imageUrls)&&(identical(other.lastPurchaseDate, lastPurchaseDate) || other.lastPurchaseDate == lastPurchaseDate)&&(identical(other.material, material) || other.material == material)&&(identical(other.name, name) || other.name == name)&&(identical(other.refundedQuantity, refundedQuantity) || other.refundedQuantity == refundedQuantity)&&(identical(other.collection, collection) || other.collection == collection)&&(identical(other.section, section) || other.section == section)&&(identical(other.sellingPrice, sellingPrice) || other.sellingPrice == sellingPrice)&&const DeepCollectionEquality().equals(other._sizes, _sizes)&&(identical(other.soldQuantity, soldQuantity) || other.soldQuantity == soldQuantity)&&(identical(other.stockQuantity, stockQuantity) || other.stockQuantity == stockQuantity)&&const DeepCollectionEquality().equals(other._videoUrls, _videoUrls));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,category,const DeepCollectionEquality().hash(_colors),selectedColor,description,discountPercentage,discountValue,id,quantity,const DeepCollectionEquality().hash(_imageUrls),lastPurchaseDate,material,name,refundedQuantity,section,sellingPrice,const DeepCollectionEquality().hash(_sizes),soldQuantity,stockQuantity,const DeepCollectionEquality().hash(_videoUrls)]);
+int get hashCode => Object.hashAll([runtimeType,category,const DeepCollectionEquality().hash(_colors),selectedColor,description,discountPercentage,discountValue,id,quantity,const DeepCollectionEquality().hash(_imageUrls),lastPurchaseDate,material,name,refundedQuantity,collection,section,sellingPrice,const DeepCollectionEquality().hash(_sizes),soldQuantity,stockQuantity,const DeepCollectionEquality().hash(_videoUrls)]);
 
 @override
 String toString() {
-  return 'ProductModel(category: $category, colors: $colors, selectedColor: $selectedColor, description: $description, discountPercentage: $discountPercentage, discountValue: $discountValue, id: $id, quantity: $quantity, imageUrls: $imageUrls, lastPurchaseDate: $lastPurchaseDate, material: $material, name: $name, refundedQuantity: $refundedQuantity, section: $section, sellingPrice: $sellingPrice, sizes: $sizes, soldQuantity: $soldQuantity, stockQuantity: $stockQuantity, videoUrls: $videoUrls)';
+  return 'ProductModel(category: $category, colors: $colors, selectedColor: $selectedColor, description: $description, discountPercentage: $discountPercentage, discountValue: $discountValue, id: $id, quantity: $quantity, imageUrls: $imageUrls, lastPurchaseDate: $lastPurchaseDate, material: $material, name: $name, refundedQuantity: $refundedQuantity, collection: $collection, section: $section, sellingPrice: $sellingPrice, sizes: $sizes, soldQuantity: $soldQuantity, stockQuantity: $stockQuantity, videoUrls: $videoUrls)';
 }
 
 
@@ -307,7 +309,7 @@ abstract mixin class _$ProductModelCopyWith<$Res> implements $ProductModelCopyWi
   factory _$ProductModelCopyWith(_ProductModel value, $Res Function(_ProductModel) _then) = __$ProductModelCopyWithImpl;
 @override @useResult
 $Res call({
- String category,@ColorOptionConverter() List<ColorOption> colors,@ColorOptionConverter() ColorOption? selectedColor, String description, double discountPercentage, double discountValue, String id,@JsonKey(includeToJson: false, includeFromJson: false) int quantity, List<String> imageUrls,@TimestampConverter() DateTime lastPurchaseDate, String material, String name, int refundedQuantity, String section, double sellingPrice, List<double> sizes, int soldQuantity, int stockQuantity, List<String> videoUrls
+ String category,@ColorOptionConverter() List<ColorOption> colors,@ColorOptionConverter() ColorOption? selectedColor, String description, double discountPercentage, double discountValue, String id,@JsonKey(includeToJson: false, includeFromJson: false) int quantity, List<String> imageUrls,@TimestampConverter() DateTime lastPurchaseDate, String material, String name, int refundedQuantity, String? collection, String section, double sellingPrice, List<double> sizes, int soldQuantity, int stockQuantity, List<String> videoUrls
 });
 
 
@@ -324,7 +326,7 @@ class __$ProductModelCopyWithImpl<$Res>
 
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? category = null,Object? colors = null,Object? selectedColor = freezed,Object? description = null,Object? discountPercentage = null,Object? discountValue = null,Object? id = null,Object? quantity = null,Object? imageUrls = null,Object? lastPurchaseDate = null,Object? material = null,Object? name = null,Object? refundedQuantity = null,Object? section = null,Object? sellingPrice = null,Object? sizes = null,Object? soldQuantity = null,Object? stockQuantity = null,Object? videoUrls = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? category = null,Object? colors = null,Object? selectedColor = freezed,Object? description = null,Object? discountPercentage = null,Object? discountValue = null,Object? id = null,Object? quantity = null,Object? imageUrls = null,Object? lastPurchaseDate = null,Object? material = null,Object? name = null,Object? refundedQuantity = null,Object? collection = freezed,Object? section = null,Object? sellingPrice = null,Object? sizes = null,Object? soldQuantity = null,Object? stockQuantity = null,Object? videoUrls = null,}) {
   return _then(_ProductModel(
 category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,colors: null == colors ? _self._colors : colors // ignore: cast_nullable_to_non_nullable
@@ -339,7 +341,8 @@ as List<String>,lastPurchaseDate: null == lastPurchaseDate ? _self.lastPurchaseD
 as DateTime,material: null == material ? _self.material : material // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,refundedQuantity: null == refundedQuantity ? _self.refundedQuantity : refundedQuantity // ignore: cast_nullable_to_non_nullable
-as int,section: null == section ? _self.section : section // ignore: cast_nullable_to_non_nullable
+as int,collection: freezed == collection ? _self.collection : collection // ignore: cast_nullable_to_non_nullable
+as String?,section: null == section ? _self.section : section // ignore: cast_nullable_to_non_nullable
 as String,sellingPrice: null == sellingPrice ? _self.sellingPrice : sellingPrice // ignore: cast_nullable_to_non_nullable
 as double,sizes: null == sizes ? _self._sizes : sizes // ignore: cast_nullable_to_non_nullable
 as List<double>,soldQuantity: null == soldQuantity ? _self.soldQuantity : soldQuantity // ignore: cast_nullable_to_non_nullable

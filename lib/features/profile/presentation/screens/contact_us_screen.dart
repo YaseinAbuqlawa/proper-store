@@ -16,7 +16,7 @@ class ContactUsScreen extends StatelessWidget {
   static const _phoneNumber = '01019500808';
   static const _facebookUrl = 'https://facebook.com/Proper.fayom';
   static const _instagramUrl = 'https://instagram.com/prope.r7';
-  static const _tiktokUrl = 'https://tiktok.com/@properstore';
+  static const _tiktokUrl = 'https://tiktok.com/@properelfym';
 
   void _open(String url) => _openWindow(url, '_blank');
 
@@ -68,7 +68,7 @@ class ContactUsScreen extends StatelessWidget {
               icon: Icons.music_note,
               color: AppColors.whiteColor,
               label: 'تيك توك',
-              value: '@properstore',
+              value: '@properelfym',
               onTap: () => _open(_tiktokUrl),
             ),
             AppSpacing.verticalSpaceLarge,

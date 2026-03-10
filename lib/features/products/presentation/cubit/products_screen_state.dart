@@ -4,9 +4,11 @@ part of 'products_screen_cubit.dart';
 abstract class ProductsScreenState with _$ProductsScreenState {
   const factory ProductsScreenState.initial() = _Initial;
   const factory ProductsScreenState.loading() = _Loading;
-  const factory ProductsScreenState.success({
+  const factory ProductsScreenState.paginated({
     required List<ProductModel> products,
-  }) = _Success;
+    required bool hasMore,
+    required bool isLoadingMore,
+  }) = _Paginated;
   const factory ProductsScreenState.failure({required String failureMessage}) =
       _Failure;
 }

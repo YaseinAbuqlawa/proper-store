@@ -55,13 +55,13 @@ extension ProductsScreenStatePatterns on ProductsScreenState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Success value)?  success,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Paginated value)?  paginated,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
-return success(_that);case _Failure() when failure != null:
+return loading(_that);case _Paginated() when paginated != null:
+return paginated(_that);case _Failure() when failure != null:
 return failure(_that);case _:
   return orElse();
 
@@ -80,13 +80,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Success value)  success,required TResult Function( _Failure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Paginated value)  paginated,required TResult Function( _Failure value)  failure,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case _Loading():
-return loading(_that);case _Success():
-return success(_that);case _Failure():
+return loading(_that);case _Paginated():
+return paginated(_that);case _Failure():
 return failure(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -104,13 +104,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Success value)?  success,TResult? Function( _Failure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Paginated value)?  paginated,TResult? Function( _Failure value)?  failure,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
-return success(_that);case _Failure() when failure != null:
+return loading(_that);case _Paginated() when paginated != null:
+return paginated(_that);case _Failure() when failure != null:
 return failure(_that);case _:
   return null;
 
@@ -128,12 +128,12 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<ProductModel> products)?  success,TResult Function( String failureMessage)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<ProductModel> products,  bool hasMore,  bool isLoadingMore)?  paginated,TResult Function( String failureMessage)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
-return success(_that.products);case _Failure() when failure != null:
+return loading();case _Paginated() when paginated != null:
+return paginated(_that.products,_that.hasMore,_that.isLoadingMore);case _Failure() when failure != null:
 return failure(_that.failureMessage);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return failure(_that.failureMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<ProductModel> products)  success,required TResult Function( String failureMessage)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<ProductModel> products,  bool hasMore,  bool isLoadingMore)  paginated,required TResult Function( String failureMessage)  failure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
-return loading();case _Success():
-return success(_that.products);case _Failure():
+return loading();case _Paginated():
+return paginated(_that.products,_that.hasMore,_that.isLoadingMore);case _Failure():
 return failure(_that.failureMessage);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return failure(_that.failureMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<ProductModel> products)?  success,TResult? Function( String failureMessage)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<ProductModel> products,  bool hasMore,  bool isLoadingMore)?  paginated,TResult? Function( String failureMessage)?  failure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
-return success(_that.products);case _Failure() when failure != null:
+return loading();case _Paginated() when paginated != null:
+return paginated(_that.products,_that.hasMore,_that.isLoadingMore);case _Failure() when failure != null:
 return failure(_that.failureMessage);case _:
   return null;
 
@@ -256,8 +256,8 @@ String toString() {
 /// @nodoc
 
 
-class _Success implements ProductsScreenState {
-  const _Success({required final  List<ProductModel> products}): _products = products;
+class _Paginated implements ProductsScreenState {
+  const _Paginated({required final  List<ProductModel> products, required this.hasMore, required this.isLoadingMore}): _products = products;
   
 
  final  List<ProductModel> _products;
@@ -267,38 +267,40 @@ class _Success implements ProductsScreenState {
   return EqualUnmodifiableListView(_products);
 }
 
+ final  bool hasMore;
+ final  bool isLoadingMore;
 
 /// Create a copy of ProductsScreenState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SuccessCopyWith<_Success> get copyWith => __$SuccessCopyWithImpl<_Success>(this, _$identity);
+_$PaginatedCopyWith<_Paginated> get copyWith => __$PaginatedCopyWithImpl<_Paginated>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&const DeepCollectionEquality().equals(other._products, _products));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Paginated&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_products));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_products),hasMore,isLoadingMore);
 
 @override
 String toString() {
-  return 'ProductsScreenState.success(products: $products)';
+  return 'ProductsScreenState.paginated(products: $products, hasMore: $hasMore, isLoadingMore: $isLoadingMore)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res> implements $ProductsScreenStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
+abstract mixin class _$PaginatedCopyWith<$Res> implements $ProductsScreenStateCopyWith<$Res> {
+  factory _$PaginatedCopyWith(_Paginated value, $Res Function(_Paginated) _then) = __$PaginatedCopyWithImpl;
 @useResult
 $Res call({
- List<ProductModel> products
+ List<ProductModel> products, bool hasMore, bool isLoadingMore
 });
 
 
@@ -306,19 +308,21 @@ $Res call({
 
 }
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res>
-    implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
+class __$PaginatedCopyWithImpl<$Res>
+    implements _$PaginatedCopyWith<$Res> {
+  __$PaginatedCopyWithImpl(this._self, this._then);
 
-  final _Success _self;
-  final $Res Function(_Success) _then;
+  final _Paginated _self;
+  final $Res Function(_Paginated) _then;
 
 /// Create a copy of ProductsScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? products = null,}) {
-  return _then(_Success(
+@pragma('vm:prefer-inline') $Res call({Object? products = null,Object? hasMore = null,Object? isLoadingMore = null,}) {
+  return _then(_Paginated(
 products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
-as List<ProductModel>,
+as List<ProductModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

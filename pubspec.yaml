@@ -70,6 +70,7 @@ dev_dependencies:
   # Testing
   mockito: ^5.4.4
   bloc_test: ^10.0.0
+  flutter_launcher_icons: ^0.14.3
 
 flutter:
   uses-material-design: true
@@ -93,6 +94,15 @@ flutter:
 flutter_intl:
   main_locale: ar
   enabled: true
+
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: "assets/images/proper_logo.png"
+    background_color: "#1E1E1E"
+    theme_color: "#C9A84C"
+  remove_alpha_ios: true
+
 flutter_native_splash:
     color: "#1E1E1E"
     image: assets/images/proper_logo.png

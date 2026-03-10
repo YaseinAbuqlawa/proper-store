@@ -20,6 +20,61 @@ class ProductsRemoteDataSource {
         .toList();
   }
 
+  Future<(List<ProductModel>, DocumentSnapshot?)> getAllProductsPaginated({
+    DocumentSnapshot? startAfter,
+    int pageSize = 12,
+  }) async {
+    var query = firestore
+        .collection(AppConsts.productsCollection)
+        .limit(pageSize);
+    if (startAfter != null) query = query.startAfterDocument(startAfter);
+    final snap = await query.get();
+    final products = snap.docs
+        .map((d) => ProductModel.fromJson(d.data()))
+        .toList();
+    final cursor = snap.docs.length == pageSize ? snap.docs.last : null;
+    return (products, cursor);
+  }
+
+  Future<(List<ProductModel>, DocumentSnapshot?)>
+  getProductsByCategoryPaginated(
+    String category, {
+    DocumentSnapshot? startAfter,
+    int pageSize = 12,
+  }) async {
+    var query = firestore
+        .collection(AppConsts.productsCollection)
+        .where('category', isEqualTo: category)
+        .limit(pageSize);
+    if (startAfter != null) query = query.startAfterDocument(startAfter);
+    final snap = await query.get();
+    final products = snap.docs
+        .map((d) => ProductModel.fromJson(d.data()))
+        .toList();
+    final cursor = snap.docs.length == pageSize ? snap.docs.last : null;
+    return (products, cursor);
+  }
+
+  Future<(List<ProductModel>, DocumentSnapshot?)>
+  getProductsByCollectionPaginated(
+    String collection, {
+    DocumentSnapshot? startAfter,
+    int pageSize = 12,
+  }) async {
+    var query = firestore
+        .collection(AppConsts.productsCollection)
+        .where('collection', isEqualTo: collection)
+        .limit(pageSize);
+    if (startAfter != null) query = query.startAfterDocument(startAfter);
+    final snap = await query.get();
+    final products = snap.docs
+        .map((d) => ProductModel.fromJson(d.data()))
+        .toList();
+    final cursor = snap.docs.length == pageSize ? snap.docs.last : null;
+    return (products, cursor);
+  }
+
+  /// Non-paginated — preserved for backward compatibility with existing callers.
   Future<List<ProductModel>> getProductsByCategory(String category) async {
     final productsDocuments = await firestore
         .collection(AppConsts.productsCollection)

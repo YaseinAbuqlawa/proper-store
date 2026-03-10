@@ -9,12 +9,11 @@ import 'package:proper_store/core/helpers/app_snackbar.dart';
 import 'package:proper_store/core/helpers/auth_guard_dialog.dart';
 import 'package:proper_store/core/products/data/models/color_option.dart';
 import 'package:proper_store/core/products/data/models/product_model.dart';
+import 'package:proper_store/core/products/domain/entities/product_filter.dart';
 import 'package:proper_store/core/products/presentation/widgets/add_to_favorite.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_card.dart';
 import 'package:proper_store/core/products/presentation/widgets/product_price.dart';
-import 'package:proper_store/core/products/domain/entities/product_filter.dart';
 import 'package:proper_store/core/router/app_routes.dart';
-import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/core/widgets/section_title.dart';
 import 'package:proper_store/core/widgets/shopping_bag_button.dart';
@@ -24,6 +23,7 @@ import 'package:proper_store/features/favorites/presentation/cubit/favorites_cub
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/widgets/product_details_bottom_nav_bar_buttons.dart';
 import 'package:proper_store/features/product_details/presentation/widgets/product_details_images_carousel.dart';
+import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
 import 'package:proper_store/generated/l10n.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -163,8 +163,11 @@ class ProductDetailsScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // "اللون المختار: [name]" row
-                                  BlocSelector<ProductDetailsCubit,
-                                      ProductDetailsState, String?>(
+                                  BlocSelector<
+                                    ProductDetailsCubit,
+                                    ProductDetailsState,
+                                    String?
+                                  >(
                                     selector: (state) => state.maybeWhen(
                                       orElse: () => null,
                                       success: (p, _, _) =>
@@ -183,10 +186,11 @@ class ProductDetailsScreen extends StatelessWidget {
                                             const SizedBox(width: 8),
                                             Text(
                                               colorName,
-                                              style: AppTextStyles.bodyDescription
+                                              style: AppTextStyles
+                                                  .bodyDescription
                                                   .copyWith(
-                                                color: AppColors.goldRoyal,
-                                              ),
+                                                    color: AppColors.goldRoyal,
+                                                  ),
                                             ),
                                           ],
                                         ],
@@ -270,7 +274,11 @@ class ProductDetailsScreen extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.error_outline, size: 64, color: AppColors.textSecondary),
+                          const Icon(
+                            Icons.error_outline,
+                            size: 64,
+                            color: AppColors.textSecondary,
+                          ),
                           const SizedBox(height: 16),
                           Text(
                             S.of(context).firebase_error_unexpected,
@@ -279,7 +287,9 @@ class ProductDetailsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           TextButton(
-                            onPressed: () => context.read<ProductDetailsCubit>().getProductDetails(id),
+                            onPressed: () => context
+                                .read<ProductDetailsCubit>()
+                                .getProductDetails(id),
                             child: Text(S.of(context).retry),
                           ),
                         ],
@@ -304,9 +314,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     flex: 4,
-                    child: BuyNowButton(
-                      onPressed: () => _buyNow(context),
-                    ),
+                    child: BuyNowButton(onPressed: () => _buyNow(context)),
                   ),
                 ],
               ),
@@ -385,12 +393,9 @@ class ColorsRow extends StatelessWidget {
               message: productColor.name,
               child: InkWell(
                 onTap: () {
-                  context
-                      .read<ProductDetailsCubit>()
-                      .selectColor(productColor);
+                  context.read<ProductDetailsCubit>().selectColor(productColor);
                 },
-                overlayColor:
-                    const WidgetStatePropertyAll(Colors.transparent),
+                overlayColor: const WidgetStatePropertyAll(Colors.transparent),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 250),
                   margin: const EdgeInsets.all(4),
@@ -443,10 +448,13 @@ class _RelatedProductsList extends StatelessWidget {
         itemCount: relatedProductsList.length,
         itemBuilder: (context, index) {
           final product = relatedProductsList[index];
-          return ProductCard(
-            product: product,
-            showAddToCart: false,
-            enableHero: false,
+          return SizedBox(
+            width: 200,
+            child: ProductCard(
+              product: product,
+              showAddToCart: false,
+              enableHero: false,
+            ),
           );
         },
       ),

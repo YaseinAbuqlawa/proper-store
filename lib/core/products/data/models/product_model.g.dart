@@ -35,6 +35,7 @@ _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
       material: json['material'] as String,
       name: json['name'] as String,
       refundedQuantity: (json['refundedQuantity'] as num).toInt(),
+      collection: json['collection'] as String? ?? null,
       section: json['section'] as String,
       sellingPrice: (json['sellingPrice'] as num).toDouble(),
       sizes: (json['sizes'] as List<dynamic>)
@@ -67,6 +68,7 @@ Map<String, dynamic> _$ProductModelToJson(
   'material': instance.material,
   'name': instance.name,
   'refundedQuantity': instance.refundedQuantity,
+  'collection': instance.collection,
   'section': instance.section,
   'sellingPrice': instance.sellingPrice,
   'sizes': instance.sizes,

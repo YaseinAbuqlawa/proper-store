@@ -267,7 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sign in with Google",
     ),
     "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
-    "similarProducts": MessageLookupByLibrary.simpleMessage("Similar products"),
+    "similarProducts": MessageLookupByLibrary.simpleMessage("Similar Products"),
     "streetLabel": MessageLookupByLibrary.simpleMessage("Street"),
     "subtotalLabel": MessageLookupByLibrary.simpleMessage("Subtotal"),
     "successTitle": MessageLookupByLibrary.simpleMessage("Success"),

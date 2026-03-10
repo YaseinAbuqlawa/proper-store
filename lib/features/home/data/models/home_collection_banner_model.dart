@@ -10,6 +10,7 @@ abstract class HomeCollectionBannerModel with _$HomeCollectionBannerModel {
     required String badgeText,
     required String imageUrl,
     required String title,
+    @Default(null) String? collection,
   }) = _HomeCollectionBannerModel;
 
   factory HomeCollectionBannerModel.fromJson(Map<String, dynamic> json) =>

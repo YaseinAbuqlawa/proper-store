@@ -15,7 +15,7 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.sizeOf(context).width;
     final deviceType = AppSizes.getDeviceType(screenWidth);
 
     final (double childAspectRatio, int crossAxisCount) = switch (deviceType) {
@@ -32,21 +32,22 @@ class ProductsScreen extends StatelessWidget {
         builder: (context, state) {
           return state.when(
             initial: () => const SizedBox.shrink(),
-            loading: () => _buildGrid(
-              products: List.filled(8, ProductModel.placeholder()),
-              isLoading: true,
+            loading: () => _buildSkeletonGrid(
               crossAxisCount: crossAxisCount,
               childAspectRatio: childAspectRatio,
             ),
-            success: (products) {
+            paginated: (products, hasMore, isLoadingMore) {
               if (products.isEmpty) {
                 return Center(child: Text(S.of(context).noProductsYet));
               }
-              return _buildGrid(
+              return _PaginatedGrid(
                 products: products,
-                isLoading: false,
+                hasMore: hasMore,
+                isLoadingMore: isLoadingMore,
                 crossAxisCount: crossAxisCount,
                 childAspectRatio: childAspectRatio,
+                onLoadMore: () =>
+                    context.read<ProductsScreenCubit>().loadMore(),
               );
             },
             failure: (_) => Center(
@@ -71,24 +72,95 @@ class ProductsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildGrid({
-    required List<ProductModel> products,
-    required bool isLoading,
+  Widget _buildSkeletonGrid({
     required int crossAxisCount,
     required double childAspectRatio,
   }) {
     return Skeletonizer(
-      enabled: isLoading,
+      enabled: true,
       child: GridView.builder(
         padding: const EdgeInsets.all(10),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount,
           childAspectRatio: childAspectRatio,
         ),
-        itemCount: products.length,
+        itemCount: 8,
         itemBuilder: (context, index) =>
-            ProductCard(product: products[index], enableHero: !isLoading),
+            ProductCard(product: ProductModel.placeholder(), enableHero: false),
       ),
+    );
+  }
+}
+
+class _PaginatedGrid extends StatefulWidget {
+  final List<ProductModel> products;
+  final bool hasMore;
+  final bool isLoadingMore;
+  final int crossAxisCount;
+  final double childAspectRatio;
+  final VoidCallback onLoadMore;
+
+  const _PaginatedGrid({
+    required this.products,
+    required this.hasMore,
+    required this.isLoadingMore,
+    required this.crossAxisCount,
+    required this.childAspectRatio,
+    required this.onLoadMore,
+  });
+
+  @override
+  State<_PaginatedGrid> createState() => _PaginatedGridState();
+}
+
+class _PaginatedGridState extends State<_PaginatedGrid> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final pos = _scrollController.position;
+    if (pos.pixels >= pos.maxScrollExtent - 200) {
+      widget.onLoadMore();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.all(10),
+          sliver: SliverGrid(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => ProductCard(product: widget.products[index]),
+              childCount: widget.products.length,
+            ),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: widget.crossAxisCount,
+              childAspectRatio: widget.childAspectRatio,
+            ),
+          ),
+        ),
+        if (widget.isLoadingMore)
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+          ),
+      ],
     );
   }
 }

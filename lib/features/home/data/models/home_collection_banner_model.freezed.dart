@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeCollectionBannerModel {
 
- String get description; String get badgeText; String get imageUrl; String get title;
+ String get description; String get badgeText; String get imageUrl; String get title; String? get collection;
 /// Create a copy of HomeCollectionBannerModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $HomeCollectionBannerModelCopyWith<HomeCollectionBannerModel> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeCollectionBannerModel&&(identical(other.description, description) || other.description == description)&&(identical(other.badgeText, badgeText) || other.badgeText == badgeText)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.title, title) || other.title == title));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeCollectionBannerModel&&(identical(other.description, description) || other.description == description)&&(identical(other.badgeText, badgeText) || other.badgeText == badgeText)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.title, title) || other.title == title)&&(identical(other.collection, collection) || other.collection == collection));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,description,badgeText,imageUrl,title);
+int get hashCode => Object.hash(runtimeType,description,badgeText,imageUrl,title,collection);
 
 @override
 String toString() {
-  return 'HomeCollectionBannerModel(description: $description, badgeText: $badgeText, imageUrl: $imageUrl, title: $title)';
+  return 'HomeCollectionBannerModel(description: $description, badgeText: $badgeText, imageUrl: $imageUrl, title: $title, collection: $collection)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $HomeCollectionBannerModelCopyWith<$Res>  {
   factory $HomeCollectionBannerModelCopyWith(HomeCollectionBannerModel value, $Res Function(HomeCollectionBannerModel) _then) = _$HomeCollectionBannerModelCopyWithImpl;
 @useResult
 $Res call({
- String description, String badgeText, String imageUrl, String title
+ String description, String badgeText, String imageUrl, String title, String? collection
 });
 
 
@@ -65,13 +65,14 @@ class _$HomeCollectionBannerModelCopyWithImpl<$Res>
 
 /// Create a copy of HomeCollectionBannerModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? description = null,Object? badgeText = null,Object? imageUrl = null,Object? title = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? description = null,Object? badgeText = null,Object? imageUrl = null,Object? title = null,Object? collection = freezed,}) {
   return _then(_self.copyWith(
 description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,badgeText: null == badgeText ? _self.badgeText : badgeText // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,
+as String,collection: freezed == collection ? _self.collection : collection // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String description,  String badgeText,  String imageUrl,  String title)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String description,  String badgeText,  String imageUrl,  String title,  String? collection)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeCollectionBannerModel() when $default != null:
-return $default(_that.description,_that.badgeText,_that.imageUrl,_that.title);case _:
+return $default(_that.description,_that.badgeText,_that.imageUrl,_that.title,_that.collection);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.description,_that.badgeText,_that.imageUrl,_that.title);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String description,  String badgeText,  String imageUrl,  String title)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String description,  String badgeText,  String imageUrl,  String title,  String? collection)  $default,) {final _that = this;
 switch (_that) {
 case _HomeCollectionBannerModel():
-return $default(_that.description,_that.badgeText,_that.imageUrl,_that.title);case _:
+return $default(_that.description,_that.badgeText,_that.imageUrl,_that.title,_that.collection);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.description,_that.badgeText,_that.imageUrl,_that.title);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String description,  String badgeText,  String imageUrl,  String title)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String description,  String badgeText,  String imageUrl,  String title,  String? collection)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeCollectionBannerModel() when $default != null:
-return $default(_that.description,_that.badgeText,_that.imageUrl,_that.title);case _:
+return $default(_that.description,_that.badgeText,_that.imageUrl,_that.title,_that.collection);case _:
   return null;
 
 }
@@ -212,13 +213,14 @@ return $default(_that.description,_that.badgeText,_that.imageUrl,_that.title);ca
 @JsonSerializable()
 
 class _HomeCollectionBannerModel implements HomeCollectionBannerModel {
-  const _HomeCollectionBannerModel({required this.description, required this.badgeText, required this.imageUrl, required this.title});
+  const _HomeCollectionBannerModel({required this.description, required this.badgeText, required this.imageUrl, required this.title, this.collection = null});
   factory _HomeCollectionBannerModel.fromJson(Map<String, dynamic> json) => _$HomeCollectionBannerModelFromJson(json);
 
 @override final  String description;
 @override final  String badgeText;
 @override final  String imageUrl;
 @override final  String title;
+@override@JsonKey() final  String? collection;
 
 /// Create a copy of HomeCollectionBannerModel
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeCollectionBannerModel&&(identical(other.description, description) || other.description == description)&&(identical(other.badgeText, badgeText) || other.badgeText == badgeText)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.title, title) || other.title == title));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeCollectionBannerModel&&(identical(other.description, description) || other.description == description)&&(identical(other.badgeText, badgeText) || other.badgeText == badgeText)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.title, title) || other.title == title)&&(identical(other.collection, collection) || other.collection == collection));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,description,badgeText,imageUrl,title);
+int get hashCode => Object.hash(runtimeType,description,badgeText,imageUrl,title,collection);
 
 @override
 String toString() {
-  return 'HomeCollectionBannerModel(description: $description, badgeText: $badgeText, imageUrl: $imageUrl, title: $title)';
+  return 'HomeCollectionBannerModel(description: $description, badgeText: $badgeText, imageUrl: $imageUrl, title: $title, collection: $collection)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$HomeCollectionBannerModelCopyWith<$Res> implements $HomeC
   factory _$HomeCollectionBannerModelCopyWith(_HomeCollectionBannerModel value, $Res Function(_HomeCollectionBannerModel) _then) = __$HomeCollectionBannerModelCopyWithImpl;
 @override @useResult
 $Res call({
- String description, String badgeText, String imageUrl, String title
+ String description, String badgeText, String imageUrl, String title, String? collection
 });
 
 
@@ -270,13 +272,14 @@ class __$HomeCollectionBannerModelCopyWithImpl<$Res>
 
 /// Create a copy of HomeCollectionBannerModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? description = null,Object? badgeText = null,Object? imageUrl = null,Object? title = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? description = null,Object? badgeText = null,Object? imageUrl = null,Object? title = null,Object? collection = freezed,}) {
   return _then(_HomeCollectionBannerModel(
 description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,badgeText: null == badgeText ? _self.badgeText : badgeText // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,
+as String,collection: freezed == collection ? _self.collection : collection // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

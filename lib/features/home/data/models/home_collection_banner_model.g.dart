@@ -13,6 +13,7 @@ _HomeCollectionBannerModel _$HomeCollectionBannerModelFromJson(
   badgeText: json['badgeText'] as String,
   imageUrl: json['imageUrl'] as String,
   title: json['title'] as String,
+  collection: json['collection'] as String? ?? null,
 );
 
 Map<String, dynamic> _$HomeCollectionBannerModelToJson(
@@ -22,4 +23,5 @@ Map<String, dynamic> _$HomeCollectionBannerModelToJson(
   'badgeText': instance.badgeText,
   'imageUrl': instance.imageUrl,
   'title': instance.title,
+  'collection': instance.collection,
 };

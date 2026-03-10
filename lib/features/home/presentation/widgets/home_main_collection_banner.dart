@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/design_system/colors/app_colors.dart';
 import 'package:proper_store/core/design_system/sizes/app_sizes.dart';
 import 'package:proper_store/core/design_system/spacing/app_spacing.dart';
 import 'package:proper_store/core/design_system/typography/app_text_styles.dart';
+import 'package:proper_store/core/products/domain/entities/product_filter.dart';
+import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/core/widgets/app_badge_card.dart';
 import 'package:proper_store/core/widgets/app_network_image.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/features/home/data/models/home_collection_banner_model.dart';
 import 'package:proper_store/features/home/presentation/cubit/home_cubit.dart';
+import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
 import 'package:proper_store/generated/l10n.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -128,7 +132,19 @@ class _BannerData extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final collection = bannerModel.collection;
+                      context.push(
+                        AppRoutes.products.path,
+                        extra: ProductsScreenArgs(
+                          title: collection ??
+                              S.of(context).mainCollectionBannerButtonText,
+                          filter: collection != null
+                              ? ProductFilterByCollection(collection)
+                              : const ProductFilterAll(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: buttonPadding,
                       backgroundColor: AppColors.goldRoyal,

@@ -26,6 +26,7 @@ abstract class ProductModel with _$ProductModel {
     required String material,
     required String name,
     required int refundedQuantity,
+    @Default(null) String? collection,
     required String section,
     required double sellingPrice,
     required List<double> sizes,
