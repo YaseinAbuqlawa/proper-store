@@ -334,5 +334,26 @@
   "loadingTitle": "Loading",
   "colorLabel": "Color:",
   "notFoundTitle": "Page not found",
-  "backToHome": "Back to home"
+  "backToHome": "Back to home",
+
+  "firebase_error_user_not_found": "User not found",
+  "@firebase_error_user_not_found": {},
+
+  "firebase_error_wrong_password": "Wrong password",
+  "@firebase_error_wrong_password": {},
+
+  "firebase_error_invalid_email": "Invalid email",
+  "@firebase_error_invalid_email": {},
+
+  "firebase_error_user_disabled": "This account has been disabled",
+  "@firebase_error_user_disabled": {},
+
+  "firebase_error_too_many_requests": "Too many attempts, try later",
+  "@firebase_error_too_many_requests": {},
+
+  "firebase_error_network_request_failed": "Check your internet connection",
+  "@firebase_error_network_request_failed": {},
+
+  "firebase_error_access_denied": "You don't have access to this panel",
+  "@firebase_error_access_denied": {}
 }

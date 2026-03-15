@@ -334,5 +334,26 @@
   "loadingTitle": "جاري التحميل",
   "colorLabel": "اللون:",
   "notFoundTitle": "الصفحة غير موجودة",
-  "backToHome": "العودة للرئيسية"
+  "backToHome": "العودة للرئيسية",
+
+  "firebase_error_user_not_found": "المستخدم غير موجود",
+  "@firebase_error_user_not_found": {},
+
+  "firebase_error_wrong_password": "كلمة المرور غير صحيحة",
+  "@firebase_error_wrong_password": {},
+
+  "firebase_error_invalid_email": "البريد الإلكتروني غير صالح",
+  "@firebase_error_invalid_email": {},
+
+  "firebase_error_user_disabled": "تم تعطيل هذا الحساب",
+  "@firebase_error_user_disabled": {},
+
+  "firebase_error_too_many_requests": "محاولات كثيرة، حاول لاحقاً",
+  "@firebase_error_too_many_requests": {},
+
+  "firebase_error_network_request_failed": "تحقق من الاتصال بالإنترنت",
+  "@firebase_error_network_request_failed": {},
+
+  "firebase_error_access_denied": "ليس لديك صلاحية الوصول لهذه اللوحة",
+  "@firebase_error_access_denied": {}
 }

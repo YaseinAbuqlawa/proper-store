@@ -1,0 +1,65 @@
+name: admin
+description: Proper Store Admin Dashboard
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  flutter_bloc: ^9.1.1
+  get_it: ^9.2.0
+  injectable: ^2.7.1+4
+
+  # Navigation
+  go_router: ^17.1.0
+
+  # Shared package
+  proper_store_shared:
+    path: ../shared
+
+  # Firebase
+  firebase_core: ^4.4.0
+  firebase_auth: ^6.1.4
+  cloud_firestore: ^6.1.2
+
+  # UI
+  cached_network_image: ^3.4.1
+  data_table_2: ^2.5.14
+
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  freezed: ^3.1.0
+  json_serializable: ^6.9.5
+  build_runner: ^2.4.15
+  injectable_generator: ^2.7.1+4
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/fonts/
+
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cairo-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Cairo-Black.ttf
+          weight: 900
