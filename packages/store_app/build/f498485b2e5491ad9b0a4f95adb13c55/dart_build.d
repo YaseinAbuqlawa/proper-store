@@ -1,1 +1,0 @@
- /Users/macbook/Desktop/importantApps/proper_store/packages/store_app/build/f498485b2e5491ad9b0a4f95adb13c55/dart_build_result.json:  /Users/macbook/Desktop/importantApps/proper_store/packages/store_app/.dart_tool/package_config.json /Users/macbook/Desktop/importantApps/proper_store/packages/store_app/pubspec.yaml /Users/macbook/develop/flutter/bin/cache/dart-sdk/version
