@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:admin/core/di/injection_container.dart' as _i600;
+import 'package:admin/core/services/image_compression_service.dart' as _i935;
 import 'package:admin/features/auth/data/data_sources/auth_remote_data_source.dart'
     as _i529;
 import 'package:admin/features/auth/data/repo/auth_repo_impl.dart' as _i1072;
@@ -20,8 +21,37 @@ import 'package:admin/features/auth/domain/use_cases/sign_out_use_case.dart'
     as _i868;
 import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart'
     as _i469;
+import 'package:admin/features/products/data/data_sources/products_remote_data_source.dart'
+    as _i442;
+import 'package:admin/features/products/data/repo/products_repo_impl.dart'
+    as _i721;
+import 'package:admin/features/products/domain/repo/products_repo.dart'
+    as _i229;
+import 'package:admin/features/products/domain/use_cases/add_category_use_case.dart'
+    as _i531;
+import 'package:admin/features/products/domain/use_cases/delete_product_use_case.dart'
+    as _i836;
+import 'package:admin/features/products/domain/use_cases/get_all_products_use_case.dart'
+    as _i72;
+import 'package:admin/features/products/domain/use_cases/get_categories_use_case.dart'
+    as _i436;
+import 'package:admin/features/products/domain/use_cases/save_product_use_case.dart'
+    as _i717;
+import 'package:admin/features/products/domain/use_cases/upload_color_image_use_case.dart'
+    as _i938;
+import 'package:admin/features/products/domain/use_cases/upload_product_main_image_use_case.dart'
+    as _i604;
+import 'package:admin/features/products/presentation/cubit/categories_cubit.dart'
+    as _i293;
+import 'package:admin/features/products/presentation/cubit/product_form_cubit.dart'
+    as _i593;
+import 'package:admin/features/products/presentation/cubit/product_form_data_cubit.dart'
+    as _i902;
+import 'package:admin/features/products/presentation/cubit/products_cubit.dart'
+    as _i177;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
+import 'package:firebase_storage/firebase_storage.dart' as _i457;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -33,16 +63,66 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final externalModules = _$ExternalModules();
+    gh.factory<_i902.ProductFormDataCubit>(() => _i902.ProductFormDataCubit());
     gh.lazySingleton<_i974.FirebaseFirestore>(() => externalModules.firestore);
     gh.lazySingleton<_i59.FirebaseAuth>(() => externalModules.auth);
+    gh.lazySingleton<_i457.FirebaseStorage>(() => externalModules.storage);
+    gh.lazySingleton<_i935.ImageCompressionService>(
+      () => _i935.ImageCompressionService(),
+    );
+    gh.lazySingleton<_i442.ProductsRemoteDataSource>(
+      () => _i442.ProductsRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+        storage: gh<_i457.FirebaseStorage>(),
+        compressionService: gh<_i935.ImageCompressionService>(),
+      ),
+    );
     gh.lazySingleton<_i529.AuthRemoteDataSource>(
       () => _i529.AuthRemoteDataSource(
         auth: gh<_i59.FirebaseAuth>(),
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
     );
+    gh.lazySingleton<_i229.ProductsRepo>(
+      () => _i721.ProductsRepoImpl(
+        dataSource: gh<_i442.ProductsRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i836.DeleteProductUseCase>(
+      () => _i836.DeleteProductUseCase(repo: gh<_i229.ProductsRepo>()),
+    );
+    gh.lazySingleton<_i72.GetAllProductsUseCase>(
+      () => _i72.GetAllProductsUseCase(repo: gh<_i229.ProductsRepo>()),
+    );
+    gh.lazySingleton<_i436.GetCategoriesUseCase>(
+      () => _i436.GetCategoriesUseCase(repo: gh<_i229.ProductsRepo>()),
+    );
     gh.lazySingleton<_i745.AuthRepo>(
       () => _i1072.AuthRepoImpl(dataSource: gh<_i529.AuthRemoteDataSource>()),
+    );
+    gh.factory<_i177.ProductsCubit>(
+      () => _i177.ProductsCubit(
+        getAllProductsUseCase: gh<_i72.GetAllProductsUseCase>(),
+        deleteProductUseCase: gh<_i836.DeleteProductUseCase>(),
+      ),
+    );
+    gh.lazySingleton<_i938.UploadColorImageUseCase>(
+      () => _i938.UploadColorImageUseCase(
+        compressionService: gh<_i935.ImageCompressionService>(),
+        repo: gh<_i229.ProductsRepo>(),
+      ),
+    );
+    gh.lazySingleton<_i604.UploadProductMainImageUseCase>(
+      () => _i604.UploadProductMainImageUseCase(
+        compressionService: gh<_i935.ImageCompressionService>(),
+        repo: gh<_i229.ProductsRepo>(),
+      ),
+    );
+    gh.lazySingleton<_i531.AddCategoryUseCase>(
+      () => _i531.AddCategoryUseCase(
+        repo: gh<_i229.ProductsRepo>(),
+        compressionService: gh<_i935.ImageCompressionService>(),
+      ),
     );
     gh.lazySingleton<_i482.SignInUseCase>(
       () => _i482.SignInUseCase(repo: gh<_i745.AuthRepo>()),
@@ -50,10 +130,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i868.SignOutUseCase>(
       () => _i868.SignOutUseCase(repo: gh<_i745.AuthRepo>()),
     );
+    gh.factory<_i293.CategoriesCubit>(
+      () => _i293.CategoriesCubit(
+        getCategoriesUseCase: gh<_i436.GetCategoriesUseCase>(),
+        addCategoryUseCase: gh<_i531.AddCategoryUseCase>(),
+      ),
+    );
+    gh.lazySingleton<_i717.SaveProductUseCase>(
+      () => _i717.SaveProductUseCase(
+        repo: gh<_i229.ProductsRepo>(),
+        uploadColorImageUseCase: gh<_i938.UploadColorImageUseCase>(),
+        uploadProductMainImageUseCase:
+            gh<_i604.UploadProductMainImageUseCase>(),
+      ),
+    );
     gh.lazySingleton<_i469.AuthCubit>(
       () => _i469.AuthCubit(
         signInUseCase: gh<_i482.SignInUseCase>(),
         signOutUseCase: gh<_i868.SignOutUseCase>(),
+      ),
+    );
+    gh.factory<_i593.ProductFormCubit>(
+      () => _i593.ProductFormCubit(
+        saveProductUseCase: gh<_i717.SaveProductUseCase>(),
       ),
     );
     return this;

@@ -33,6 +33,13 @@ dependencies:
 
   # Firebase
   firebase_core: ^4.4.0
+  cloud_firestore: ^6.1.2
+
+  # Data & Serialization
+  fpdart: ^1.1.0
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.11.0
+  intl: ^0.20.2
 
   smooth_page_indicator: ^2.0.1
   carousel_slider: ^5.1.2

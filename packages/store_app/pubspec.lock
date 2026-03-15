@@ -210,7 +210,7 @@ packages:
     source: hosted
     version: "1.1.2"
   cloud_firestore:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cloud_firestore
       sha256: e17d7a4342374973decaee550f9f4e4ddb8c89a8b41c2540d0c24004f49cdf36
@@ -510,7 +510,7 @@ packages:
     source: sdk
     version: "0.0.0"
   fpdart:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: fpdart
       sha256: f8e9d0989ba293946673e382c59ac513e30cb6746a9452df195f29e3357a73d4
@@ -526,7 +526,7 @@ packages:
     source: hosted
     version: "3.2.5"
   freezed_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: freezed_annotation
       sha256: "7294967ff0a6d98638e7acb774aac3af2550777accd8149c90af5b014e6d44d8"
@@ -646,7 +646,7 @@ packages:
     source: hosted
     version: "2.12.1"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
@@ -662,7 +662,7 @@ packages:
     source: hosted
     version: "1.0.5"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       sha256: cb09e7dac6210041fad964ed7fbee004f14258b4eca4040f72d1234062ace4c8

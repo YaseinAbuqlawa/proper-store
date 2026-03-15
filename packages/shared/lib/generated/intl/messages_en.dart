@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "apartmentLabel": MessageLookupByLibrary.simpleMessage("Apartment number"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Store Admin Dashboard"),
     "areaLabel": MessageLookupByLibrary.simpleMessage("Area / Neighborhood"),
+    "backToHome": MessageLookupByLibrary.simpleMessage("Back to home"),
     "buildingNumberLabel": MessageLookupByLibrary.simpleMessage(
       "Building number",
     ),
@@ -60,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("Change number"),
     "checkoutTitle": MessageLookupByLibrary.simpleMessage("Checkout"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("City"),
+    "colorLabel": MessageLookupByLibrary.simpleMessage("Color:"),
     "comingSoon": MessageLookupByLibrary.simpleMessage("Coming soon"),
     "completeCheckout": MessageLookupByLibrary.simpleMessage(
       "Complete checkout",
@@ -176,6 +178,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "highQuality": MessageLookupByLibrary.simpleMessage("High quality"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("Home"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "loadingTitle": MessageLookupByLibrary.simpleMessage("Loading"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Sign In"),
     "loginSuccess": MessageLookupByLibrary.simpleMessage(
       "Logged in successfully",
@@ -210,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Your orders will appear here after your first purchase",
     ),
     "noProductsYet": MessageLookupByLibrary.simpleMessage("No products found"),
+    "notFoundTitle": MessageLookupByLibrary.simpleMessage("Page not found"),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage("Or sign in easily"),
     "orderConfirmedMessage": MessageLookupByLibrary.simpleMessage(
       "We\'ll contact you soon to confirm your delivery time",

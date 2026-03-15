@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "apartmentLabel": MessageLookupByLibrary.simpleMessage("رقم الشقة"),
     "appTitle": MessageLookupByLibrary.simpleMessage("لوحة تحكم المتجر"),
     "areaLabel": MessageLookupByLibrary.simpleMessage("المنطقة / الحي"),
+    "backToHome": MessageLookupByLibrary.simpleMessage("العودة للرئيسية"),
     "buildingNumberLabel": MessageLookupByLibrary.simpleMessage("رقم المبنى"),
     "buyNow": MessageLookupByLibrary.simpleMessage("شراء الان"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
@@ -60,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("تغيير الرقم"),
     "checkoutTitle": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("المدينة"),
+    "colorLabel": MessageLookupByLibrary.simpleMessage("اللون:"),
     "comingSoon": MessageLookupByLibrary.simpleMessage("قريباً"),
     "completeCheckout": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage("تاكيد الرقم"),
@@ -168,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "highQuality": MessageLookupByLibrary.simpleMessage("جودة عالية"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "loadingTitle": MessageLookupByLibrary.simpleMessage("جاري التحميل"),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginSuccess": MessageLookupByLibrary.simpleMessage(
       "تم تسجيل الدخول بنجاح",
@@ -204,6 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "طلباتك ستظهر هنا بعد أول عملية شراء",
     ),
     "noProductsYet": MessageLookupByLibrary.simpleMessage("لا توجد منتجات"),
+    "notFoundTitle": MessageLookupByLibrary.simpleMessage("الصفحة غير موجودة"),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage(
       "او سجلي الدخول بسهولة",
     ),
