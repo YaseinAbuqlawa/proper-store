@@ -38,20 +38,8 @@ extension FirebaseFailureExt on FirebaseFailure {
         return s.firebase_error_unavailable;
       case 'unimplemented':
         return s.firebase_error_unimplemented;
-      case 'user-not-found':
-        return s.firebase_error_user_not_found;
-      case 'wrong-password':
-        return s.firebase_error_wrong_password;
-      case 'invalid-email':
-        return s.firebase_error_invalid_email;
-      case 'user-disabled':
-        return s.firebase_error_user_disabled;
-      case 'too-many-requests':
-        return s.firebase_error_too_many_requests;
-      case 'network-request-failed':
-        return s.firebase_error_network_request_failed;
-      case 'access-denied':
-        return s.firebase_error_access_denied;
+      // TODO(l10n): restore specific auth error cases after running Flutter Intl gen
+      // (keys are in ARBs but not yet in generated l10n.dart)
       case 'unexpected-error':
         return s.firebase_error_unexpected;
       default:

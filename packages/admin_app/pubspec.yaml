@@ -22,6 +22,10 @@ dependencies:
   proper_store_shared:
     path: ../shared
 
+  # Functional programming & serialization
+  fpdart: ^1.2.0
+  freezed_annotation: ^3.1.0
+
   # Firebase
   firebase_core: ^4.4.0
   firebase_auth: ^6.1.4
