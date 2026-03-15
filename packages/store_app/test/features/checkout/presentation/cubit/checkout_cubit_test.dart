@@ -7,12 +7,12 @@ import 'package:fpdart/fpdart.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:proper_store/core/failures/app_failures.dart';
-import 'package:proper_store_shared/models/address_model.dart';
-import 'package:proper_store_shared/models/cart_item_model.dart';
-import 'package:proper_store_shared/models/shipping_cost_model.dart';
 import 'package:proper_store/features/checkout/domain/use_cases/get_shipping_cost_use_case.dart';
 import 'package:proper_store/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:proper_store/features/orders/domain/use_cases/create_order_use_case.dart';
+import 'package:proper_store_shared/models/address_model.dart';
+import 'package:proper_store_shared/models/cart_item_model.dart';
+import 'package:proper_store_shared/models/shipping_cost_model.dart';
 
 import 'checkout_cubit_test.mocks.dart';
 

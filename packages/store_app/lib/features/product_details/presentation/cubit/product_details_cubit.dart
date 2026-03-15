@@ -3,10 +3,10 @@ import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/failures/app_failures.dart';
-import 'package:proper_store_shared/models/color_variant.dart';
-import 'package:proper_store_shared/models/product_model.dart';
 import 'package:proper_store/core/products/domain/use_cases/get_product_with_id_use_case.dart';
 import 'package:proper_store/features/product_details/domain/use_cases/get_related_products_use_case.dart';
+import 'package:proper_store_shared/models/product_model.dart';
+import 'package:proper_store_shared/models/product_variant.dart';
 
 part 'product_details_cubit.freezed.dart';
 part 'product_details_state.dart';
@@ -20,7 +20,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     required this.getRelatedProductsUseCase,
   }) : super(ProductDetailsState.initial());
 
-  void selectColor(ColorVariant selectedColor) {
+  void selectColor(ProductVariant selectedColor) {
     state.whenOrNull(
       success: (productDetails, activeIndex, relatedProductsList) => emit(
         ProductDetailsState.success(
@@ -58,7 +58,9 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
               emit(ProductDetailsState.failure(code: serverFailure.code)),
           (relatedProductsList) => emit(
             ProductDetailsState.success(
-              productDetails: productDetails,
+              productDetails: productDetails.copyWith(
+                selectedColor: productDetails.colors.firstOrNull,
+              ),
               relatedProductsList: relatedProductsList,
             ),
           ),

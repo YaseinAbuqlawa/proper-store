@@ -12,7 +12,7 @@ export 'helpers/app_consts.dart';
 export 'helpers/json_convertors.dart';
 export 'models/address_model.dart';
 export 'models/cart_item_model.dart';
-export 'models/color_variant.dart';
+export 'models/product_variant.dart';
 export 'models/customer_model.dart';
 export 'models/order_model.dart';
 export 'models/product_model.dart';

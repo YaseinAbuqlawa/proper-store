@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart' show Color;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../helpers/json_convertors.dart';
-import 'color_variant.dart';
+import 'product_variant.dart';
 
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
@@ -13,8 +13,10 @@ abstract class ProductModel with _$ProductModel {
 
   const factory ProductModel({
     required String category,
-    @ColorVariantConverter() required List<ColorVariant> colors,
-    @ColorVariantConverter() @Default(null) ColorVariant? selectedColor,
+    @ProductVariantConverter() required List<ProductVariant> colors,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    @Default(null)
+    ProductVariant? selectedColor,
     required String description,
     required double discountPercentage,
     required double discountValue,
@@ -22,17 +24,17 @@ abstract class ProductModel with _$ProductModel {
     @JsonKey(includeToJson: false, includeFromJson: false)
     @Default(0)
     int quantity,
-    required List<String> imageUrls,
+    required String mainImageUrl,
     @TimestampConverter() required DateTime lastPurchaseDate,
     required String material,
     required String name,
     required int refundedQuantity,
-    @Default(null) String? collection,
+    @Default("") String? collection,
     required String section,
     required double sellingPrice,
     required List<double> sizes,
     required int soldQuantity,
-    required List<String> videoUrls,
+    required int stockQuantity,
   }) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
@@ -40,12 +42,12 @@ abstract class ProductModel with _$ProductModel {
 
   factory ProductModel.placeholder() => ProductModel(
     category: 'Category',
-    colors: const [ColorVariant(name: 'رمادي', color: Color(0xFFBDBDBD))],
+    colors: const [ProductVariant(name: 'رمادي', color: Color(0xFFBDBDBD))],
     description: 'Product description placeholder text here',
     discountPercentage: 0,
     discountValue: 0,
     id: 'placeholder-id',
-    imageUrls: const ['https://placeholder.com/image.png'],
+    mainImageUrl: 'https://placeholder.com/image.png',
     lastPurchaseDate: DateTime(2026),
     material: 'Material',
     name: 'Product Name',
@@ -54,7 +56,7 @@ abstract class ProductModel with _$ProductModel {
     sellingPrice: 99.99,
     sizes: const [40, 41, 42],
     soldQuantity: 0,
-    videoUrls: const [],
+    stockQuantity: 0,
   );
 
   int get totalStock => colors.fold(0, (sum, c) => sum + c.stockQuantity);

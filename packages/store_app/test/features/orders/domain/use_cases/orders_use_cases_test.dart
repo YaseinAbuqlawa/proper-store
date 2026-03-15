@@ -4,14 +4,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import 'package:proper_store/core/failures/app_failures.dart';
-import 'package:proper_store_shared/models/address_model.dart';
-import 'package:proper_store_shared/models/cart_item_model.dart';
-import 'package:proper_store_shared/models/order_model.dart';
 import 'package:proper_store/features/orders/domain/repo/orders_repo.dart';
 import 'package:proper_store/features/orders/domain/use_cases/create_order_use_case.dart';
 import 'package:proper_store/features/orders/domain/use_cases/get_customer_orders_use_case.dart';
+import 'package:proper_store_shared/models/address_model.dart';
+import 'package:proper_store_shared/models/cart_item_model.dart';
+import 'package:proper_store_shared/models/order_model.dart';
 
 import 'orders_use_cases_test.mocks.dart';
 
@@ -67,8 +66,9 @@ void main() {
     setUp(() => useCase = GetCustomerOrdersUseCase(repo: mockRepo));
 
     test('returns order list on success', () async {
-      when(mockRepo.getCustomerOrders(customerId: testUid))
-          .thenAnswer((_) async => Right([testOrder]));
+      when(
+        mockRepo.getCustomerOrders(customerId: testUid),
+      ).thenAnswer((_) async => Right([testOrder]));
 
       final result = await useCase.call(customerId: testUid);
 
@@ -81,8 +81,9 @@ void main() {
     });
 
     test('returns failure on error', () async {
-      when(mockRepo.getCustomerOrders(customerId: testUid))
-          .thenAnswer((_) async => Left(ServerFailure(code: 'unavailable')));
+      when(
+        mockRepo.getCustomerOrders(customerId: testUid),
+      ).thenAnswer((_) async => Left(ServerFailure(code: 'unavailable')));
 
       final result = await useCase.call(customerId: testUid);
 
@@ -96,8 +97,9 @@ void main() {
     setUp(() => useCase = CreateOrderUseCase(repo: mockRepo));
 
     test('returns order ID on success', () async {
-      when(mockRepo.createOrder(order: testOrder))
-          .thenAnswer((_) async => const Right('new-order-id'));
+      when(
+        mockRepo.createOrder(order: testOrder),
+      ).thenAnswer((_) async => const Right('new-order-id'));
 
       final result = await useCase.call(order: testOrder);
 
@@ -110,8 +112,9 @@ void main() {
     });
 
     test('returns failure on error', () async {
-      when(mockRepo.createOrder(order: testOrder))
-          .thenAnswer((_) async => Left(ServerFailure(code: 'permission-denied')));
+      when(
+        mockRepo.createOrder(order: testOrder),
+      ).thenAnswer((_) async => Left(ServerFailure(code: 'permission-denied')));
 
       final result = await useCase.call(order: testOrder);
 

@@ -6,19 +6,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import 'package:proper_store/core/failures/app_failures.dart';
-import 'package:proper_store_shared/models/address_model.dart';
-import 'package:proper_store_shared/models/cart_item_model.dart';
-import 'package:proper_store_shared/models/order_model.dart';
 import 'package:proper_store/features/orders/domain/use_cases/create_order_use_case.dart';
 import 'package:proper_store/features/orders/domain/use_cases/get_customer_orders_use_case.dart';
 import 'package:proper_store/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:proper_store/features/orders/presentation/cubit/orders_state.dart';
+import 'package:proper_store_shared/models/address_model.dart';
+import 'package:proper_store_shared/models/cart_item_model.dart';
+import 'package:proper_store_shared/models/order_model.dart';
 
 import 'orders_cubit_test.mocks.dart';
 
-@GenerateMocks([GetCustomerOrdersUseCase, CreateOrderUseCase, FirebaseAuth, User])
+@GenerateMocks([
+  GetCustomerOrdersUseCase,
+  CreateOrderUseCase,
+  FirebaseAuth,
+  User,
+])
 void main() {
   late MockGetCustomerOrdersUseCase mockGetOrdersUseCase;
   late MockCreateOrderUseCase mockCreateOrderUseCase;
@@ -62,10 +66,10 @@ void main() {
   );
 
   OrdersCubit buildCubit() => OrdersCubit(
-        getCustomerOrdersUseCase: mockGetOrdersUseCase,
-        createOrderUseCase: mockCreateOrderUseCase,
-        auth: mockFirebaseAuth,
-      );
+    getCustomerOrdersUseCase: mockGetOrdersUseCase,
+    createOrderUseCase: mockCreateOrderUseCase,
+    auth: mockFirebaseAuth,
+  );
 
   setUp(() {
     mockGetOrdersUseCase = MockGetCustomerOrdersUseCase();
@@ -106,8 +110,9 @@ void main() {
       'emits [loading, loaded] on success',
       build: () {
         when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
-        when(mockGetOrdersUseCase.call(customerId: testUid))
-            .thenAnswer((_) async => Right([testOrder]));
+        when(
+          mockGetOrdersUseCase.call(customerId: testUid),
+        ).thenAnswer((_) async => Right([testOrder]));
         return buildCubit();
       },
       act: (cubit) => cubit.getCustomerOrders(),
@@ -121,8 +126,9 @@ void main() {
       'emits [loading, failure] on error',
       build: () {
         when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
-        when(mockGetOrdersUseCase.call(customerId: testUid))
-            .thenAnswer((_) async => Left(ServerFailure(code: 'unavailable')));
+        when(
+          mockGetOrdersUseCase.call(customerId: testUid),
+        ).thenAnswer((_) async => Left(ServerFailure(code: 'unavailable')));
         return buildCubit();
       },
       act: (cubit) => cubit.getCustomerOrders(),
@@ -142,11 +148,11 @@ void main() {
   group('addOrder', () {
     test('returns order ID and prepends to list on success', () async {
       when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
-      when(mockCreateOrderUseCase.call(order: testOrder))
-          .thenAnswer((_) async => const Right('new-order-id'));
+      when(
+        mockCreateOrderUseCase.call(order: testOrder),
+      ).thenAnswer((_) async => const Right('new-order-id'));
 
-      final cubit = buildCubit()
-        ..emit(OrdersState.loaded(orders: []));
+      final cubit = buildCubit()..emit(OrdersState.loaded(orders: []));
 
       final result = await cubit.addOrder(order: testOrder);
 
@@ -160,8 +166,9 @@ void main() {
 
     test('returns null and emits failure on error', () async {
       when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
-      when(mockCreateOrderUseCase.call(order: testOrder))
-          .thenAnswer((_) async => Left(ServerFailure(code: 'internal')));
+      when(
+        mockCreateOrderUseCase.call(order: testOrder),
+      ).thenAnswer((_) async => Left(ServerFailure(code: 'internal')));
 
       final cubit = buildCubit();
       final result = await cubit.addOrder(order: testOrder);

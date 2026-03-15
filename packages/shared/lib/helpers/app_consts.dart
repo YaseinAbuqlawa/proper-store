@@ -1,4 +1,8 @@
 abstract final class AppConsts {
+  static const String currencySymbol = 'ج';
+  static const String sectionBags = 'bags';
+  static const int imageQuality = 85;
+
   static const String storeConfigCollection = 'storeConfig';
   static const String bagCategoriesCollection = 'bagCategories';
   static const String customersCollection = 'customers';

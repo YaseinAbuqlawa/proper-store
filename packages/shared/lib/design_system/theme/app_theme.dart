@@ -49,6 +49,46 @@ class AppTheme {
         ),
         bodySmall: TextStyle(fontFamily: 'Cairo', color: AppColors.textSubtle),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppColors.lightBackground,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.textSubtle),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.textSubtle),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.goldRoyal, width: 1.5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.errorRed),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.errorRed, width: 1.5),
+        ),
+        labelStyle: const TextStyle(
+          fontFamily: 'Cairo',
+          color: AppColors.textSubtle,
+        ),
+        hintStyle: const TextStyle(
+          fontFamily: 'Cairo',
+          color: AppColors.textSubtle,
+        ),
+        floatingLabelStyle: const TextStyle(
+          fontFamily: 'Cairo',
+          color: AppColors.goldMuted,
+        ),
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           padding: AppSpacing.buttonPadding,
@@ -115,6 +155,46 @@ class AppTheme {
         bodySmall: TextStyle(
           fontFamily: 'Cairo',
           color: AppColors.textSecondary,
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppColors.darkGray,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.textSecondary),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.textSecondary),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.goldRoyal, width: 1.5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.errorRed),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
+          borderSide: const BorderSide(color: AppColors.errorRed, width: 1.5),
+        ),
+        labelStyle: const TextStyle(
+          fontFamily: 'Cairo',
+          color: AppColors.textSecondary,
+        ),
+        hintStyle: const TextStyle(
+          fontFamily: 'Cairo',
+          color: AppColors.textSecondary,
+        ),
+        floatingLabelStyle: const TextStyle(
+          fontFamily: 'Cairo',
+          color: AppColors.goldMuted,
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

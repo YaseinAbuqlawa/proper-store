@@ -1,0 +1,72 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:injectable/injectable.dart';
+import 'package:proper_store_shared/models/product_model.dart';
+
+import 'package:admin/features/products/presentation/models/product_variant_entry.dart';
+
+import 'product_form_data_state.dart';
+
+@injectable
+class ProductFormDataCubit extends Cubit<ProductFormData> {
+  ProductFormDataCubit() : super(const ProductFormData());
+
+  void initForEdit(ProductModel product) {
+    emit(
+      ProductFormData(
+        selectedCategory: product.category,
+        existingMainImageUrl: product.mainImageUrl.isNotEmpty
+            ? product.mainImageUrl
+            : null,
+        productVariants: product.colors
+            .map(ProductVariantEntry.fromVariant)
+            .toList(),
+      ),
+    );
+  }
+
+  void selectCategory(String? category) {
+    emit(state.copyWith(selectedCategory: category));
+  }
+
+  Future<void> pickMainImage() async {
+    final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (picked == null) return;
+    final bytes = await picked.readAsBytes();
+    emit(
+      state.copyWith(
+        removedMainImageUrl: state.existingMainImageUrl,
+        existingMainImageUrl: null,
+        newMainImageBytes: bytes,
+      ),
+    );
+  }
+
+  void removeMainImage() {
+    emit(
+      state.copyWith(
+        removedMainImageUrl: state.existingMainImageUrl ?? state.removedMainImageUrl,
+        existingMainImageUrl: null,
+        newMainImageBytes: null,
+      ),
+    );
+  }
+
+  void addVariant() {
+    emit(
+      state.copyWith(
+        productVariants: [...state.productVariants, ProductVariantEntry()],
+      ),
+    );
+  }
+
+  void removeVariant(int index) {
+    final updated = List<ProductVariantEntry>.from(state.productVariants)
+      ..removeAt(index);
+    emit(state.copyWith(productVariants: updated));
+  }
+
+  void notifyVariantChanged() {
+    emit(state.copyWith(productVariants: List.from(state.productVariants)));
+  }
+}

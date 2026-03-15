@@ -1,19 +1,19 @@
 import 'package:flutter/widgets.dart' show Color;
 
-class ColorVariant {
+class ProductVariant {
   final String name;
   final Color color;
   final int stockQuantity;
   final List<String> imageUrls;
 
-  const ColorVariant({
+  const ProductVariant({
     required this.name,
     required this.color,
     this.stockQuantity = 0,
     this.imageUrls = const [],
   });
 
-  factory ColorVariant.fromJson(Map<String, dynamic> json) => ColorVariant(
+  factory ProductVariant.fromJson(Map<String, dynamic> json) => ProductVariant(
     name: json['name'] as String,
     color: Color(json['hex'] as int),
     stockQuantity: (json['stockQuantity'] as num?)?.toInt() ?? 0,
@@ -34,13 +34,12 @@ class ColorVariant {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ColorVariant &&
-          color.toARGB32() == other.color.toARGB32();
+      other is ProductVariant && color.toARGB32() == other.color.toARGB32();
 
   @override
   int get hashCode => color.toARGB32().hashCode;
 
   @override
   String toString() =>
-      'ColorVariant(name: $name, color: $color, stock: $stockQuantity)';
+      'ProductVariant(name: $name, color: $color, stock: $stockQuantity)';
 }

@@ -14,6 +14,7 @@ import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:admin/features/auth/presentation/screens/login_screen.dart';
 import 'package:admin/features/customers/presentation/screens/customers_screen.dart';
 import 'package:admin/features/orders/presentation/screens/orders_screen.dart';
+import 'package:admin/features/products/presentation/screens/product_form_screen.dart';
 import 'package:admin/features/products/presentation/screens/products_screen.dart';
 import 'package:admin/features/store_config/presentation/screens/store_config_screen.dart';
 
@@ -56,6 +57,19 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: AppRoutes.products.path,
           builder: (ctx, s) => const AdminProductsScreen(),
+          routes: [
+            GoRoute(
+              path: 'add',
+              parentNavigatorKey: rootNavigationKey,
+              builder: (ctx, s) => const ProductFormScreen(),
+            ),
+            GoRoute(
+              path: 'edit',
+              parentNavigatorKey: rootNavigationKey,
+              builder: (_, state) =>
+                  ProductFormScreen(product: state.extra as dynamic),
+            ),
+          ],
         ),
         GoRoute(
           path: AppRoutes.customers.path,

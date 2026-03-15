@@ -10,8 +10,8 @@ import 'package:proper_store_shared/design_system/typography/app_text_styles.dar
 import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/helpers/app_snackbar.dart';
 import 'package:proper_store_shared/models/cart_item_model.dart';
-import 'package:proper_store_shared/models/color_variant.dart';
 import 'package:proper_store_shared/models/product_model.dart';
+import 'package:proper_store_shared/models/product_variant.dart';
 
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/helpers/auth_guard_dialog.dart';
@@ -74,7 +74,8 @@ class ProductDetailsScreen extends StatelessWidget {
                             child: ProductDetailsImagesCarousel(
                               productId: id,
                               screenHeight: screenHeight,
-                              imageUrls: productDetails!.imageUrls,
+                              imageUrls:
+                                  productDetails!.selectedColor!.imageUrls,
                             ),
                           ),
 
@@ -82,7 +83,10 @@ class ProductDetailsScreen extends StatelessWidget {
                             child: Center(
                               child: AnimatedSmoothIndicator(
                                 activeIndex: activeIndex,
-                                count: productDetails.imageUrls.length,
+                                count: productDetails
+                                    .selectedColor!
+                                    .imageUrls
+                                    .length,
                                 effect: const WormEffect(
                                   dotWidth: 10,
                                   dotHeight: 10,
@@ -336,10 +340,10 @@ class ProductDetailsScreen extends StatelessWidget {
   }
 
   CartItemModel? _buildCartItem(ProductModel product) {
-    final colorVariant = product.selectedColor ?? product.colors.firstOrNull;
-    if (colorVariant == null) return null;
+    final productVariant = product.selectedColor ?? product.colors.firstOrNull;
+    if (productVariant == null) return null;
     return CartItemModel.fromProductModel(
-      product.copyWith(selectedColor: colorVariant),
+      product.copyWith(selectedColor: productVariant),
     );
   }
 
@@ -373,7 +377,7 @@ class ProductDetailsScreen extends StatelessWidget {
 }
 
 class ColorsRow extends StatelessWidget {
-  final List<ColorVariant> productColors;
+  final List<ProductVariant> productColors;
   const ColorsRow({super.key, required this.productColors});
 
   @override
@@ -381,7 +385,7 @@ class ColorsRow extends StatelessWidget {
     return BlocSelector<
       ProductDetailsCubit,
       ProductDetailsState,
-      ColorVariant?
+      ProductVariant?
     >(
       selector: (state) {
         return state.maybeWhen(

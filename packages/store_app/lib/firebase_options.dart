@@ -72,5 +72,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'proper-store-eg.firebasestorage.app',
     iosBundleId: 'com.example.properStore',
   );
-
 }

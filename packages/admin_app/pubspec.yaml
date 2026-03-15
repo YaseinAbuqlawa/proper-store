@@ -30,6 +30,7 @@ dependencies:
   firebase_core: ^4.4.0
   firebase_auth: ^6.1.4
   cloud_firestore: ^6.1.2
+  firebase_storage: ^13.1.0
 
   # UI
   cached_network_image: ^3.4.1
@@ -37,6 +38,12 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
+  
+  # Image handling
+  flutter_image_compress: ^2.3.0
+  image_picker: ^1.1.2
+  flutter_colorpicker: ^1.1.0
+
 
 dev_dependencies:
   flutter_test:
@@ -46,7 +53,7 @@ dev_dependencies:
   freezed: ^3.1.0
   json_serializable: ^6.9.5
   build_runner: ^2.4.15
-  injectable_generator: ^2.7.1+4
+  injectable_generator: ^2.12.1
 
 flutter:
   uses-material-design: true

@@ -44,7 +44,7 @@ class ProductCard extends StatelessWidget {
           onTap: () {
             appRouter.push(
               AppRoutes.productDetails.withId(product.id),
-              extra: product.imageUrls[0],
+              extra: product.mainImageUrl,
             );
           },
           child: Container(
@@ -66,9 +66,9 @@ class ProductCard extends StatelessWidget {
                   children: [
                     enableHero
                         ? Hero(
-                            tag: product.imageUrls[0] + product.id,
+                            tag: product.mainImageUrl + product.id,
                             child: AppNetworkImage(
-                              imageUrl: product.imageUrls[0],
+                              imageUrl: product.mainImageUrl,
                               height: constraints.maxHeight * .5,
                             ),
                           )
@@ -76,7 +76,7 @@ class ProductCard extends StatelessWidget {
                             width: double.infinity,
                             height: constraints.maxHeight * .5,
                             child: AppNetworkImage(
-                              imageUrl: product.imageUrls[0],
+                              imageUrl: product.mainImageUrl,
                               height: constraints.maxHeight * .5,
                             ),
                           ),
