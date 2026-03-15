@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+  <meta name="google-signin-client_id" content="968085072868-fmsr9su6c0p9vd35720gn321j1aesujj.apps.googleusercontent.com">
+
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="متجر The Proper Store — حقائب نسائية راقية. تسوقي أحدث التصاميم بأفضل الأسعار.">
+  <meta name="keywords" content="حقائب نسائية, متجر إلكتروني, The Proper Store">
+  <meta property="og:title" content="The Proper Store">
+  <meta property="og:description" content="حقائب نسائية راقية — تسوقي الآن">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theproperstore.com">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Proper Store">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <title>The Proper Store</title>
+  <link rel="manifest" href="manifest.json">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <style>
+    @keyframes splashFadeIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes splashDot {
+      0%, 80%, 100% { transform: scale(0.4); opacity: 0.3; }
+      40%           { transform: scale(1);   opacity: 1; }
+    }
+    #splash { animation: splashFadeIn 0.5s ease-out forwards; }
+    .splash-dots {
+      position: fixed; bottom: 15%; left: 0; right: 0;
+      display: flex; justify-content: center; gap: 10px;
+    }
+    .splash-dots span {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #C9A84C;
+      animation: splashDot 1.3s ease-in-out infinite both;
+    }
+    .splash-dots span:nth-child(1) { animation-delay: -0.32s; }
+    .splash-dots span:nth-child(2) { animation-delay: -0.16s; }
+    .splash-dots span:nth-child(3) { animation-delay:     0s; }
+  </style>
+  <style id="splash-screen-style">
+    html {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      background-color: #1E1E1E;
+          background-size: 100% 100%;
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .contain {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width:100vw;
+      object-fit: contain;
+    }
+
+    .stretch {
+      display:block;
+      width:100%; height:100%;
+    }
+
+    .cover {
+      display:block;
+      width:100%; height:100%;
+      object-fit: cover;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+
+    .bottomLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .bottomRight {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <script id="splash-screen-script">
+    function removeSplashFromWeb() {
+      var splash = document.getElementById("splash");
+      var dots = document.querySelector(".splash-dots");
+      if (!splash) return;
+      splash.style.transition = "opacity 0.45s ease-out";
+      splash.style.opacity = "0";
+      if (dots) {
+        dots.style.transition = "opacity 0.45s ease-out";
+        dots.style.opacity = "0";
+      }
+      setTimeout(function() {
+        splash.remove();
+        if (dots) dots.remove();
+        document.getElementById("splash-branding")?.remove();
+        var content = document.getElementById("initial_content");
+        if (content) content.style.cssText = "";
+        document.body.style.background = "transparent";
+      }, 450);
+    }
+  </script>
+</head>
+<body>
+  <picture id="splash">
+      <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
+      <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+      <img class="contain" aria-hidden="true" src="splash/img/light-1x.png" alt="">
+  </picture>
+  <div class="splash-dots">
+    <span></span><span></span><span></span>
+  </div>
+
+
+
+
+
+
+
+
+  <script src="flutter_bootstrap.js" async=""></script>
+
+
+</body></html>

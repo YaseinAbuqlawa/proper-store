@@ -1,0 +1,338 @@
+{
+  "@@locale": "ar",
+  "appTitle": "لوحة تحكم المتجر",
+  "@appTitle": { "description": "Admin dashboard app title" },
+
+  "loginTitle": "تسجيل الدخول",
+  "@loginTitle": {},
+
+  "emailLabel": "البريد الإلكتروني",
+  "@emailLabel": {},
+
+  "passwordLabel": "كلمة المرور",
+  "@passwordLabel": {},
+
+  "loginButton": "تسجيل الدخول",
+  "@loginButton": {},
+
+  "logoutButton": "تسجيل الخروج",
+  "@logoutButton": {},
+
+  "navOrders": "الطلبات",
+  "@navOrders": {},
+
+  "navProducts": "المنتجات",
+  "@navProducts": {},
+
+  "navCustomers": "العملاء",
+  "@navCustomers": {},
+
+  "navStoreConfig": "الإعدادات",
+  "@navStoreConfig": {},
+
+  "errorRequired": "هذا الحقل مطلوب",
+  "@errorRequired": {},
+
+  "errorAccessDenied": "ليس لديك صلاحية الوصول لهذه اللوحة",
+  "@errorAccessDenied": {},
+
+  "errorUnexpected": "حدث خطأ غير متوقع، حاول مجدداً",
+  "@errorUnexpected": {},
+
+  "comingSoon": "قريباً",
+  "@comingSoon": {},
+
+  "dashboardTitle": "لوحة التحكم",
+  "@dashboardTitle": {},
+
+  "emailValidation": "أدخل البريد الإلكتروني",
+  "@emailValidation": {},
+
+  "passwordValidation": "أدخل كلمة المرور",
+  "@passwordValidation": {},
+
+  "cancelBtn": "إلغاء",
+  "@cancelBtn": {},
+
+  "addBtn": "إضافة",
+  "@addBtn": {},
+
+  "deleteBtn": "حذف",
+  "@deleteBtn": {},
+
+  "retryBtn": "إعادة المحاولة",
+  "@retryBtn": {},
+
+  "productsTitle": "المنتجات",
+  "@productsTitle": {},
+
+  "productsSearchHint": "بحث عن منتج...",
+  "@productsSearchHint": {},
+
+  "productsEmpty": "لا توجد منتجات",
+  "@productsEmpty": {},
+
+  "productDeleteTitle": "حذف المنتج",
+  "@productDeleteTitle": {},
+
+  "productDeleteMessage": "هل تريد حذف هذا المنتج نهائياً؟ لا يمكن التراجع.",
+  "@productDeleteMessage": {},
+
+  "productFormAddTitle": "إضافة منتج جديد",
+  "@productFormAddTitle": {},
+
+  "productFormEditTitle": "تعديل المنتج",
+  "@productFormEditTitle": {},
+
+  "productFormSave": "حفظ التغييرات",
+  "@productFormSave": {},
+
+  "productFormAddBtn": "إضافة المنتج",
+  "@productFormAddBtn": {},
+
+  "productFormSectionBasicInfo": "المعلومات الأساسية",
+  "@productFormSectionBasicInfo": {},
+
+  "productFormSectionPricing": "التسعير",
+  "@productFormSectionPricing": {},
+
+  "productFormSectionColors": "ألوان المنتج",
+  "@productFormSectionColors": {},
+
+  "productFormSectionMainImage": "الصورة الرئيسية",
+  "@productFormSectionMainImage": {},
+
+  "productFormSectionReports": "الإحصائيات",
+  "@productFormSectionReports": {},
+
+  "productFormFieldName": "اسم المنتج",
+  "@productFormFieldName": {},
+
+  "productFormFieldDesc": "الوصف",
+  "@productFormFieldDesc": {},
+
+  "productFormFieldCategory": "التصنيف",
+  "@productFormFieldCategory": {},
+
+  "productFormFieldCollection": "الكولكشن (اختياري)",
+  "@productFormFieldCollection": {},
+
+  "productFormFieldPrice": "سعر البيع",
+  "@productFormFieldPrice": {},
+
+  "productFormFieldDiscountPct": "نسبة الخصم %",
+  "@productFormFieldDiscountPct": {},
+
+  "productFormFieldDiscountVal": "قيمة الخصم",
+  "@productFormFieldDiscountVal": {},
+
+  "productFormFieldSoldQty": "الكميات المباعة",
+  "@productFormFieldSoldQty": {},
+
+  "productFormFieldRefundedQty": "الكميات المستردة",
+  "@productFormFieldRefundedQty": {},
+
+  "productFormAddColor": "إضافة لون",
+  "@productFormAddColor": {},
+
+  "productFormColorName": "اسم اللون",
+  "@productFormColorName": {},
+
+  "productFormColorStock": "المخزون",
+  "@productFormColorStock": {},
+
+  "productFormColorPickImage": "إضافة صورة",
+  "@productFormColorPickImage": {},
+
+  "productFormColorChangeImage": "تغيير الصورة",
+  "@productFormColorChangeImage": {},
+
+  "productFormPickColor": "اختر لوناً",
+  "@productFormPickColor": {},
+
+  "productFormPickImage": "اختر صورة رئيسية",
+  "@productFormPickImage": {},
+
+  "productFormChangeImage": "تغيير الصورة",
+  "@productFormChangeImage": {},
+
+  "productFormErrorAtLeastOneColor": "يرجى إضافة لون واحد على الأقل",
+  "@productFormErrorAtLeastOneColor": {},
+
+  "productFormSuccessAdd": "تم إضافة المنتج بنجاح",
+  "@productFormSuccessAdd": {},
+
+  "productFormSuccessEdit": "تم تحديث المنتج بنجاح",
+  "@productFormSuccessEdit": {},
+
+  "productFormAddCategory": "إضافة تصنيف جديد",
+  "@productFormAddCategory": {},
+
+  "productFormCategoryHint": "اسم التصنيف",
+  "@productFormCategoryHint": {},
+
+  "editBtn": "تعديل",
+  "@editBtn": {},
+
+  "actionsLabel": "الإجراءات",
+  "@actionsLabel": {},
+
+  "homeTitle" : "PROPER",
+  "homeButtonName": "الرئيسية" ,
+  "categories" : "الاقسام",
+  "favoritesTitle" : "المفضلة",
+  "cartTitle" : "السلة",
+  "ordersTitle" : "طلباتي",
+  "profileTitle" : "حسابي",
+  "mostSoldSectionTitle": "الاكثر مبيعاً",
+  "showAllText": "عرض الكل",
+  "mainCollectionBannerButtonText": "تسوقي الان",
+  "addToCartText" : "أضف للسلة",
+  "currencySymbol" : " ج.م",
+  "productDetailsScreenTitle" : "تفاصيل المنتج",
+  "fieldRequired": "هذا الحقل مطلوب",
+  "phoneNumberMustBe10Digits": "رقم الهاتف يجب أن يتكون من 10 أرقام",
+  "changePhoneNumber": "تغيير الرقم",
+  "phoneNumberLabel": "رقم الهاتف",
+  "otpCodeLabel": "رمز التحقق",
+  "otpMustBe6Digits": "رمز التحقق يجب ان يكون 6 ارقام على الاقل",
+  "welcomeMessage": "مرحباً بكِ",
+  "signInToFollowLatestFashion": "سجلي الدخول لمتابعة أحدث صيحات الموضة",
+  "fullNameLabel": "الاسم الكامل",
+  "enterFullNameHint": "ادخلي اسمك الكامل",
+  "nameMustBeMoreThan2Chars": "الاسم يجب أن يكون أكثر من حرفين",
+  "otpSentSuccessfully": "تم ارسال رمز التحقق",
+  "verifyCode": "التحقق من الرمز",
+  "confirmPhoneNumber": "تاكيد الرقم",
+  "errorTitle": "خطأ",
+  "successTitle": "نجاح",
+  "completeCheckout": "إتمام الشراء",
+  "buyNow": "شراء الان",
+  "addToCartButton": "إضافة للسلة",
+  "discountLabel": "خصم {percentage}%",
+  "@discountLabel": {
+      "placeholders": {
+          "percentage": {
+              "type": "double"
+          }
+      }
+  },
+  "loginSuccess": "تم تسجيل الدخول بنجاح",
+  "signInForBestService": "سجلي دخولك لتحصلي على افضل خدمة ممكنة",
+  "signInEasilyVia": "سجلي بسهولة عبر",
+  "myAddresses": "عناويني",
+  "contactUs": "تواصل معنا",
+  "returnPolicy": "سياسة الاسترجاع",
+  "signOut": "تسجيل الخروج",
+  "selectedColor": "اللون المختار:",
+  "descriptionAndDetails": "الوصف والتفاصيل",
+  "similarProducts": "منتجات مشابهة",
+  "highQuality": "جودة عالية",
+  "pricesSuitYou": "بأسعار تناسبك",
+  "discoverLatestFashion": "اكتشفي أحدث صيحات الموضة من الأحذية والحقائب في مصر بجودة عالمية.",
+  "shopAsGuest": "التسوق كزائر",
+  "orSignInEasily": "او سجلي الدخول بسهولة",
+  "firebase_error_aborted": "حصلت مشكلة بسيطة والعملية اتوقفت، ممكن تحاول مرة تانية؟",
+  "firebase_error_already_exists": "البيانات دي موجودة عندنا بالفعل، يا ريت تتأكد منها.",
+  "firebase_error_cancelled": "تم إلغاء العملية بناءً على طلبك.",
+  "firebase_error_data_loss": "عذراً، حصل فقد في البيانات، يا ريت تبلغ الدعم الفني لمساعدتك.",
+  "firebase_error_deadline_exceeded": "الوقت خلص والنت شكله ضعيف شوية، تأكد من الاتصال وجرب تاني.",
+  "firebase_error_failed_precondition": "العملية دي مقدرش أنفذها دلوقتي، حاول مرة تانية لاحقاً.",
+  "firebase_error_internal": "فيه عطل فني بسيط في النظام، وإحنا شغالين على إصلاحه حالياً.",
+  "firebase_error_invalid_argument": "فيه بيانات دخلت بشكل غير صحيح، يا ريت تراجع عليها.",
+  "firebase_error_not_found": "للأسف ملقناش الحاجة اللي بتدور عليها، تأكد إنك كاتبها صح.",
+  "firebase_error_ok": "تمت العملية بنجاح، شكراً ليك!",
+  "firebase_error_out_of_range": "القيمة اللي دخلتها مش في النطاق المسموح بيه.",
+  "firebase_error_permission_denied": "عذراً، مفيش صلاحية كافية للقيام بالخطوة دي.",
+  "firebase_error_resource_exhausted": "فيه ضغط كبير حالياً، استنى لحظة وجرب تاني.",
+  "firebase_error_unauthenticated": "من فضلك سجل دخولك الأول عشان تقدر تكمل معانا.",
+  "firebase_error_unavailable": "الخدمة غير متاحة مؤقتاً، بنحاول نرجعها في أسرع وقت.",
+  "firebase_error_unimplemented": "الميزة دي لسه مش متاحة حالياً، انتظرها في التحديثات الجاية.",
+  "firebase_error_unknown": "حصل خطأ غير متوقع، يا ريت تحاول مرة تانية.",
+  "firebase_error_unexpected": "حدث خطأ غير متوقع، يرجى المحاولة مرة ثانية أو التأكد من اتصال الإنترنت.",
+  "addAddressTitle": "إضافة عنوان",
+  "noAddressesYet": "لا توجد عناوين بعد",
+  "addFirstAddress": "أضف عنوانك الأول للبدء",
+  "addressLabelLabel": "نوع العنوان",
+  "addressLabelHint": "مثال: المنزل، العمل",
+  "cityLabel": "المدينة",
+  "areaLabel": "المنطقة / الحي",
+  "streetLabel": "الشارع",
+  "buildingNumberLabel": "رقم المبنى",
+  "floorLabel": "الدور",
+  "apartmentLabel": "رقم الشقة",
+  "setAsDefault": "تعيين كعنوان افتراضي",
+  "saveAddress": "حفظ العنوان",
+  "addressSaved": "تم حفظ العنوان بنجاح",
+  "addressDeleted": "تم حذف العنوان",
+  "defaultBadge": "افتراضي",
+  "deleteAddressConfirm": "هل أنت متأكد من حذف هذا العنوان؟",
+  "cancel": "إلغاء",
+  "delete": "حذف",
+  "phoneNumberMustBe11Digits": "رقم الهاتف يجب أن يتكون من 11 أرقام",
+  "retry": "إعادة المحاولة",
+  "noProductsYet": "لا توجد منتجات",
+  "noOrdersYet": "لا توجد طلبات بعد",
+  "noOrdersYetMessage": "طلباتك ستظهر هنا بعد أول عملية شراء",
+  "orderStatusPending": "قيد الانتظار",
+  "orderStatusConfirmed": "مؤكد",
+  "orderStatusShipped": "تم الشحن",
+  "orderStatusDelivered": "تم التسليم",
+  "orderStatusCancelled": "ملغي",
+  "orderTotalLabel": "الإجمالي",
+  "paymentCOD": "الدفع عند الاستلام",
+  "orderNumberLabel": "رقم الطلب",
+  "orderDetails": "عرض التفاصيل",
+  "orderDetailsTitle": "تفاصيل الطلب",
+  "orderStatusTitle": "حالة الطلب",
+  "orderStepPreparing": "تجهيز",
+  "orderStepShipping": "شحن",
+  "orderStepDelivery": "توصيل",
+  "orderedOnLabel": "تم الطلب:",
+  "checkoutTitle": "إتمام الشراء",
+  "orderSummaryTitle": "ملخص الطلب",
+  "shippingAddressTitle": "عنوان الشحن",
+  "paymentMethodTitle": "طريقة الدفع",
+  "placeOrderButton": "تأكيد الطلب",
+  "noAddressSelected": "يرجى اختيار عنوان للشحن",
+  "addNewAddress": "إضافة عنوان جديد",
+  "shippingFree": "مجاني",
+  "shippingLabel": "الشحن",
+  "shippingNotAvailable": "غير متاح لهذه المنطقة",
+  "subtotalLabel": "الإجمالي قبل الخصم",
+  "discountAmountLabel": "الخصم",
+  "orderConfirmedTitle": "تم تأكيد طلبك!",
+  "orderConfirmedMessage": "سيتم التواصل معك قريباً لتأكيد موعد التوصيل",
+  "continueShopping": "متابعة التسوق",
+  "loginToCheckout": "سجلي دخولك",
+  "loginToCheckoutMessage": "سجلي دخولك لمتابعة طلباتك والاستمتاع بأفضل تجربة تسوق",
+  "addedToCart": "تمت الإضافة للسلة بنجاح",
+  "signInWithGoogle": "تسجيل الدخول بجوجل",
+  "signInWithFacebook": "تسجيل الدخول بفيسبوك",
+  "grandTotalLabel": "الإجمالي النهائي",
+  "quantityLabel": "الكمية: {count}",
+  "@quantityLabel": {
+      "placeholders": {
+          "count": {
+              "type": "int"
+          }
+      }
+  },
+  "emptyCartMessage": "سلة التسوق فارغة، أضف منتجات تعجبك!",
+  "emptyCartShopNow": "تسوقي الآن",
+  "emptyFavoritesMessage": "قائمة المفضلة فارغة، احفظي ما يعجبك!",
+  "emptyFavoritesShopNow": "تسوقي الآن",
+  "moreProductsLabel": "+{count} منتجات أخرى",
+  "@moreProductsLabel": {
+      "placeholders": {
+          "count": {
+             "type": "int"
+          }
+      }
+  },
+  "darkModeLabel": "الوضع الداكن",
+  "loadingTitle": "جاري التحميل",
+  "colorLabel": "اللون:",
+  "notFoundTitle": "الصفحة غير موجودة",
+  "backToHome": "العودة للرئيسية"
+}

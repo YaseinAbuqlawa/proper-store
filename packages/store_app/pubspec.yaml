@@ -1,0 +1,98 @@
+name: proper_store
+description: "An E-Commerce Web App for selling women bags and shoes"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.11.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Provides internationalization and localization facilities, including message translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
+  flutter_localizations:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+
+  # State Management & DI
+  flutter_bloc: ^9.1.1
+  get_it: ^9.2.0
+  injectable: ^2.7.1+4
+
+  # Navigation
+  go_router: ^17.1.0
+
+  # Shared package
+  proper_store_shared:
+    path: ../shared
+
+  # Images
+  cached_network_image: ^3.4.1
+
+  # Firebase
+  firebase_core: ^4.4.0
+
+  smooth_page_indicator: ^2.0.1
+  carousel_slider: ^5.1.2
+  lottie: ^3.3.2
+  flutter_native_splash: ^2.4.7
+  firebase_auth: ^6.1.4
+  cloud_functions: ^6.0.6
+  flutter_svg: ^2.2.3
+  skeletonizer: ^2.1.3
+  shared_preferences: ^2.5.3
+  firebase_analytics: ^12.1.3
+  web: ^1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  # Code Generation Tools
+  build_runner: ^2.4.8
+  freezed: ^3.2.5
+  injectable_generator: ^2.6.2
+  json_serializable: ^6.7.1
+
+  # Testing
+  mockito: ^5.4.4
+  bloc_test: ^10.0.0
+  flutter_launcher_icons: ^0.14.3
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/lottie/
+    - assets/icons/
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cairo-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Cairo-Black.ttf
+          weight: 900
+
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: "assets/images/proper_logo.png"
+    background_color: "#1E1E1E"
+    theme_color: "#C9A84C"
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  color: "#1E1E1E"
+  image: assets/images/proper_logo.png
+  fullscreen: true
+  web: true
+  web_image_position: center
+  web_image_mode: contain

@@ -1,0 +1,27 @@
+name: proper_store_shared
+description: Shared models, failures, and helpers for Proper Store apps.
+version: 1.0.0
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.11.0
+  cloud_firestore: ^6.1.2
+  fpdart: ^1.2.0
+  intl: ^0.20.2
+  elegant_notification: ^2.5.1
+  awesome_dialog: ^3.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.15
+  freezed: ^3.1.0
+  json_serializable: ^6.9.5
+flutter_intl:
+  enabled: true
