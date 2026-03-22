@@ -53,7 +53,10 @@ class CategoriesCubit extends Cubit<CategoriesState> {
           status: CategoriesStatus.failure,
         ),
       ),
-      (_) => emit(state.copyWith(status: CategoriesStatus.success)),
+      (_) => emit(state.copyWith(
+        categories: [...state.categories, name],
+        status: CategoriesStatus.success,
+      )),
     );
   }
 }

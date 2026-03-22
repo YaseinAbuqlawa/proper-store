@@ -209,6 +209,16 @@ class S {
     );
   }
 
+  /// `Search applies to loaded products only`
+  String get productsSearchScopeHint {
+    return Intl.message(
+      'Search applies to loaded products only',
+      name: 'productsSearchScopeHint',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No products found`
   String get productsEmpty {
     return Intl.message(
@@ -1762,6 +1772,116 @@ class S {
   /// `Back to home`
   String get backToHome {
     return Intl.message('Back to home', name: 'backToHome', desc: '', args: []);
+  }
+
+  /// `User not found`
+  String get firebase_error_user_not_found {
+    return Intl.message(
+      'User not found',
+      name: 'firebase_error_user_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wrong password`
+  String get firebase_error_wrong_password {
+    return Intl.message(
+      'Wrong password',
+      name: 'firebase_error_wrong_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid email`
+  String get firebase_error_invalid_email {
+    return Intl.message(
+      'Invalid email',
+      name: 'firebase_error_invalid_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This account has been disabled`
+  String get firebase_error_user_disabled {
+    return Intl.message(
+      'This account has been disabled',
+      name: 'firebase_error_user_disabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Too many attempts, try later`
+  String get firebase_error_too_many_requests {
+    return Intl.message(
+      'Too many attempts, try later',
+      name: 'firebase_error_too_many_requests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your internet connection`
+  String get firebase_error_network_request_failed {
+    return Intl.message(
+      'Check your internet connection',
+      name: 'firebase_error_network_request_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have access to this panel`
+  String get firebase_error_access_denied {
+    return Intl.message(
+      'You don\'t have access to this panel',
+      name: 'firebase_error_access_denied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Each color must have at least one image`
+  String get productFormErrorColorMustHaveImage {
+    return Intl.message(
+      'Each color must have at least one image',
+      name: 'productFormErrorColorMustHaveImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please add an image for the category`
+  String get categoryImageRequired {
+    return Intl.message(
+      'Please add an image for the category',
+      name: 'categoryImageRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please add a main image for the product`
+  String get productFormErrorMainImageRequired {
+    return Intl.message(
+      'Please add a main image for the product',
+      name: 'productFormErrorMainImageRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid number`
+  String get productFormErrorInvalidNumber {
+    return Intl.message(
+      'Please enter a valid number',
+      name: 'productFormErrorInvalidNumber',
+      desc: '',
+      args: [],
+    );
   }
 }
 

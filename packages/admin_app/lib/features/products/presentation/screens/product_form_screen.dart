@@ -14,6 +14,7 @@ import 'package:admin/features/products/presentation/cubit/product_form_data_cub
 import 'package:admin/features/products/presentation/cubit/product_form_data_state.dart';
 import 'package:admin/features/products/presentation/widgets/add_category_dialog.dart';
 import 'package:admin/features/products/presentation/widgets/form_basic_info_card.dart';
+import 'package:admin/features/products/presentation/widgets/form_section_header.dart';
 import 'package:admin/features/products/presentation/widgets/form_colors_section.dart';
 import 'package:admin/features/products/presentation/widgets/form_main_image_card.dart';
 import 'package:admin/features/products/presentation/widgets/form_pricing_card.dart';
@@ -167,12 +168,27 @@ class _ProductFormViewState extends State<_ProductFormView> {
         formData.selectedCategory == null) {
       return;
     }
+    if (!formData.hasMainImage) {
+      AppSnackbar.errorSnackbar(
+        context: context,
+        failureMessage: l.productFormErrorMainImageRequired,
+      );
+      return;
+    }
     if (formData.productVariants.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l.productFormErrorAtLeastOneColor),
-          backgroundColor: AppColors.errorRed,
-        ),
+      AppSnackbar.errorSnackbar(
+        context: context,
+        failureMessage: l.productFormErrorAtLeastOneColor,
+      );
+      return;
+    }
+    final variantWithoutImage = formData.productVariants
+        .where((v) => !v.hasImages)
+        .firstOrNull;
+    if (variantWithoutImage != null) {
+      AppSnackbar.errorSnackbar(
+        context: context,
+        failureMessage: l.productFormErrorColorMustHaveImage,
       );
       return;
     }
@@ -227,24 +243,17 @@ class _ProductFormViewState extends State<_ProductFormView> {
           listener: (context, state) {
             state.whenOrNull(
               success: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      isEdit
-                          ? l.productFormSuccessEdit
-                          : l.productFormSuccessAdd,
-                    ),
-                    backgroundColor: AppColors.successGreen,
-                  ),
+                AppSnackbar.successSnackbar(
+                  context: context,
+                  message:
+                      isEdit ? l.productFormSuccessEdit : l.productFormSuccessAdd,
                 );
                 context.pop();
               },
               failure: (msg) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(msg),
-                    backgroundColor: AppColors.errorRed,
-                  ),
+                AppSnackbar.errorSnackbar(
+                  context: context,
+                  failureMessage: msg,
                 );
               },
             );

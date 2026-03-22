@@ -12,6 +12,7 @@ class AdminTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool readOnly;
   final ValueChanged<String>? onChanged;
+  final String? Function(String?)? validator;
 
   const AdminTextField({
     super.key,
@@ -24,6 +25,7 @@ class AdminTextField extends StatelessWidget {
     this.keyboardType,
     this.readOnly = false,
     this.onChanged,
+    this.validator,
   });
 
   @override
@@ -39,11 +41,12 @@ class AdminTextField extends StatelessWidget {
         prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 18) : null,
         suffixText: suffixText,
       ),
-      validator: isRequired
-          ? (v) => (v == null || v.trim().isEmpty)
-                ? S.of(context).errorRequired
-                : null
-          : null,
+      validator: (v) {
+        if (isRequired && (v == null || v.trim().isEmpty)) {
+          return S.of(context).errorRequired;
+        }
+        return validator?.call(v);
+      },
     );
   }
 }

@@ -58,6 +58,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancelBtn": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("السلة"),
     "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
+    "categoryImageRequired": MessageLookupByLibrary.simpleMessage(
+      "يرجى إضافة صورة للتصنيف",
+    ),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("تغيير الرقم"),
     "checkoutTitle": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("المدينة"),
@@ -113,6 +116,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_aborted": MessageLookupByLibrary.simpleMessage(
       "حصلت مشكلة بسيطة والعملية اتوقفت، ممكن تحاول مرة تانية؟",
     ),
+    "firebase_error_access_denied": MessageLookupByLibrary.simpleMessage(
+      "ليس لديك صلاحية الوصول لهذه اللوحة",
+    ),
     "firebase_error_already_exists": MessageLookupByLibrary.simpleMessage(
       "البيانات دي موجودة عندنا بالفعل، يا ريت تتأكد منها.",
     ),
@@ -134,6 +140,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_invalid_argument": MessageLookupByLibrary.simpleMessage(
       "فيه بيانات دخلت بشكل غير صحيح، يا ريت تراجع عليها.",
     ),
+    "firebase_error_invalid_email": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني غير صالح",
+    ),
+    "firebase_error_network_request_failed":
+        MessageLookupByLibrary.simpleMessage("تحقق من الاتصال بالإنترنت"),
     "firebase_error_not_found": MessageLookupByLibrary.simpleMessage(
       "للأسف ملقناش الحاجة اللي بتدور عليها، تأكد إنك كاتبها صح.",
     ),
@@ -149,6 +160,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_resource_exhausted": MessageLookupByLibrary.simpleMessage(
       "فيه ضغط كبير حالياً، استنى لحظة وجرب تاني.",
     ),
+    "firebase_error_too_many_requests": MessageLookupByLibrary.simpleMessage(
+      "محاولات كثيرة، حاول لاحقاً",
+    ),
     "firebase_error_unauthenticated": MessageLookupByLibrary.simpleMessage(
       "من فضلك سجل دخولك الأول عشان تقدر تكمل معانا.",
     ),
@@ -163,6 +177,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "firebase_error_unknown": MessageLookupByLibrary.simpleMessage(
       "حصل خطأ غير متوقع، يا ريت تحاول مرة تانية.",
+    ),
+    "firebase_error_user_disabled": MessageLookupByLibrary.simpleMessage(
+      "تم تعطيل هذا الحساب",
+    ),
+    "firebase_error_user_not_found": MessageLookupByLibrary.simpleMessage(
+      "المستخدم غير موجود",
+    ),
+    "firebase_error_wrong_password": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور غير صحيحة",
     ),
     "floorLabel": MessageLookupByLibrary.simpleMessage("الدور"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
@@ -290,6 +313,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "productFormErrorAtLeastOneColor": MessageLookupByLibrary.simpleMessage(
       "يرجى إضافة لون واحد على الأقل",
     ),
+    "productFormErrorColorMustHaveImage": MessageLookupByLibrary.simpleMessage(
+      "كل لون يجب أن يحتوي على صورة واحدة على الأقل",
+    ),
+    "productFormErrorInvalidNumber": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال رقم صحيح",
+    ),
+    "productFormErrorMainImageRequired": MessageLookupByLibrary.simpleMessage(
+      "يرجى إضافة صورة رئيسية للمنتج",
+    ),
     "productFormFieldCategory": MessageLookupByLibrary.simpleMessage("التصنيف"),
     "productFormFieldCollection": MessageLookupByLibrary.simpleMessage(
       "الكولكشن (اختياري)",
@@ -338,6 +370,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "productsEmpty": MessageLookupByLibrary.simpleMessage("لا توجد منتجات"),
     "productsSearchHint": MessageLookupByLibrary.simpleMessage(
       "بحث عن منتج...",
+    ),
+    "productsSearchScopeHint": MessageLookupByLibrary.simpleMessage(
+      "البحث يشمل المنتجات المحملة فقط",
     ),
     "productsTitle": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),

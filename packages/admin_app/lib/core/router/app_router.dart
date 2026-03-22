@@ -1,11 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-
 import 'package:admin/core/di/injection_container.dart';
 import 'package:admin/core/router/app_routes.dart';
 import 'package:admin/core/widgets/not_found_screen.dart';
@@ -17,6 +11,11 @@ import 'package:admin/features/orders/presentation/screens/orders_screen.dart';
 import 'package:admin/features/products/presentation/screens/product_form_screen.dart';
 import 'package:admin/features/products/presentation/screens/products_screen.dart';
 import 'package:admin/features/store_config/presentation/screens/store_config_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proper_store_shared/models/product_model.dart';
 
 final GlobalKey<NavigatorState> rootNavigationKey = GlobalKey<NavigatorState>();
 
@@ -59,15 +58,15 @@ final GoRouter appRouter = GoRouter(
           builder: (ctx, s) => const AdminProductsScreen(),
           routes: [
             GoRoute(
-              path: 'add',
+              path: AppRoutes.productsAdd.path,
               parentNavigatorKey: rootNavigationKey,
               builder: (ctx, s) => const ProductFormScreen(),
             ),
             GoRoute(
-              path: 'edit',
+              path: AppRoutes.productsEdit.path,
               parentNavigatorKey: rootNavigationKey,
               builder: (_, state) =>
-                  ProductFormScreen(product: state.extra as dynamic),
+                  ProductFormScreen(product: state.extra as ProductModel?),
             ),
           ],
         ),

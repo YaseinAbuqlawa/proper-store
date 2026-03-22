@@ -69,6 +69,9 @@
   "productsSearchHint": "بحث عن منتج...",
   "@productsSearchHint": {},
 
+  "productsSearchScopeHint": "البحث يشمل المنتجات المحملة فقط",
+  "@productsSearchScopeHint": {},
+
   "productsEmpty": "لا توجد منتجات",
   "@productsEmpty": {},
 
@@ -355,5 +358,17 @@
   "@firebase_error_network_request_failed": {},
 
   "firebase_error_access_denied": "ليس لديك صلاحية الوصول لهذه اللوحة",
-  "@firebase_error_access_denied": {}
+  "@firebase_error_access_denied": {},
+
+  "productFormErrorColorMustHaveImage": "كل لون يجب أن يحتوي على صورة واحدة على الأقل",
+  "@productFormErrorColorMustHaveImage": {},
+
+  "categoryImageRequired": "يرجى إضافة صورة للتصنيف",
+  "@categoryImageRequired": {},
+
+  "productFormErrorMainImageRequired": "يرجى إضافة صورة رئيسية للمنتج",
+  "@productFormErrorMainImageRequired": {},
+
+  "productFormErrorInvalidNumber": "يرجى إدخال رقم صحيح",
+  "@productFormErrorInvalidNumber": {}
 }

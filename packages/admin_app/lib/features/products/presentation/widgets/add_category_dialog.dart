@@ -5,7 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
+import 'package:proper_store_shared/helpers/app_dialog.dart';
+import 'package:proper_store_shared/helpers/app_snackbar.dart';
 
+import 'package:admin/core/helpers/image_compressor.dart';
 import 'package:admin/features/products/presentation/cubit/categories_cubit.dart';
 
 class AddCategoryDialog extends StatefulWidget {
@@ -39,19 +42,41 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
       imageQuality: AppConsts.imageQuality,
     );
     if (file == null) return;
-    final bytes = await file.readAsBytes();
+    if (!mounted) return;
+    AppDialog.showLoading(context);
+    final raw = await file.readAsBytes();
+    final bytes = await ImageCompressor.compress(raw);
+    if (!mounted) return;
+    Navigator.of(context).pop();
     setState(() => _imageBytes = bytes);
   }
 
   Future<void> _save() async {
+    final l = S.of(context);
     final name = _nameController.text.trim();
-    if (name.isEmpty || _imageBytes == null) return;
+    if (name.isEmpty) {
+      AppSnackbar.errorSnackbar(
+        context: context,
+        failureMessage: l.errorRequired,
+      );
+      return;
+    }
+    if (_imageBytes == null) {
+      AppSnackbar.errorSnackbar(
+        context: context,
+        failureMessage: l.categoryImageRequired,
+      );
+      return;
+    }
     setState(() => _saving = true);
     await widget.cubit.addCategory(name, _imageBytes!);
-    if (mounted) {
-      Navigator.of(context).pop();
-      widget.onSaved(name);
+    if (!mounted) return;
+    if (widget.cubit.state.status == CategoriesStatus.failure) {
+      setState(() => _saving = false);
+      return;
     }
+    Navigator.of(context).pop();
+    widget.onSaved(name);
   }
 
   @override
@@ -114,6 +139,9 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
           child: Text(l.cancelBtn),
         ),
         FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: AppColors.goldRoyal,
+          ),
           onPressed: _saving ? null : _save,
           child: _saving
               ? const SizedBox(

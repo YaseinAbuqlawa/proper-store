@@ -69,6 +69,9 @@
   "productsSearchHint": "Search products...",
   "@productsSearchHint": {},
 
+  "productsSearchScopeHint": "Search applies to loaded products only",
+  "@productsSearchScopeHint": {},
+
   "productsEmpty": "No products found",
   "@productsEmpty": {},
 
@@ -355,5 +358,17 @@
   "@firebase_error_network_request_failed": {},
 
   "firebase_error_access_denied": "You don't have access to this panel",
-  "@firebase_error_access_denied": {}
+  "@firebase_error_access_denied": {},
+
+  "productFormErrorColorMustHaveImage": "Each color must have at least one image",
+  "@productFormErrorColorMustHaveImage": {},
+
+  "categoryImageRequired": "Please add an image for the category",
+  "@categoryImageRequired": {},
+
+  "productFormErrorMainImageRequired": "Please add a main image for the product",
+  "@productFormErrorMainImageRequired": {},
+
+  "productFormErrorInvalidNumber": "Please enter a valid number",
+  "@productFormErrorInvalidNumber": {}
 }

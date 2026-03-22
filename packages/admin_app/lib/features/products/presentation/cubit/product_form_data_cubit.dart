@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 
+import 'package:admin/core/helpers/image_compressor.dart';
 import 'package:admin/features/products/presentation/models/product_variant_entry.dart';
 
 import 'product_form_data_state.dart';
@@ -32,7 +33,8 @@ class ProductFormDataCubit extends Cubit<ProductFormData> {
   Future<void> pickMainImage() async {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (picked == null) return;
-    final bytes = await picked.readAsBytes();
+    final raw = await picked.readAsBytes();
+    final bytes = await ImageCompressor.compress(raw);
     emit(
       state.copyWith(
         removedMainImageUrl: state.existingMainImageUrl,

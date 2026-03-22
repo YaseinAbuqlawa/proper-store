@@ -75,7 +75,7 @@ class _ProductsViewState extends State<_ProductsView> {
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 8),
               child: FilledButton.icon(
-                onPressed: () => context.push(AppRoutes.productsAdd.path),
+                onPressed: () => _navigateToForm(context),
                 icon: const Icon(Icons.add),
                 label: Text(S.of(context).productFormAddBtn),
               ),
@@ -90,6 +90,7 @@ class _ProductsViewState extends State<_ProductsView> {
               decoration: InputDecoration(
                 hintText: S.of(context).productsSearchHint,
                 prefixIcon: const Icon(Icons.search),
+                helperText: S.of(context).productsSearchScopeHint,
                 isDense: true,
               ),
               onChanged: (value) => setState(() => _searchQuery = value),
@@ -100,7 +101,7 @@ class _ProductsViewState extends State<_ProductsView> {
       floatingActionButton: _isDesktop
           ? null
           : FloatingActionButton.extended(
-              onPressed: () => context.push(AppRoutes.productsAdd.path),
+              onPressed: () => _navigateToForm(context),
               icon: const Icon(Icons.add),
               label: Text(S.of(context).productFormAddBtn),
             ),
@@ -204,7 +205,7 @@ class _ProductsViewState extends State<_ProductsView> {
         return ProductCardMobile(
           product: products[index],
           onEdit: () =>
-              context.push(AppRoutes.productsEdit.path, extra: products[index]),
+              _navigateToForm(context, product: products[index]),
           onDelete: () => _confirmDelete(context, products[index]),
         );
       },
@@ -298,7 +299,7 @@ class _ProductsViewState extends State<_ProductsView> {
                 icon: const Icon(Icons.edit_outlined, size: 20),
                 tooltip: S.of(context).editBtn,
                 onPressed: () =>
-                    context.push(AppRoutes.productsEdit.path, extra: product),
+                    _navigateToForm(context, product: product),
               ),
               IconButton(
                 icon: const Icon(
@@ -314,6 +315,15 @@ class _ProductsViewState extends State<_ProductsView> {
         ),
       ],
     );
+  }
+
+  Future<void> _navigateToForm(BuildContext context, {ProductModel? product}) async {
+    final cubit = context.read<ProductsCubit>();
+    final path = product != null
+        ? AppRoutes.productsEdit.path
+        : AppRoutes.productsAdd.path;
+    await context.push(path, extra: product);
+    if (mounted) cubit.loadProducts();
   }
 
   void _confirmDelete(BuildContext context, ProductModel product) {

@@ -6,6 +6,7 @@ import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
 
+import 'package:admin/core/helpers/image_compressor.dart';
 import 'package:admin/features/products/presentation/models/product_variant_entry.dart';
 
 class ProductVariantEditor extends StatefulWidget {
@@ -49,7 +50,8 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
       imageQuality: AppConsts.imageQuality,
     );
     if (files.isEmpty) return;
-    final bytes = await Future.wait(files.map((f) => f.readAsBytes()));
+    final rawList = await Future.wait(files.map((f) => f.readAsBytes()));
+    final bytes = await Future.wait(rawList.map(ImageCompressor.compress));
     setState(() => widget.entry.newImageBytes.addAll(bytes));
     widget.onChanged();
   }

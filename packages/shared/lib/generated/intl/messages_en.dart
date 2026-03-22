@@ -58,6 +58,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancelBtn": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+    "categoryImageRequired": MessageLookupByLibrary.simpleMessage(
+      "Please add an image for the category",
+    ),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("Change number"),
     "checkoutTitle": MessageLookupByLibrary.simpleMessage("Checkout"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("City"),
@@ -121,6 +124,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_aborted": MessageLookupByLibrary.simpleMessage(
       "The process was interrupted. Please try again.",
     ),
+    "firebase_error_access_denied": MessageLookupByLibrary.simpleMessage(
+      "You don\'t have access to this panel",
+    ),
     "firebase_error_already_exists": MessageLookupByLibrary.simpleMessage(
       "This information already exists. Please double-check.",
     ),
@@ -142,6 +148,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_invalid_argument": MessageLookupByLibrary.simpleMessage(
       "Some information was entered incorrectly. Please review and try again.",
     ),
+    "firebase_error_invalid_email": MessageLookupByLibrary.simpleMessage(
+      "Invalid email",
+    ),
+    "firebase_error_network_request_failed":
+        MessageLookupByLibrary.simpleMessage("Check your internet connection"),
     "firebase_error_not_found": MessageLookupByLibrary.simpleMessage(
       "We couldn\'t find what you were looking for. Please make sure the details are correct.",
     ),
@@ -157,6 +168,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "firebase_error_resource_exhausted": MessageLookupByLibrary.simpleMessage(
       "The server is busy right now. Please wait a moment and try again.",
     ),
+    "firebase_error_too_many_requests": MessageLookupByLibrary.simpleMessage(
+      "Too many attempts, try later",
+    ),
     "firebase_error_unauthenticated": MessageLookupByLibrary.simpleMessage(
       "Please sign in first to continue.",
     ),
@@ -171,6 +185,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "firebase_error_unknown": MessageLookupByLibrary.simpleMessage(
       "An unexpected error occurred. Please try again.",
+    ),
+    "firebase_error_user_disabled": MessageLookupByLibrary.simpleMessage(
+      "This account has been disabled",
+    ),
+    "firebase_error_user_not_found": MessageLookupByLibrary.simpleMessage(
+      "User not found",
+    ),
+    "firebase_error_wrong_password": MessageLookupByLibrary.simpleMessage(
+      "Wrong password",
     ),
     "floorLabel": MessageLookupByLibrary.simpleMessage("Floor"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("Full name"),
@@ -300,6 +323,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "productFormErrorAtLeastOneColor": MessageLookupByLibrary.simpleMessage(
       "Please add at least one color variant",
     ),
+    "productFormErrorColorMustHaveImage": MessageLookupByLibrary.simpleMessage(
+      "Each color must have at least one image",
+    ),
+    "productFormErrorInvalidNumber": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid number",
+    ),
+    "productFormErrorMainImageRequired": MessageLookupByLibrary.simpleMessage(
+      "Please add a main image for the product",
+    ),
     "productFormFieldCategory": MessageLookupByLibrary.simpleMessage(
       "Category",
     ),
@@ -356,6 +388,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "productsEmpty": MessageLookupByLibrary.simpleMessage("No products found"),
     "productsSearchHint": MessageLookupByLibrary.simpleMessage(
       "Search products...",
+    ),
+    "productsSearchScopeHint": MessageLookupByLibrary.simpleMessage(
+      "Search applies to loaded products only",
     ),
     "productsTitle": MessageLookupByLibrary.simpleMessage("Products"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("My Account"),
