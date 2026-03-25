@@ -115,10 +115,11 @@ class _ProductFormViewState extends State<_ProductFormView> {
     final pct = double.tryParse(discountPercentageController.text) ?? 0;
     if (price <= 0) return;
     _isUpdatingPricing = true;
-    final value = price * pct / 100;
-    if (discountValueController.text != value.toStringAsFixed(2)) {
-      discountValueController.text = value.toStringAsFixed(2);
-    }
+    final value = context.read<ProductFormDataCubit>().computeDiscountValue(
+          price: price,
+          percentage: pct,
+        );
+    if (discountValueController.text != value) discountValueController.text = value;
     _isUpdatingPricing = false;
   }
 
@@ -129,10 +130,11 @@ class _ProductFormViewState extends State<_ProductFormView> {
     final pct = double.tryParse(discountPercentageController.text) ?? 0;
     if (price <= 0) return;
     _isUpdatingPricing = true;
-    final value = price * pct / 100;
-    if (discountValueController.text != value.toStringAsFixed(2)) {
-      discountValueController.text = value.toStringAsFixed(2);
-    }
+    final value = context.read<ProductFormDataCubit>().computeDiscountValue(
+          price: price,
+          percentage: pct,
+        );
+    if (discountValueController.text != value) discountValueController.text = value;
     _isUpdatingPricing = false;
   }
 
@@ -143,10 +145,11 @@ class _ProductFormViewState extends State<_ProductFormView> {
     final value = double.tryParse(discountValueController.text) ?? 0;
     if (price <= 0) return;
     _isUpdatingPricing = true;
-    final pct = value / price * 100;
-    if (discountPercentageController.text != pct.toStringAsFixed(2)) {
-      discountPercentageController.text = pct.toStringAsFixed(2);
-    }
+    final pct = context.read<ProductFormDataCubit>().computeDiscountPercentage(
+          price: price,
+          value: value,
+        );
+    if (discountPercentageController.text != pct) discountPercentageController.text = pct;
     _isUpdatingPricing = false;
   }
 
@@ -219,6 +222,7 @@ class _ProductFormViewState extends State<_ProductFormView> {
               ),
             )
             .toList(),
+        removedVariantImageUrls: formData.removedVariantImageUrls,
         existingProduct: widget.product,
       ),
     );
@@ -260,10 +264,9 @@ class _ProductFormViewState extends State<_ProductFormView> {
           },
         ),
       ],
-      child: BlocBuilder<ProductFormCubit, ProductFormState>(
-        builder: (context, submitState) {
-          final isSubmitting =
-              submitState.whenOrNull(submitting: () => true) ?? false;
+      child: BlocSelector<ProductFormCubit, ProductFormState, bool>(
+        selector: (state) => state.whenOrNull(submitting: () => true) ?? false,
+        builder: (context, isSubmitting) {
           return BlocBuilder<ProductFormDataCubit, ProductFormData>(
             builder: (context, formData) {
               final formDataCubit = context.read<ProductFormDataCubit>();

@@ -16,6 +16,9 @@ class ProductSaveParams {
   final Uint8List? newMainImageBytes;
   final List<ProductVariantSaveParams> productVariants;
 
+  /// URLs from fully-removed variants to delete from Storage on save.
+  final List<String> removedVariantImageUrls;
+
   /// Non-null when editing an existing product.
   final ProductModel? existingProduct;
 
@@ -31,6 +34,7 @@ class ProductSaveParams {
     required this.removedMainImageUrl,
     required this.newMainImageBytes,
     required this.productVariants,
+    required this.removedVariantImageUrls,
     required this.existingProduct,
   });
 }

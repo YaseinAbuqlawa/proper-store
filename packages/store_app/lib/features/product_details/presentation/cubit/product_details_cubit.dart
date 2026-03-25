@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,10 +16,17 @@ part 'product_details_state.dart';
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   final GetProductWithIdUseCase getProductWithIdUseCase;
   final GetRelatedProductsUseCase getRelatedProductsUseCase;
+  final FirebaseAuth _firebaseAuth;
+
   ProductDetailsCubit({
     required this.getProductWithIdUseCase,
     required this.getRelatedProductsUseCase,
-  }) : super(ProductDetailsState.initial());
+    required FirebaseAuth firebaseAuth,
+  })  : _firebaseAuth = firebaseAuth,
+        super(ProductDetailsState.initial());
+
+  bool get isUserAnonymous =>
+      _firebaseAuth.currentUser?.isAnonymous ?? true;
 
   void selectColor(ProductVariant selectedColor) {
     state.whenOrNull(
@@ -41,28 +49,24 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   Future<void> getProductDetails(String productId) async {
     emit(ProductDetailsState.loading());
     final result = await getProductWithIdUseCase.call(productId);
-
-    //? wait for the hero animation
-    await Future.delayed(Duration(milliseconds: 500));
     if (isClosed) return;
     result.fold(
       (serverFailure) =>
           emit(ProductDetailsState.failure(code: serverFailure.code)),
       (productDetails) async {
-        final result = await getRelatedProducts(
+        final relatedResult = await getRelatedProducts(
           productCategory: productDetails.category,
           currentProductId: productDetails.id,
         );
-        result.fold(
-          (serverFailure) =>
-              emit(ProductDetailsState.failure(code: serverFailure.code)),
-          (relatedProductsList) => emit(
-            ProductDetailsState.success(
-              productDetails: productDetails.copyWith(
-                selectedColor: productDetails.colors.firstOrNull,
-              ),
-              relatedProductsList: relatedProductsList,
+        if (isClosed) return;
+        // Related products failure is non-critical — show product regardless.
+        final relatedList = relatedResult.getOrElse((_) => []);
+        emit(
+          ProductDetailsState.success(
+            productDetails: productDetails.copyWith(
+              selectedColor: productDetails.colors.firstOrNull,
             ),
+            relatedProductsList: relatedList,
           ),
         );
       },

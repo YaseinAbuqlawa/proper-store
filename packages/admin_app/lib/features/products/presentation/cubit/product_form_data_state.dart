@@ -12,12 +12,16 @@ class ProductFormData {
   final String? removedMainImageUrl;
   final List<ProductVariantEntry> productVariants;
 
+  /// URLs of images from fully-removed variants, to be deleted from Storage on save.
+  final List<String> removedVariantImageUrls;
+
   const ProductFormData({
     this.selectedCategory,
     this.existingMainImageUrl,
     this.newMainImageBytes,
     this.removedMainImageUrl,
     this.productVariants = const [],
+    this.removedVariantImageUrls = const [],
   });
 
   bool get hasMainImage =>
@@ -29,6 +33,7 @@ class ProductFormData {
     Object? newMainImageBytes = _unchanged,
     Object? removedMainImageUrl = _unchanged,
     List<ProductVariantEntry>? productVariants,
+    List<String>? removedVariantImageUrls,
   }) {
     return ProductFormData(
       selectedCategory: identical(selectedCategory, _unchanged)
@@ -44,6 +49,8 @@ class ProductFormData {
           ? this.removedMainImageUrl
           : removedMainImageUrl as String?,
       productVariants: productVariants ?? this.productVariants,
+      removedVariantImageUrls:
+          removedVariantImageUrls ?? this.removedVariantImageUrls,
     );
   }
 }

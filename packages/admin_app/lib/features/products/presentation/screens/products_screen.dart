@@ -39,7 +39,6 @@ class _ProductsView extends StatefulWidget {
 class _ProductsViewState extends State<_ProductsView> {
   final _searchController = TextEditingController();
   final _scrollController = ScrollController();
-  String _searchQuery = '';
 
   @override
   void initState() {
@@ -89,7 +88,8 @@ class _ProductsViewState extends State<_ProductsView> {
             child: AdminSearchBar(
               controller: _searchController,
               hintText: S.of(context).productsSearchHint,
-              onChanged: (value) => setState(() => _searchQuery = value),
+              onChanged: (value) =>
+                  context.read<ProductsCubit>().updateSearchQuery(value),
             ),
           ),
         ),
@@ -107,14 +107,14 @@ class _ProductsViewState extends State<_ProductsView> {
             case ProductsStatus.loaded:
               return _buildContent(
                 context,
-                products: state.products,
+                products: state.filteredProducts,
                 hasMore: state.hasMore,
                 isLoadingMore: false,
               );
             case ProductsStatus.loadingMore:
               return _buildContent(
                 context,
-                products: state.products,
+                products: state.filteredProducts,
                 hasMore: state.hasMore,
                 isLoadingMore: true,
               );
@@ -156,16 +156,7 @@ class _ProductsViewState extends State<_ProductsView> {
     required bool hasMore,
     required bool isLoadingMore,
   }) {
-    final filtered = _searchQuery.isEmpty
-        ? products
-        : products
-              .where(
-                (p) =>
-                    p.name.toLowerCase().contains(_searchQuery.toLowerCase()),
-              )
-              .toList();
-
-    if (filtered.isEmpty) {
+    if (products.isEmpty) {
       return Center(
         child: Text(
           S.of(context).productsEmpty,
@@ -177,8 +168,8 @@ class _ProductsViewState extends State<_ProductsView> {
     return RefreshIndicator(
       onRefresh: () => context.read<ProductsCubit>().loadProducts(),
       child: _isDesktop
-          ? _buildDesktopTable(context, filtered, isLoadingMore)
-          : _buildMobileList(context, filtered, isLoadingMore),
+          ? _buildDesktopTable(context, products, isLoadingMore)
+          : _buildMobileList(context, products, isLoadingMore),
     );
   }
 

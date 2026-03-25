@@ -70,6 +70,10 @@ class ProductsCubit extends Cubit<ProductsState> {
     );
   }
 
+  void updateSearchQuery(String query) {
+    emit(state.copyWith(searchQuery: query));
+  }
+
   Future<void> deleteProduct(String id) async {
     final result = await deleteProductUseCase.call(id);
 

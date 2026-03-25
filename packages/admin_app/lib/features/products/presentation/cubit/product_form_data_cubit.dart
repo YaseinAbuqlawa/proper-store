@@ -53,12 +53,37 @@ class ProductFormDataCubit extends Cubit<ProductFormData> {
   }
 
   void removeVariant(int index) {
+    final removed = state.productVariants[index];
     final updated = List<ProductVariantEntry>.from(state.productVariants)
       ..removeAt(index);
-    emit(state.copyWith(productVariants: updated));
+    emit(state.copyWith(
+      productVariants: updated,
+      removedVariantImageUrls: [
+        ...state.removedVariantImageUrls,
+        ...removed.existingImageUrls,
+      ],
+    ));
   }
 
   void notifyVariantChanged() {
     emit(state.copyWith(productVariants: List.from(state.productVariants)));
+  }
+
+  /// Returns the discount value string given price and percentage.
+  String computeDiscountValue({
+    required double price,
+    required double percentage,
+  }) {
+    if (price <= 0) return '0';
+    return (price * percentage / 100).toStringAsFixed(2);
+  }
+
+  /// Returns the discount percentage string given price and discount value.
+  String computeDiscountPercentage({
+    required double price,
+    required double value,
+  }) {
+    if (price <= 0) return '0';
+    return (value / price * 100).toStringAsFixed(2);
   }
 }

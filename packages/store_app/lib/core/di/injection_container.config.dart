@@ -289,17 +289,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i726.SetCustomerFavoritesUseCase>(
       () => _i726.SetCustomerFavoritesUseCase(repo: gh<_i206.FavoritesRepo>()),
     );
-    gh.factory<_i846.ProductDetailsCubit>(
-      () => _i846.ProductDetailsCubit(
-        getProductWithIdUseCase: gh<_i1033.GetProductWithIdUseCase>(),
-        getRelatedProductsUseCase: gh<_i66.GetRelatedProductsUseCase>(),
-      ),
-    );
     gh.lazySingleton<_i395.FavoritesCubit>(
       () => _i395.FavoritesCubit(
         setCustomerFavoritesUseCase: gh<_i726.SetCustomerFavoritesUseCase>(),
         getFavoriteProductsUseCase: gh<_i182.GetFavoriteProductsUseCase>(),
         auth: gh<_i59.FirebaseAuth>(),
+      ),
+    );
+    gh.factory<_i846.ProductDetailsCubit>(
+      () => _i846.ProductDetailsCubit(
+        getProductWithIdUseCase: gh<_i1033.GetProductWithIdUseCase>(),
+        getRelatedProductsUseCase: gh<_i66.GetRelatedProductsUseCase>(),
+        firebaseAuth: gh<_i59.FirebaseAuth>(),
       ),
     );
     gh.lazySingleton<_i795.ResumeFacebookRedirectUseCase>(

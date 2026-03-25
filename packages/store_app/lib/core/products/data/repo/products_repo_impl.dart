@@ -12,94 +12,56 @@ class ProductsRepoImpl implements ProductsRepo {
   final ProductsRemoteDataSource remoteDataSource;
   ProductsRepoImpl({required this.remoteDataSource});
 
-  @override
-  Future<Either<ServerFailure, ProductModel>> getProductWithId(
-    String id,
-  ) async {
+  Future<Either<ServerFailure, T>> _run<T>(Future<T> Function() action) async {
     try {
-      return Right(await remoteDataSource.getProductWithId(id));
+      return Right(await action());
     } on FirebaseException catch (e) {
       return Left(ServerFailure(code: e.code));
-    } catch (e) {
+    } catch (_) {
       return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
   @override
-  Future<Either<ServerFailure, List<ProductModel>>> getAllProducts() async {
-    try {
-      return Right(await remoteDataSource.getAllProducts());
-    } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
-    } catch (e) {
-      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
-    }
-  }
+  Future<Either<ServerFailure, ProductModel>> getProductWithId(
+    String id,
+  ) => _run(() => remoteDataSource.getProductWithId(id));
+
+  @override
+  Future<Either<ServerFailure, List<ProductModel>>> getAllProducts() =>
+      _run(() => remoteDataSource.getAllProducts());
 
   @override
   Future<Either<ServerFailure, List<ProductModel>>> getProductsByCategory(
     String category,
-  ) async {
-    try {
-      return Right(await remoteDataSource.getProductsByCategory(category));
-    } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
-    } catch (e) {
-      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
-    }
-  }
+  ) => _run(() => remoteDataSource.getProductsByCategory(category));
 
   @override
   Future<Either<ServerFailure, (List<ProductModel>, DocumentSnapshot?)>>
-  getAllProductsPaginated({DocumentSnapshot? startAfter}) async {
-    try {
-      return Right(
-        await remoteDataSource.getAllProductsPaginated(startAfter: startAfter),
-      );
-    } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
-    } catch (e) {
-      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
-    }
-  }
+  getAllProductsPaginated({DocumentSnapshot? startAfter}) =>
+      _run(() => remoteDataSource.getAllProductsPaginated(startAfter: startAfter));
 
   @override
   Future<Either<ServerFailure, (List<ProductModel>, DocumentSnapshot?)>>
   getProductsByCategoryPaginated(
     String category, {
     DocumentSnapshot? startAfter,
-  }) async {
-    try {
-      return Right(
-        await remoteDataSource.getProductsByCategoryPaginated(
-          category,
-          startAfter: startAfter,
-        ),
-      );
-    } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
-    } catch (e) {
-      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
-    }
-  }
+  }) => _run(
+    () => remoteDataSource.getProductsByCategoryPaginated(
+      category,
+      startAfter: startAfter,
+    ),
+  );
 
   @override
   Future<Either<ServerFailure, (List<ProductModel>, DocumentSnapshot?)>>
   getProductsByCollectionPaginated(
     String collection, {
     DocumentSnapshot? startAfter,
-  }) async {
-    try {
-      return Right(
-        await remoteDataSource.getProductsByCollectionPaginated(
-          collection,
-          startAfter: startAfter,
-        ),
-      );
-    } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
-    } catch (e) {
-      return Left(ServerFailure(code: AppConsts.unexpectedErrorText));
-    }
-  }
+  }) => _run(
+    () => remoteDataSource.getProductsByCollectionPaginated(
+      collection,
+      startAfter: startAfter,
+    ),
+  );
 }

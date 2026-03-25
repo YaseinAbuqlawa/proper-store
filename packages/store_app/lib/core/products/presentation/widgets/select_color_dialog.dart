@@ -50,11 +50,12 @@ class SelectColorDialog extends StatelessWidget {
                 ProductModel
               >(
                 selector: (state) {
-                  return state.whenOrNull(
+                  return state.maybeWhen(
                     success:
                         (productDetails, activeIndex, relatedProductsList) =>
-                            productDetails,
-                  )!;
+                            productDetails ?? product,
+                    orElse: () => product,
+                  );
                 },
                 builder: (context, productDetails) {
                   return ElevatedButton(

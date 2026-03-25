@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -365,7 +364,7 @@ class ProductDetailsScreen extends StatelessWidget {
     final item = _buildCartItem(product);
     if (item == null) return;
 
-    final isAnonymous = sl<FirebaseAuth>().currentUser?.isAnonymous ?? true;
+    final isAnonymous = context.read<ProductDetailsCubit>().isUserAnonymous;
     if (isAnonymous) {
       final proceed = await AuthGuardDialog.show(context);
       if (!proceed || !context.mounted) return;

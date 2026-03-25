@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductsState {
 
- ProductsStatus get status; List<ProductModel> get products; bool get hasMore; DocumentSnapshot? get lastDoc; String get failureMessage;
+ ProductsStatus get status; List<ProductModel> get products; bool get hasMore; DocumentSnapshot? get lastDoc; String get failureMessage; String get searchQuery;
 /// Create a copy of ProductsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ProductsStateCopyWith<ProductsState> get copyWith => _$ProductsStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductsState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.products, products)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.lastDoc, lastDoc) || other.lastDoc == lastDoc)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductsState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.products, products)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.lastDoc, lastDoc) || other.lastDoc == lastDoc)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage)&&(identical(other.searchQuery, searchQuery) || other.searchQuery == searchQuery));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(products),hasMore,lastDoc,failureMessage);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(products),hasMore,lastDoc,failureMessage,searchQuery);
 
 @override
 String toString() {
-  return 'ProductsState(status: $status, products: $products, hasMore: $hasMore, lastDoc: $lastDoc, failureMessage: $failureMessage)';
+  return 'ProductsState(status: $status, products: $products, hasMore: $hasMore, lastDoc: $lastDoc, failureMessage: $failureMessage, searchQuery: $searchQuery)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ProductsStateCopyWith<$Res>  {
   factory $ProductsStateCopyWith(ProductsState value, $Res Function(ProductsState) _then) = _$ProductsStateCopyWithImpl;
 @useResult
 $Res call({
- ProductsStatus status, List<ProductModel> products, bool hasMore, DocumentSnapshot? lastDoc, String failureMessage
+ ProductsStatus status, List<ProductModel> products, bool hasMore, DocumentSnapshot? lastDoc, String failureMessage, String searchQuery
 });
 
 
@@ -62,13 +62,14 @@ class _$ProductsStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? products = null,Object? hasMore = null,Object? lastDoc = freezed,Object? failureMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? products = null,Object? hasMore = null,Object? lastDoc = freezed,Object? failureMessage = null,Object? searchQuery = null,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as ProductsStatus,products: null == products ? _self.products : products // ignore: cast_nullable_to_non_nullable
 as List<ProductModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,lastDoc: freezed == lastDoc ? _self.lastDoc : lastDoc // ignore: cast_nullable_to_non_nullable
 as DocumentSnapshot?,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
+as String,searchQuery: null == searchQuery ? _self.searchQuery : searchQuery // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -154,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProductsStatus status,  List<ProductModel> products,  bool hasMore,  DocumentSnapshot? lastDoc,  String failureMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProductsStatus status,  List<ProductModel> products,  bool hasMore,  DocumentSnapshot? lastDoc,  String failureMessage,  String searchQuery)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductsState() when $default != null:
-return $default(_that.status,_that.products,_that.hasMore,_that.lastDoc,_that.failureMessage);case _:
+return $default(_that.status,_that.products,_that.hasMore,_that.lastDoc,_that.failureMessage,_that.searchQuery);case _:
   return orElse();
 
 }
@@ -175,10 +176,10 @@ return $default(_that.status,_that.products,_that.hasMore,_that.lastDoc,_that.fa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProductsStatus status,  List<ProductModel> products,  bool hasMore,  DocumentSnapshot? lastDoc,  String failureMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProductsStatus status,  List<ProductModel> products,  bool hasMore,  DocumentSnapshot? lastDoc,  String failureMessage,  String searchQuery)  $default,) {final _that = this;
 switch (_that) {
 case _ProductsState():
-return $default(_that.status,_that.products,_that.hasMore,_that.lastDoc,_that.failureMessage);case _:
+return $default(_that.status,_that.products,_that.hasMore,_that.lastDoc,_that.failureMessage,_that.searchQuery);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +196,10 @@ return $default(_that.status,_that.products,_that.hasMore,_that.lastDoc,_that.fa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProductsStatus status,  List<ProductModel> products,  bool hasMore,  DocumentSnapshot? lastDoc,  String failureMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProductsStatus status,  List<ProductModel> products,  bool hasMore,  DocumentSnapshot? lastDoc,  String failureMessage,  String searchQuery)?  $default,) {final _that = this;
 switch (_that) {
 case _ProductsState() when $default != null:
-return $default(_that.status,_that.products,_that.hasMore,_that.lastDoc,_that.failureMessage);case _:
+return $default(_that.status,_that.products,_that.hasMore,_that.lastDoc,_that.failureMessage,_that.searchQuery);case _:
   return null;
 
 }
@@ -209,8 +210,8 @@ return $default(_that.status,_that.products,_that.hasMore,_that.lastDoc,_that.fa
 /// @nodoc
 
 
-class _ProductsState implements ProductsState {
-  const _ProductsState({this.status = ProductsStatus.initial, final  List<ProductModel> products = const [], this.hasMore = true, this.lastDoc, this.failureMessage = ""}): _products = products;
+class _ProductsState extends ProductsState {
+  const _ProductsState({this.status = ProductsStatus.initial, final  List<ProductModel> products = const [], this.hasMore = true, this.lastDoc, this.failureMessage = '', this.searchQuery = ''}): _products = products,super._();
   
 
 @override@JsonKey() final  ProductsStatus status;
@@ -224,6 +225,7 @@ class _ProductsState implements ProductsState {
 @override@JsonKey() final  bool hasMore;
 @override final  DocumentSnapshot? lastDoc;
 @override@JsonKey() final  String failureMessage;
+@override@JsonKey() final  String searchQuery;
 
 /// Create a copy of ProductsState
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +237,16 @@ _$ProductsStateCopyWith<_ProductsState> get copyWith => __$ProductsStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductsState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.lastDoc, lastDoc) || other.lastDoc == lastDoc)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductsState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.lastDoc, lastDoc) || other.lastDoc == lastDoc)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage)&&(identical(other.searchQuery, searchQuery) || other.searchQuery == searchQuery));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_products),hasMore,lastDoc,failureMessage);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_products),hasMore,lastDoc,failureMessage,searchQuery);
 
 @override
 String toString() {
-  return 'ProductsState(status: $status, products: $products, hasMore: $hasMore, lastDoc: $lastDoc, failureMessage: $failureMessage)';
+  return 'ProductsState(status: $status, products: $products, hasMore: $hasMore, lastDoc: $lastDoc, failureMessage: $failureMessage, searchQuery: $searchQuery)';
 }
 
 
@@ -255,7 +257,7 @@ abstract mixin class _$ProductsStateCopyWith<$Res> implements $ProductsStateCopy
   factory _$ProductsStateCopyWith(_ProductsState value, $Res Function(_ProductsState) _then) = __$ProductsStateCopyWithImpl;
 @override @useResult
 $Res call({
- ProductsStatus status, List<ProductModel> products, bool hasMore, DocumentSnapshot? lastDoc, String failureMessage
+ ProductsStatus status, List<ProductModel> products, bool hasMore, DocumentSnapshot? lastDoc, String failureMessage, String searchQuery
 });
 
 
@@ -272,13 +274,14 @@ class __$ProductsStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? products = null,Object? hasMore = null,Object? lastDoc = freezed,Object? failureMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? products = null,Object? hasMore = null,Object? lastDoc = freezed,Object? failureMessage = null,Object? searchQuery = null,}) {
   return _then(_ProductsState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as ProductsStatus,products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
 as List<ProductModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,lastDoc: freezed == lastDoc ? _self.lastDoc : lastDoc // ignore: cast_nullable_to_non_nullable
 as DocumentSnapshot?,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
+as String,searchQuery: null == searchQuery ? _self.searchQuery : searchQuery // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

@@ -27,14 +27,16 @@ class SaveProductUseCase {
       final productId =
           params.existingProduct?.id ?? await repo.generateProductId();
 
-      final mainImageResult = await _processMainImage(params, productId);
+      // 1. Upload new images first — no deletions yet.
+      final mainImageResult = await _uploadMainImage(params, productId);
       if (mainImageResult.isLeft()) return mainImageResult.map((_) {});
       final mainImageUrl = mainImageResult.getOrElse((_) => '');
 
-      final variantsResult = await _processProductVariants(params, productId);
+      final variantsResult = await _uploadVariants(params, productId);
       if (variantsResult.isLeft()) return variantsResult.map((_) {});
       final productVariants = variantsResult.getOrElse((_) => []);
 
+      // 2. Write to Firestore.
       final product = _buildProduct(
         params: params,
         productId: productId,
@@ -42,21 +44,27 @@ class SaveProductUseCase {
         productVariants: productVariants,
       );
 
-      return params.existingProduct != null
+      final saveResult = params.existingProduct != null
           ? await repo.updateProduct(product: product)
           : await repo.addProduct(product: product);
+
+      if (saveResult.isLeft()) return saveResult;
+
+      // 3. Delete old images only after Firestore write succeeds.
+      //    Failures here are non-critical — Firestore already has the correct
+      //    new URLs, so we swallow errors to avoid rolling back a successful save.
+      await _deleteOldImages(params);
+
+      return const Right(null);
     } catch (e) {
       return Left(ServerFailure(code: e.toString()));
     }
   }
 
-  Future<Either<ServerFailure, String>> _processMainImage(
+  Future<Either<ServerFailure, String>> _uploadMainImage(
     ProductSaveParams params,
     String productId,
   ) async {
-    if (params.removedMainImageUrl != null) {
-      await repo.deleteProductImage(url: params.removedMainImageUrl!);
-    }
     if (params.newMainImageBytes != null) {
       return uploadProductMainImageUseCase.call(
         bytes: params.newMainImageBytes!,
@@ -66,15 +74,12 @@ class SaveProductUseCase {
     return Right(params.existingMainImageUrl ?? '');
   }
 
-  Future<Either<ServerFailure, List<ProductVariant>>> _processProductVariants(
+  Future<Either<ServerFailure, List<ProductVariant>>> _uploadVariants(
     ProductSaveParams params,
     String productId,
   ) async {
     final productVariants = <ProductVariant>[];
     for (final variant in params.productVariants) {
-      for (final url in variant.removedImageUrls) {
-        await repo.deleteProductImage(url: url);
-      }
       final uploadResult = await _uploadVariantImages(variant, productId);
       if (uploadResult.isLeft()) return uploadResult.map((_) => []);
       final uploadedUrls = uploadResult.getOrElse((_) => []);
@@ -108,6 +113,23 @@ class SaveProductUseCase {
       uploaded.add(result.getOrElse((_) => ''));
     }
     return Right(uploaded);
+  }
+
+  Future<void> _deleteOldImages(ProductSaveParams params) async {
+    final urlsToDelete = [
+      if (params.removedMainImageUrl != null) params.removedMainImageUrl!,
+      for (final v in params.productVariants) ...v.removedImageUrls,
+      ...params.removedVariantImageUrls,
+    ];
+
+    for (final url in urlsToDelete) {
+      try {
+        await repo.deleteProductImage(url: url);
+      } catch (_) {
+        // Non-critical: Firestore already updated. Storage cleanup failure
+        // only causes an orphaned file, not data corruption.
+      }
+    }
   }
 
   ProductModel _buildProduct({

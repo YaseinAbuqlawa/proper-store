@@ -8,11 +8,20 @@ enum ProductsStatus { initial, loading, loaded, loadingMore, failure }
 
 @freezed
 abstract class ProductsState with _$ProductsState {
+  const ProductsState._();
+
   const factory ProductsState({
     @Default(ProductsStatus.initial) ProductsStatus status,
     @Default([]) List<ProductModel> products,
     @Default(true) bool hasMore,
     DocumentSnapshot? lastDoc,
-    @Default("") String failureMessage,
+    @Default('') String failureMessage,
+    @Default('') String searchQuery,
   }) = _ProductsState;
+
+  List<ProductModel> get filteredProducts {
+    if (searchQuery.isEmpty) return products;
+    final query = searchQuery.toLowerCase();
+    return products.where((p) => p.name.toLowerCase().contains(query)).toList();
+  }
 }

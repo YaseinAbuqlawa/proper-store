@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
@@ -28,7 +29,7 @@ class AddCategoryDialog extends StatefulWidget {
 class _AddCategoryDialogState extends State<AddCategoryDialog> {
   final _nameController = TextEditingController();
   Uint8List? _imageBytes;
-  bool _saving = false;
+  String _pendingSaveName = '';
 
   @override
   void dispose() {
@@ -51,7 +52,7 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
     setState(() => _imageBytes = bytes);
   }
 
-  Future<void> _save() async {
+  void _save() {
     final l = S.of(context);
     final name = _nameController.text.trim();
     if (name.isEmpty) {
@@ -68,93 +69,112 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
       );
       return;
     }
-    setState(() => _saving = true);
-    await widget.cubit.addCategory(name, _imageBytes!);
-    if (!mounted) return;
-    if (widget.cubit.state.status == CategoriesStatus.failure) {
-      setState(() => _saving = false);
-      return;
-    }
-    Navigator.of(context).pop();
-    widget.onSaved(name);
+    _pendingSaveName = name;
+    widget.cubit.addCategory(name, _imageBytes!);
   }
 
   @override
   Widget build(BuildContext context) {
     final l = S.of(context);
-    return AlertDialog(
-      title: Text(
-        l.productFormAddCategory,
-        style: const TextStyle(
-          fontFamily: 'Cairo',
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            controller: _nameController,
-            autofocus: true,
-            decoration: InputDecoration(hintText: l.productFormCategoryHint),
-          ),
-          const SizedBox(height: 16),
-          GestureDetector(
-            onTap: _saving ? null : _pickImage,
-            child: Container(
-              width: double.infinity,
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.textSubtle),
-                borderRadius: BorderRadius.circular(8),
+    return BlocProvider.value(
+      value: widget.cubit,
+      child: BlocConsumer<CategoriesCubit, CategoriesState>(
+        listenWhen: (prev, curr) =>
+            _pendingSaveName.isNotEmpty &&
+            prev.status == CategoriesStatus.loading,
+        listener: (context, state) {
+          if (state.status == CategoriesStatus.failure) {
+            AppSnackbar.errorSnackbar(
+              context: context,
+              failureMessage: state.failureMessage,
+            );
+            setState(() => _pendingSaveName = '');
+          } else if (state.status == CategoriesStatus.success) {
+            final savedName = _pendingSaveName;
+            Navigator.of(context).pop();
+            widget.onSaved(savedName);
+          }
+        },
+        builder: (context, state) {
+          final isSaving = _pendingSaveName.isNotEmpty &&
+              state.status == CategoriesStatus.loading;
+          return AlertDialog(
+            title: Text(
+              l.productFormAddCategory,
+              style: const TextStyle(
+                fontFamily: 'Cairo',
+                fontWeight: FontWeight.bold,
               ),
-              clipBehavior: Clip.antiAlias,
-              child: _imageBytes != null
-                  ? Image.memory(_imageBytes!, fit: BoxFit.cover)
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.add_photo_alternate_outlined,
-                          color: AppColors.goldMuted,
-                          size: 28,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          l.productFormPickImage,
-                          style: const TextStyle(
-                            color: AppColors.goldMuted,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
             ),
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: _saving ? null : () => Navigator.of(context).pop(),
-          child: Text(l.cancelBtn),
-        ),
-        FilledButton(
-          style: FilledButton.styleFrom(
-            backgroundColor: AppColors.goldRoyal,
-          ),
-          onPressed: _saving ? null : _save,
-          child: _saving
-              ? const SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: Colors.white,
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: _nameController,
+                  autofocus: true,
+                  decoration:
+                      InputDecoration(hintText: l.productFormCategoryHint),
+                ),
+                const SizedBox(height: 16),
+                GestureDetector(
+                  onTap: isSaving ? null : _pickImage,
+                  child: Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.textSubtle),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: _imageBytes != null
+                        ? Image.memory(_imageBytes!, fit: BoxFit.cover)
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.add_photo_alternate_outlined,
+                                color: AppColors.goldMuted,
+                                size: 28,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                l.productFormPickImage,
+                                style: const TextStyle(
+                                  color: AppColors.goldMuted,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
                   ),
-                )
-              : Text(l.addBtn),
-        ),
-      ],
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: isSaving ? null : () => Navigator.of(context).pop(),
+                child: Text(l.cancelBtn),
+              ),
+              FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: AppColors.goldRoyal,
+                ),
+                onPressed: isSaving ? null : _save,
+                child: isSaving
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : Text(l.addBtn),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
