@@ -84,7 +84,6 @@ final GoRouter appRouter = GoRouter(
         ),
         GoRoute(
           path: AppRoutes.customerOrders.path,
-          parentNavigatorKey: rootNavigationKey,
           builder: (_, s) => OrdersScreen(customer: s.extra as CustomerModel),
         ),
         GoRoute(

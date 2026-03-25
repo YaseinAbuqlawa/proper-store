@@ -6,18 +6,14 @@ import 'package:injectable/injectable.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 
-import '../../../../core/services/image_compression_service.dart';
-
 @lazySingleton
 class ProductsRemoteDataSource {
   final FirebaseFirestore firestore;
   final FirebaseStorage storage;
-  final ImageCompressionService compressionService;
 
   const ProductsRemoteDataSource({
     required this.firestore,
     required this.storage,
-    required this.compressionService,
   });
 
   String generateProductId() =>

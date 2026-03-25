@@ -73,6 +73,24 @@ import 'package:admin/features/products/presentation/cubit/product_form_data_cub
     as _i902;
 import 'package:admin/features/products/presentation/cubit/products_cubit.dart'
     as _i177;
+import 'package:admin/features/store_config/data/data_sources/store_config_remote_data_source.dart'
+    as _i883;
+import 'package:admin/features/store_config/data/repo/store_config_repo_impl.dart'
+    as _i37;
+import 'package:admin/features/store_config/domain/repo/store_config_repo.dart'
+    as _i1053;
+import 'package:admin/features/store_config/domain/use_cases/add_category_use_case.dart'
+    as _i839;
+import 'package:admin/features/store_config/domain/use_cases/delete_category_use_case.dart'
+    as _i483;
+import 'package:admin/features/store_config/domain/use_cases/get_store_config_use_case.dart'
+    as _i30;
+import 'package:admin/features/store_config/domain/use_cases/update_collection_banner_use_case.dart'
+    as _i214;
+import 'package:admin/features/store_config/domain/use_cases/update_shipping_costs_use_case.dart'
+    as _i252;
+import 'package:admin/features/store_config/presentation/cubit/store_config_cubit.dart'
+    as _i625;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:firebase_storage/firebase_storage.dart' as _i457;
@@ -94,13 +112,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i935.ImageCompressionService>(
       () => _i935.ImageCompressionService(),
     );
-    gh.lazySingleton<_i442.ProductsRemoteDataSource>(
-      () => _i442.ProductsRemoteDataSource(
-        firestore: gh<_i974.FirebaseFirestore>(),
-        storage: gh<_i457.FirebaseStorage>(),
-        compressionService: gh<_i935.ImageCompressionService>(),
-      ),
-    );
     gh.lazySingleton<_i529.AuthRemoteDataSource>(
       () => _i529.AuthRemoteDataSource(
         auth: gh<_i59.FirebaseAuth>(),
@@ -115,6 +126,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i837.OrdersRemoteDataSource>(
       () => _i837.OrdersRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
+      ),
+    );
+    gh.lazySingleton<_i442.ProductsRemoteDataSource>(
+      () => _i442.ProductsRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+        storage: gh<_i457.FirebaseStorage>(),
+      ),
+    );
+    gh.lazySingleton<_i883.StoreConfigRemoteDataSource>(
+      () => _i883.StoreConfigRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+        storage: gh<_i457.FirebaseStorage>(),
       ),
     );
     gh.lazySingleton<_i978.OrdersRepo>(
@@ -149,6 +172,9 @@ extension GetItInjectableX on _i174.GetIt {
         deleteProductUseCase: gh<_i836.DeleteProductUseCase>(),
       ),
     );
+    gh.lazySingleton<_i1053.StoreConfigRepo>(
+      () => _i37.StoreConfigRepoImpl(gh<_i883.StoreConfigRemoteDataSource>()),
+    );
     gh.lazySingleton<_i329.GetCustomersUseCase>(
       () => _i329.GetCustomersUseCase(repo: gh<_i1026.CustomersRepo>()),
     );
@@ -160,6 +186,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i300.UpdateOrderStatusUseCase>(
       () => _i300.UpdateOrderStatusUseCase(repo: gh<_i978.OrdersRepo>()),
+    );
+    gh.lazySingleton<_i483.DeleteCategoryUseCase>(
+      () => _i483.DeleteCategoryUseCase(gh<_i1053.StoreConfigRepo>()),
+    );
+    gh.lazySingleton<_i30.GetStoreConfigUseCase>(
+      () => _i30.GetStoreConfigUseCase(gh<_i1053.StoreConfigRepo>()),
+    );
+    gh.lazySingleton<_i252.UpdateShippingCostsUseCase>(
+      () => _i252.UpdateShippingCostsUseCase(gh<_i1053.StoreConfigRepo>()),
     );
     gh.factory<_i938.CustomersCubit>(
       () => _i938.CustomersCubit(
@@ -202,6 +237,18 @@ extension GetItInjectableX on _i174.GetIt {
         addCategoryUseCase: gh<_i531.AddCategoryUseCase>(),
       ),
     );
+    gh.lazySingleton<_i839.AddCategoryUseCase>(
+      () => _i839.AddCategoryUseCase(
+        gh<_i1053.StoreConfigRepo>(),
+        gh<_i935.ImageCompressionService>(),
+      ),
+    );
+    gh.lazySingleton<_i214.UpdateCollectionBannerUseCase>(
+      () => _i214.UpdateCollectionBannerUseCase(
+        gh<_i1053.StoreConfigRepo>(),
+        gh<_i935.ImageCompressionService>(),
+      ),
+    );
     gh.factory<_i84.OrdersCubit>(
       () => _i84.OrdersCubit(
         getOrdersUseCase: gh<_i447.GetOrdersUseCase>(),
@@ -220,6 +267,15 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i469.AuthCubit(
         signInUseCase: gh<_i482.SignInUseCase>(),
         signOutUseCase: gh<_i868.SignOutUseCase>(),
+      ),
+    );
+    gh.factory<_i625.StoreConfigCubit>(
+      () => _i625.StoreConfigCubit(
+        getStoreConfig: gh<_i30.GetStoreConfigUseCase>(),
+        updateShippingCosts: gh<_i252.UpdateShippingCostsUseCase>(),
+        addCategory: gh<_i839.AddCategoryUseCase>(),
+        deleteCategory: gh<_i483.DeleteCategoryUseCase>(),
+        updateBanner: gh<_i214.UpdateCollectionBannerUseCase>(),
       ),
     );
     gh.factory<_i593.ProductFormCubit>(
