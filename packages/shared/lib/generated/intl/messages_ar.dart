@@ -99,6 +99,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmDeleteGovernorate": MessageLookupByLibrary.simpleMessage(
       "هل تريد حذف هذه المحافظة؟",
     ),
+    "confirmDeleteImage": MessageLookupByLibrary.simpleMessage(
+      "هل تريد حذف هذه الصورة؟",
+    ),
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage("تاكيد الرقم"),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "continueShopping": MessageLookupByLibrary.simpleMessage("متابعة التسوق"),

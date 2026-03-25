@@ -2374,6 +2374,16 @@ class S {
     );
   }
 
+  /// `Delete this image?`
+  String get confirmDeleteImage {
+    return Intl.message(
+      'Delete this image?',
+      name: 'confirmDeleteImage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Collection Banner`
   String get bannerSectionTitle {
     return Intl.message(

@@ -528,6 +528,9 @@
   "confirmDeleteCategory": "هل تريد حذف هذا القسم؟",
   "@confirmDeleteCategory": {},
 
+  "confirmDeleteImage": "هل تريد حذف هذه الصورة؟",
+  "@confirmDeleteImage": {},
+
   "bannerSectionTitle": "بنر المجموعة",
   "@bannerSectionTitle": {},
 

@@ -44,16 +44,6 @@ class ProductFormDataCubit extends Cubit<ProductFormData> {
     );
   }
 
-  void removeMainImage() {
-    emit(
-      state.copyWith(
-        removedMainImageUrl: state.existingMainImageUrl ?? state.removedMainImageUrl,
-        existingMainImageUrl: null,
-        newMainImageBytes: null,
-      ),
-    );
-  }
-
   void addVariant() {
     emit(
       state.copyWith(

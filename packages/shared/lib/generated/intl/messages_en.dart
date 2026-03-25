@@ -109,6 +109,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmDeleteGovernorate": MessageLookupByLibrary.simpleMessage(
       "Delete this governorate?",
     ),
+    "confirmDeleteImage": MessageLookupByLibrary.simpleMessage(
+      "Delete this image?",
+    ),
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Confirm number",
     ),

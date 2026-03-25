@@ -528,6 +528,9 @@
   "confirmDeleteCategory": "Delete this category?",
   "@confirmDeleteCategory": {},
 
+  "confirmDeleteImage": "Delete this image?",
+  "@confirmDeleteImage": {},
+
   "bannerSectionTitle": "Collection Banner",
   "@bannerSectionTitle": {},
 

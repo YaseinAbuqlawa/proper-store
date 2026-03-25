@@ -7,6 +7,7 @@ import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
 
 import 'package:admin/core/helpers/image_compressor.dart';
+import 'package:admin/core/widgets/confirm_delete_dialog.dart';
 import 'package:admin/features/products/presentation/models/product_variant_entry.dart';
 
 class ProductVariantEditor extends StatefulWidget {
@@ -57,16 +58,33 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
   }
 
   void removeExistingImage(int index) {
-    setState(() {
-      widget.entry.removedImageUrls.add(widget.entry.existingImageUrls[index]);
-      widget.entry.existingImageUrls.removeAt(index);
-    });
-    widget.onChanged();
+    showDialog<void>(
+      context: context,
+      builder: (_) => ConfirmDeleteDialog(
+        message: S.of(context).confirmDeleteImage,
+        onConfirm: () {
+          setState(() {
+            widget.entry.removedImageUrls
+                .add(widget.entry.existingImageUrls[index]);
+            widget.entry.existingImageUrls.removeAt(index);
+          });
+          widget.onChanged();
+        },
+      ),
+    );
   }
 
   void removeNewImage(int index) {
-    setState(() => widget.entry.newImageBytes.removeAt(index));
-    widget.onChanged();
+    showDialog<void>(
+      context: context,
+      builder: (_) => ConfirmDeleteDialog(
+        message: S.of(context).confirmDeleteImage,
+        onConfirm: () {
+          setState(() => widget.entry.newImageBytes.removeAt(index));
+          widget.onChanged();
+        },
+      ),
+    );
   }
 
   void pickColor() {
@@ -111,7 +129,8 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
   @override
   Widget build(BuildContext context) {
     final l = S.of(context);
-    final isLight = widget.entry.color.computeLuminance() > 0.7;
+    final color = widget.entry.color;
+    final isLight = color.computeLuminance() > 0.7;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
@@ -121,7 +140,7 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(width: 5, color: widget.entry.color),
+            Container(width: 5, color: color),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -138,7 +157,7 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
                               width: 52,
                               height: 52,
                               decoration: BoxDecoration(
-                                color: widget.entry.color,
+                                color: color,
                                 border: Border.all(
                                   color: isLight
                                       ? AppColors.textSubtle
@@ -147,9 +166,7 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: widget.entry.color.withValues(
-                                      alpha: 0.35,
-                                    ),
+                                    color: color.withValues(alpha: 0.35),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),

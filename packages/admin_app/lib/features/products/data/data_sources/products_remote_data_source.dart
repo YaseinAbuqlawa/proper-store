@@ -6,6 +6,8 @@ import 'package:injectable/injectable.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 
+import 'package:admin/core/helpers/image_compressor.dart';
+
 @lazySingleton
 class ProductsRemoteDataSource {
   final FirebaseFirestore firestore;
@@ -81,7 +83,8 @@ class ProductsRemoteDataSource {
     required String productId,
     required Uint8List compressedImage,
   }) async {
-    final path = 'products/$productId/main.webp';
+    final ext = ImageCompressor.extensionOf(compressedImage);
+    final path = 'products/$productId/main.$ext';
     return _upload(compressedImage: compressedImage, path: path);
   }
 
@@ -91,8 +94,9 @@ class ProductsRemoteDataSource {
     required int index,
     required Uint8List compressedImage,
   }) async {
+    final ext = ImageCompressor.extensionOf(compressedImage);
     final path =
-        'products/$productId/colors/${colorHex}_${DateTime.now().millisecondsSinceEpoch}_$index.webp';
+        'products/$productId/colors/${colorHex}_${DateTime.now().millisecondsSinceEpoch}_$index.$ext';
     return _upload(compressedImage: compressedImage, path: path);
   }
 
@@ -100,7 +104,8 @@ class ProductsRemoteDataSource {
     required String categoryName,
     required Uint8List compressedImage,
   }) async {
-    final path = 'categories/$categoryName.webp';
+    final ext = ImageCompressor.extensionOf(compressedImage);
+    final path = 'categories/$categoryName.$ext';
     return _upload(compressedImage: compressedImage, path: path);
   }
 
@@ -131,7 +136,7 @@ class ProductsRemoteDataSource {
     final ref = storage.ref(path);
     final task = await ref.putData(
       compressedImage,
-      SettableMetadata(contentType: 'image/webp'),
+      SettableMetadata(contentType: ImageCompressor.contentTypeOf(compressedImage)),
     );
     return task.ref.getDownloadURL();
   }

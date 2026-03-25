@@ -341,9 +341,6 @@ class _ProductFormViewState extends State<_ProductFormView> {
                               existingImageUrl: formData.existingMainImageUrl,
                               newImageBytes: formData.newMainImageBytes,
                               onPickImage: formDataCubit.pickMainImage,
-                              onRemoveImage: formData.hasMainImage
-                                  ? formDataCubit.removeMainImage
-                                  : null,
                             ),
                             const SizedBox(height: 28),
                             FormSectionHeader(
