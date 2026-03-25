@@ -40,6 +40,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "addedToCart": MessageLookupByLibrary.simpleMessage(
       "تمت الإضافة للسلة بنجاح",
     ),
+    "addressCopiedLabel": MessageLookupByLibrary.simpleMessage(
+      "تم نسخ العنوان",
+    ),
     "addressDeleted": MessageLookupByLibrary.simpleMessage("تم حذف العنوان"),
     "addressLabelHint": MessageLookupByLibrary.simpleMessage(
       "مثال: المنزل، العمل",
@@ -48,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addressSaved": MessageLookupByLibrary.simpleMessage(
       "تم حفظ العنوان بنجاح",
     ),
+    "allOrdersFilter": MessageLookupByLibrary.simpleMessage("الكل"),
     "apartmentLabel": MessageLookupByLibrary.simpleMessage("رقم الشقة"),
     "appTitle": MessageLookupByLibrary.simpleMessage("لوحة تحكم المتجر"),
     "areaLabel": MessageLookupByLibrary.simpleMessage("المنطقة / الحي"),
@@ -56,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "buyNow": MessageLookupByLibrary.simpleMessage("شراء الان"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "cancelLabel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("السلة"),
     "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
     "categoryImageRequired": MessageLookupByLibrary.simpleMessage(
@@ -70,7 +75,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage("تاكيد الرقم"),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "continueShopping": MessageLookupByLibrary.simpleMessage("متابعة التسوق"),
+    "copyAddressLabel": MessageLookupByLibrary.simpleMessage("نسخ العنوان"),
+    "copyLabel": MessageLookupByLibrary.simpleMessage("نسخ"),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" ج.م"),
+    "customerDataLabel": MessageLookupByLibrary.simpleMessage("بيانات العميل"),
+    "customerNameLabel": MessageLookupByLibrary.simpleMessage("الاسم"),
+    "customerPhoneLabel": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "darkModeLabel": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "dashboardTitle": MessageLookupByLibrary.simpleMessage("لوحة التحكم"),
     "defaultBadge": MessageLookupByLibrary.simpleMessage("افتراضي"),
@@ -188,6 +198,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "كلمة المرور غير صحيحة",
     ),
     "floorLabel": MessageLookupByLibrary.simpleMessage("الدور"),
+    "freeShippingLabel": MessageLookupByLibrary.simpleMessage("مجاني"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
     "grandTotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي النهائي"),
     "highQuality": MessageLookupByLibrary.simpleMessage("جودة عالية"),
@@ -212,6 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "الاكثر مبيعاً",
     ),
     "myAddresses": MessageLookupByLibrary.simpleMessage("عناويني"),
+    "nameCopiedLabel": MessageLookupByLibrary.simpleMessage("تم نسخ الاسم"),
     "nameMustBeMoreThan2Chars": MessageLookupByLibrary.simpleMessage(
       "الاسم يجب أن يكون أكثر من حرفين",
     ),
@@ -234,27 +246,56 @@ class MessageLookup extends MessageLookupByLibrary {
     "orSignInEasily": MessageLookupByLibrary.simpleMessage(
       "او سجلي الدخول بسهولة",
     ),
+    "orderAccountSummaryLabel": MessageLookupByLibrary.simpleMessage(
+      "ملخص الحساب",
+    ),
     "orderConfirmedMessage": MessageLookupByLibrary.simpleMessage(
       "سيتم التواصل معك قريباً لتأكيد موعد التوصيل",
     ),
     "orderConfirmedTitle": MessageLookupByLibrary.simpleMessage(
       "تم تأكيد طلبك!",
     ),
+    "orderCustomerLabel": MessageLookupByLibrary.simpleMessage("العميل"),
+    "orderDateLabel": MessageLookupByLibrary.simpleMessage("التاريخ"),
     "orderDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
     "orderDetailsTitle": MessageLookupByLibrary.simpleMessage("تفاصيل الطلب"),
+    "orderItemsLabel": MessageLookupByLibrary.simpleMessage("عناصر الطلب"),
     "orderNumberLabel": MessageLookupByLibrary.simpleMessage("رقم الطلب"),
+    "orderPaymentMethodLabel": MessageLookupByLibrary.simpleMessage(
+      "طريقة الدفع",
+    ),
+    "orderPriceBreakdownLabel": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل السعر",
+    ),
+    "orderProductsLabel": MessageLookupByLibrary.simpleMessage("المنتجات"),
+    "orderShippingAddressLabel": MessageLookupByLibrary.simpleMessage(
+      "عنوان الشحن",
+    ),
     "orderStatusCancelled": MessageLookupByLibrary.simpleMessage("ملغي"),
     "orderStatusConfirmed": MessageLookupByLibrary.simpleMessage("مؤكد"),
     "orderStatusDelivered": MessageLookupByLibrary.simpleMessage("تم التسليم"),
     "orderStatusPending": MessageLookupByLibrary.simpleMessage("قيد الانتظار"),
     "orderStatusShipped": MessageLookupByLibrary.simpleMessage("تم الشحن"),
     "orderStatusTitle": MessageLookupByLibrary.simpleMessage("حالة الطلب"),
+    "orderStatusUpdateFailed": MessageLookupByLibrary.simpleMessage(
+      "فشل تحديث حالة الطلب",
+    ),
+    "orderStatusUpdated": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث حالة الطلب",
+    ),
     "orderStepDelivery": MessageLookupByLibrary.simpleMessage("توصيل"),
     "orderStepPreparing": MessageLookupByLibrary.simpleMessage("تجهيز"),
     "orderStepShipping": MessageLookupByLibrary.simpleMessage("شحن"),
     "orderSummaryTitle": MessageLookupByLibrary.simpleMessage("ملخص الطلب"),
     "orderTotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي"),
     "orderedOnLabel": MessageLookupByLibrary.simpleMessage("تم الطلب:"),
+    "ordersEmpty": MessageLookupByLibrary.simpleMessage("لا توجد طلبات"),
+    "ordersSearchHint": MessageLookupByLibrary.simpleMessage(
+      "بحث برقم الطلب...",
+    ),
+    "ordersSearchScopeHint": MessageLookupByLibrary.simpleMessage(
+      "البحث في الطلبات المحملة فقط",
+    ),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("طلباتي"),
     "otpCodeLabel": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
     "otpMustBe6Digits": MessageLookupByLibrary.simpleMessage(
@@ -269,6 +310,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "paymentCOD": MessageLookupByLibrary.simpleMessage("الدفع عند الاستلام"),
     "paymentMethodTitle": MessageLookupByLibrary.simpleMessage("طريقة الدفع"),
+    "phoneCopiedLabel": MessageLookupByLibrary.simpleMessage(
+      "تم نسخ رقم الهاتف",
+    ),
     "phoneNumberLabel": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
       "رقم الهاتف يجب أن يتكون من 10 أرقام",
@@ -381,6 +425,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "retryBtn": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("سياسة الاسترجاع"),
     "saveAddress": MessageLookupByLibrary.simpleMessage("حفظ العنوان"),
+    "selectNewStatusHint": MessageLookupByLibrary.simpleMessage(
+      "اختر الحالة الجديدة للطلب",
+    ),
     "selectedColor": MessageLookupByLibrary.simpleMessage("اللون المختار:"),
     "setAsDefault": MessageLookupByLibrary.simpleMessage(
       "تعيين كعنوان افتراضي",
@@ -393,6 +440,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "shopAsGuest": MessageLookupByLibrary.simpleMessage("التسوق كزائر"),
     "showAllText": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "showRemainingItemsLabel": MessageLookupByLibrary.simpleMessage(
+      "عرض جميع العناصر المتبقية",
+    ),
     "signInEasilyVia": MessageLookupByLibrary.simpleMessage("سجلي بسهولة عبر"),
     "signInForBestService": MessageLookupByLibrary.simpleMessage(
       "سجلي دخولك لتحصلي على افضل خدمة ممكنة",
@@ -411,6 +461,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "streetLabel": MessageLookupByLibrary.simpleMessage("الشارع"),
     "subtotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي قبل الخصم"),
     "successTitle": MessageLookupByLibrary.simpleMessage("نجاح"),
+    "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("إجمالي الوحدات"),
+    "updateStatusLabel": MessageLookupByLibrary.simpleMessage("تحديث الحالة"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("التحقق من الرمز"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("مرحباً بكِ"),
   };

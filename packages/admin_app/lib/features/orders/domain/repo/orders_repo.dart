@@ -1,0 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:proper_store_shared/models/customer_model.dart';
+import 'package:proper_store_shared/models/order_model.dart';
+
+import '../../../../core/failures/app_failures.dart';
+
+abstract interface class OrdersRepo {
+  Future<Either<ServerFailure, (List<OrderModel>, DocumentSnapshot?)>> getOrders({
+    DocumentSnapshot? startAfter,
+    required int pageSize,
+    OrderStatus? statusFilter,
+  });
+
+  Future<Either<ServerFailure, void>> updateOrderStatus({
+    required String orderId,
+    required OrderStatus newStatus,
+  });
+
+  Future<Either<ServerFailure, CustomerModel>> getCustomer({
+    required String customerId,
+  });
+}

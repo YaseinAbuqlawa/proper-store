@@ -36,7 +36,9 @@ abstract class CartItemModel with _$CartItemModel {
       productId: product.id,
       name: product.name,
       selectedColor: productVariant.color,
-      imageUrl: product.mainImageUrl,
+      imageUrl: productVariant.imageUrls.isNotEmpty
+          ? productVariant.imageUrls.first
+          : product.mainImageUrl,
       sellingPrice: product.sellingPrice,
       discountValue: product.discountValue,
       quantity: quantity,

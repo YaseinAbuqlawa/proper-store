@@ -370,5 +370,89 @@
   "@productFormErrorMainImageRequired": {},
 
   "productFormErrorInvalidNumber": "Please enter a valid number",
-  "@productFormErrorInvalidNumber": {}
+  "@productFormErrorInvalidNumber": {},
+
+  "ordersSearchHint": "Search by order ID...",
+  "@ordersSearchHint": {},
+
+  "ordersSearchScopeHint": "Search applies to loaded orders only",
+  "@ordersSearchScopeHint": {},
+
+  "ordersEmpty": "No orders found",
+  "@ordersEmpty": {},
+
+  "allOrdersFilter": "All",
+  "@allOrdersFilter": {},
+
+  "orderCustomerLabel": "Customer",
+  "@orderCustomerLabel": {},
+
+  "orderDateLabel": "Date",
+  "@orderDateLabel": {},
+
+  "orderStatusUpdated": "Order status updated",
+  "@orderStatusUpdated": {},
+
+  "orderStatusUpdateFailed": "Failed to update status",
+  "@orderStatusUpdateFailed": {},
+
+  "orderShippingAddressLabel": "Shipping Address",
+  "@orderShippingAddressLabel": {},
+
+  "orderPaymentMethodLabel": "Payment Method",
+  "@orderPaymentMethodLabel": {},
+
+  "orderProductsLabel": "Products",
+  "@orderProductsLabel": {},
+
+  "orderPriceBreakdownLabel": "Price Breakdown",
+  "@orderPriceBreakdownLabel": {},
+
+  "updateStatusLabel": "Update Status",
+  "@updateStatusLabel": {},
+
+  "customerNameLabel": "Name",
+  "@customerNameLabel": {},
+
+  "customerPhoneLabel": "Phone",
+  "@customerPhoneLabel": {},
+
+  "customerDataLabel": "Customer Details",
+  "@customerDataLabel": {},
+
+  "freeShippingLabel": "Free",
+  "@freeShippingLabel": {},
+
+  "orderAccountSummaryLabel": "Order Summary",
+  "@orderAccountSummaryLabel": {},
+
+  "selectNewStatusHint": "Select the new order status",
+  "@selectNewStatusHint": {},
+
+  "cancelLabel": "Cancel",
+  "@cancelLabel": {},
+
+  "showRemainingItemsLabel": "Show all remaining items",
+  "@showRemainingItemsLabel": {},
+
+  "totalUnitsLabel": "Total units",
+  "@totalUnitsLabel": {},
+
+  "orderItemsLabel": "Order Items",
+  "@orderItemsLabel": {},
+
+  "copyLabel": "Copy",
+  "@copyLabel": {},
+
+  "copyAddressLabel": "Copy Address",
+  "@copyAddressLabel": {},
+
+  "addressCopiedLabel": "Address copied",
+  "@addressCopiedLabel": {},
+
+  "nameCopiedLabel": "Name copied",
+  "@nameCopiedLabel": {},
+
+  "phoneCopiedLabel": "Phone number copied",
+  "@phoneCopiedLabel": {}
 }

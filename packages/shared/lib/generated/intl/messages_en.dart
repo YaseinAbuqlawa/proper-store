@@ -40,12 +40,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "addedToCart": MessageLookupByLibrary.simpleMessage(
       "Added to cart successfully",
     ),
+    "addressCopiedLabel": MessageLookupByLibrary.simpleMessage(
+      "Address copied",
+    ),
     "addressDeleted": MessageLookupByLibrary.simpleMessage("Address deleted"),
     "addressLabelHint": MessageLookupByLibrary.simpleMessage("e.g. Home, Work"),
     "addressLabelLabel": MessageLookupByLibrary.simpleMessage("Address label"),
     "addressSaved": MessageLookupByLibrary.simpleMessage(
       "Address saved successfully",
     ),
+    "allOrdersFilter": MessageLookupByLibrary.simpleMessage("All"),
     "apartmentLabel": MessageLookupByLibrary.simpleMessage("Apartment number"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Store Admin Dashboard"),
     "areaLabel": MessageLookupByLibrary.simpleMessage("Area / Neighborhood"),
@@ -56,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "buyNow": MessageLookupByLibrary.simpleMessage("Buy now"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
     "categoryImageRequired": MessageLookupByLibrary.simpleMessage(
@@ -76,7 +81,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "continueShopping": MessageLookupByLibrary.simpleMessage(
       "Continue Shopping",
     ),
+    "copyAddressLabel": MessageLookupByLibrary.simpleMessage("Copy Address"),
+    "copyLabel": MessageLookupByLibrary.simpleMessage("Copy"),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" EGP"),
+    "customerDataLabel": MessageLookupByLibrary.simpleMessage(
+      "Customer Details",
+    ),
+    "customerNameLabel": MessageLookupByLibrary.simpleMessage("Name"),
+    "customerPhoneLabel": MessageLookupByLibrary.simpleMessage("Phone"),
     "darkModeLabel": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "dashboardTitle": MessageLookupByLibrary.simpleMessage("Dashboard"),
     "defaultBadge": MessageLookupByLibrary.simpleMessage("Default"),
@@ -196,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Wrong password",
     ),
     "floorLabel": MessageLookupByLibrary.simpleMessage("Floor"),
+    "freeShippingLabel": MessageLookupByLibrary.simpleMessage("Free"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("Full name"),
     "grandTotalLabel": MessageLookupByLibrary.simpleMessage("Grand Total"),
     "highQuality": MessageLookupByLibrary.simpleMessage("High quality"),
@@ -220,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Best Sellers",
     ),
     "myAddresses": MessageLookupByLibrary.simpleMessage("My addresses"),
+    "nameCopiedLabel": MessageLookupByLibrary.simpleMessage("Name copied"),
     "nameMustBeMoreThan2Chars": MessageLookupByLibrary.simpleMessage(
       "Name must be more than 2 characters",
     ),
@@ -238,27 +252,56 @@ class MessageLookup extends MessageLookupByLibrary {
     "noProductsYet": MessageLookupByLibrary.simpleMessage("No products found"),
     "notFoundTitle": MessageLookupByLibrary.simpleMessage("Page not found"),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage("Or sign in easily"),
+    "orderAccountSummaryLabel": MessageLookupByLibrary.simpleMessage(
+      "Order Summary",
+    ),
     "orderConfirmedMessage": MessageLookupByLibrary.simpleMessage(
       "We\'ll contact you soon to confirm your delivery time",
     ),
     "orderConfirmedTitle": MessageLookupByLibrary.simpleMessage(
       "Order Confirmed!",
     ),
+    "orderCustomerLabel": MessageLookupByLibrary.simpleMessage("Customer"),
+    "orderDateLabel": MessageLookupByLibrary.simpleMessage("Date"),
     "orderDetails": MessageLookupByLibrary.simpleMessage("View details"),
     "orderDetailsTitle": MessageLookupByLibrary.simpleMessage("Order Details"),
+    "orderItemsLabel": MessageLookupByLibrary.simpleMessage("Order Items"),
     "orderNumberLabel": MessageLookupByLibrary.simpleMessage("Order number"),
+    "orderPaymentMethodLabel": MessageLookupByLibrary.simpleMessage(
+      "Payment Method",
+    ),
+    "orderPriceBreakdownLabel": MessageLookupByLibrary.simpleMessage(
+      "Price Breakdown",
+    ),
+    "orderProductsLabel": MessageLookupByLibrary.simpleMessage("Products"),
+    "orderShippingAddressLabel": MessageLookupByLibrary.simpleMessage(
+      "Shipping Address",
+    ),
     "orderStatusCancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
     "orderStatusConfirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
     "orderStatusDelivered": MessageLookupByLibrary.simpleMessage("Delivered"),
     "orderStatusPending": MessageLookupByLibrary.simpleMessage("Pending"),
     "orderStatusShipped": MessageLookupByLibrary.simpleMessage("Shipped"),
     "orderStatusTitle": MessageLookupByLibrary.simpleMessage("Order Status"),
+    "orderStatusUpdateFailed": MessageLookupByLibrary.simpleMessage(
+      "Failed to update status",
+    ),
+    "orderStatusUpdated": MessageLookupByLibrary.simpleMessage(
+      "Order status updated",
+    ),
     "orderStepDelivery": MessageLookupByLibrary.simpleMessage("Delivery"),
     "orderStepPreparing": MessageLookupByLibrary.simpleMessage("Preparing"),
     "orderStepShipping": MessageLookupByLibrary.simpleMessage("Shipping"),
     "orderSummaryTitle": MessageLookupByLibrary.simpleMessage("Order summary"),
     "orderTotalLabel": MessageLookupByLibrary.simpleMessage("Total"),
     "orderedOnLabel": MessageLookupByLibrary.simpleMessage("Ordered on:"),
+    "ordersEmpty": MessageLookupByLibrary.simpleMessage("No orders found"),
+    "ordersSearchHint": MessageLookupByLibrary.simpleMessage(
+      "Search by order ID...",
+    ),
+    "ordersSearchScopeHint": MessageLookupByLibrary.simpleMessage(
+      "Search applies to loaded orders only",
+    ),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("My Orders"),
     "otpCodeLabel": MessageLookupByLibrary.simpleMessage("Verification code"),
     "otpMustBe6Digits": MessageLookupByLibrary.simpleMessage(
@@ -274,6 +317,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "paymentCOD": MessageLookupByLibrary.simpleMessage("Cash on delivery"),
     "paymentMethodTitle": MessageLookupByLibrary.simpleMessage(
       "Payment method",
+    ),
+    "phoneCopiedLabel": MessageLookupByLibrary.simpleMessage(
+      "Phone number copied",
     ),
     "phoneNumberLabel": MessageLookupByLibrary.simpleMessage("Phone number"),
     "phoneNumberMustBe10Digits": MessageLookupByLibrary.simpleMessage(
@@ -399,6 +445,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "retryBtn": MessageLookupByLibrary.simpleMessage("Retry"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("Return policy"),
     "saveAddress": MessageLookupByLibrary.simpleMessage("Save address"),
+    "selectNewStatusHint": MessageLookupByLibrary.simpleMessage(
+      "Select the new order status",
+    ),
     "selectedColor": MessageLookupByLibrary.simpleMessage("Selected color:"),
     "setAsDefault": MessageLookupByLibrary.simpleMessage(
       "Set as default address",
@@ -413,6 +462,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "shopAsGuest": MessageLookupByLibrary.simpleMessage("Shop as guest"),
     "showAllText": MessageLookupByLibrary.simpleMessage("Show all"),
+    "showRemainingItemsLabel": MessageLookupByLibrary.simpleMessage(
+      "Show all remaining items",
+    ),
     "signInEasilyVia": MessageLookupByLibrary.simpleMessage(
       "Sign in easily via",
     ),
@@ -433,6 +485,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "streetLabel": MessageLookupByLibrary.simpleMessage("Street"),
     "subtotalLabel": MessageLookupByLibrary.simpleMessage("Subtotal"),
     "successTitle": MessageLookupByLibrary.simpleMessage("Success"),
+    "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("Total units"),
+    "updateStatusLabel": MessageLookupByLibrary.simpleMessage("Update Status"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("Verify code"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("Welcome"),
   };

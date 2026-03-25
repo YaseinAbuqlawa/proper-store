@@ -5,7 +5,8 @@ enum AppRoutes {
   productsAdd('/products/add'),
   productsEdit('/products/edit'),
   customers('/customers'),
-  storeConfig('/store-config');
+  storeConfig('/store-config'),
+  orderDetails('/orders/details');
 
   const AppRoutes(this.path);
 

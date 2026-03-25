@@ -1883,6 +1883,256 @@ class S {
       args: [],
     );
   }
+
+  /// `Search by order ID...`
+  String get ordersSearchHint {
+    return Intl.message(
+      'Search by order ID...',
+      name: 'ordersSearchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search applies to loaded orders only`
+  String get ordersSearchScopeHint {
+    return Intl.message(
+      'Search applies to loaded orders only',
+      name: 'ordersSearchScopeHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No orders found`
+  String get ordersEmpty {
+    return Intl.message(
+      'No orders found',
+      name: 'ordersEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get allOrdersFilter {
+    return Intl.message('All', name: 'allOrdersFilter', desc: '', args: []);
+  }
+
+  /// `Customer`
+  String get orderCustomerLabel {
+    return Intl.message(
+      'Customer',
+      name: 'orderCustomerLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get orderDateLabel {
+    return Intl.message('Date', name: 'orderDateLabel', desc: '', args: []);
+  }
+
+  /// `Order status updated`
+  String get orderStatusUpdated {
+    return Intl.message(
+      'Order status updated',
+      name: 'orderStatusUpdated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to update status`
+  String get orderStatusUpdateFailed {
+    return Intl.message(
+      'Failed to update status',
+      name: 'orderStatusUpdateFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shipping Address`
+  String get orderShippingAddressLabel {
+    return Intl.message(
+      'Shipping Address',
+      name: 'orderShippingAddressLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Method`
+  String get orderPaymentMethodLabel {
+    return Intl.message(
+      'Payment Method',
+      name: 'orderPaymentMethodLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Products`
+  String get orderProductsLabel {
+    return Intl.message(
+      'Products',
+      name: 'orderProductsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price Breakdown`
+  String get orderPriceBreakdownLabel {
+    return Intl.message(
+      'Price Breakdown',
+      name: 'orderPriceBreakdownLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Status`
+  String get updateStatusLabel {
+    return Intl.message(
+      'Update Status',
+      name: 'updateStatusLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get customerNameLabel {
+    return Intl.message('Name', name: 'customerNameLabel', desc: '', args: []);
+  }
+
+  /// `Phone`
+  String get customerPhoneLabel {
+    return Intl.message(
+      'Phone',
+      name: 'customerPhoneLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customer Details`
+  String get customerDataLabel {
+    return Intl.message(
+      'Customer Details',
+      name: 'customerDataLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free`
+  String get freeShippingLabel {
+    return Intl.message('Free', name: 'freeShippingLabel', desc: '', args: []);
+  }
+
+  /// `Order Summary`
+  String get orderAccountSummaryLabel {
+    return Intl.message(
+      'Order Summary',
+      name: 'orderAccountSummaryLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select the new order status`
+  String get selectNewStatusHint {
+    return Intl.message(
+      'Select the new order status',
+      name: 'selectNewStatusHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancelLabel {
+    return Intl.message('Cancel', name: 'cancelLabel', desc: '', args: []);
+  }
+
+  /// `Show all remaining items`
+  String get showRemainingItemsLabel {
+    return Intl.message(
+      'Show all remaining items',
+      name: 'showRemainingItemsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total units`
+  String get totalUnitsLabel {
+    return Intl.message(
+      'Total units',
+      name: 'totalUnitsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Items`
+  String get orderItemsLabel {
+    return Intl.message(
+      'Order Items',
+      name: 'orderItemsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy`
+  String get copyLabel {
+    return Intl.message('Copy', name: 'copyLabel', desc: '', args: []);
+  }
+
+  /// `Copy Address`
+  String get copyAddressLabel {
+    return Intl.message(
+      'Copy Address',
+      name: 'copyAddressLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address copied`
+  String get addressCopiedLabel {
+    return Intl.message(
+      'Address copied',
+      name: 'addressCopiedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name copied`
+  String get nameCopiedLabel {
+    return Intl.message(
+      'Name copied',
+      name: 'nameCopiedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number copied`
+  String get phoneCopiedLabel {
+    return Intl.message(
+      'Phone number copied',
+      name: 'phoneCopiedLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

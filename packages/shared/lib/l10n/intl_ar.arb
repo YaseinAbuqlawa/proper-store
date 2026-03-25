@@ -370,5 +370,89 @@
   "@productFormErrorMainImageRequired": {},
 
   "productFormErrorInvalidNumber": "يرجى إدخال رقم صحيح",
-  "@productFormErrorInvalidNumber": {}
+  "@productFormErrorInvalidNumber": {},
+
+  "ordersSearchHint": "بحث برقم الطلب...",
+  "@ordersSearchHint": {},
+
+  "ordersSearchScopeHint": "البحث في الطلبات المحملة فقط",
+  "@ordersSearchScopeHint": {},
+
+  "ordersEmpty": "لا توجد طلبات",
+  "@ordersEmpty": {},
+
+  "allOrdersFilter": "الكل",
+  "@allOrdersFilter": {},
+
+  "orderCustomerLabel": "العميل",
+  "@orderCustomerLabel": {},
+
+  "orderDateLabel": "التاريخ",
+  "@orderDateLabel": {},
+
+  "orderStatusUpdated": "تم تحديث حالة الطلب",
+  "@orderStatusUpdated": {},
+
+  "orderStatusUpdateFailed": "فشل تحديث حالة الطلب",
+  "@orderStatusUpdateFailed": {},
+
+  "orderShippingAddressLabel": "عنوان الشحن",
+  "@orderShippingAddressLabel": {},
+
+  "orderPaymentMethodLabel": "طريقة الدفع",
+  "@orderPaymentMethodLabel": {},
+
+  "orderProductsLabel": "المنتجات",
+  "@orderProductsLabel": {},
+
+  "orderPriceBreakdownLabel": "تفاصيل السعر",
+  "@orderPriceBreakdownLabel": {},
+
+  "updateStatusLabel": "تحديث الحالة",
+  "@updateStatusLabel": {},
+
+  "customerNameLabel": "الاسم",
+  "@customerNameLabel": {},
+
+  "customerPhoneLabel": "رقم الهاتف",
+  "@customerPhoneLabel": {},
+
+  "customerDataLabel": "بيانات العميل",
+  "@customerDataLabel": {},
+
+  "freeShippingLabel": "مجاني",
+  "@freeShippingLabel": {},
+
+  "orderAccountSummaryLabel": "ملخص الحساب",
+  "@orderAccountSummaryLabel": {},
+
+  "selectNewStatusHint": "اختر الحالة الجديدة للطلب",
+  "@selectNewStatusHint": {},
+
+  "cancelLabel": "إلغاء",
+  "@cancelLabel": {},
+
+  "showRemainingItemsLabel": "عرض جميع العناصر المتبقية",
+  "@showRemainingItemsLabel": {},
+
+  "totalUnitsLabel": "إجمالي الوحدات",
+  "@totalUnitsLabel": {},
+
+  "orderItemsLabel": "عناصر الطلب",
+  "@orderItemsLabel": {},
+
+  "copyLabel": "نسخ",
+  "@copyLabel": {},
+
+  "copyAddressLabel": "نسخ العنوان",
+  "@copyAddressLabel": {},
+
+  "addressCopiedLabel": "تم نسخ العنوان",
+  "@addressCopiedLabel": {},
+
+  "nameCopiedLabel": "تم نسخ الاسم",
+  "@nameCopiedLabel": {},
+
+  "phoneCopiedLabel": "تم نسخ رقم الهاتف",
+  "@phoneCopiedLabel": {}
 }

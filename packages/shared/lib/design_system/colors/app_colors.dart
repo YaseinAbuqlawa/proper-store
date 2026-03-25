@@ -28,6 +28,18 @@ class AppColors {
     BoxShadow(color: Color(0x12000000), blurRadius: 8, offset: Offset(0, 2)),
   ];
 
+  // Order status badge colors
+  static const Color statusPendingBg = Color(0xFFF7E1A6);
+  static const Color statusPendingFg = Color(0xFF736334);
+  static const Color statusConfirmedBg = Color(0xFFDBE1FF);
+  static const Color statusConfirmedFg = Color(0xFF415BA4);
+  static const Color statusShippedBg = Color(0xFFFFF3E0);
+  static const Color statusShippedFg = Color(0xFFE65100);
+  static const Color statusDeliveredBg = Color(0xFFE8F5E9);
+  static const Color statusDeliveredFg = Color(0xFF2E7D32);
+  static const Color statusCancelledBg = Color(0xFFFFDAD6);
+  static const Color statusCancelledFg = Color(0xFF93000A);
+
   static const Gradient goldGradient = LinearGradient(
     colors: [Color(0xFFD4AF37), Color(0xFFF5E0A3), Color(0xFFC5A028)],
     begin: Alignment.topLeft,
