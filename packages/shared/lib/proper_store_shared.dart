@@ -17,3 +17,6 @@ export 'models/customer_model.dart';
 export 'models/order_model.dart';
 export 'models/product_model.dart';
 export 'models/shipping_cost_model.dart';
+export 'models/category_model.dart';
+export 'models/home_collection_banner_model.dart';
+export 'helpers/egypt_governorates.dart';

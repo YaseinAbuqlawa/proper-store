@@ -6,8 +6,8 @@ import 'package:proper_store_shared/helpers/app_consts.dart';
 import 'package:proper_store/core/products/data/data_sources/products_remote_data_source.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 import 'package:proper_store/features/home/data/data_sources/home_remote_data_source.dart';
-import 'package:proper_store/features/home/data/models/category_model.dart';
-import 'package:proper_store/features/home/data/models/home_collection_banner_model.dart';
+import 'package:proper_store_shared/models/category_model.dart';
+import 'package:proper_store_shared/models/home_collection_banner_model.dart';
 import 'package:proper_store/features/home/domain/repo/home_repo.dart';
 
 @LazySingleton(as: HomeRepo)

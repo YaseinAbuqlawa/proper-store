@@ -2173,6 +2173,296 @@ class S {
       args: [],
     );
   }
+
+  /// `Store Customization`
+  String get storeConfigTitle {
+    return Intl.message(
+      'Store Customization',
+      name: 'storeConfigTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage shipping costs, categories, and general appearance`
+  String get storeConfigSubtitle {
+    return Intl.message(
+      'Manage shipping costs, categories, and general appearance',
+      name: 'storeConfigSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shipping Costs`
+  String get shippingSectionTitle {
+    return Intl.message(
+      'Shipping Costs',
+      name: 'shippingSectionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Governorate`
+  String get addGovernorate {
+    return Intl.message(
+      'Add Governorate',
+      name: 'addGovernorate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Shipping Cost`
+  String get editShippingCostTitle {
+    return Intl.message(
+      'Edit Shipping Cost',
+      name: 'editShippingCostTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shipping Cost (EGP)`
+  String get shippingCostFieldLabel {
+    return Intl.message(
+      'Shipping Cost (EGP)',
+      name: 'shippingCostFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Governorate`
+  String get selectGovernorate {
+    return Intl.message(
+      'Select Governorate',
+      name: 'selectGovernorate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search governorate...`
+  String get searchGovernorateHint {
+    return Intl.message(
+      'Search governorate...',
+      name: 'searchGovernorateHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This governorate is already added`
+  String get governorateAlreadyAdded {
+    return Intl.message(
+      'This governorate is already added',
+      name: 'governorateAlreadyAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All governorates are already added`
+  String get noGovernoratesToAdd {
+    return Intl.message(
+      'All governorates are already added',
+      name: 'noGovernoratesToAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No shipping costs defined yet`
+  String get shippingCostsEmpty {
+    return Intl.message(
+      'No shipping costs defined yet',
+      name: 'shippingCostsEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete this governorate?`
+  String get confirmDeleteGovernorate {
+    return Intl.message(
+      'Delete this governorate?',
+      name: 'confirmDeleteGovernorate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categories`
+  String get categoriesSectionTitle {
+    return Intl.message(
+      'Categories',
+      name: 'categoriesSectionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Category`
+  String get addCategory {
+    return Intl.message(
+      'Add Category',
+      name: 'addCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category Name`
+  String get categoryNameLabel {
+    return Intl.message(
+      'Category Name',
+      name: 'categoryNameLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `e.g. Winter Clothes`
+  String get categoryNameHint {
+    return Intl.message(
+      'e.g. Winter Clothes',
+      name: 'categoryNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Photo`
+  String get uploadPhoto {
+    return Intl.message(
+      'Upload Photo',
+      name: 'uploadPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add New Category`
+  String get addNewCategoryBtn {
+    return Intl.message(
+      'Add New Category',
+      name: 'addNewCategoryBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No categories yet`
+  String get categoriesEmpty {
+    return Intl.message(
+      'No categories yet',
+      name: 'categoriesEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete this category?`
+  String get confirmDeleteCategory {
+    return Intl.message(
+      'Delete this category?',
+      name: 'confirmDeleteCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collection Banner`
+  String get bannerSectionTitle {
+    return Intl.message(
+      'Collection Banner',
+      name: 'bannerSectionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Banner Title`
+  String get bannerTitleLabel {
+    return Intl.message(
+      'Banner Title',
+      name: 'bannerTitleLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Badge Text`
+  String get bannerBadgeLabel {
+    return Intl.message(
+      'Badge Text',
+      name: 'bannerBadgeLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collection Name`
+  String get bannerCollectionLabel {
+    return Intl.message(
+      'Collection Name',
+      name: 'bannerCollectionLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get bannerDescriptionLabel {
+    return Intl.message(
+      'Description',
+      name: 'bannerDescriptionLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save Changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Changes saved successfully`
+  String get storeConfigSaveSuccess {
+    return Intl.message(
+      'Changes saved successfully',
+      name: 'storeConfigSaveSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to save changes, please try again`
+  String get storeConfigSaveFailed {
+    return Intl.message(
+      'Failed to save changes, please try again',
+      name: 'storeConfigSaveFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please add a banner image`
+  String get bannerImageRequired {
+    return Intl.message(
+      'Please add a banner image',
+      name: 'bannerImageRequired',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

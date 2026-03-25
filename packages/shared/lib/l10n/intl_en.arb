@@ -466,5 +466,92 @@
   "@viewOrdersBtn": {},
 
   "customerOrdersTitle": "Customer Orders",
-  "@customerOrdersTitle": {}
+  "@customerOrdersTitle": {},
+
+  "storeConfigTitle": "Store Customization",
+  "@storeConfigTitle": {},
+
+  "storeConfigSubtitle": "Manage shipping costs, categories, and general appearance",
+  "@storeConfigSubtitle": {},
+
+  "shippingSectionTitle": "Shipping Costs",
+  "@shippingSectionTitle": {},
+
+  "addGovernorate": "Add Governorate",
+  "@addGovernorate": {},
+
+  "editShippingCostTitle": "Edit Shipping Cost",
+  "@editShippingCostTitle": {},
+
+  "shippingCostFieldLabel": "Shipping Cost (EGP)",
+  "@shippingCostFieldLabel": {},
+
+  "selectGovernorate": "Select Governorate",
+  "@selectGovernorate": {},
+
+  "searchGovernorateHint": "Search governorate...",
+  "@searchGovernorateHint": {},
+
+  "governorateAlreadyAdded": "This governorate is already added",
+  "@governorateAlreadyAdded": {},
+
+  "noGovernoratesToAdd": "All governorates are already added",
+  "@noGovernoratesToAdd": {},
+
+  "shippingCostsEmpty": "No shipping costs defined yet",
+  "@shippingCostsEmpty": {},
+
+  "confirmDeleteGovernorate": "Delete this governorate?",
+  "@confirmDeleteGovernorate": {},
+
+  "categoriesSectionTitle": "Categories",
+  "@categoriesSectionTitle": {},
+
+  "addCategory": "Add Category",
+  "@addCategory": {},
+
+  "categoryNameLabel": "Category Name",
+  "@categoryNameLabel": {},
+
+  "categoryNameHint": "e.g. Winter Clothes",
+  "@categoryNameHint": {},
+
+  "uploadPhoto": "Upload Photo",
+  "@uploadPhoto": {},
+
+  "addNewCategoryBtn": "Add New Category",
+  "@addNewCategoryBtn": {},
+
+  "categoriesEmpty": "No categories yet",
+  "@categoriesEmpty": {},
+
+  "confirmDeleteCategory": "Delete this category?",
+  "@confirmDeleteCategory": {},
+
+  "bannerSectionTitle": "Collection Banner",
+  "@bannerSectionTitle": {},
+
+  "bannerTitleLabel": "Banner Title",
+  "@bannerTitleLabel": {},
+
+  "bannerBadgeLabel": "Badge Text",
+  "@bannerBadgeLabel": {},
+
+  "bannerCollectionLabel": "Collection Name",
+  "@bannerCollectionLabel": {},
+
+  "bannerDescriptionLabel": "Description",
+  "@bannerDescriptionLabel": {},
+
+  "saveChanges": "Save Changes",
+  "@saveChanges": {},
+
+  "storeConfigSaveSuccess": "Changes saved successfully",
+  "@storeConfigSaveSuccess": {},
+
+  "storeConfigSaveFailed": "Failed to save changes, please try again",
+  "@storeConfigSaveFailed": {},
+
+  "bannerImageRequired": "Please add a banner image",
+  "@bannerImageRequired": {}
 }

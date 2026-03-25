@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
-import 'package:proper_store/features/home/data/models/category_model.dart';
-import 'package:proper_store/features/home/data/models/home_collection_banner_model.dart';
+import 'package:proper_store_shared/models/category_model.dart';
+import 'package:proper_store_shared/models/home_collection_banner_model.dart';
 
 @lazySingleton
 class HomeRemoteDataSource {

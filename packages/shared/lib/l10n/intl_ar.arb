@@ -466,5 +466,92 @@
   "@viewOrdersBtn": {},
 
   "customerOrdersTitle": "طلبات العميل",
-  "@customerOrdersTitle": {}
+  "@customerOrdersTitle": {},
+
+  "storeConfigTitle": "تخصيص المتجر",
+  "@storeConfigTitle": {},
+
+  "storeConfigSubtitle": "إدارة تكاليف الشحن، الأقسام، والمظهر العام",
+  "@storeConfigSubtitle": {},
+
+  "shippingSectionTitle": "تكاليف الشحن",
+  "@shippingSectionTitle": {},
+
+  "addGovernorate": "إضافة محافظة",
+  "@addGovernorate": {},
+
+  "editShippingCostTitle": "تعديل تكلفة الشحن",
+  "@editShippingCostTitle": {},
+
+  "shippingCostFieldLabel": "تكلفة الشحن (ج.م)",
+  "@shippingCostFieldLabel": {},
+
+  "selectGovernorate": "اختر محافظة",
+  "@selectGovernorate": {},
+
+  "searchGovernorateHint": "ابحث عن محافظة...",
+  "@searchGovernorateHint": {},
+
+  "governorateAlreadyAdded": "هذه المحافظة مضافة بالفعل",
+  "@governorateAlreadyAdded": {},
+
+  "noGovernoratesToAdd": "جميع المحافظات مضافة",
+  "@noGovernoratesToAdd": {},
+
+  "shippingCostsEmpty": "لا توجد تكاليف شحن محددة بعد",
+  "@shippingCostsEmpty": {},
+
+  "confirmDeleteGovernorate": "هل تريد حذف هذه المحافظة؟",
+  "@confirmDeleteGovernorate": {},
+
+  "categoriesSectionTitle": "الأقسام",
+  "@categoriesSectionTitle": {},
+
+  "addCategory": "إضافة قسم",
+  "@addCategory": {},
+
+  "categoryNameLabel": "اسم القسم",
+  "@categoryNameLabel": {},
+
+  "categoryNameHint": "مثلاً: ملابس شتوية",
+  "@categoryNameHint": {},
+
+  "uploadPhoto": "رفع صورة",
+  "@uploadPhoto": {},
+
+  "addNewCategoryBtn": "إضافة قسم جديد",
+  "@addNewCategoryBtn": {},
+
+  "categoriesEmpty": "لا توجد أقسام بعد",
+  "@categoriesEmpty": {},
+
+  "confirmDeleteCategory": "هل تريد حذف هذا القسم؟",
+  "@confirmDeleteCategory": {},
+
+  "bannerSectionTitle": "بنر المجموعة",
+  "@bannerSectionTitle": {},
+
+  "bannerTitleLabel": "عنوان البنر",
+  "@bannerTitleLabel": {},
+
+  "bannerBadgeLabel": "نص الشارة",
+  "@bannerBadgeLabel": {},
+
+  "bannerCollectionLabel": "اسم المجموعة",
+  "@bannerCollectionLabel": {},
+
+  "bannerDescriptionLabel": "الوصف",
+  "@bannerDescriptionLabel": {},
+
+  "saveChanges": "حفظ التغييرات",
+  "@saveChanges": {},
+
+  "storeConfigSaveSuccess": "تم حفظ التغييرات بنجاح",
+  "@storeConfigSaveSuccess": {},
+
+  "storeConfigSaveFailed": "حدث خطأ أثناء الحفظ، حاول مجدداً",
+  "@storeConfigSaveFailed": {},
+
+  "bannerImageRequired": "يرجى إضافة صورة للبنر",
+  "@bannerImageRequired": {}
 }

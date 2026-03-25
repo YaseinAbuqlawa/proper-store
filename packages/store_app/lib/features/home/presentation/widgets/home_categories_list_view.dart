@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proper_store/core/products/domain/entities/product_filter.dart';
 import 'package:proper_store/core/router/app_routes.dart';
-import 'package:proper_store/features/home/data/models/category_model.dart';
+import 'package:proper_store_shared/models/category_model.dart';
 import 'package:proper_store/features/home/presentation/cubit/home_cubit.dart';
 import 'package:proper_store/features/products/presentation/models/products_screen_args.dart';
 import 'package:proper_store_shared/design_system/colors/app_colors.dart';

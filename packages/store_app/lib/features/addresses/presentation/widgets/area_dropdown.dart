@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proper_store/core/helpers/egypt_governorates.dart';
+import 'package:proper_store_shared/helpers/egypt_governorates.dart';
 import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/design_system/spacing/app_spacing.dart';
 import 'package:proper_store_shared/generated/l10n.dart';

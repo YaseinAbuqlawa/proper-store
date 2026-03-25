@@ -31,10 +31,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "actionsLabel": MessageLookupByLibrary.simpleMessage("الإجراءات"),
     "addAddressTitle": MessageLookupByLibrary.simpleMessage("إضافة عنوان"),
     "addBtn": MessageLookupByLibrary.simpleMessage("إضافة"),
+    "addCategory": MessageLookupByLibrary.simpleMessage("إضافة قسم"),
     "addFirstAddress": MessageLookupByLibrary.simpleMessage(
       "أضف عنوانك الأول للبدء",
     ),
+    "addGovernorate": MessageLookupByLibrary.simpleMessage("إضافة محافظة"),
     "addNewAddress": MessageLookupByLibrary.simpleMessage("إضافة عنوان جديد"),
+    "addNewCategoryBtn": MessageLookupByLibrary.simpleMessage("إضافة قسم جديد"),
     "addToCartButton": MessageLookupByLibrary.simpleMessage("إضافة للسلة"),
     "addToCartText": MessageLookupByLibrary.simpleMessage("أضف للسلة"),
     "addedToCart": MessageLookupByLibrary.simpleMessage(
@@ -56,6 +59,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("لوحة تحكم المتجر"),
     "areaLabel": MessageLookupByLibrary.simpleMessage("المنطقة / الحي"),
     "backToHome": MessageLookupByLibrary.simpleMessage("العودة للرئيسية"),
+    "bannerBadgeLabel": MessageLookupByLibrary.simpleMessage("نص الشارة"),
+    "bannerCollectionLabel": MessageLookupByLibrary.simpleMessage(
+      "اسم المجموعة",
+    ),
+    "bannerDescriptionLabel": MessageLookupByLibrary.simpleMessage("الوصف"),
+    "bannerImageRequired": MessageLookupByLibrary.simpleMessage(
+      "يرجى إضافة صورة للبنر",
+    ),
+    "bannerSectionTitle": MessageLookupByLibrary.simpleMessage("بنر المجموعة"),
+    "bannerTitleLabel": MessageLookupByLibrary.simpleMessage("عنوان البنر"),
     "buildingNumberLabel": MessageLookupByLibrary.simpleMessage("رقم المبنى"),
     "buyNow": MessageLookupByLibrary.simpleMessage("شراء الان"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
@@ -63,15 +76,29 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancelLabel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("السلة"),
     "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
+    "categoriesEmpty": MessageLookupByLibrary.simpleMessage(
+      "لا توجد أقسام بعد",
+    ),
+    "categoriesSectionTitle": MessageLookupByLibrary.simpleMessage("الأقسام"),
     "categoryImageRequired": MessageLookupByLibrary.simpleMessage(
       "يرجى إضافة صورة للتصنيف",
     ),
+    "categoryNameHint": MessageLookupByLibrary.simpleMessage(
+      "مثلاً: ملابس شتوية",
+    ),
+    "categoryNameLabel": MessageLookupByLibrary.simpleMessage("اسم القسم"),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("تغيير الرقم"),
     "checkoutTitle": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("المدينة"),
     "colorLabel": MessageLookupByLibrary.simpleMessage("اللون:"),
     "comingSoon": MessageLookupByLibrary.simpleMessage("قريباً"),
     "completeCheckout": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
+    "confirmDeleteCategory": MessageLookupByLibrary.simpleMessage(
+      "هل تريد حذف هذا القسم؟",
+    ),
+    "confirmDeleteGovernorate": MessageLookupByLibrary.simpleMessage(
+      "هل تريد حذف هذه المحافظة؟",
+    ),
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage("تاكيد الرقم"),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "continueShopping": MessageLookupByLibrary.simpleMessage("متابعة التسوق"),
@@ -103,6 +130,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "اكتشفي أحدث صيحات الموضة من الأحذية والحقائب في مصر بجودة عالمية.",
     ),
     "editBtn": MessageLookupByLibrary.simpleMessage("تعديل"),
+    "editShippingCostTitle": MessageLookupByLibrary.simpleMessage(
+      "تعديل تكلفة الشحن",
+    ),
     "emailLabel": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "emailValidation": MessageLookupByLibrary.simpleMessage(
       "أدخل البريد الإلكتروني",
@@ -205,6 +235,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "floorLabel": MessageLookupByLibrary.simpleMessage("الدور"),
     "freeShippingLabel": MessageLookupByLibrary.simpleMessage("مجاني"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
+    "governorateAlreadyAdded": MessageLookupByLibrary.simpleMessage(
+      "هذه المحافظة مضافة بالفعل",
+    ),
     "grandTotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي النهائي"),
     "highQuality": MessageLookupByLibrary.simpleMessage("جودة عالية"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("الرئيسية"),
@@ -241,6 +274,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noAddressesYet": MessageLookupByLibrary.simpleMessage(
       "لا توجد عناوين بعد",
+    ),
+    "noGovernoratesToAdd": MessageLookupByLibrary.simpleMessage(
+      "جميع المحافظات مضافة",
     ),
     "noOrdersYet": MessageLookupByLibrary.simpleMessage("لا توجد طلبات بعد"),
     "noOrdersYetMessage": MessageLookupByLibrary.simpleMessage(
@@ -430,6 +466,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "retryBtn": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("سياسة الاسترجاع"),
     "saveAddress": MessageLookupByLibrary.simpleMessage("حفظ العنوان"),
+    "saveChanges": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
+    "searchGovernorateHint": MessageLookupByLibrary.simpleMessage(
+      "ابحث عن محافظة...",
+    ),
+    "selectGovernorate": MessageLookupByLibrary.simpleMessage("اختر محافظة"),
     "selectNewStatusHint": MessageLookupByLibrary.simpleMessage(
       "اختر الحالة الجديدة للطلب",
     ),
@@ -438,10 +479,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "تعيين كعنوان افتراضي",
     ),
     "shippingAddressTitle": MessageLookupByLibrary.simpleMessage("عنوان الشحن"),
+    "shippingCostFieldLabel": MessageLookupByLibrary.simpleMessage(
+      "تكلفة الشحن (ج.م)",
+    ),
+    "shippingCostsEmpty": MessageLookupByLibrary.simpleMessage(
+      "لا توجد تكاليف شحن محددة بعد",
+    ),
     "shippingFree": MessageLookupByLibrary.simpleMessage("مجاني"),
     "shippingLabel": MessageLookupByLibrary.simpleMessage("الشحن"),
     "shippingNotAvailable": MessageLookupByLibrary.simpleMessage(
       "غير متاح لهذه المنطقة",
+    ),
+    "shippingSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "تكاليف الشحن",
     ),
     "shopAsGuest": MessageLookupByLibrary.simpleMessage("التسوق كزائر"),
     "showAllText": MessageLookupByLibrary.simpleMessage("عرض الكل"),
@@ -463,11 +513,22 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("منتجات مشابهة"),
+    "storeConfigSaveFailed": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ أثناء الحفظ، حاول مجدداً",
+    ),
+    "storeConfigSaveSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم حفظ التغييرات بنجاح",
+    ),
+    "storeConfigSubtitle": MessageLookupByLibrary.simpleMessage(
+      "إدارة تكاليف الشحن، الأقسام، والمظهر العام",
+    ),
+    "storeConfigTitle": MessageLookupByLibrary.simpleMessage("تخصيص المتجر"),
     "streetLabel": MessageLookupByLibrary.simpleMessage("الشارع"),
     "subtotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي قبل الخصم"),
     "successTitle": MessageLookupByLibrary.simpleMessage("نجاح"),
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("إجمالي الوحدات"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("تحديث الحالة"),
+    "uploadPhoto": MessageLookupByLibrary.simpleMessage("رفع صورة"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("التحقق من الرمز"),
     "viewOrdersBtn": MessageLookupByLibrary.simpleMessage("عرض الطلبات"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("مرحباً بكِ"),

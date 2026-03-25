@@ -31,10 +31,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "actionsLabel": MessageLookupByLibrary.simpleMessage("Actions"),
     "addAddressTitle": MessageLookupByLibrary.simpleMessage("Add address"),
     "addBtn": MessageLookupByLibrary.simpleMessage("Add"),
+    "addCategory": MessageLookupByLibrary.simpleMessage("Add Category"),
     "addFirstAddress": MessageLookupByLibrary.simpleMessage(
       "Add your first address to get started",
     ),
+    "addGovernorate": MessageLookupByLibrary.simpleMessage("Add Governorate"),
     "addNewAddress": MessageLookupByLibrary.simpleMessage("Add new address"),
+    "addNewCategoryBtn": MessageLookupByLibrary.simpleMessage(
+      "Add New Category",
+    ),
     "addToCartButton": MessageLookupByLibrary.simpleMessage("Add to cart"),
     "addToCartText": MessageLookupByLibrary.simpleMessage("Add to cart"),
     "addedToCart": MessageLookupByLibrary.simpleMessage(
@@ -54,6 +59,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("Store Admin Dashboard"),
     "areaLabel": MessageLookupByLibrary.simpleMessage("Area / Neighborhood"),
     "backToHome": MessageLookupByLibrary.simpleMessage("Back to home"),
+    "bannerBadgeLabel": MessageLookupByLibrary.simpleMessage("Badge Text"),
+    "bannerCollectionLabel": MessageLookupByLibrary.simpleMessage(
+      "Collection Name",
+    ),
+    "bannerDescriptionLabel": MessageLookupByLibrary.simpleMessage(
+      "Description",
+    ),
+    "bannerImageRequired": MessageLookupByLibrary.simpleMessage(
+      "Please add a banner image",
+    ),
+    "bannerSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "Collection Banner",
+    ),
+    "bannerTitleLabel": MessageLookupByLibrary.simpleMessage("Banner Title"),
     "buildingNumberLabel": MessageLookupByLibrary.simpleMessage(
       "Building number",
     ),
@@ -63,9 +82,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+    "categoriesEmpty": MessageLookupByLibrary.simpleMessage(
+      "No categories yet",
+    ),
+    "categoriesSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "Categories",
+    ),
     "categoryImageRequired": MessageLookupByLibrary.simpleMessage(
       "Please add an image for the category",
     ),
+    "categoryNameHint": MessageLookupByLibrary.simpleMessage(
+      "e.g. Winter Clothes",
+    ),
+    "categoryNameLabel": MessageLookupByLibrary.simpleMessage("Category Name"),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("Change number"),
     "checkoutTitle": MessageLookupByLibrary.simpleMessage("Checkout"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("City"),
@@ -73,6 +102,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "comingSoon": MessageLookupByLibrary.simpleMessage("Coming soon"),
     "completeCheckout": MessageLookupByLibrary.simpleMessage(
       "Complete checkout",
+    ),
+    "confirmDeleteCategory": MessageLookupByLibrary.simpleMessage(
+      "Delete this category?",
+    ),
+    "confirmDeleteGovernorate": MessageLookupByLibrary.simpleMessage(
+      "Delete this governorate?",
     ),
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Confirm number",
@@ -115,6 +150,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Discover the latest fashion trends in shoes and bags in Egypt with world-class quality.",
     ),
     "editBtn": MessageLookupByLibrary.simpleMessage("Edit"),
+    "editShippingCostTitle": MessageLookupByLibrary.simpleMessage(
+      "Edit Shipping Cost",
+    ),
     "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
     "emailValidation": MessageLookupByLibrary.simpleMessage("Enter your email"),
     "emptyCartMessage": MessageLookupByLibrary.simpleMessage(
@@ -219,6 +257,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "floorLabel": MessageLookupByLibrary.simpleMessage("Floor"),
     "freeShippingLabel": MessageLookupByLibrary.simpleMessage("Free"),
     "fullNameLabel": MessageLookupByLibrary.simpleMessage("Full name"),
+    "governorateAlreadyAdded": MessageLookupByLibrary.simpleMessage(
+      "This governorate is already added",
+    ),
     "grandTotalLabel": MessageLookupByLibrary.simpleMessage("Grand Total"),
     "highQuality": MessageLookupByLibrary.simpleMessage("High quality"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("Home"),
@@ -254,6 +295,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please select a shipping address",
     ),
     "noAddressesYet": MessageLookupByLibrary.simpleMessage("No addresses yet"),
+    "noGovernoratesToAdd": MessageLookupByLibrary.simpleMessage(
+      "All governorates are already added",
+    ),
     "noOrdersYet": MessageLookupByLibrary.simpleMessage("No orders yet"),
     "noOrdersYetMessage": MessageLookupByLibrary.simpleMessage(
       "Your orders will appear here after your first purchase",
@@ -454,6 +498,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "retryBtn": MessageLookupByLibrary.simpleMessage("Retry"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("Return policy"),
     "saveAddress": MessageLookupByLibrary.simpleMessage("Save address"),
+    "saveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
+    "searchGovernorateHint": MessageLookupByLibrary.simpleMessage(
+      "Search governorate...",
+    ),
+    "selectGovernorate": MessageLookupByLibrary.simpleMessage(
+      "Select Governorate",
+    ),
     "selectNewStatusHint": MessageLookupByLibrary.simpleMessage(
       "Select the new order status",
     ),
@@ -464,10 +515,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "shippingAddressTitle": MessageLookupByLibrary.simpleMessage(
       "Shipping address",
     ),
+    "shippingCostFieldLabel": MessageLookupByLibrary.simpleMessage(
+      "Shipping Cost (EGP)",
+    ),
+    "shippingCostsEmpty": MessageLookupByLibrary.simpleMessage(
+      "No shipping costs defined yet",
+    ),
     "shippingFree": MessageLookupByLibrary.simpleMessage("Free"),
     "shippingLabel": MessageLookupByLibrary.simpleMessage("Shipping"),
     "shippingNotAvailable": MessageLookupByLibrary.simpleMessage(
       "Not available for this area",
+    ),
+    "shippingSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "Shipping Costs",
     ),
     "shopAsGuest": MessageLookupByLibrary.simpleMessage("Shop as guest"),
     "showAllText": MessageLookupByLibrary.simpleMessage("Show all"),
@@ -491,11 +551,24 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("Similar Products"),
+    "storeConfigSaveFailed": MessageLookupByLibrary.simpleMessage(
+      "Failed to save changes, please try again",
+    ),
+    "storeConfigSaveSuccess": MessageLookupByLibrary.simpleMessage(
+      "Changes saved successfully",
+    ),
+    "storeConfigSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Manage shipping costs, categories, and general appearance",
+    ),
+    "storeConfigTitle": MessageLookupByLibrary.simpleMessage(
+      "Store Customization",
+    ),
     "streetLabel": MessageLookupByLibrary.simpleMessage("Street"),
     "subtotalLabel": MessageLookupByLibrary.simpleMessage("Subtotal"),
     "successTitle": MessageLookupByLibrary.simpleMessage("Success"),
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("Total units"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("Update Status"),
+    "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("Verify code"),
     "viewOrdersBtn": MessageLookupByLibrary.simpleMessage("View Orders"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("Welcome"),
