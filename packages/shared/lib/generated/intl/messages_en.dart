@@ -88,7 +88,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Customer Details",
     ),
     "customerNameLabel": MessageLookupByLibrary.simpleMessage("Name"),
+    "customerOrdersTitle": MessageLookupByLibrary.simpleMessage(
+      "Customer Orders",
+    ),
     "customerPhoneLabel": MessageLookupByLibrary.simpleMessage("Phone"),
+    "customersEmpty": MessageLookupByLibrary.simpleMessage(
+      "No customers found",
+    ),
+    "customersSearchHint": MessageLookupByLibrary.simpleMessage(
+      "Search by name or email...",
+    ),
     "darkModeLabel": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "dashboardTitle": MessageLookupByLibrary.simpleMessage("Dashboard"),
     "defaultBadge": MessageLookupByLibrary.simpleMessage("Default"),
@@ -488,6 +497,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("Total units"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("Update Status"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("Verify code"),
+    "viewOrdersBtn": MessageLookupByLibrary.simpleMessage("View Orders"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("Welcome"),
   };
 }

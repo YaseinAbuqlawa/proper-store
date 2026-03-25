@@ -16,6 +16,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:proper_store_shared/models/customer_model.dart';
 import 'package:proper_store_shared/models/order_model.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 
@@ -56,8 +57,7 @@ final GoRouter appRouter = GoRouter(
           builder: (ctx, s) => const OrdersScreen(),
           routes: [
             GoRoute(
-              path: 'details',
-              parentNavigatorKey: rootNavigationKey,
+              path: AppRoutes.orderDetails.path,
               builder: (_, s) =>
                   OrderDetailsScreen(order: s.extra as OrderModel),
             ),
@@ -69,12 +69,10 @@ final GoRouter appRouter = GoRouter(
           routes: [
             GoRoute(
               path: 'add',
-              parentNavigatorKey: rootNavigationKey,
               builder: (ctx, s) => const ProductFormScreen(),
             ),
             GoRoute(
               path: 'edit',
-              parentNavigatorKey: rootNavigationKey,
               builder: (_, state) =>
                   ProductFormScreen(product: state.extra as ProductModel?),
             ),
@@ -83,6 +81,11 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: AppRoutes.customers.path,
           builder: (ctx, s) => const CustomersScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.customerOrders.path,
+          parentNavigatorKey: rootNavigationKey,
+          builder: (_, s) => OrdersScreen(customer: s.extra as CustomerModel),
         ),
         GoRoute(
           path: AppRoutes.storeConfig.path,

@@ -10,6 +10,7 @@ abstract interface class OrdersRepo {
     DocumentSnapshot? startAfter,
     required int pageSize,
     OrderStatus? statusFilter,
+    String? customerId,
   });
 
   Future<Either<ServerFailure, void>> updateOrderStatus({

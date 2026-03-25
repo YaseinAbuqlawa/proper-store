@@ -16,9 +16,11 @@ class GetOrdersUseCase {
     DocumentSnapshot? startAfter,
     int pageSize = 20,
     OrderStatus? statusFilter,
+    String? customerId,
   }) => repo.getOrders(
         startAfter: startAfter,
         pageSize: pageSize,
         statusFilter: statusFilter,
+        customerId: customerId,
       );
 }

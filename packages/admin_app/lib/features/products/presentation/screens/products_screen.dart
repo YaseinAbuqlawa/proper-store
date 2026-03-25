@@ -10,6 +10,7 @@ import 'package:proper_store_shared/helpers/app_consts.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 
 import 'package:admin/core/di/injection_container.dart';
+import 'package:admin/core/widgets/admin_search_bar.dart';
 import 'package:admin/core/router/app_routes.dart';
 import 'package:admin/features/products/presentation/cubit/products_cubit.dart';
 import 'package:admin/features/products/presentation/cubit/products_state.dart';
@@ -85,14 +86,9 @@ class _ProductsViewState extends State<_ProductsView> {
           preferredSize: const Size.fromHeight(60),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: TextField(
+            child: AdminSearchBar(
               controller: _searchController,
-              decoration: InputDecoration(
-                hintText: S.of(context).productsSearchHint,
-                prefixIcon: const Icon(Icons.search),
-                helperText: S.of(context).productsSearchScopeHint,
-                isDense: true,
-              ),
+              hintText: S.of(context).productsSearchHint,
               onChanged: (value) => setState(() => _searchQuery = value),
             ),
           ),

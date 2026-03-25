@@ -1,4 +1,5 @@
 import 'package:admin/core/di/injection_container.dart';
+import 'package:admin/core/widgets/admin_search_bar.dart';
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/core/router/app_routes.dart';
 import 'package:admin/features/orders/presentation/cubit/orders_cubit.dart';
@@ -12,22 +13,31 @@ import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/design_system/spacing/app_spacing.dart';
 import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
+import 'package:proper_store_shared/models/customer_model.dart';
 import 'package:proper_store_shared/models/order_model.dart';
 
 class OrdersScreen extends StatelessWidget {
-  const OrdersScreen({super.key});
+  final CustomerModel? customer;
+
+  const OrdersScreen({super.key, this.customer});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<OrdersCubit>()..loadOrders(),
-      child: const _OrdersView(),
+      create: (_) {
+        final cubit = sl<OrdersCubit>();
+        if (customer != null) cubit.setCustomerFilter(customer!.id);
+        return cubit..loadOrders();
+      },
+      child: _OrdersView(customer: customer),
     );
   }
 }
 
 class _OrdersView extends StatefulWidget {
-  const _OrdersView();
+  final CustomerModel? customer;
+
+  const _OrdersView({this.customer});
 
   @override
   State<_OrdersView> createState() => _OrdersViewState();
@@ -63,44 +73,34 @@ class _OrdersViewState extends State<_OrdersView> {
   @override
   Widget build(BuildContext context) {
     final l = S.of(context);
+    final customer = widget.customer;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l.navOrders, style: AppTextStyles.heroHeadline),
+        title: customer != null
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l.navOrders, style: AppTextStyles.heroHeadline),
+                  Text(
+                    customer.name,
+                    style: const TextStyle(
+                      fontFamily: 'Cairo',
+                      fontSize: 13,
+                      color: AppColors.textSubtle,
+                    ),
+                  ),
+                ],
+              )
+            : Text(l.navOrders, style: AppTextStyles.heroHeadline),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(116),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: Column(
               children: [
-                TextField(
+                AdminSearchBar(
                   controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: l.ordersSearchHint,
-                    prefixIcon: const Icon(Icons.search),
-                    helperText: l.ordersSearchScopeHint,
-                    isDense: false,
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
-                    ),
-                    filled: true,
-                    fillColor: AppColors.lightBackground,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide.none,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.zero,
-                      borderSide: const BorderSide(
-                        color: AppColors.goldRoyal,
-                        width: 1.5,
-                      ),
-                    ),
-                  ),
+                  hintText: l.ordersSearchHint,
                   onChanged: (v) => setState(() => _searchQuery = v),
                 ),
                 const SizedBox(height: 8),

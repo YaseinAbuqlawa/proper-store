@@ -14,6 +14,7 @@ class OrdersRemoteDataSource {
     DocumentSnapshot? startAfter,
     required int pageSize,
     OrderStatus? statusFilter,
+    String? customerId,
   }) async {
     Query<Map<String, dynamic>> query = firestore
         .collection(AppConsts.ordersCollection)
@@ -22,6 +23,10 @@ class OrdersRemoteDataSource {
 
     if (statusFilter != null) {
       query = query.where('status', isEqualTo: statusFilter.name);
+    }
+
+    if (customerId != null) {
+      query = query.where('customerId', isEqualTo: customerId);
     }
 
     if (startAfter != null) {

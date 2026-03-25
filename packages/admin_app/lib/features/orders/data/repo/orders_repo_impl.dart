@@ -19,6 +19,7 @@ class OrdersRepoImpl implements OrdersRepo {
     DocumentSnapshot? startAfter,
     required int pageSize,
     OrderStatus? statusFilter,
+    String? customerId,
   }) async {
     try {
       return Right(
@@ -26,6 +27,7 @@ class OrdersRepoImpl implements OrdersRepo {
           startAfter: startAfter,
           pageSize: pageSize,
           statusFilter: statusFilter,
+          customerId: customerId,
         ),
       );
     } on FirebaseException catch (e) {

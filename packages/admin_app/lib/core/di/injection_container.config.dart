@@ -21,6 +21,16 @@ import 'package:admin/features/auth/domain/use_cases/sign_out_use_case.dart'
     as _i868;
 import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart'
     as _i469;
+import 'package:admin/features/customers/data/data_sources/customers_remote_data_source.dart'
+    as _i213;
+import 'package:admin/features/customers/data/repo/customers_repo_impl.dart'
+    as _i165;
+import 'package:admin/features/customers/domain/repo/customers_repo.dart'
+    as _i1026;
+import 'package:admin/features/customers/domain/use_cases/get_customers_use_case.dart'
+    as _i329;
+import 'package:admin/features/customers/presentation/cubit/customers_cubit.dart'
+    as _i938;
 import 'package:admin/features/orders/data/data_sources/orders_remote_data_source.dart'
     as _i837;
 import 'package:admin/features/orders/data/repo/orders_repo_impl.dart' as _i424;
@@ -97,6 +107,11 @@ extension GetItInjectableX on _i174.GetIt {
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
     );
+    gh.lazySingleton<_i213.CustomersRemoteDataSource>(
+      () => _i213.CustomersRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+      ),
+    );
     gh.lazySingleton<_i837.OrdersRemoteDataSource>(
       () => _i837.OrdersRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -109,6 +124,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i229.ProductsRepo>(
       () => _i721.ProductsRepoImpl(
         dataSource: gh<_i442.ProductsRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i1026.CustomersRepo>(
+      () => _i165.CustomersRepoImpl(
+        dataSource: gh<_i213.CustomersRemoteDataSource>(),
       ),
     );
     gh.lazySingleton<_i836.DeleteProductUseCase>(
@@ -129,6 +149,9 @@ extension GetItInjectableX on _i174.GetIt {
         deleteProductUseCase: gh<_i836.DeleteProductUseCase>(),
       ),
     );
+    gh.lazySingleton<_i329.GetCustomersUseCase>(
+      () => _i329.GetCustomersUseCase(repo: gh<_i1026.CustomersRepo>()),
+    );
     gh.lazySingleton<_i40.GetCustomerUseCase>(
       () => _i40.GetCustomerUseCase(repo: gh<_i978.OrdersRepo>()),
     );
@@ -137,6 +160,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i300.UpdateOrderStatusUseCase>(
       () => _i300.UpdateOrderStatusUseCase(repo: gh<_i978.OrdersRepo>()),
+    );
+    gh.factory<_i938.CustomersCubit>(
+      () => _i938.CustomersCubit(
+        getCustomersUseCase: gh<_i329.GetCustomersUseCase>(),
+      ),
     );
     gh.factory<_i707.OrderDetailsCubit>(
       () => _i707.OrderDetailsCubit(

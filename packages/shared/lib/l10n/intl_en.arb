@@ -454,5 +454,17 @@
   "@nameCopiedLabel": {},
 
   "phoneCopiedLabel": "Phone number copied",
-  "@phoneCopiedLabel": {}
+  "@phoneCopiedLabel": {},
+
+  "customersSearchHint": "Search by name or email...",
+  "@customersSearchHint": {},
+
+  "customersEmpty": "No customers found",
+  "@customersEmpty": {},
+
+  "viewOrdersBtn": "View Orders",
+  "@viewOrdersBtn": {},
+
+  "customerOrdersTitle": "Customer Orders",
+  "@customerOrdersTitle": {}
 }

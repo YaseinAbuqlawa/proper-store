@@ -16,10 +16,20 @@ class OrdersCubit extends Cubit<OrdersState> {
     required this.updateOrderStatusUseCase,
   }) : super(const OrdersState());
 
+  void setCustomerFilter(String customerId) {
+    emit(state.copyWith(
+      customerIdFilter: customerId,
+      orders: [],
+      lastDoc: null,
+      hasMore: true,
+    ));
+  }
+
   Future<void> loadOrders() async {
     emit(state.copyWith(status: OrdersStatus.loading));
     final result = await getOrdersUseCase.call(
       statusFilter: state.activeFilter,
+      customerId: state.customerIdFilter,
     );
 
     result.fold(
@@ -51,6 +61,7 @@ class OrdersCubit extends Cubit<OrdersState> {
     final result = await getOrdersUseCase.call(
       startAfter: state.lastDoc,
       statusFilter: state.activeFilter,
+      customerId: state.customerIdFilter,
     );
 
     result.fold(

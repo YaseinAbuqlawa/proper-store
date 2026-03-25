@@ -80,7 +80,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" ج.م"),
     "customerDataLabel": MessageLookupByLibrary.simpleMessage("بيانات العميل"),
     "customerNameLabel": MessageLookupByLibrary.simpleMessage("الاسم"),
+    "customerOrdersTitle": MessageLookupByLibrary.simpleMessage("طلبات العميل"),
     "customerPhoneLabel": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+    "customersEmpty": MessageLookupByLibrary.simpleMessage("لا يوجد عملاء"),
+    "customersSearchHint": MessageLookupByLibrary.simpleMessage(
+      "ابحث بالاسم أو البريد الإلكتروني...",
+    ),
     "darkModeLabel": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "dashboardTitle": MessageLookupByLibrary.simpleMessage("لوحة التحكم"),
     "defaultBadge": MessageLookupByLibrary.simpleMessage("افتراضي"),
@@ -464,6 +469,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("إجمالي الوحدات"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("تحديث الحالة"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("التحقق من الرمز"),
+    "viewOrdersBtn": MessageLookupByLibrary.simpleMessage("عرض الطلبات"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("مرحباً بكِ"),
   };
 }

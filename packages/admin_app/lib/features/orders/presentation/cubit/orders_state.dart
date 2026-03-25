@@ -15,5 +15,6 @@ abstract class OrdersState with _$OrdersState {
     DocumentSnapshot? lastDoc,
     @Default('') String failureMessage,
     @Default(null) OrderStatus? activeFilter,
+    @Default(null) String? customerIdFilter,
   }) = _OrdersState;
 }

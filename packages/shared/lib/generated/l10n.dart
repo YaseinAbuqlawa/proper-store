@@ -2133,6 +2133,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Search by name or email...`
+  String get customersSearchHint {
+    return Intl.message(
+      'Search by name or email...',
+      name: 'customersSearchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No customers found`
+  String get customersEmpty {
+    return Intl.message(
+      'No customers found',
+      name: 'customersEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Orders`
+  String get viewOrdersBtn {
+    return Intl.message(
+      'View Orders',
+      name: 'viewOrdersBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customer Orders`
+  String get customerOrdersTitle {
+    return Intl.message(
+      'Customer Orders',
+      name: 'customerOrdersTitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
