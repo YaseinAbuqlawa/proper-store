@@ -171,9 +171,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               : data.products;
 
                           if (!data.isLoading && displayList.isEmpty) {
-                            return const SliverFillRemaining(
+                            return SliverFillRemaining(
                               child: Center(
-                                child: Text('No products available'),
+                                child: Text(S.of(context).noProductsYet),
                               ),
                             );
                           }

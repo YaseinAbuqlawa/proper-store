@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -28,7 +27,7 @@ class CartCubit extends Cubit<CartState> {
     _currentUserId = customerId;
     final result = await _loadCartItems(customerId: customerId);
     result.fold(
-      (failure) => debugPrint('CartCubit: failed to load cart — ${failure.code}'),
+      (_) {},
       (items) => emit(state.copyWith(products: items)),
     );
   }
@@ -94,7 +93,7 @@ class CartCubit extends Cubit<CartState> {
     if (uid == null) return;
     _saveCartItems(customerId: uid, items: state.products).then(
       (result) => result.fold(
-        (failure) => debugPrint('CartCubit: failed to sync cart — ${failure.code}'),
+        (_) {},
         (_) {},
       ),
     );

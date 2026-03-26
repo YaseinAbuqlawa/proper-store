@@ -74,7 +74,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               productId: id,
                               screenHeight: screenHeight,
                               imageUrls:
-                                  productDetails!.selectedColor!.imageUrls,
+                                  (productDetails!.selectedColor ?? productDetails.colors.firstOrNull)?.imageUrls ?? [initialImageUrl],
                             ),
                           ),
 
@@ -82,10 +82,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             child: Center(
                               child: AnimatedSmoothIndicator(
                                 activeIndex: activeIndex,
-                                count: productDetails
-                                    .selectedColor!
-                                    .imageUrls
-                                    .length,
+                                count: (productDetails.selectedColor ?? productDetails.colors.firstOrNull)?.imageUrls.length ?? 1,
                                 effect: const WormEffect(
                                   dotWidth: 10,
                                   dotHeight: 10,

@@ -163,12 +163,9 @@ final GoRouter appRouter = GoRouter(
         final id = state.pathParameters['id'];
         final imageUrl = state.extra is String ? state.extra as String : '';
 
-        assert(
-          id != null,
-          'Product details route requires an [id] path parameter',
-        );
+        if (id == null || id.isEmpty) return const NotFoundScreen();
 
-        return ProductDetailsScreen(id: id ?? '', initialImageUrl: imageUrl);
+        return ProductDetailsScreen(id: id, initialImageUrl: imageUrl);
       },
     ),
   ],
