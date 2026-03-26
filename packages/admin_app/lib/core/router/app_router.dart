@@ -57,7 +57,7 @@ final GoRouter appRouter = GoRouter(
           builder: (ctx, s) => const OrdersScreen(),
           routes: [
             GoRoute(
-              path: AppRoutes.orderDetails.path,
+              path: 'details',
               builder: (_, s) =>
                   OrderDetailsScreen(order: s.extra as OrderModel),
             ),
