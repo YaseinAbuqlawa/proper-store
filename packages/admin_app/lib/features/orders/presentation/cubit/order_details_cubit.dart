@@ -45,7 +45,7 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
 
     emit(state.copyWith(isUpdatingStatus: true, failureMessage: ''));
     final result = await updateOrderStatusUseCase.call(
-      orderId: current.id,
+      order: current,
       newStatus: newStatus,
     );
 

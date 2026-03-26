@@ -1,5 +1,6 @@
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/orders/data/data_sources/orders_remote_data_source.dart';
+import 'package:admin/features/orders/domain/entities/inventory_action.dart';
 import 'package:admin/features/orders/domain/repo/orders_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
@@ -39,13 +40,15 @@ class OrdersRepoImpl implements OrdersRepo {
 
   @override
   Future<Either<ServerFailure, void>> updateOrderStatus({
-    required String orderId,
+    required OrderModel order,
     required OrderStatus newStatus,
+    required InventoryAction action,
   }) async {
     try {
       await dataSource.updateOrderStatus(
-        orderId: orderId,
+        order: order,
         newStatus: newStatus,
+        action: action,
       );
       return const Right(null);
     } on FirebaseException catch (e) {

@@ -204,7 +204,7 @@ class _OrdersViewState extends State<_OrdersView> {
           order: order,
           onView: () => _navigateToDetails(context, order),
           onStatusSelected: (s) =>
-              context.read<OrdersCubit>().updateStatus(order.id, s),
+              context.read<OrdersCubit>().updateStatus(order, s),
         );
       },
     );

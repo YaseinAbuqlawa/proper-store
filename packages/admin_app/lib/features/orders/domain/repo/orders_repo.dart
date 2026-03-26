@@ -4,6 +4,7 @@ import 'package:proper_store_shared/models/customer_model.dart';
 import 'package:proper_store_shared/models/order_model.dart';
 
 import '../../../../core/failures/app_failures.dart';
+import '../entities/inventory_action.dart';
 
 abstract interface class OrdersRepo {
   Future<Either<ServerFailure, (List<OrderModel>, DocumentSnapshot?)>> getOrders({
@@ -14,8 +15,9 @@ abstract interface class OrdersRepo {
   });
 
   Future<Either<ServerFailure, void>> updateOrderStatus({
-    required String orderId,
+    required OrderModel order,
     required OrderStatus newStatus,
+    required InventoryAction action,
   });
 
   Future<Either<ServerFailure, CustomerModel>> getCustomer({

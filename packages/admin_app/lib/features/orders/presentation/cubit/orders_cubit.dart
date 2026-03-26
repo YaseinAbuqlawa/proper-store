@@ -99,9 +99,9 @@ class OrdersCubit extends Cubit<OrdersState> {
     await loadOrders();
   }
 
-  Future<void> updateStatus(String orderId, OrderStatus newStatus) async {
+  Future<void> updateStatus(OrderModel order, OrderStatus newStatus) async {
     final result = await updateOrderStatusUseCase.call(
-      orderId: orderId,
+      order: order,
       newStatus: newStatus,
     );
 
@@ -109,7 +109,7 @@ class OrdersCubit extends Cubit<OrdersState> {
       (failure) => emit(state.copyWith(failureMessage: failure.code)),
       (_) {
         final updated = state.orders.map((o) {
-          return o.id == orderId ? o.copyWith(status: newStatus) : o;
+          return o.id == order.id ? o.copyWith(status: newStatus) : o;
         }).toList();
         emit(state.copyWith(orders: updated, failureMessage: ''));
       },

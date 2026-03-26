@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
+import 'package:proper_store_shared/models/cart_item_model.dart';
 import 'package:proper_store_shared/models/customer_model.dart';
 import 'package:proper_store_shared/models/order_model.dart';
+
+import '../../domain/entities/inventory_action.dart';
 
 @lazySingleton
 class OrdersRemoteDataSource {
@@ -50,12 +53,114 @@ class OrdersRemoteDataSource {
   }
 
   Future<void> updateOrderStatus({
-    required String orderId,
+    required OrderModel order,
     required OrderStatus newStatus,
+    required InventoryAction action,
   }) async {
-    await firestore.collection(AppConsts.ordersCollection).doc(orderId).update({
-      'status': newStatus.name,
+    if (action == InventoryAction.none) {
+      await firestore
+          .collection(AppConsts.ordersCollection)
+          .doc(order.id)
+          .update({'status': newStatus.name});
+      return;
+    }
+
+    final Map<String, List<CartItemModel>> byProduct = {};
+    for (final item in order.products) {
+      byProduct.putIfAbsent(item.productId, () => []).add(item);
+    }
+
+    await firestore.runTransaction((tx) async {
+      final orderRef = firestore
+          .collection(AppConsts.ordersCollection)
+          .doc(order.id);
+
+      // Reads must come before writes inside a Firestore transaction
+      final productRefs = byProduct.keys
+          .map(
+            (id) => firestore.collection(AppConsts.productsCollection).doc(id),
+          )
+          .toList();
+      final productSnaps = await Future.wait(productRefs.map(tx.get));
+
+      tx.update(orderRef, {'status': newStatus.name});
+
+      for (var i = 0; i < productRefs.length; i++) {
+        final snap = productSnaps[i];
+        if (!snap.exists) continue;
+
+        final data = snap.data()!;
+        final items = byProduct[productRefs[i].id]!;
+        final updates = _buildProductUpdates(
+          data: data,
+          items: items,
+          action: action,
+          newStatus: newStatus,
+        );
+        tx.update(productRefs[i], updates);
+      }
     });
+  }
+
+  Map<String, dynamic> _buildProductUpdates({
+    required Map<String, dynamic> data,
+    required List<CartItemModel> items,
+    required InventoryAction action,
+    required OrderStatus newStatus,
+  }) {
+    final totalQty = items.fold<int>(0, (acc, it) => acc + it.quantity);
+    final int currentSold = (data['soldQuantity'] as num?)?.toInt() ?? 0;
+    final int currentRefunded =
+        (data['refundedQuantity'] as num?)?.toInt() ?? 0;
+    final List<dynamic> rawColors =
+        List<dynamic>.from(data['colors'] as List? ?? []);
+
+    final updatedColors = rawColors.map((c) {
+      final map = Map<String, dynamic>.from(c as Map);
+      final int variantHex = (map['hex'] as num).toInt();
+      final int itemQty = items
+          .where((it) => it.selectedColor.toARGB32() == variantHex)
+          .fold<int>(0, (acc, it) => acc + it.quantity);
+      if (itemQty == 0) return map;
+
+      final int currentStock = (map['stockQuantity'] as num?)?.toInt() ?? 0;
+      map['stockQuantity'] = switch (action) {
+        InventoryAction.delivery => (currentStock - itemQty).clamp(0, 999999),
+        InventoryAction.cancellation => currentStock + itemQty,
+        InventoryAction.uncancellation when newStatus == OrderStatus.delivered =>
+          (currentStock - itemQty).clamp(0, 999999),
+        _ => currentStock,
+      };
+      return map;
+    }).toList();
+
+    final newStockQuantity = updatedColors.fold<int>(
+      0,
+      (acc, c) => acc + (((c as Map)['stockQuantity'] as num?)?.toInt() ?? 0),
+    );
+
+    final updates = <String, dynamic>{
+      'colors': updatedColors,
+      'stockQuantity': newStockQuantity,
+    };
+
+    switch (action) {
+      case InventoryAction.delivery:
+        updates['soldQuantity'] = currentSold + totalQty;
+      case InventoryAction.cancellation:
+        updates['soldQuantity'] = (currentSold - totalQty).clamp(0, 999999);
+        updates['refundedQuantity'] = currentRefunded + totalQty;
+      case InventoryAction.uncancellation:
+        updates['refundedQuantity'] =
+            (currentRefunded - totalQty).clamp(0, 999999);
+        if (newStatus == OrderStatus.delivered) {
+          updates['soldQuantity'] = currentSold + totalQty;
+        }
+      case InventoryAction.none:
+        break;
+    }
+
+    return updates;
   }
 
   Future<CustomerModel> getCustomer({required String customerId}) async {
