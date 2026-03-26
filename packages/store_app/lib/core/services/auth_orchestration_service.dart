@@ -43,6 +43,7 @@ class AuthOrchestrationService {
     _subscription = _auth.authStateChanges().listen((User? user) {
       if (user != null) {
         _profileCubit.getCustomerData();
+        _cartCubit.loadCart(user.uid);
       } else {
         _profileCubit.clearProfileData();
         _favoritesCubit.clearFavorites();

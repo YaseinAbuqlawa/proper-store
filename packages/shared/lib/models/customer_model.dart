@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'cart_item_model.dart';
+
 part 'customer_model.freezed.dart';
 part 'customer_model.g.dart';
 
@@ -13,6 +15,7 @@ abstract class CustomerModel with _$CustomerModel {
     @Default([]) List<String> favoritesList,
     @Default(null) String? role,
     @Default('') String phone,
+    @Default([]) List<CartItemModel> cartItems,
   }) = _CustomerModel;
 
   factory CustomerModel.fromJson(Map<String, dynamic> json) =>

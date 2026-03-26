@@ -66,6 +66,15 @@ import 'package:proper_store/features/auth/features/phone_auth_screen_presentati
     as _i501;
 import 'package:proper_store/features/auth/features/welcome_screen_presentation/cubit/auth_cubit.dart'
     as _i967;
+import 'package:proper_store/features/cart/data/data_sources/cart_remote_data_source.dart'
+    as _i440;
+import 'package:proper_store/features/cart/data/repo/cart_repo_impl.dart'
+    as _i862;
+import 'package:proper_store/features/cart/domain/repo/cart_repo.dart' as _i163;
+import 'package:proper_store/features/cart/domain/use_cases/load_cart_items_use_case.dart'
+    as _i414;
+import 'package:proper_store/features/cart/domain/use_cases/save_cart_items_use_case.dart'
+    as _i267;
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart'
     as _i1006;
 import 'package:proper_store/features/checkout/data/data_sources/shipping_cost_remote_data_source.dart'
@@ -149,7 +158,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i974.FirebaseFirestore>(() => externalModules.firestore);
     gh.lazySingleton<_i59.FirebaseAuth>(() => externalModules.auth);
     gh.lazySingleton<_i809.FirebaseFunctions>(() => externalModules.functions);
-    gh.lazySingleton<_i1006.CartCubit>(() => _i1006.CartCubit());
     gh.lazySingleton<_i360.ProfileRemoteDataSource>(
       () => _i360.ProfileRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -170,6 +178,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i472.AddressesRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
+    );
+    gh.lazySingleton<_i440.CartRemoteDataSource>(
+      () =>
+          _i440.CartRemoteDataSource(firestore: gh<_i974.FirebaseFirestore>()),
     );
     gh.lazySingleton<_i380.ShippingCostRemoteDataSource>(
       () => _i380.ShippingCostRemoteDataSource(
@@ -210,6 +222,11 @@ extension GetItInjectableX on _i174.GetIt {
         remoteDataSource: gh<_i380.ShippingCostRemoteDataSource>(),
       ),
     );
+    gh.lazySingleton<_i163.CartRepo>(
+      () => _i862.CartRepoImpl(
+        remoteDataSource: gh<_i440.CartRemoteDataSource>(),
+      ),
+    );
     gh.lazySingleton<_i714.GetAllProductsUseCase>(
       () => _i714.GetAllProductsUseCase(repo: gh<_i1061.ProductsRepo>()),
     );
@@ -238,6 +255,12 @@ extension GetItInjectableX on _i174.GetIt {
         functions: gh<_i809.FirebaseFunctions>(),
       ),
     );
+    gh.lazySingleton<_i414.LoadCartItemsUseCase>(
+      () => _i414.LoadCartItemsUseCase(repo: gh<_i163.CartRepo>()),
+    );
+    gh.lazySingleton<_i267.SaveCartItemsUseCase>(
+      () => _i267.SaveCartItemsUseCase(repo: gh<_i163.CartRepo>()),
+    );
     gh.lazySingleton<_i596.GetCustomerDataUseCase>(
       () => _i596.GetCustomerDataUseCase(repo: gh<_i871.ProfileRepo>()),
     );
@@ -258,6 +281,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i333.OrdersRepo>(
       () => _i308.OrdersRepoImpl(
         remoteDataSource: gh<_i766.OrdersRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i1006.CartCubit>(
+      () => _i1006.CartCubit(
+        saveCartItems: gh<_i267.SaveCartItemsUseCase>(),
+        loadCartItems: gh<_i414.LoadCartItemsUseCase>(),
       ),
     );
     gh.lazySingleton<_i147.HomeRepo>(

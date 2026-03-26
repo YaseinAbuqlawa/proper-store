@@ -1,15 +1,37 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:proper_store_shared/models/product_model.dart';
+import 'package:proper_store/features/cart/domain/use_cases/load_cart_items_use_case.dart';
+import 'package:proper_store/features/cart/domain/use_cases/save_cart_items_use_case.dart';
 import 'package:proper_store_shared/models/cart_item_model.dart';
+import 'package:proper_store_shared/models/product_model.dart';
 
 part 'cart_cubit.freezed.dart';
 part 'cart_state.dart';
 
 @lazySingleton
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(CartState(cartState: CartStates.initial));
+  final SaveCartItemsUseCase _saveCartItems;
+  final LoadCartItemsUseCase _loadCartItems;
+
+  String? _currentUserId;
+
+  CartCubit({
+    required SaveCartItemsUseCase saveCartItems,
+    required LoadCartItemsUseCase loadCartItems,
+  })  : _saveCartItems = saveCartItems,
+        _loadCartItems = loadCartItems,
+        super(CartState(cartState: CartStates.initial));
+
+  Future<void> loadCart(String customerId) async {
+    _currentUserId = customerId;
+    final result = await _loadCartItems(customerId: customerId);
+    result.fold(
+      (failure) => debugPrint('CartCubit: failed to load cart — ${failure.code}'),
+      (items) => emit(state.copyWith(products: items)),
+    );
+  }
 
   void addProductToCart(CartItemModel product) {
     if (state.products.any((p) => p.id == product.id)) {
@@ -19,6 +41,7 @@ class CartCubit extends Cubit<CartState> {
       );
     } else {
       emit(state.copyWith(products: [...state.products, product]));
+      _syncToFirestore();
     }
   }
 
@@ -28,6 +51,7 @@ class CartCubit extends Cubit<CartState> {
         products: state.products.where((p) => p.id != productId).toList(),
       ),
     );
+    _syncToFirestore();
   }
 
   void changeProductQuantity({
@@ -56,9 +80,23 @@ class CartCubit extends Cubit<CartState> {
     }
 
     emit(state.copyWith(products: updatedProducts));
+    _syncToFirestore();
   }
 
   void clearCart() {
     emit(state.copyWith(cartState: CartStates.initial, products: []));
+    _syncToFirestore();
+    _currentUserId = null;
+  }
+
+  void _syncToFirestore() {
+    final uid = _currentUserId;
+    if (uid == null) return;
+    _saveCartItems(customerId: uid, items: state.products).then(
+      (result) => result.fold(
+        (failure) => debugPrint('CartCubit: failed to sync cart — ${failure.code}'),
+        (_) {},
+      ),
+    );
   }
 }

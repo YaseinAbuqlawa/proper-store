@@ -12,7 +12,7 @@ part of 'cart_cubit.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$CartState {
+mixin _$CartState implements DiagnosticableTreeMixin {
 
  CartStates get cartState; List<CartItemModel> get products;
 /// Create a copy of CartState
@@ -22,6 +22,12 @@ mixin _$CartState {
 $CartStateCopyWith<CartState> get copyWith => _$CartStateCopyWithImpl<CartState>(this as CartState, _$identity);
 
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'CartState'))
+    ..add(DiagnosticsProperty('cartState', cartState))..add(DiagnosticsProperty('products', products));
+}
 
 @override
 bool operator ==(Object other) {
@@ -33,7 +39,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,cartState,const DeepCollectionEquality().hash(products));
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'CartState(cartState: $cartState, products: $products)';
 }
 
@@ -206,7 +212,7 @@ return $default(_that.cartState,_that.products);case _:
 /// @nodoc
 
 
-class _CartState implements CartState {
+class _CartState with DiagnosticableTreeMixin implements CartState {
   const _CartState({required this.cartState, final  List<CartItemModel> products = const []}): _products = products;
   
 
@@ -226,6 +232,12 @@ class _CartState implements CartState {
 _$CartStateCopyWith<_CartState> get copyWith => __$CartStateCopyWithImpl<_CartState>(this, _$identity);
 
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'CartState'))
+    ..add(DiagnosticsProperty('cartState', cartState))..add(DiagnosticsProperty('products', products));
+}
 
 @override
 bool operator ==(Object other) {
@@ -237,7 +249,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,cartState,const DeepCollectionEquality().hash(_products));
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'CartState(cartState: $cartState, products: $products)';
 }
 

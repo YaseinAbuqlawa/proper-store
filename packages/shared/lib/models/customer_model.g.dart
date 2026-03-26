@@ -19,6 +19,11 @@ _CustomerModel _$CustomerModelFromJson(Map<String, dynamic> json) =>
           const [],
       role: json['role'] as String? ?? null,
       phone: json['phone'] as String? ?? '',
+      cartItems:
+          (json['cartItems'] as List<dynamic>?)
+              ?.map((e) => CartItemModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$CustomerModelToJson(_CustomerModel instance) =>
@@ -30,4 +35,5 @@ Map<String, dynamic> _$CustomerModelToJson(_CustomerModel instance) =>
       'favoritesList': instance.favoritesList,
       'role': instance.role,
       'phone': instance.phone,
+      'cartItems': instance.cartItems,
     };
