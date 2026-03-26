@@ -4,8 +4,6 @@ import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/screens/product_details_screen.dart';
-import 'package:proper_store_shared/design_system/colors/app_colors.dart';
-import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
 import 'package:proper_store_shared/models/cart_item_model.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 
@@ -35,14 +33,10 @@ class SelectColorDialog extends StatelessWidget {
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.transparent,
+                  foregroundColor: Theme.of(context).textTheme.bodyMedium?.color,
                   padding: EdgeInsets.all(0),
                 ),
-                child: Text(
-                  "الغاء",
-                  style: AppTextStyles.buttonText.copyWith(
-                    color: AppColors.whiteColor,
-                  ),
-                ),
+                child: const Text("الغاء"),
               ),
               BlocSelector<
                 ProductDetailsCubit,

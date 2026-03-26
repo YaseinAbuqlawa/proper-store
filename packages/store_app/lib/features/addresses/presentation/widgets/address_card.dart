@@ -74,8 +74,12 @@ class AddressCard extends StatelessWidget {
           style: AppTextStyles.bodyDescription,
         ),
         actions: [
-          InkWell(
-            onTap: () => Navigator.pop(dialogContext),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              foregroundColor: Theme.of(context).textTheme.bodyMedium?.color,
+            ),
             child: Text(s.cancel),
           ),
           TextButton(
@@ -83,6 +87,10 @@ class AddressCard extends StatelessWidget {
               Navigator.pop(dialogContext);
               context.read<AddressesCubit>().deleteAddress(address);
             },
+            style: TextButton.styleFrom(
+              backgroundColor: AppColors.errorRed,
+              foregroundColor: AppColors.whiteColor,
+            ),
             child: Text(s.delete),
           ),
         ],
