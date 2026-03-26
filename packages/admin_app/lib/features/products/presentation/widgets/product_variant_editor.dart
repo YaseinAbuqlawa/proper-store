@@ -184,7 +184,7 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
                         ),
                         const SizedBox(width: 12),
                         Expanded(
-                          child: TextField(
+                          child: TextFormField(
                             controller: nameCtrl,
                             decoration: InputDecoration(
                               labelText: l.productFormColorName,
@@ -193,6 +193,10 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
                                 size: 18,
                               ),
                             ),
+                            validator: (v) =>
+                                (v == null || v.trim().isEmpty)
+                                    ? l.errorRequired
+                                    : null,
                             onChanged: (v) {
                               widget.entry.name = v;
                               widget.onChanged();

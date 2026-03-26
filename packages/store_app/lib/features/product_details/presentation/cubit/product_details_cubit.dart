@@ -16,17 +16,16 @@ part 'product_details_state.dart';
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   final GetProductWithIdUseCase getProductWithIdUseCase;
   final GetRelatedProductsUseCase getRelatedProductsUseCase;
-  final FirebaseAuth _firebaseAuth;
+  final FirebaseAuth firebaseAuth;
 
   ProductDetailsCubit({
     required this.getProductWithIdUseCase,
     required this.getRelatedProductsUseCase,
-    required FirebaseAuth firebaseAuth,
-  })  : _firebaseAuth = firebaseAuth,
-        super(ProductDetailsState.initial());
+    required this.firebaseAuth,
+  }) : super(ProductDetailsState.initial());
 
   bool get isUserAnonymous =>
-      _firebaseAuth.currentUser?.isAnonymous ?? true;
+      firebaseAuth.currentUser?.isAnonymous ?? true;
 
   void selectColor(ProductVariant selectedColor) {
     state.whenOrNull(
@@ -54,7 +53,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       (serverFailure) =>
           emit(ProductDetailsState.failure(code: serverFailure.code)),
       (productDetails) async {
-        final relatedResult = await getRelatedProducts(
+        final relatedResult = await _getRelatedProducts(
           productCategory: productDetails.category,
           currentProductId: productDetails.id,
         );
@@ -73,18 +72,13 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     );
   }
 
-  Future<Either<ServerFailure, List<ProductModel>>> getRelatedProducts({
+  Future<Either<ServerFailure, List<ProductModel>>> _getRelatedProducts({
     required String productCategory,
     required String currentProductId,
   }) async {
-    final result = await getRelatedProductsUseCase.call(
+    return getRelatedProductsUseCase.call(
       productCategory: productCategory,
       currentProductId: currentProductId,
-    );
-
-    return result.fold(
-      (serverFailure) => Left(serverFailure),
-      (relatedProductsList) => Right(relatedProductsList),
     );
   }
 

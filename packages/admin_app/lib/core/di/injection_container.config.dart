@@ -154,6 +154,9 @@ extension GetItInjectableX on _i174.GetIt {
         dataSource: gh<_i213.CustomersRemoteDataSource>(),
       ),
     );
+    gh.lazySingleton<_i531.AddCategoryUseCase>(
+      () => _i531.AddCategoryUseCase(repo: gh<_i229.ProductsRepo>()),
+    );
     gh.lazySingleton<_i836.DeleteProductUseCase>(
       () => _i836.DeleteProductUseCase(repo: gh<_i229.ProductsRepo>()),
     );
@@ -163,8 +166,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i436.GetCategoriesUseCase>(
       () => _i436.GetCategoriesUseCase(repo: gh<_i229.ProductsRepo>()),
     );
+    gh.lazySingleton<_i938.UploadColorImageUseCase>(
+      () => _i938.UploadColorImageUseCase(repo: gh<_i229.ProductsRepo>()),
+    );
+    gh.lazySingleton<_i604.UploadProductMainImageUseCase>(
+      () => _i604.UploadProductMainImageUseCase(repo: gh<_i229.ProductsRepo>()),
+    );
     gh.lazySingleton<_i745.AuthRepo>(
       () => _i1072.AuthRepoImpl(dataSource: gh<_i529.AuthRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i717.SaveProductUseCase>(
+      () => _i717.SaveProductUseCase(
+        repo: gh<_i229.ProductsRepo>(),
+        uploadColorImageUseCase: gh<_i938.UploadColorImageUseCase>(),
+        uploadProductMainImageUseCase:
+            gh<_i604.UploadProductMainImageUseCase>(),
+      ),
     );
     gh.factory<_i177.ProductsCubit>(
       () => _i177.ProductsCubit(
@@ -207,24 +224,6 @@ extension GetItInjectableX on _i174.GetIt {
         updateOrderStatusUseCase: gh<_i300.UpdateOrderStatusUseCase>(),
       ),
     );
-    gh.lazySingleton<_i938.UploadColorImageUseCase>(
-      () => _i938.UploadColorImageUseCase(
-        compressionService: gh<_i935.ImageCompressionService>(),
-        repo: gh<_i229.ProductsRepo>(),
-      ),
-    );
-    gh.lazySingleton<_i604.UploadProductMainImageUseCase>(
-      () => _i604.UploadProductMainImageUseCase(
-        compressionService: gh<_i935.ImageCompressionService>(),
-        repo: gh<_i229.ProductsRepo>(),
-      ),
-    );
-    gh.lazySingleton<_i531.AddCategoryUseCase>(
-      () => _i531.AddCategoryUseCase(
-        repo: gh<_i229.ProductsRepo>(),
-        compressionService: gh<_i935.ImageCompressionService>(),
-      ),
-    );
     gh.lazySingleton<_i482.SignInUseCase>(
       () => _i482.SignInUseCase(repo: gh<_i745.AuthRepo>()),
     );
@@ -235,6 +234,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i293.CategoriesCubit(
         getCategoriesUseCase: gh<_i436.GetCategoriesUseCase>(),
         addCategoryUseCase: gh<_i531.AddCategoryUseCase>(),
+      ),
+    );
+    gh.factory<_i593.ProductFormCubit>(
+      () => _i593.ProductFormCubit(
+        saveProductUseCase: gh<_i717.SaveProductUseCase>(),
       ),
     );
     gh.lazySingleton<_i839.AddCategoryUseCase>(
@@ -255,14 +259,6 @@ extension GetItInjectableX on _i174.GetIt {
         updateOrderStatusUseCase: gh<_i300.UpdateOrderStatusUseCase>(),
       ),
     );
-    gh.lazySingleton<_i717.SaveProductUseCase>(
-      () => _i717.SaveProductUseCase(
-        repo: gh<_i229.ProductsRepo>(),
-        uploadColorImageUseCase: gh<_i938.UploadColorImageUseCase>(),
-        uploadProductMainImageUseCase:
-            gh<_i604.UploadProductMainImageUseCase>(),
-      ),
-    );
     gh.lazySingleton<_i469.AuthCubit>(
       () => _i469.AuthCubit(
         signInUseCase: gh<_i482.SignInUseCase>(),
@@ -276,11 +272,6 @@ extension GetItInjectableX on _i174.GetIt {
         addCategory: gh<_i839.AddCategoryUseCase>(),
         deleteCategory: gh<_i483.DeleteCategoryUseCase>(),
         updateBanner: gh<_i214.UpdateCollectionBannerUseCase>(),
-      ),
-    );
-    gh.factory<_i593.ProductFormCubit>(
-      () => _i593.ProductFormCubit(
-        saveProductUseCase: gh<_i717.SaveProductUseCase>(),
       ),
     );
     return this;
