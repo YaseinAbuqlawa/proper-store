@@ -1,12 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:proper_store_shared/design_system/colors/app_colors.dart';
-import 'package:proper_store_shared/generated/l10n.dart';
-import 'package:proper_store_shared/helpers/app_snackbar.dart';
-import 'package:proper_store_shared/models/product_model.dart';
-
 import 'package:admin/core/di/injection_container.dart';
+import 'package:admin/core/widgets/admin_button.dart';
 import 'package:admin/features/products/domain/use_cases/params/product_save_params.dart';
 import 'package:admin/features/products/presentation/cubit/categories_cubit.dart';
 import 'package:admin/features/products/presentation/cubit/product_form_cubit.dart';
@@ -14,11 +7,17 @@ import 'package:admin/features/products/presentation/cubit/product_form_data_cub
 import 'package:admin/features/products/presentation/cubit/product_form_data_state.dart';
 import 'package:admin/features/products/presentation/widgets/add_category_dialog.dart';
 import 'package:admin/features/products/presentation/widgets/form_basic_info_card.dart';
-import 'package:admin/features/products/presentation/widgets/form_section_header.dart';
 import 'package:admin/features/products/presentation/widgets/form_colors_section.dart';
 import 'package:admin/features/products/presentation/widgets/form_main_image_card.dart';
 import 'package:admin/features/products/presentation/widgets/form_pricing_card.dart';
+import 'package:admin/features/products/presentation/widgets/form_section_header.dart';
 import 'package:admin/features/products/presentation/widgets/reports_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proper_store_shared/generated/l10n.dart';
+import 'package:proper_store_shared/helpers/app_snackbar.dart';
+import 'package:proper_store_shared/models/product_model.dart';
 
 class ProductFormScreen extends StatelessWidget {
   final ProductModel? product;
@@ -116,10 +115,11 @@ class _ProductFormViewState extends State<_ProductFormView> {
     if (price <= 0) return;
     _isUpdatingPricing = true;
     final value = context.read<ProductFormDataCubit>().computeDiscountValue(
-          price: price,
-          percentage: pct,
-        );
-    if (discountValueController.text != value) discountValueController.text = value;
+      price: price,
+      percentage: pct,
+    );
+    if (discountValueController.text != value)
+      discountValueController.text = value;
     _isUpdatingPricing = false;
   }
 
@@ -131,10 +131,11 @@ class _ProductFormViewState extends State<_ProductFormView> {
     if (price <= 0) return;
     _isUpdatingPricing = true;
     final value = context.read<ProductFormDataCubit>().computeDiscountValue(
-          price: price,
-          percentage: pct,
-        );
-    if (discountValueController.text != value) discountValueController.text = value;
+      price: price,
+      percentage: pct,
+    );
+    if (discountValueController.text != value)
+      discountValueController.text = value;
     _isUpdatingPricing = false;
   }
 
@@ -146,10 +147,11 @@ class _ProductFormViewState extends State<_ProductFormView> {
     if (price <= 0) return;
     _isUpdatingPricing = true;
     final pct = context.read<ProductFormDataCubit>().computeDiscountPercentage(
-          price: price,
-          value: value,
-        );
-    if (discountPercentageController.text != pct) discountPercentageController.text = pct;
+      price: price,
+      value: value,
+    );
+    if (discountPercentageController.text != pct)
+      discountPercentageController.text = pct;
     _isUpdatingPricing = false;
   }
 
@@ -246,15 +248,33 @@ class _ProductFormViewState extends State<_ProductFormView> {
         BlocListener<ProductFormCubit, ProductFormState>(
           listener: (context, state) {
             state.whenOrNull(
+              submitting: () {
+                showDialog<void>(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (_) => AlertDialog(
+                    content: Row(
+                      children: [
+                        const CircularProgressIndicator(),
+                        const SizedBox(width: 16),
+                        Text(l.loadingTitle),
+                      ],
+                    ),
+                  ),
+                );
+              },
               success: () {
+                Navigator.of(context, rootNavigator: true).pop();
                 AppSnackbar.successSnackbar(
                   context: context,
-                  message:
-                      isEdit ? l.productFormSuccessEdit : l.productFormSuccessAdd,
+                  message: isEdit
+                      ? l.productFormSuccessEdit
+                      : l.productFormSuccessAdd,
                 );
                 context.pop();
               },
               failure: (msg) {
+                Navigator.of(context, rootNavigator: true).pop();
                 AppSnackbar.errorSnackbar(
                   context: context,
                   failureMessage: msg,
@@ -276,33 +296,12 @@ class _ProductFormViewState extends State<_ProductFormView> {
                     isEdit ? l.productFormEditTitle : l.productFormAddTitle,
                   ),
                 ),
-                floatingActionButton: FloatingActionButton.extended(
-                  onPressed: isSubmitting ? null : () => _submit(context),
-                  backgroundColor: AppColors.goldRoyal,
-                  icon: isSubmitting
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2.5,
-                            color: Colors.white,
-                          ),
-                        )
-                      : Icon(isEdit ? Icons.save_outlined : Icons.add),
-                  label: Text(
-                    isEdit ? l.productFormSave : l.productFormAddBtn,
-                    style: const TextStyle(
-                      fontFamily: 'Cairo',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
                 body: Form(
                   key: _formKey,
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.fromLTRB(16, 24, 16, 100),
+                      padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
                       child: ConstrainedBox(
                         constraints: const BoxConstraints(maxWidth: 860),
                         child: Column(
@@ -366,6 +365,15 @@ class _ProductFormViewState extends State<_ProductFormView> {
                               const SizedBox(height: 10),
                               ReportsCard(product: widget.product!),
                             ],
+                            const SizedBox(height: 20),
+                            AdminButton.primary(
+                              label: isEdit
+                                  ? l.productFormSave
+                                  : l.productFormAddBtn,
+                              onPressed: isSubmitting
+                                  ? null
+                                  : () => _submit(context),
+                            ),
                           ],
                         ),
                       ),

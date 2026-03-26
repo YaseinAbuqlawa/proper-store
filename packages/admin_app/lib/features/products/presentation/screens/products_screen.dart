@@ -10,6 +10,7 @@ import 'package:proper_store_shared/helpers/app_consts.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 
 import 'package:admin/core/di/injection_container.dart';
+import 'package:admin/core/widgets/admin_button.dart';
 import 'package:admin/core/widgets/admin_search_bar.dart';
 import 'package:admin/core/router/app_routes.dart';
 import 'package:admin/features/products/presentation/cubit/products_cubit.dart';
@@ -70,17 +71,6 @@ class _ProductsViewState extends State<_ProductsView> {
           S.of(context).productsTitle,
           style: AppTextStyles.heroHeadline,
         ),
-        actions: [
-          if (_isDesktop)
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 8),
-              child: FilledButton.icon(
-                onPressed: () => _navigateToForm(context),
-                icon: const Icon(Icons.add),
-                label: Text(S.of(context).productFormAddBtn),
-              ),
-            ),
-        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(
@@ -98,54 +88,77 @@ class _ProductsViewState extends State<_ProductsView> {
           ? null
           : FloatingActionButton.extended(
               onPressed: () => _navigateToForm(context),
+              backgroundColor: AppColors.goldRoyal,
+              foregroundColor: AppColors.blackDeep,
               icon: const Icon(Icons.add),
               label: Text(S.of(context).productFormAddBtn),
             ),
-      body: BlocBuilder<ProductsCubit, ProductsState>(
-        builder: (context, state) {
-          switch (state.status) {
-            case ProductsStatus.loaded:
-              return _buildContent(
-                context,
-                products: state.filteredProducts,
-                hasMore: state.hasMore,
-                isLoadingMore: false,
-              );
-            case ProductsStatus.loadingMore:
-              return _buildContent(
-                context,
-                products: state.filteredProducts,
-                hasMore: state.hasMore,
-                isLoadingMore: true,
-              );
-            case ProductsStatus.failure:
-              return Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(
-                      Icons.error_outline,
-                      size: 48,
-                      color: AppColors.errorRed,
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      state.failureMessage,
-                      style: AppTextStyles.sectionTitle,
-                    ),
-                    const SizedBox(height: 12),
-                    FilledButton(
-                      onPressed: () =>
-                          context.read<ProductsCubit>().loadProducts(),
-                      child: Text(S.of(context).retryBtn),
-                    ),
-                  ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (_isDesktop)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: SizedBox(
+                  width: 200,
+                  child: AdminButton.primary(
+                    label: S.of(context).productFormAddBtn,
+                    onPressed: () => _navigateToForm(context),
+                  ),
                 ),
-              );
-            default:
-              return const Center(child: CircularProgressIndicator());
-          }
-        },
+              ),
+            ),
+          Expanded(
+            child: BlocBuilder<ProductsCubit, ProductsState>(
+              builder: (context, state) {
+                switch (state.status) {
+                  case ProductsStatus.loaded:
+                    return _buildContent(
+                      context,
+                      products: state.filteredProducts,
+                      hasMore: state.hasMore,
+                      isLoadingMore: false,
+                    );
+                  case ProductsStatus.loadingMore:
+                    return _buildContent(
+                      context,
+                      products: state.filteredProducts,
+                      hasMore: state.hasMore,
+                      isLoadingMore: true,
+                    );
+                  case ProductsStatus.failure:
+                    return Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.error_outline,
+                            size: 48,
+                            color: AppColors.errorRed,
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            state.failureMessage,
+                            style: AppTextStyles.sectionTitle,
+                          ),
+                          const SizedBox(height: 12),
+                          FilledButton(
+                            onPressed: () =>
+                                context.read<ProductsCubit>().loadProducts(),
+                            child: Text(S.of(context).retryBtn),
+                          ),
+                        ],
+                      ),
+                    );
+                  default:
+                    return const Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

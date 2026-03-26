@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
+
+import 'package:admin/core/widgets/admin_button.dart';
 
 class DeleteProductDialog extends StatelessWidget {
   final String productName;
@@ -18,19 +19,18 @@ class DeleteProductDialog extends StatelessWidget {
     final l = S.of(context);
     return AlertDialog(
       title: Text(l.productDeleteTitle, style: AppTextStyles.sectionTitle),
-      content: Text(l.productDeleteMessage, style: AppTextStyles.sectionTitle),
+      content: Text(l.productDeleteMessage, style: AppTextStyles.bodyDescription),
       actions: [
-        TextButton(
+        AdminButton.secondary(
+          label: l.cancelBtn,
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(l.cancelBtn),
         ),
-        FilledButton(
-          style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
+        AdminButton.destructive(
+          label: l.deleteBtn,
           onPressed: () {
             Navigator.of(context).pop();
             onConfirm();
           },
-          child: Text(l.deleteBtn),
         ),
       ],
     );

@@ -10,6 +10,7 @@ import 'package:proper_store_shared/helpers/app_dialog.dart';
 import 'package:proper_store_shared/helpers/app_snackbar.dart';
 
 import 'package:admin/core/helpers/image_compressor.dart';
+import 'package:admin/core/widgets/admin_button.dart';
 import 'package:admin/features/products/presentation/cubit/categories_cubit.dart';
 
 class AddCategoryDialog extends StatefulWidget {
@@ -151,25 +152,14 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
               ],
             ),
             actions: [
-              TextButton(
+              AdminButton.secondary(
+                label: l.cancelBtn,
                 onPressed: isSaving ? null : () => Navigator.of(context).pop(),
-                child: Text(l.cancelBtn),
               ),
-              FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.goldRoyal,
-                ),
+              AdminButton.primary(
+                label: l.addBtn,
                 onPressed: isSaving ? null : _save,
-                child: isSaving
-                    ? const SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
-                        ),
-                      )
-                    : Text(l.addBtn),
+                isLoading: isSaving,
               ),
             ],
           );

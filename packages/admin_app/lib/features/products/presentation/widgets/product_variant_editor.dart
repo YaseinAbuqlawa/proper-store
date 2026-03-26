@@ -7,6 +7,7 @@ import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
 
 import 'package:admin/core/helpers/image_compressor.dart';
+import 'package:admin/core/widgets/admin_button.dart';
 import 'package:admin/core/widgets/confirm_delete_dialog.dart';
 import 'package:admin/features/products/presentation/models/product_variant_entry.dart';
 
@@ -109,17 +110,17 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
           ),
         ),
         actions: [
-          TextButton(
+          AdminButton.secondary(
+            label: S.of(context).cancelBtn,
             onPressed: () => Navigator.of(ctx).pop(),
-            child: Text(S.of(context).cancelBtn),
           ),
-          FilledButton(
+          AdminButton.primary(
+            label: S.of(context).addBtn,
             onPressed: () {
               setState(() => widget.entry.color = tempColor);
               widget.onChanged();
               Navigator.of(ctx).pop();
             },
-            child: Text(S.of(context).addBtn),
           ),
         ],
       ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
+
+import 'package:admin/core/widgets/admin_button.dart';
 
 class ConfirmDeleteDialog extends StatelessWidget {
   final String message;
@@ -21,17 +22,16 @@ class ConfirmDeleteDialog extends StatelessWidget {
       title: Text(l.deleteBtn, style: AppTextStyles.sectionTitle),
       content: Text(message, style: AppTextStyles.bodyDescription),
       actions: [
-        TextButton(
+        AdminButton.secondary(
+          label: l.cancelBtn,
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(l.cancelBtn),
         ),
-        FilledButton(
-          style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
+        AdminButton.destructive(
+          label: l.deleteBtn,
           onPressed: () {
             Navigator.of(context).pop();
             onConfirm();
           },
-          child: Text(l.deleteBtn, style: const TextStyle(color: Colors.white)),
         ),
       ],
     );

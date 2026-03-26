@@ -7,6 +7,8 @@ import 'package:proper_store_shared/design_system/typography/app_text_styles.dar
 import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/helpers/egypt_governorates.dart';
 
+import 'package:admin/core/widgets/admin_button.dart';
+
 class AddEditShippingDialog extends StatefulWidget {
   /// Pass non-null to edit an existing entry.
   final String? existingGovernorate;
@@ -133,24 +135,14 @@ class _AddEditShippingDialogState extends State<AddEditShippingDialog> {
         ),
       ),
       actions: [
-        TextButton(
+        AdminButton.secondary(
+          label: l.cancelBtn,
           onPressed: _isSaving ? null : () => Navigator.of(context).pop(),
-          child: Text(l.cancelBtn),
         ),
-        FilledButton(
-          onPressed:
-              (_isSaving || _selectedGovernorate == null) ? null : _submit,
-          style: FilledButton.styleFrom(
-            backgroundColor: AppColors.goldRoyal,
-            foregroundColor: AppColors.blackDeep,
-          ),
-          child: _isSaving
-              ? const SizedBox(
-                  width: 18,
-                  height: 18,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
-              : Text(l.addBtn),
+        AdminButton.primary(
+          label: l.addBtn,
+          onPressed: (_isSaving || _selectedGovernorate == null) ? null : _submit,
+          isLoading: _isSaving,
         ),
       ],
     );
