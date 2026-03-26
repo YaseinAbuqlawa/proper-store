@@ -46,6 +46,10 @@ abstract interface class ProductsRepo {
     required Uint8List compressedImage,
   });
 
+  Future<Either<ServerFailure, List<ProductModel>>> getProductsByIds(
+    List<String> ids,
+  );
+
   Future<Either<ServerFailure, List<String>>> getCategories();
 
   Future<Either<ServerFailure, Unit>> addCategory({

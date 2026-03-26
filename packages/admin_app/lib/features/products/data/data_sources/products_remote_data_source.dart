@@ -109,6 +109,28 @@ class ProductsRemoteDataSource {
     return _upload(compressedImage: compressedImage, path: path);
   }
 
+  Future<List<ProductModel>> getProductsByIds(List<String> ids) async {
+    if (ids.isEmpty) return [];
+
+    const chunkSize = 30;
+    final futures = <Future<QuerySnapshot<Map<String, dynamic>>>>[];
+
+    for (var i = 0; i < ids.length; i += chunkSize) {
+      final chunk = ids.sublist(i, (i + chunkSize).clamp(0, ids.length));
+      futures.add(
+        firestore
+            .collection(AppConsts.productsCollection)
+            .where('id', whereIn: chunk)
+            .get(),
+      );
+    }
+
+    final snapshots = await Future.wait(futures);
+    return snapshots
+        .expand((s) => s.docs.map((d) => ProductModel.fromJson(d.data())))
+        .toList();
+  }
+
   Future<List<String>> getCategories() async {
     final snapshot = await firestore
         .collection(AppConsts.bagCategoriesCollection)

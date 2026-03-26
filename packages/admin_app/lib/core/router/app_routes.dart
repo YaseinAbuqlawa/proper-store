@@ -7,7 +7,8 @@ enum AppRoutes {
   customers('/customers'),
   storeConfig('/store-config'),
   orderDetails('/orders/details'),
-  customerOrders('/customers/orders');
+  customerOrders('/customers/orders'),
+  customerFavorites('/customers/favorites');
 
   const AppRoutes(this.path);
 

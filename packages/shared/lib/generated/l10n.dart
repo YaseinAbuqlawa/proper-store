@@ -2473,6 +2473,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Favourites`
+  String get customerFavoritesTitle {
+    return Intl.message(
+      'Favourites',
+      name: 'customerFavoritesTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No favourite products`
+  String get customerFavoritesEmpty {
+    return Intl.message(
+      'No favourite products',
+      name: 'customerFavoritesEmpty',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

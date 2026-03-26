@@ -165,6 +165,19 @@ class ProductsRepoImpl implements ProductsRepo {
   }
 
   @override
+  Future<Either<ServerFailure, List<ProductModel>>> getProductsByIds(
+    List<String> ids,
+  ) async {
+    try {
+      return Right(await dataSource.getProductsByIds(ids));
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(code: e.code));
+    } catch (e) {
+      return Left(ServerFailure(code: e.toString()));
+    }
+  }
+
+  @override
   Future<Either<ServerFailure, List<String>>> getCategories() async {
     try {
       return Right(await dataSource.getCategories());

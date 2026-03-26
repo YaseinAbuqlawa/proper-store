@@ -125,6 +125,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "customerDataLabel": MessageLookupByLibrary.simpleMessage(
       "Customer Details",
     ),
+    "customerFavoritesEmpty": MessageLookupByLibrary.simpleMessage(
+      "No favourite products",
+    ),
+    "customerFavoritesTitle": MessageLookupByLibrary.simpleMessage(
+      "Favourites",
+    ),
     "customerNameLabel": MessageLookupByLibrary.simpleMessage("Name"),
     "customerOrdersTitle": MessageLookupByLibrary.simpleMessage(
       "Customer Orders",

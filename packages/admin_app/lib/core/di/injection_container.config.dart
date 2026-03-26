@@ -29,6 +29,8 @@ import 'package:admin/features/customers/domain/repo/customers_repo.dart'
     as _i1026;
 import 'package:admin/features/customers/domain/use_cases/get_customers_use_case.dart'
     as _i329;
+import 'package:admin/features/customers/presentation/cubit/customer_favorites_cubit.dart'
+    as _i315;
 import 'package:admin/features/customers/presentation/cubit/customers_cubit.dart'
     as _i938;
 import 'package:admin/features/orders/data/data_sources/orders_remote_data_source.dart'
@@ -59,6 +61,8 @@ import 'package:admin/features/products/domain/use_cases/get_all_products_use_ca
     as _i72;
 import 'package:admin/features/products/domain/use_cases/get_categories_use_case.dart'
     as _i436;
+import 'package:admin/features/products/domain/use_cases/get_products_by_ids_use_case.dart'
+    as _i359;
 import 'package:admin/features/products/domain/use_cases/save_product_use_case.dart'
     as _i717;
 import 'package:admin/features/products/domain/use_cases/upload_color_image_use_case.dart'
@@ -166,6 +170,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i436.GetCategoriesUseCase>(
       () => _i436.GetCategoriesUseCase(repo: gh<_i229.ProductsRepo>()),
     );
+    gh.lazySingleton<_i359.GetProductsByIdsUseCase>(
+      () => _i359.GetProductsByIdsUseCase(repo: gh<_i229.ProductsRepo>()),
+    );
     gh.lazySingleton<_i938.UploadColorImageUseCase>(
       () => _i938.UploadColorImageUseCase(repo: gh<_i229.ProductsRepo>()),
     );
@@ -222,6 +229,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i707.OrderDetailsCubit(
         getCustomerUseCase: gh<_i40.GetCustomerUseCase>(),
         updateOrderStatusUseCase: gh<_i300.UpdateOrderStatusUseCase>(),
+      ),
+    );
+    gh.factory<_i315.CustomerFavoritesCubit>(
+      () => _i315.CustomerFavoritesCubit(
+        getProductsByIds: gh<_i359.GetProductsByIdsUseCase>(),
       ),
     );
     gh.lazySingleton<_i482.SignInUseCase>(
