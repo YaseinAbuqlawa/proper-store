@@ -169,7 +169,7 @@ class _GovernorateRow extends StatelessWidget {
                 'ج.م',
                 style: AppTextStyles.bodyDescription.copyWith(fontSize: 11),
               ),
-              const SizedBox(width: AppSpacing.medium),
+              const SizedBox(width: 4),
               IconButton(
                 icon: Icon(
                   Icons.edit_outlined,

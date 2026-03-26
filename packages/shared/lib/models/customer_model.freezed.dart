@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CustomerModel {
 
- String get id; String get name; String get email; String get photoUrl; List<String> get favoritesList; String? get role;
+ String get id; String get name; String get email; String get photoUrl; List<String> get favoritesList; String? get role; String get phone;
 /// Create a copy of CustomerModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $CustomerModelCopyWith<CustomerModel> get copyWith => _$CustomerModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other.favoritesList, favoritesList)&&(identical(other.role, role) || other.role == role));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other.favoritesList, favoritesList)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,photoUrl,const DeepCollectionEquality().hash(favoritesList),role);
+int get hashCode => Object.hash(runtimeType,id,name,email,photoUrl,const DeepCollectionEquality().hash(favoritesList),role,phone);
 
 @override
 String toString() {
-  return 'CustomerModel(id: $id, name: $name, email: $email, photoUrl: $photoUrl, favoritesList: $favoritesList, role: $role)';
+  return 'CustomerModel(id: $id, name: $name, email: $email, photoUrl: $photoUrl, favoritesList: $favoritesList, role: $role, phone: $phone)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $CustomerModelCopyWith<$Res>  {
   factory $CustomerModelCopyWith(CustomerModel value, $Res Function(CustomerModel) _then) = _$CustomerModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String email, String photoUrl, List<String> favoritesList, String? role
+ String id, String name, String email, String photoUrl, List<String> favoritesList, String? role, String phone
 });
 
 
@@ -65,7 +65,7 @@ class _$CustomerModelCopyWithImpl<$Res>
 
 /// Create a copy of CustomerModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? email = null,Object? photoUrl = null,Object? favoritesList = null,Object? role = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? email = null,Object? photoUrl = null,Object? favoritesList = null,Object? role = freezed,Object? phone = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,8 @@ as String,email: null == email ? _self.email : email // ignore: cast_nullable_to
 as String,photoUrl: null == photoUrl ? _self.photoUrl : photoUrl // ignore: cast_nullable_to_non_nullable
 as String,favoritesList: null == favoritesList ? _self.favoritesList : favoritesList // ignore: cast_nullable_to_non_nullable
 as List<String>,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String photoUrl,  List<String> favoritesList,  String? role)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String photoUrl,  List<String> favoritesList,  String? role,  String phone)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CustomerModel() when $default != null:
-return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesList,_that.role);case _:
+return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesList,_that.role,_that.phone);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesLi
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String photoUrl,  List<String> favoritesList,  String? role)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String photoUrl,  List<String> favoritesList,  String? role,  String phone)  $default,) {final _that = this;
 switch (_that) {
 case _CustomerModel():
-return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesList,_that.role);case _:
+return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesList,_that.role,_that.phone);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesLi
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String email,  String photoUrl,  List<String> favoritesList,  String? role)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String email,  String photoUrl,  List<String> favoritesList,  String? role,  String phone)?  $default,) {final _that = this;
 switch (_that) {
 case _CustomerModel() when $default != null:
-return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesList,_that.role);case _:
+return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesList,_that.role,_that.phone);case _:
   return null;
 
 }
@@ -214,7 +215,7 @@ return $default(_that.id,_that.name,_that.email,_that.photoUrl,_that.favoritesLi
 @JsonSerializable()
 
 class _CustomerModel implements CustomerModel {
-  const _CustomerModel({required this.id, required this.name, required this.email, this.photoUrl = '', final  List<String> favoritesList = const [], this.role = null}): _favoritesList = favoritesList;
+  const _CustomerModel({required this.id, required this.name, required this.email, this.photoUrl = '', final  List<String> favoritesList = const [], this.role = null, this.phone = ''}): _favoritesList = favoritesList;
   factory _CustomerModel.fromJson(Map<String, dynamic> json) => _$CustomerModelFromJson(json);
 
 @override final  String id;
@@ -229,6 +230,7 @@ class _CustomerModel implements CustomerModel {
 }
 
 @override@JsonKey() final  String? role;
+@override@JsonKey() final  String phone;
 
 /// Create a copy of CustomerModel
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +245,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other._favoritesList, _favoritesList)&&(identical(other.role, role) || other.role == role));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other._favoritesList, _favoritesList)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,photoUrl,const DeepCollectionEquality().hash(_favoritesList),role);
+int get hashCode => Object.hash(runtimeType,id,name,email,photoUrl,const DeepCollectionEquality().hash(_favoritesList),role,phone);
 
 @override
 String toString() {
-  return 'CustomerModel(id: $id, name: $name, email: $email, photoUrl: $photoUrl, favoritesList: $favoritesList, role: $role)';
+  return 'CustomerModel(id: $id, name: $name, email: $email, photoUrl: $photoUrl, favoritesList: $favoritesList, role: $role, phone: $phone)';
 }
 
 
@@ -263,7 +265,7 @@ abstract mixin class _$CustomerModelCopyWith<$Res> implements $CustomerModelCopy
   factory _$CustomerModelCopyWith(_CustomerModel value, $Res Function(_CustomerModel) _then) = __$CustomerModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String email, String photoUrl, List<String> favoritesList, String? role
+ String id, String name, String email, String photoUrl, List<String> favoritesList, String? role, String phone
 });
 
 
@@ -280,7 +282,7 @@ class __$CustomerModelCopyWithImpl<$Res>
 
 /// Create a copy of CustomerModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? email = null,Object? photoUrl = null,Object? favoritesList = null,Object? role = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? email = null,Object? photoUrl = null,Object? favoritesList = null,Object? role = freezed,Object? phone = null,}) {
   return _then(_CustomerModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -288,7 +290,8 @@ as String,email: null == email ? _self.email : email // ignore: cast_nullable_to
 as String,photoUrl: null == photoUrl ? _self.photoUrl : photoUrl // ignore: cast_nullable_to_non_nullable
 as String,favoritesList: null == favoritesList ? _self._favoritesList : favoritesList // ignore: cast_nullable_to_non_nullable
 as List<String>,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

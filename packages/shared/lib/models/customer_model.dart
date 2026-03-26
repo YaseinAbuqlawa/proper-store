@@ -12,6 +12,7 @@ abstract class CustomerModel with _$CustomerModel {
     @Default('') String photoUrl,
     @Default([]) List<String> favoritesList,
     @Default(null) String? role,
+    @Default('') String phone,
   }) = _CustomerModel;
 
   factory CustomerModel.fromJson(Map<String, dynamic> json) =>

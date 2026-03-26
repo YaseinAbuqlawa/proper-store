@@ -15,24 +15,34 @@ class ReportsCard extends StatelessWidget {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Row(
-          children: [
-            Expanded(
-              child: _StatField(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final fields = [
+              _StatField(
                 label: l.productFormFieldSoldQty,
                 value: product.soldQuantity.toString(),
                 icon: Icons.shopping_cart_checkout_outlined,
               ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: _StatField(
+              _StatField(
                 label: l.productFormFieldRefundedQty,
                 value: product.refundedQuantity.toString(),
                 icon: Icons.assignment_return_outlined,
               ),
-            ),
-          ],
+            ];
+            if (constraints.maxWidth < 450) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [fields[0], const SizedBox(height: 12), fields[1]],
+              );
+            }
+            return Row(
+              children: [
+                Expanded(child: fields[0]),
+                const SizedBox(width: 16),
+                Expanded(child: fields[1]),
+              ],
+            );
+          },
         ),
       ),
     );

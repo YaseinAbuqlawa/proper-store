@@ -203,12 +203,28 @@ class _CustomerAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (customer.photoUrl.isNotEmpty) {
-      return CircleAvatar(
-        radius: 32,
-        backgroundImage: NetworkImage(customer.photoUrl),
+      return ClipOval(
+        child: Image.network(
+          customer.photoUrl,
+          width: 64,
+          height: 64,
+          fit: BoxFit.cover,
+          errorBuilder: (_, _, _) => _InitialsAvatar(customer: customer),
+        ),
       );
     }
 
+    return _InitialsAvatar(customer: customer);
+  }
+}
+
+class _InitialsAvatar extends StatelessWidget {
+  final CustomerModel customer;
+
+  const _InitialsAvatar({required this.customer});
+
+  @override
+  Widget build(BuildContext context) {
     final initial = customer.name.isNotEmpty
         ? customer.name[0].toUpperCase()
         : '?';
@@ -260,29 +276,56 @@ class _CustomerInfo extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        const SizedBox(height: 4),
-        Row(
-          children: [
-            const Icon(
-              Icons.email_outlined,
-              size: 14,
-              color: AppColors.goldMuted,
-            ),
-            const SizedBox(width: 4),
-            Flexible(
-              child: Text(
-                customer.email,
-                style: const TextStyle(
-                  fontFamily: 'Cairo',
-                  fontSize: 12,
-                  color: AppColors.textSubtle,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+        if (customer.email.isNotEmpty) ...[
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              const Icon(
+                Icons.email_outlined,
+                size: 14,
+                color: AppColors.goldMuted,
               ),
-            ),
-          ],
-        ),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  customer.email,
+                  style: const TextStyle(
+                    fontFamily: 'Cairo',
+                    fontSize: 12,
+                    color: AppColors.textSubtle,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ],
+        if (customer.phone.isNotEmpty) ...[
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              const Icon(
+                Icons.phone_outlined,
+                size: 14,
+                color: AppColors.goldMuted,
+              ),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  customer.phone,
+                  style: const TextStyle(
+                    fontFamily: 'Cairo',
+                    fontSize: 12,
+                    color: AppColors.textSubtle,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ],
         if (customer.favoritesList.isNotEmpty) ...[
           const SizedBox(height: 4),
           Row(

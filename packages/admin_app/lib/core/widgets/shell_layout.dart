@@ -263,7 +263,7 @@ class _MobileLayout extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).dashboardTitle),
+        title: Text(items.where((i) => i.route.path == currentPath).firstOrNull?.label ?? S.of(context).dashboardTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout_outlined),
