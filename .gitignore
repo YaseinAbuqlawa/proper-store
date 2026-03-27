@@ -52,3 +52,11 @@ app.*.map.json
 .metadata
 /packages/store_app/android/app/google-services.json
 /packages/store_app/ios/Runner/GoogleService-Info.plist
+
+# Cloud Functions
+functions/node_modules/
+functions/lib/
+
+# Scripts — service account key (never commit)
+scripts/service-account.json
+scripts/node_modules/
