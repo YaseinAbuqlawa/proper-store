@@ -60,3 +60,12 @@ functions/lib/
 # Scripts — service account key (never commit)
 scripts/service-account.json
 scripts/node_modules/
+
+# Root-level node_modules (safety net)
+/node_modules/
+/package-lock.json
+scripts/package-lock.json
+scripts/package.json
+
+functions/package-lock.json
+scripts/package-lock.json
