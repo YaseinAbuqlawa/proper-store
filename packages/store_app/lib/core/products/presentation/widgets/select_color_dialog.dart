@@ -23,7 +23,7 @@ class SelectColorDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("اختر لون:"),
-                ColorsRow(productColors: product.colors),
+                ColorsRow(productColors: product.variants.values.toList()),
               ],
             ),
             actions: [
@@ -59,7 +59,7 @@ class SelectColorDialog extends StatelessWidget {
                           productDetails.copyWith(
                             selectedColor:
                                 productDetails.selectedColor ??
-                                productDetails.colors.firstOrNull,
+                                productDetails.variants.values.firstOrNull,
                           ),
                         ),
                       );

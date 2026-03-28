@@ -39,6 +39,10 @@ class ProductVariant {
   @override
   int get hashCode => color.toARGB32().hashCode;
 
+  /// The Firestore map key for this variant (e.g. 'ffab0000').
+  /// Derived from [color] using full ARGB hex (no '#' prefix, lowercase).
+  String get hexKey => color.toARGB32().toRadixString(16);
+
   @override
   String toString() =>
       'ProductVariant(name: $name, color: $color, stock: $stockQuantity)';

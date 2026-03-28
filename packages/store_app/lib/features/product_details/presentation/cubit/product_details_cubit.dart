@@ -63,7 +63,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         emit(
           ProductDetailsState.success(
             productDetails: productDetails.copyWith(
-              selectedColor: productDetails.colors.firstOrNull,
+              selectedColor: productDetails.variants.values.firstOrNull,
             ),
             relatedProductsList: relatedList,
           ),

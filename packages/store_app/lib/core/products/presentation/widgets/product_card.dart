@@ -107,58 +107,8 @@ class ProductCard extends StatelessWidget {
                       discountPercentage: product.discountPercentage,
                     ),
                     const AppSpacer(height: 10),
-                    if (product.colors.isNotEmpty && showAddToCart) ...[
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 3),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: .25,
-                                color: AppColors.blackDeep,
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                AppSpacing.borderRadiusFull,
-                              ),
-                              color: product.colors[0].color,
-                            ),
-                            width: 20,
-                            height: 20,
-                          ),
-                          if (product.colors.length > 2)
-                            Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 3),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: .25,
-                                  color: AppColors.blackDeep,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  AppSpacing.borderRadiusFull,
-                                ),
-                                color: product.colors[1].color,
-                              ),
-                              width: 20,
-                              height: 20,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const Icon(Icons.add, size: 8),
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Text(
-                                      (product.colors.length - 2).toString(),
-                                      style: AppTextStyles.productName.copyWith(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                        ],
-                      ),
+                    if (product.variants.isNotEmpty && showAddToCart) ...[
+                      _VariantColorsRow(product: product),
                       const AppSpacer(height: 10),
                       AddToCart(product: product),
                     ],
@@ -169,6 +119,73 @@ class ProductCard extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _VariantColorsRow extends StatelessWidget {
+  final ProductModel product;
+  const _VariantColorsRow({required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    final variants = product.variants;
+    final count = variants.length;
+    if (count == 0) return const SizedBox.shrink();
+    final values = variants.values.toList();
+    return Row(
+      children: [
+        _ColorCircle(color: values[0].color),
+        if (count >= 2) ...[
+          const SizedBox(width: 4),
+          _ColorCircle(color: values[1].color),
+        ],
+        if (count > 2) ...[
+          const SizedBox(width: 4),
+          _OverflowCount(count: count - 2),
+        ],
+      ],
+    );
+  }
+}
+
+class _ColorCircle extends StatelessWidget {
+  final Color color;
+  const _ColorCircle({required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 20,
+      height: 20,
+      decoration: BoxDecoration(
+        border: Border.all(width: 0.25, color: AppColors.blackDeep),
+        borderRadius: BorderRadius.circular(AppSpacing.borderRadiusFull),
+        color: color,
+      ),
+    );
+  }
+}
+
+class _OverflowCount extends StatelessWidget {
+  final int count;
+  const _OverflowCount({required this.count});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 20,
+      height: 20,
+      decoration: BoxDecoration(
+        color: AppColors.textSecondary,
+        borderRadius: BorderRadius.circular(AppSpacing.borderRadiusFull),
+      ),
+      child: Center(
+        child: Text(
+          '+$count',
+          style: AppTextStyles.bodyDescription.copyWith(fontSize: 8),
+        ),
+      ),
     );
   }
 }

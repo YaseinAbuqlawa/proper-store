@@ -142,6 +142,7 @@ class SaveProductUseCase {
       0,
       (previous, current) => previous + current.stockQuantity,
     );
+    final variantsMap = {for (final v in productVariants) v.hexKey: v};
     return ProductModel(
       id: productId,
       name: params.name,
@@ -152,10 +153,11 @@ class SaveProductUseCase {
       material: '',
       sizes: const [],
       stockQuantity: totalStockQuantity,
+      totalStock: totalStockQuantity,
       sellingPrice: params.sellingPrice,
       discountPercentage: params.discountPercentage,
       discountValue: params.discountValue,
-      colors: productVariants,
+      variants: variantsMap,
       mainImageUrl: mainImageUrl,
       soldQuantity: params.existingProduct?.soldQuantity ?? 0,
       refundedQuantity: params.existingProduct?.refundedQuantity ?? 0,

@@ -19,7 +19,7 @@ class ProductFormDataCubit extends Cubit<ProductFormData> {
         existingMainImageUrl: product.mainImageUrl.isNotEmpty
             ? product.mainImageUrl
             : null,
-        productVariants: product.colors
+        productVariants: product.variants.values
             .map(ProductVariantEntry.fromVariant)
             .toList(),
       ),

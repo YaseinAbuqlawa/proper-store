@@ -74,7 +74,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               productId: id,
                               screenHeight: screenHeight,
                               imageUrls:
-                                  (productDetails!.selectedColor ?? productDetails.colors.firstOrNull)?.imageUrls ?? [initialImageUrl],
+                                  (productDetails!.selectedColor ?? productDetails.variants.values.firstOrNull)?.imageUrls ?? [initialImageUrl],
                             ),
                           ),
 
@@ -82,7 +82,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             child: Center(
                               child: AnimatedSmoothIndicator(
                                 activeIndex: activeIndex,
-                                count: (productDetails.selectedColor ?? productDetails.colors.firstOrNull)?.imageUrls.length ?? 1,
+                                count: (productDetails.selectedColor ?? productDetails.variants.values.firstOrNull)?.imageUrls.length ?? 1,
                                 effect: const WormEffect(
                                   dotWidth: 10,
                                   dotHeight: 10,
@@ -175,7 +175,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                       orElse: () => null,
                                       success: (p, _, _) =>
                                           (p?.selectedColor ??
-                                                  p?.colors.firstOrNull)
+                                                  p?.variants.values.firstOrNull)
                                               ?.name,
                                     ),
                                     builder: (context, colorName) {
@@ -202,7 +202,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                   ),
                                   const AppSpacer(height: 8),
                                   ColorsRow(
-                                    productColors: productDetails.colors,
+                                    productColors: productDetails.variants.values.toList(),
                                   ),
                                   const SizedBox(height: 16),
                                   SectionTitle(
@@ -336,7 +336,7 @@ class ProductDetailsScreen extends StatelessWidget {
   }
 
   CartItemModel? _buildCartItem(ProductModel product) {
-    final productVariant = product.selectedColor ?? product.colors.firstOrNull;
+    final productVariant = product.selectedColor ?? product.variants.values.firstOrNull;
     if (productVariant == null) return null;
     return CartItemModel.fromProductModel(
       product.copyWith(selectedColor: productVariant),

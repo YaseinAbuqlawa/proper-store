@@ -13,7 +13,7 @@ abstract class ProductModel with _$ProductModel {
 
   const factory ProductModel({
     required String category,
-    @ProductVariantConverter() required List<ProductVariant> colors,
+    @ProductVariantMapConverter() required Map<String, ProductVariant> variants,
     @JsonKey(includeToJson: false, includeFromJson: false)
     @Default(null)
     ProductVariant? selectedColor,
@@ -35,31 +35,35 @@ abstract class ProductModel with _$ProductModel {
     required List<double> sizes,
     required int soldQuantity,
     required int stockQuantity,
+    @Default(0) int totalStock,
+    @Default([]) List<String> outOfStockVariants,
+    @Default(false) bool hasOutOfStockVariants,
   }) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
 
-  factory ProductModel.placeholder() => ProductModel(
-    category: 'Category',
-    colors: const [ProductVariant(name: 'رمادي', color: Color(0xFFBDBDBD))],
-    description: 'Product description placeholder text here',
-    discountPercentage: 0,
-    discountValue: 0,
-    id: 'placeholder-id',
-    mainImageUrl: 'https://placeholder.com/image.png',
-    lastPurchaseDate: DateTime(2026),
-    material: 'Material',
-    name: 'Product Name',
-    refundedQuantity: 0,
-    section: 'Section',
-    sellingPrice: 99.99,
-    sizes: const [40, 41, 42],
-    soldQuantity: 0,
-    stockQuantity: 0,
-  );
-
-  int get totalStock => colors.fold(0, (sum, c) => sum + c.stockQuantity);
+  factory ProductModel.placeholder() {
+    const variant = ProductVariant(name: 'رمادي', color: Color(0xFFBDBDBD));
+    return ProductModel(
+      category: 'Category',
+      variants: {variant.hexKey: variant},
+      description: 'Product description placeholder text here',
+      discountPercentage: 0,
+      discountValue: 0,
+      id: 'placeholder-id',
+      mainImageUrl: 'https://placeholder.com/image.png',
+      lastPurchaseDate: DateTime(2026),
+      material: 'Material',
+      name: 'Product Name',
+      refundedQuantity: 0,
+      section: 'Section',
+      sellingPrice: 99.99,
+      sizes: const [40, 41, 42],
+      soldQuantity: 0,
+      stockQuantity: 0,
+    );
+  }
 
   double get offerPrice => sellingPrice - discountValue;
 }

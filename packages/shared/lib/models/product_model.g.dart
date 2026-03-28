@@ -9,13 +9,9 @@ part of 'product_model.dart';
 _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
     _ProductModel(
       category: json['category'] as String,
-      colors: (json['colors'] as List<dynamic>)
-          .map(
-            (e) => const ProductVariantConverter().fromJson(
-              e as Map<String, dynamic>,
-            ),
-          )
-          .toList(),
+      variants: const ProductVariantMapConverter().fromJson(
+        json['variants'] as Map<String, dynamic>,
+      ),
       description: json['description'] as String,
       discountPercentage: (json['discountPercentage'] as num).toDouble(),
       discountValue: (json['discountValue'] as num).toDouble(),
@@ -35,14 +31,19 @@ _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
           .toList(),
       soldQuantity: (json['soldQuantity'] as num).toInt(),
       stockQuantity: (json['stockQuantity'] as num).toInt(),
+      totalStock: (json['totalStock'] as num?)?.toInt() ?? 0,
+      outOfStockVariants:
+          (json['outOfStockVariants'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      hasOutOfStockVariants: json['hasOutOfStockVariants'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ProductModelToJson(_ProductModel instance) =>
     <String, dynamic>{
       'category': instance.category,
-      'colors': instance.colors
-          .map(const ProductVariantConverter().toJson)
-          .toList(),
+      'variants': const ProductVariantMapConverter().toJson(instance.variants),
       'description': instance.description,
       'discountPercentage': instance.discountPercentage,
       'discountValue': instance.discountValue,
@@ -60,4 +61,7 @@ Map<String, dynamic> _$ProductModelToJson(_ProductModel instance) =>
       'sizes': instance.sizes,
       'soldQuantity': instance.soldQuantity,
       'stockQuantity': instance.stockQuantity,
+      'totalStock': instance.totalStock,
+      'outOfStockVariants': instance.outOfStockVariants,
+      'hasOutOfStockVariants': instance.hasOutOfStockVariants,
     };
