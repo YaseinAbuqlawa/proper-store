@@ -130,6 +130,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "copyAddressLabel": MessageLookupByLibrary.simpleMessage("Copy Address"),
     "copyLabel": MessageLookupByLibrary.simpleMessage("Copy"),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" EGP"),
+    "customerCartEmpty": MessageLookupByLibrary.simpleMessage(
+      "No items in cart",
+    ),
+    "customerCartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
     "customerDataLabel": MessageLookupByLibrary.simpleMessage(
       "Customer Details",
     ),

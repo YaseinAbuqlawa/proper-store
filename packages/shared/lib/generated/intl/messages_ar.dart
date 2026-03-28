@@ -116,6 +116,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "copyAddressLabel": MessageLookupByLibrary.simpleMessage("نسخ العنوان"),
     "copyLabel": MessageLookupByLibrary.simpleMessage("نسخ"),
     "currencySymbol": MessageLookupByLibrary.simpleMessage(" ج.م"),
+    "customerCartEmpty": MessageLookupByLibrary.simpleMessage(
+      "لا توجد منتجات في السلة",
+    ),
+    "customerCartTitle": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
     "customerDataLabel": MessageLookupByLibrary.simpleMessage("بيانات العميل"),
     "customerFavoritesEmpty": MessageLookupByLibrary.simpleMessage(
       "لا توجد منتجات مفضلة",

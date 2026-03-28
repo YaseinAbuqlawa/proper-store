@@ -564,6 +564,12 @@
   "customerFavoritesEmpty": "No favourite products",
   "@customerFavoritesEmpty": {},
 
+  "customerCartTitle": "Cart",
+  "@customerCartTitle": {},
+
+  "customerCartEmpty": "No items in cart",
+  "@customerCartEmpty": {},
+
   "usernameLabel": "Username",
   "@usernameLabel": {},
 

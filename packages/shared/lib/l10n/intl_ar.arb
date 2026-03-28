@@ -564,6 +564,12 @@
   "customerFavoritesEmpty": "لا توجد منتجات مفضلة",
   "@customerFavoritesEmpty": {},
 
+  "customerCartTitle": "سلة التسوق",
+  "@customerCartTitle": {},
+
+  "customerCartEmpty": "لا توجد منتجات في السلة",
+  "@customerCartEmpty": {},
+
   "usernameLabel": "اسم المستخدم",
   "@usernameLabel": {},
 

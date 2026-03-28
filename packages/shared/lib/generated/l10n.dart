@@ -2494,6 +2494,21 @@ class S {
     );
   }
 
+  /// `Cart`
+  String get customerCartTitle {
+    return Intl.message('Cart', name: 'customerCartTitle', desc: '', args: []);
+  }
+
+  /// `No items in cart`
+  String get customerCartEmpty {
+    return Intl.message(
+      'No items in cart',
+      name: 'customerCartEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Username`
   String get usernameLabel {
     return Intl.message('Username', name: 'usernameLabel', desc: '', args: []);

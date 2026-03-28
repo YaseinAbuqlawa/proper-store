@@ -14,6 +14,7 @@ import 'package:admin/core/widgets/not_found_screen.dart';
 import 'package:admin/core/widgets/shell_layout.dart';
 import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:admin/features/auth/presentation/screens/login_screen.dart';
+import 'package:admin/features/customers/presentation/screens/customer_cart_screen.dart';
 import 'package:admin/features/customers/presentation/screens/customer_favorites_screen.dart';
 import 'package:admin/features/customers/presentation/screens/customers_screen.dart';
 import 'package:admin/features/orders/presentation/screens/order_details_screen.dart';
@@ -112,6 +113,11 @@ final GoRouter appRouter = GoRouter(
           path: AppRoutes.customerFavorites.path,
           builder: (_, s) =>
               CustomerFavoritesScreen(customer: s.extra as CustomerModel),
+        ),
+        GoRoute(
+          path: AppRoutes.customerCart.path,
+          builder: (_, s) =>
+              CustomerCartScreen(customer: s.extra as CustomerModel),
         ),
         GoRoute(
           path: AppRoutes.storeConfig.path,

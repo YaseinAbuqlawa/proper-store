@@ -183,6 +183,13 @@ class _CustomerInfo extends StatelessWidget {
             label: '${customer.favoritesList.length}',
           ),
         ],
+        if (customer.cartItems.isNotEmpty) ...[
+          const SizedBox(height: 4),
+          _InfoRow(
+            icon: Icons.shopping_cart_outlined,
+            label: '${customer.cartItems.length}',
+          ),
+        ],
       ],
     );
   }
@@ -241,6 +248,14 @@ class _ActionButtons extends StatelessWidget {
                   AppRoutes.customerFavorites.path,
                   extra: customer,
                 )
+            : null,
+      ),
+      const SizedBox(width: AppSpacing.small, height: AppSpacing.small),
+      _OutlinedBtn(
+        icon: Icons.shopping_cart_outlined,
+        label: l.customerCartTitle,
+        onPressed: customer.cartItems.isNotEmpty
+            ? () => context.push(AppRoutes.customerCart.path, extra: customer)
             : null,
       ),
       const SizedBox(width: AppSpacing.small, height: AppSpacing.small),

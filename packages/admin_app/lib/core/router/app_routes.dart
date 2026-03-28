@@ -9,6 +9,7 @@ enum AppRoutes {
   orderDetails('/orders/details'),
   customerOrders('/customers/orders'),
   customerFavorites('/customers/favorites'),
+  customerCart('/customers/cart'),
   staff('/staff');
 
   const AppRoutes(this.path);
