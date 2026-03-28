@@ -1,5 +1,13 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proper_store_shared/models/customer_model.dart';
+import 'package:proper_store_shared/models/order_model.dart';
+import 'package:proper_store_shared/models/product_model.dart';
+
 import 'package:admin/core/di/injection_container.dart';
 import 'package:admin/core/router/app_routes.dart';
 import 'package:admin/core/widgets/not_found_screen.dart';
@@ -12,14 +20,8 @@ import 'package:admin/features/orders/presentation/screens/order_details_screen.
 import 'package:admin/features/orders/presentation/screens/orders_screen.dart';
 import 'package:admin/features/products/presentation/screens/product_form_screen.dart';
 import 'package:admin/features/products/presentation/screens/products_screen.dart';
+import 'package:admin/features/staff/presentation/screens/staff_screen.dart';
 import 'package:admin/features/store_config/presentation/screens/store_config_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:proper_store_shared/models/customer_model.dart';
-import 'package:proper_store_shared/models/order_model.dart';
-import 'package:proper_store_shared/models/product_model.dart';
 
 final GlobalKey<NavigatorState> rootNavigationKey = GlobalKey<NavigatorState>();
 
@@ -36,6 +38,25 @@ final GoRouter appRouter = GoRouter(
 
     if (isLoggingIn && isLoggedIn) return AppRoutes.orders.path;
     if (!isLoggingIn && !isLoggedIn) return AppRoutes.login.path;
+
+    if (isLoggedIn) {
+      final role = sl<AuthCubit>().state.mapOrNull(
+        authenticated: (s) => s.user.role,
+      );
+      if (role != null) {
+        final path = state.fullPath ?? '';
+        if (path.startsWith('/products') && !role.canAccessProducts) {
+          return AppRoutes.orders.path;
+        }
+        if (path == AppRoutes.storeConfig.path &&
+            !role.canAccessStoreConfig) {
+          return AppRoutes.orders.path;
+        }
+        if (path == AppRoutes.staff.path && !role.canManageStaff) {
+          return AppRoutes.orders.path;
+        }
+      }
+    }
 
     return null;
   },
@@ -95,6 +116,10 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: AppRoutes.storeConfig.path,
           builder: (ctx, s) => const StoreConfigScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.staff.path,
+          builder: (ctx, s) => const StaffScreen(),
         ),
       ],
     ),

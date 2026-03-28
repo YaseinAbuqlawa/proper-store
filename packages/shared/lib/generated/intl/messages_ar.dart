@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addGovernorate": MessageLookupByLibrary.simpleMessage("إضافة محافظة"),
     "addNewAddress": MessageLookupByLibrary.simpleMessage("إضافة عنوان جديد"),
     "addNewCategoryBtn": MessageLookupByLibrary.simpleMessage("إضافة قسم جديد"),
+    "addStaffBtn": MessageLookupByLibrary.simpleMessage("إضافة موظف"),
     "addToCartButton": MessageLookupByLibrary.simpleMessage("إضافة للسلة"),
     "addToCartText": MessageLookupByLibrary.simpleMessage("أضف للسلة"),
     "addedToCart": MessageLookupByLibrary.simpleMessage(
@@ -74,6 +75,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cancelLabel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "cannotDeleteLastSuperAdmin": MessageLookupByLibrary.simpleMessage(
+      "لا يمكن حذف آخر مدير عام. قم بتعيين مدير عام آخر أولاً.",
+    ),
     "cartTitle": MessageLookupByLibrary.simpleMessage("السلة"),
     "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
     "categoriesEmpty": MessageLookupByLibrary.simpleMessage(
@@ -87,7 +91,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "مثلاً: ملابس شتوية",
     ),
     "categoryNameLabel": MessageLookupByLibrary.simpleMessage("اسم القسم"),
+    "changePasswordBtn": MessageLookupByLibrary.simpleMessage(
+      "تغيير كلمة المرور",
+    ),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("تغيير الرقم"),
+    "changeRoleBtn": MessageLookupByLibrary.simpleMessage("تغيير الصلاحية"),
     "checkoutTitle": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("المدينة"),
     "colorLabel": MessageLookupByLibrary.simpleMessage("اللون:"),
@@ -128,6 +136,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "هل أنت متأكد من حذف هذا العنوان؟",
     ),
     "deleteBtn": MessageLookupByLibrary.simpleMessage("حذف"),
+    "deleteStaffBtn": MessageLookupByLibrary.simpleMessage("حذف"),
+    "deleteStaffConfirm": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد من حذف هذا الموظف؟",
+    ),
     "descriptionAndDetails": MessageLookupByLibrary.simpleMessage(
       "الوصف والتفاصيل",
     ),
@@ -520,6 +532,26 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("منتجات مشابهة"),
+    "staffCreatedAtLabel": MessageLookupByLibrary.simpleMessage(
+      "تاريخ الإنشاء",
+    ),
+    "staffCreatedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم إنشاء الحساب بنجاح",
+    ),
+    "staffDeletedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم حذف الحساب",
+    ),
+    "staffManagementTitle": MessageLookupByLibrary.simpleMessage(
+      "إدارة الموظفين",
+    ),
+    "staffPasswordChangedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تغيير كلمة المرور بنجاح",
+    ),
+    "staffRoleChangedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث الصلاحية بنجاح",
+    ),
+    "staffRoleLabel": MessageLookupByLibrary.simpleMessage("الصلاحية"),
+    "staffUsernameLabel": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
     "storeConfigSaveFailed": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ أثناء الحفظ، حاول مجدداً",
     ),
@@ -536,6 +568,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("إجمالي الوحدات"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("تحديث الحالة"),
     "uploadPhoto": MessageLookupByLibrary.simpleMessage("رفع صورة"),
+    "usernameLabel": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("التحقق من الرمز"),
     "viewOrdersBtn": MessageLookupByLibrary.simpleMessage("عرض الطلبات"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("مرحباً بكِ"),

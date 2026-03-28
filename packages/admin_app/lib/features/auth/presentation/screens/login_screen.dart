@@ -1,12 +1,10 @@
+import 'package:admin/core/failures/app_failures.dart';
+import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
-
-import 'package:admin/core/failures/app_failures.dart';
-import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,28 +15,29 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  late final TextEditingController emailController;
+  late final TextEditingController usernameController;
   late final TextEditingController passwordController;
   bool obscurePassword = true;
 
   @override
   void initState() {
     super.initState();
-    emailController = TextEditingController();
+    usernameController = TextEditingController();
     passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
-    emailController.dispose();
+    usernameController.dispose();
     passwordController.dispose();
     super.dispose();
   }
 
   void _submit() {
     if (!(_formKey.currentState?.validate() ?? false)) return;
+    final email = '${usernameController.text.trim()}@properstaff.com';
     context.read<AuthCubit>().signIn(
-      email: emailController.text.trim(),
+      email: email,
       password: passwordController.text,
     );
   }
@@ -54,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
             constraints: const BoxConstraints(maxWidth: 440),
             child: _LoginCard(
               formKey: _formKey,
-              emailController: emailController,
+              usernameController: usernameController,
               passwordController: passwordController,
               obscurePassword: obscurePassword,
               onTogglePassword: () =>
@@ -70,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 class _LoginCard extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final TextEditingController emailController;
+  final TextEditingController usernameController;
   final TextEditingController passwordController;
   final bool obscurePassword;
   final VoidCallback onTogglePassword;
@@ -78,7 +77,7 @@ class _LoginCard extends StatelessWidget {
 
   const _LoginCard({
     required this.formKey,
-    required this.emailController,
+    required this.usernameController,
     required this.passwordController,
     required this.obscurePassword,
     required this.onTogglePassword,
@@ -104,14 +103,14 @@ class _LoginCard extends StatelessWidget {
             const _Logo(),
             const SizedBox(height: 32),
             TextFormField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
+              controller: usernameController,
+              keyboardType: TextInputType.text,
               textDirection: TextDirection.ltr,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
-                labelText: s.emailLabel,
-                prefixIcon: const Icon(Icons.email_outlined),
+                labelText: s.usernameLabel,
+                prefixIcon: const Icon(Icons.person_outline),
               ),
               validator: (v) =>
                   (v == null || v.isEmpty) ? s.emailValidation : null,
@@ -186,8 +185,9 @@ class _ErrorMessage extends StatelessWidget {
           state.whenOrNull(failure: (failureMessage) => failureMessage),
       builder: (context, failureCode) {
         if (failureCode == null) return const SizedBox.shrink();
-        final message =
-            FirebaseFailure(code: failureCode).fromException(context: context);
+        final message = FirebaseFailure(
+          code: failureCode,
+        ).fromException(context: context);
         return Padding(
           padding: const EdgeInsets.only(top: 8),
           child: Container(
@@ -200,7 +200,7 @@ class _ErrorMessage extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.error_outline,
-                  color: AppColors.errorRed,
+                  color: AppColors.whiteColor,
                   size: 18,
                 ),
                 const SizedBox(width: 8),
@@ -208,7 +208,7 @@ class _ErrorMessage extends StatelessWidget {
                   child: Text(
                     message,
                     style: AppTextStyles.bodyDescription.copyWith(
-                      color: AppColors.errorRed,
+                      color: AppColors.whiteColor,
                     ),
                   ),
                 ),

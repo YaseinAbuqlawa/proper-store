@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addNewCategoryBtn": MessageLookupByLibrary.simpleMessage(
       "Add New Category",
     ),
+    "addStaffBtn": MessageLookupByLibrary.simpleMessage("Add Staff"),
     "addToCartButton": MessageLookupByLibrary.simpleMessage("Add to cart"),
     "addToCartText": MessageLookupByLibrary.simpleMessage("Add to cart"),
     "addedToCart": MessageLookupByLibrary.simpleMessage(
@@ -80,6 +81,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cannotDeleteLastSuperAdmin": MessageLookupByLibrary.simpleMessage(
+      "Cannot delete the last super admin. Assign another super admin first.",
+    ),
     "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
     "categoriesEmpty": MessageLookupByLibrary.simpleMessage(
@@ -95,7 +99,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "e.g. Winter Clothes",
     ),
     "categoryNameLabel": MessageLookupByLibrary.simpleMessage("Category Name"),
+    "changePasswordBtn": MessageLookupByLibrary.simpleMessage(
+      "Change Password",
+    ),
     "changePhoneNumber": MessageLookupByLibrary.simpleMessage("Change number"),
+    "changeRoleBtn": MessageLookupByLibrary.simpleMessage("Change Role"),
     "checkoutTitle": MessageLookupByLibrary.simpleMessage("Checkout"),
     "cityLabel": MessageLookupByLibrary.simpleMessage("City"),
     "colorLabel": MessageLookupByLibrary.simpleMessage("Color:"),
@@ -150,6 +158,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Are you sure you want to delete this address?",
     ),
     "deleteBtn": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteStaffBtn": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteStaffConfirm": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this staff member?",
+    ),
     "descriptionAndDetails": MessageLookupByLibrary.simpleMessage(
       "Description and details",
     ),
@@ -560,6 +572,24 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("Similar Products"),
+    "staffCreatedAtLabel": MessageLookupByLibrary.simpleMessage("Created"),
+    "staffCreatedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Staff account created successfully",
+    ),
+    "staffDeletedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Staff account deleted",
+    ),
+    "staffManagementTitle": MessageLookupByLibrary.simpleMessage(
+      "Staff Management",
+    ),
+    "staffPasswordChangedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Password changed successfully",
+    ),
+    "staffRoleChangedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Role updated successfully",
+    ),
+    "staffRoleLabel": MessageLookupByLibrary.simpleMessage("Role"),
+    "staffUsernameLabel": MessageLookupByLibrary.simpleMessage("Username"),
     "storeConfigSaveFailed": MessageLookupByLibrary.simpleMessage(
       "Failed to save changes, please try again",
     ),
@@ -578,6 +608,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("Total units"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("Update Status"),
     "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
+    "usernameLabel": MessageLookupByLibrary.simpleMessage("Username"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("Verify code"),
     "viewOrdersBtn": MessageLookupByLibrary.simpleMessage("View Orders"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage("Welcome"),

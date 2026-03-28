@@ -77,6 +77,22 @@ import 'package:admin/features/products/presentation/cubit/product_form_data_cub
     as _i902;
 import 'package:admin/features/products/presentation/cubit/products_cubit.dart'
     as _i177;
+import 'package:admin/features/staff/data/data_sources/staff_remote_data_source.dart'
+    as _i499;
+import 'package:admin/features/staff/data/repo/staff_repo_impl.dart' as _i662;
+import 'package:admin/features/staff/domain/repo/staff_repo.dart' as _i309;
+import 'package:admin/features/staff/domain/use_cases/change_password_use_case.dart'
+    as _i1013;
+import 'package:admin/features/staff/domain/use_cases/change_role_use_case.dart'
+    as _i760;
+import 'package:admin/features/staff/domain/use_cases/create_staff_use_case.dart'
+    as _i590;
+import 'package:admin/features/staff/domain/use_cases/delete_staff_use_case.dart'
+    as _i443;
+import 'package:admin/features/staff/domain/use_cases/get_staff_use_case.dart'
+    as _i616;
+import 'package:admin/features/staff/presentation/cubit/staff_cubit.dart'
+    as _i79;
 import 'package:admin/features/store_config/data/data_sources/store_config_remote_data_source.dart'
     as _i883;
 import 'package:admin/features/store_config/data/repo/store_config_repo_impl.dart'
@@ -96,6 +112,7 @@ import 'package:admin/features/store_config/domain/use_cases/update_shipping_cos
 import 'package:admin/features/store_config/presentation/cubit/store_config_cubit.dart'
     as _i625;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
+import 'package:cloud_functions/cloud_functions.dart' as _i809;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:firebase_storage/firebase_storage.dart' as _i457;
 import 'package:get_it/get_it.dart' as _i174;
@@ -113,14 +130,33 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i974.FirebaseFirestore>(() => externalModules.firestore);
     gh.lazySingleton<_i59.FirebaseAuth>(() => externalModules.auth);
     gh.lazySingleton<_i457.FirebaseStorage>(() => externalModules.storage);
+    gh.lazySingleton<_i809.FirebaseFunctions>(() => externalModules.functions);
     gh.lazySingleton<_i935.ImageCompressionService>(
       () => _i935.ImageCompressionService(),
     );
-    gh.lazySingleton<_i529.AuthRemoteDataSource>(
-      () => _i529.AuthRemoteDataSource(
-        auth: gh<_i59.FirebaseAuth>(),
+    gh.lazySingleton<_i499.StaffRemoteDataSource>(
+      () => _i499.StaffRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
+        functions: gh<_i809.FirebaseFunctions>(),
       ),
+    );
+    gh.lazySingleton<_i309.StaffRepo>(
+      () => _i662.StaffRepoImpl(dataSource: gh<_i499.StaffRemoteDataSource>()),
+    );
+    gh.factory<_i1013.ChangePasswordUseCase>(
+      () => _i1013.ChangePasswordUseCase(repo: gh<_i309.StaffRepo>()),
+    );
+    gh.factory<_i760.ChangeRoleUseCase>(
+      () => _i760.ChangeRoleUseCase(repo: gh<_i309.StaffRepo>()),
+    );
+    gh.factory<_i590.CreateStaffUseCase>(
+      () => _i590.CreateStaffUseCase(repo: gh<_i309.StaffRepo>()),
+    );
+    gh.factory<_i443.DeleteStaffUseCase>(
+      () => _i443.DeleteStaffUseCase(repo: gh<_i309.StaffRepo>()),
+    );
+    gh.factory<_i616.GetStaffUseCase>(
+      () => _i616.GetStaffUseCase(repo: gh<_i309.StaffRepo>()),
     );
     gh.lazySingleton<_i213.CustomersRemoteDataSource>(
       () => _i213.CustomersRemoteDataSource(
@@ -148,9 +184,21 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i424.OrdersRepoImpl(dataSource: gh<_i837.OrdersRemoteDataSource>()),
     );
+    gh.lazySingleton<_i529.AuthRemoteDataSource>(
+      () => _i529.AuthRemoteDataSource(auth: gh<_i59.FirebaseAuth>()),
+    );
     gh.lazySingleton<_i229.ProductsRepo>(
       () => _i721.ProductsRepoImpl(
         dataSource: gh<_i442.ProductsRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i79.StaffCubit>(
+      () => _i79.StaffCubit(
+        getStaff: gh<_i616.GetStaffUseCase>(),
+        createStaff: gh<_i590.CreateStaffUseCase>(),
+        changeRole: gh<_i760.ChangeRoleUseCase>(),
+        changePassword: gh<_i1013.ChangePasswordUseCase>(),
+        deleteStaff: gh<_i443.DeleteStaffUseCase>(),
       ),
     );
     gh.lazySingleton<_i1026.CustomersRepo>(

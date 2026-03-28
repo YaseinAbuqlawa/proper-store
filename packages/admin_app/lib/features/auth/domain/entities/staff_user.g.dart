@@ -19,4 +19,8 @@ Map<String, dynamic> _$StaffModelToJson(_StaffModel instance) =>
       'role': _$StaffRoleEnumMap[instance.role]!,
     };
 
-const _$StaffRoleEnumMap = {StaffRole.admin: 'admin', StaffRole.cs: 'cs'};
+const _$StaffRoleEnumMap = {
+  StaffRole.superAdmin: 'superAdmin',
+  StaffRole.admin: 'admin',
+  StaffRole.cs: 'cs',
+};

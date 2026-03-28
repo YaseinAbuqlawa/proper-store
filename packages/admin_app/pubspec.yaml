@@ -38,6 +38,12 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
+
+  flutter_web_plugins:
+    sdk: flutter
+
+  # Firebase Cloud Functions
+  cloud_functions: ^6.0.7
   
   # Image handling
   flutter_image_compress: ^2.3.0

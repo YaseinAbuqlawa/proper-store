@@ -1,4 +1,5 @@
 enum StaffRole {
+  superAdmin,
   admin,
   cs;
 
@@ -7,6 +8,11 @@ enum StaffRole {
     return StaffRole.values.where((r) => r.name == value).firstOrNull;
   }
 
-  bool get canAccessProducts => this == StaffRole.admin;
-  bool get canAccessStoreConfig => this == StaffRole.admin;
+  bool get canAccessProducts =>
+      this == StaffRole.superAdmin || this == StaffRole.admin;
+
+  bool get canAccessStoreConfig =>
+      this == StaffRole.superAdmin || this == StaffRole.admin;
+
+  bool get canManageStaff => this == StaffRole.superAdmin;
 }

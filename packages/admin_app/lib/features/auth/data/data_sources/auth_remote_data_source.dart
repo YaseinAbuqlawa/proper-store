@@ -1,16 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:admin/features/auth/domain/entities/staff_role.dart';
+import 'package:admin/features/auth/domain/entities/staff_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-
-import 'package:admin/core/helpers/app_consts.dart';
-import 'package:admin/features/auth/domain/entities/staff_user.dart';
 
 @lazySingleton
 class AuthRemoteDataSource {
   final FirebaseAuth auth;
-  final FirebaseFirestore firestore;
 
-  const AuthRemoteDataSource({required this.auth, required this.firestore});
+  const AuthRemoteDataSource({required this.auth});
 
   Future<StaffModel> signInWithEmailAndPassword({
     required String email,
@@ -23,28 +20,30 @@ class AuthRemoteDataSource {
 
     final user = credential.user;
     if (user == null) {
-      throw FirebaseAuthException(code: "user-not-found");
+      throw FirebaseAuthException(code: 'user-not-found');
     }
 
-    final uid = user.uid;
-    final staffModel = await _fetchStaffModel(uid);
+    final idTokenResult = await user.getIdTokenResult().timeout(
+      const Duration(seconds: 5),
+      onTimeout: () {
+        throw FirebaseAuthException(
+          code: 'timeout',
+          message: 'Firebase taking too long to fetch token.',
+        );
+      },
+    );
+    final roleString = idTokenResult.claims?['role'] as String?;
 
-    return staffModel;
-  }
-
-  Future<StaffModel> _fetchStaffModel(String uid) async {
-    final doc = await firestore
-        .collection(AppConsts.staffCollection)
-        .doc(uid)
-        .get();
-
-    final data = doc.data();
-
-    if (data == null) {
+    if (roleString == null) {
       throw FirebaseAuthException(code: 'not-found');
     }
 
-    return StaffModel.fromJson(data);
+    final role = StaffRole.fromString(roleString);
+    if (role == null) {
+      throw FirebaseAuthException(code: 'not-found');
+    }
+
+    return StaffModel(uid: user.uid, email: user.email ?? '', role: role);
   }
 
   Future<void> signOut() => auth.signOut();

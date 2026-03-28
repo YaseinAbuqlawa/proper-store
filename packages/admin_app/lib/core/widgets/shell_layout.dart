@@ -389,5 +389,15 @@ List<_NavItem> _navItems(BuildContext context, StaffRole? role) {
     );
   }
 
+  if (role?.canManageStaff == true) {
+    items.add(
+      _NavItem(
+        icon: Icons.manage_accounts_outlined,
+        label: s.staffManagementTitle,
+        route: AppRoutes.staff,
+      ),
+    );
+  }
+
   return items;
 }

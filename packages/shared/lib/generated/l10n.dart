@@ -2493,6 +2493,136 @@ class S {
       args: [],
     );
   }
+
+  /// `Username`
+  String get usernameLabel {
+    return Intl.message('Username', name: 'usernameLabel', desc: '', args: []);
+  }
+
+  /// `Staff Management`
+  String get staffManagementTitle {
+    return Intl.message(
+      'Staff Management',
+      name: 'staffManagementTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Staff`
+  String get addStaffBtn {
+    return Intl.message('Add Staff', name: 'addStaffBtn', desc: '', args: []);
+  }
+
+  /// `Username`
+  String get staffUsernameLabel {
+    return Intl.message(
+      'Username',
+      name: 'staffUsernameLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role`
+  String get staffRoleLabel {
+    return Intl.message('Role', name: 'staffRoleLabel', desc: '', args: []);
+  }
+
+  /// `Created`
+  String get staffCreatedAtLabel {
+    return Intl.message(
+      'Created',
+      name: 'staffCreatedAtLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Role`
+  String get changeRoleBtn {
+    return Intl.message(
+      'Change Role',
+      name: 'changeRoleBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePasswordBtn {
+    return Intl.message(
+      'Change Password',
+      name: 'changePasswordBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get deleteStaffBtn {
+    return Intl.message('Delete', name: 'deleteStaffBtn', desc: '', args: []);
+  }
+
+  /// `Are you sure you want to delete this staff member?`
+  String get deleteStaffConfirm {
+    return Intl.message(
+      'Are you sure you want to delete this staff member?',
+      name: 'deleteStaffConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Staff account created successfully`
+  String get staffCreatedSuccess {
+    return Intl.message(
+      'Staff account created successfully',
+      name: 'staffCreatedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Staff account deleted`
+  String get staffDeletedSuccess {
+    return Intl.message(
+      'Staff account deleted',
+      name: 'staffDeletedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully`
+  String get staffPasswordChangedSuccess {
+    return Intl.message(
+      'Password changed successfully',
+      name: 'staffPasswordChangedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role updated successfully`
+  String get staffRoleChangedSuccess {
+    return Intl.message(
+      'Role updated successfully',
+      name: 'staffRoleChangedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cannot delete the last super admin. Assign another super admin first.`
+  String get cannotDeleteLastSuperAdmin {
+    return Intl.message(
+      'Cannot delete the last super admin. Assign another super admin first.',
+      name: 'cannotDeleteLastSuperAdmin',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

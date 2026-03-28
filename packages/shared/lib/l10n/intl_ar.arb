@@ -562,5 +562,50 @@
   "@customerFavoritesTitle": {},
 
   "customerFavoritesEmpty": "لا توجد منتجات مفضلة",
-  "@customerFavoritesEmpty": {}
+  "@customerFavoritesEmpty": {},
+
+  "usernameLabel": "اسم المستخدم",
+  "@usernameLabel": {},
+
+  "staffManagementTitle": "إدارة الموظفين",
+  "@staffManagementTitle": {},
+
+  "addStaffBtn": "إضافة موظف",
+  "@addStaffBtn": {},
+
+  "staffUsernameLabel": "اسم المستخدم",
+  "@staffUsernameLabel": {},
+
+  "staffRoleLabel": "الصلاحية",
+  "@staffRoleLabel": {},
+
+  "staffCreatedAtLabel": "تاريخ الإنشاء",
+  "@staffCreatedAtLabel": {},
+
+  "changeRoleBtn": "تغيير الصلاحية",
+  "@changeRoleBtn": {},
+
+  "changePasswordBtn": "تغيير كلمة المرور",
+  "@changePasswordBtn": {},
+
+  "deleteStaffBtn": "حذف",
+  "@deleteStaffBtn": {},
+
+  "deleteStaffConfirm": "هل أنت متأكد من حذف هذا الموظف؟",
+  "@deleteStaffConfirm": {},
+
+  "staffCreatedSuccess": "تم إنشاء الحساب بنجاح",
+  "@staffCreatedSuccess": {},
+
+  "staffDeletedSuccess": "تم حذف الحساب",
+  "@staffDeletedSuccess": {},
+
+  "staffPasswordChangedSuccess": "تم تغيير كلمة المرور بنجاح",
+  "@staffPasswordChangedSuccess": {},
+
+  "staffRoleChangedSuccess": "تم تحديث الصلاحية بنجاح",
+  "@staffRoleChangedSuccess": {},
+
+  "cannotDeleteLastSuperAdmin": "لا يمكن حذف آخر مدير عام. قم بتعيين مدير عام آخر أولاً.",
+  "@cannotDeleteLastSuperAdmin": {}
 }

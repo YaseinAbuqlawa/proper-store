@@ -562,5 +562,50 @@
   "@customerFavoritesTitle": {},
 
   "customerFavoritesEmpty": "No favourite products",
-  "@customerFavoritesEmpty": {}
+  "@customerFavoritesEmpty": {},
+
+  "usernameLabel": "Username",
+  "@usernameLabel": {},
+
+  "staffManagementTitle": "Staff Management",
+  "@staffManagementTitle": {},
+
+  "addStaffBtn": "Add Staff",
+  "@addStaffBtn": {},
+
+  "staffUsernameLabel": "Username",
+  "@staffUsernameLabel": {},
+
+  "staffRoleLabel": "Role",
+  "@staffRoleLabel": {},
+
+  "staffCreatedAtLabel": "Created",
+  "@staffCreatedAtLabel": {},
+
+  "changeRoleBtn": "Change Role",
+  "@changeRoleBtn": {},
+
+  "changePasswordBtn": "Change Password",
+  "@changePasswordBtn": {},
+
+  "deleteStaffBtn": "Delete",
+  "@deleteStaffBtn": {},
+
+  "deleteStaffConfirm": "Are you sure you want to delete this staff member?",
+  "@deleteStaffConfirm": {},
+
+  "staffCreatedSuccess": "Staff account created successfully",
+  "@staffCreatedSuccess": {},
+
+  "staffDeletedSuccess": "Staff account deleted",
+  "@staffDeletedSuccess": {},
+
+  "staffPasswordChangedSuccess": "Password changed successfully",
+  "@staffPasswordChangedSuccess": {},
+
+  "staffRoleChangedSuccess": "Role updated successfully",
+  "@staffRoleChangedSuccess": {},
+
+  "cannotDeleteLastSuperAdmin": "Cannot delete the last super admin. Assign another super admin first.",
+  "@cannotDeleteLastSuperAdmin": {}
 }

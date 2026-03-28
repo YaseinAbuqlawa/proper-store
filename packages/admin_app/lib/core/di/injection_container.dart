@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -21,4 +22,7 @@ abstract class ExternalModules {
 
   @lazySingleton
   FirebaseStorage get storage => FirebaseStorage.instance;
+
+  @lazySingleton
+  FirebaseFunctions get functions => FirebaseFunctions.instance;
 }

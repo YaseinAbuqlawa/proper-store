@@ -1,16 +1,15 @@
-import 'package:flutter/material.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
-import 'package:proper_store_shared/design_system/theme/app_theme.dart';
-import 'package:proper_store_shared/generated/l10n.dart';
-
 import 'package:admin/core/di/injection_container.dart';
 import 'package:admin/core/router/app_router.dart';
 import 'package:admin/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:proper_store_shared/design_system/theme/app_theme.dart';
+import 'package:proper_store_shared/generated/l10n.dart';
 
 Future<void> main() async {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
