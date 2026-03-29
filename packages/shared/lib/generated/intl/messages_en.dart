@@ -22,9 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(percentage) => "Discount ${percentage}%";
 
-  static String m1(count) => "+${count} more items";
+  static String m1(productName, available) =>
+      "Only ${available} left for ${productName}";
 
-  static String m2(count) => "Qty: ${count}";
+  static String m2(count) => "+${count} more items";
+
+  static String m3(productName) =>
+      "Product ${productName} is currently out of stock";
+
+  static String m4(count) => "Qty: ${count}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -300,10 +306,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sign in to track your orders and enjoy a better shopping experience",
     ),
     "logoutButton": MessageLookupByLibrary.simpleMessage("Sign Out"),
+    "lowStockProduct": m1,
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "Shop now",
     ),
-    "moreProductsLabel": m1,
+    "moreProductsLabel": m2,
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
       "Best Sellers",
     ),
@@ -388,6 +395,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpSentSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Verification code sent",
     ),
+    "outOfStockLabel": MessageLookupByLibrary.simpleMessage("Out of Stock"),
+    "outOfStockProduct": m3,
     "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordValidation": MessageLookupByLibrary.simpleMessage(
       "Enter your password",
@@ -518,7 +527,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "productsTitle": MessageLookupByLibrary.simpleMessage("Products"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("My Account"),
-    "quantityLabel": m2,
+    "quantityLabel": m4,
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "retryBtn": MessageLookupByLibrary.simpleMessage("Retry"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("Return policy"),
@@ -576,6 +585,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("Similar Products"),
+    "someItemsUnavailableError": MessageLookupByLibrary.simpleMessage(
+      "Some items are out of stock",
+    ),
     "staffCreatedAtLabel": MessageLookupByLibrary.simpleMessage("Created"),
     "staffCreatedSuccess": MessageLookupByLibrary.simpleMessage(
       "Staff account created successfully",

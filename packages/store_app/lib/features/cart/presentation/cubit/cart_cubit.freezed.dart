@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CartState {
 
- CartStates get cartState; List<CartItemModel> get products;
+ CartStates get cartState; List<CartItemModel> get products; String? get errorMessage;
 /// Create a copy of CartState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CartStateCopyWith<CartState> get copyWith => _$CartStateCopyWithImpl<CartState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CartState&&(identical(other.cartState, cartState) || other.cartState == cartState)&&const DeepCollectionEquality().equals(other.products, products));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CartState&&(identical(other.cartState, cartState) || other.cartState == cartState)&&const DeepCollectionEquality().equals(other.products, products)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,cartState,const DeepCollectionEquality().hash(products));
+int get hashCode => Object.hash(runtimeType,cartState,const DeepCollectionEquality().hash(products),errorMessage);
 
 @override
 String toString() {
-  return 'CartState(cartState: $cartState, products: $products)';
+  return 'CartState(cartState: $cartState, products: $products, errorMessage: $errorMessage)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CartStateCopyWith<$Res>  {
   factory $CartStateCopyWith(CartState value, $Res Function(CartState) _then) = _$CartStateCopyWithImpl;
 @useResult
 $Res call({
- CartStates cartState, List<CartItemModel> products
+ CartStates cartState, List<CartItemModel> products, String? errorMessage
 });
 
 
@@ -62,11 +62,12 @@ class _$CartStateCopyWithImpl<$Res>
 
 /// Create a copy of CartState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? cartState = null,Object? products = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? cartState = null,Object? products = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 cartState: null == cartState ? _self.cartState : cartState // ignore: cast_nullable_to_non_nullable
 as CartStates,products: null == products ? _self.products : products // ignore: cast_nullable_to_non_nullable
-as List<CartItemModel>,
+as List<CartItemModel>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CartStates cartState,  List<CartItemModel> products)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CartStates cartState,  List<CartItemModel> products,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CartState() when $default != null:
-return $default(_that.cartState,_that.products);case _:
+return $default(_that.cartState,_that.products,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.cartState,_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CartStates cartState,  List<CartItemModel> products)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CartStates cartState,  List<CartItemModel> products,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _CartState():
-return $default(_that.cartState,_that.products);case _:
+return $default(_that.cartState,_that.products,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.cartState,_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CartStates cartState,  List<CartItemModel> products)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CartStates cartState,  List<CartItemModel> products,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _CartState() when $default != null:
-return $default(_that.cartState,_that.products);case _:
+return $default(_that.cartState,_that.products,_that.errorMessage);case _:
   return null;
 
 }
@@ -207,7 +208,7 @@ return $default(_that.cartState,_that.products);case _:
 
 
 class _CartState implements CartState {
-  const _CartState({required this.cartState, final  List<CartItemModel> products = const []}): _products = products;
+  const _CartState({required this.cartState, final  List<CartItemModel> products = const [], this.errorMessage = null}): _products = products;
   
 
 @override final  CartStates cartState;
@@ -218,6 +219,7 @@ class _CartState implements CartState {
   return EqualUnmodifiableListView(_products);
 }
 
+@override@JsonKey() final  String? errorMessage;
 
 /// Create a copy of CartState
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +231,16 @@ _$CartStateCopyWith<_CartState> get copyWith => __$CartStateCopyWithImpl<_CartSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CartState&&(identical(other.cartState, cartState) || other.cartState == cartState)&&const DeepCollectionEquality().equals(other._products, _products));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CartState&&(identical(other.cartState, cartState) || other.cartState == cartState)&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,cartState,const DeepCollectionEquality().hash(_products));
+int get hashCode => Object.hash(runtimeType,cartState,const DeepCollectionEquality().hash(_products),errorMessage);
 
 @override
 String toString() {
-  return 'CartState(cartState: $cartState, products: $products)';
+  return 'CartState(cartState: $cartState, products: $products, errorMessage: $errorMessage)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class _$CartStateCopyWith<$Res> implements $CartStateCopyWith<$Re
   factory _$CartStateCopyWith(_CartState value, $Res Function(_CartState) _then) = __$CartStateCopyWithImpl;
 @override @useResult
 $Res call({
- CartStates cartState, List<CartItemModel> products
+ CartStates cartState, List<CartItemModel> products, String? errorMessage
 });
 
 
@@ -266,11 +268,12 @@ class __$CartStateCopyWithImpl<$Res>
 
 /// Create a copy of CartState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? cartState = null,Object? products = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? cartState = null,Object? products = null,Object? errorMessage = freezed,}) {
   return _then(_CartState(
 cartState: null == cartState ? _self.cartState : cartState // ignore: cast_nullable_to_non_nullable
 as CartStates,products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
-as List<CartItemModel>,
+as List<CartItemModel>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
+import 'package:proper_store_shared/helpers/cart_item_normalizer.dart';
 import 'package:proper_store_shared/models/cart_item_model.dart';
 import 'package:proper_store_shared/models/customer_model.dart';
 import 'package:proper_store_shared/models/order_model.dart';
@@ -44,7 +45,12 @@ class OrdersRemoteDataSource {
       if (raw is Timestamp) {
         data['createdAt'] = raw.millisecondsSinceEpoch;
       }
-      data["id"] = doc.id;
+      data['id'] = doc.id;
+      data['products'] = (data['products'] as List<dynamic>? ?? [])
+          .map(
+            (e) => normalizeCartItemJson(Map<String, dynamic>.from(e as Map)),
+          )
+          .toList();
       return OrderModel.fromJson(data);
     }).toList();
 
@@ -91,7 +97,7 @@ class OrdersRemoteDataSource {
 
         final data = snap.data()!;
         final items = byProduct[productRefs[i].id]!;
-        final updates = _buildProductUpdates(
+        final updates = buildProductUpdates(
           data: data,
           items: items,
           action: action,
@@ -102,47 +108,71 @@ class OrdersRemoteDataSource {
     });
   }
 
-  Map<String, dynamic> _buildProductUpdates({
+  Map<String, dynamic> buildProductUpdates({
     required Map<String, dynamic> data,
     required List<CartItemModel> items,
     required InventoryAction action,
     required OrderStatus newStatus,
   }) {
+    final updates = <String, dynamic>{};
+    _applyVariantStockUpdates(updates, data, items, action, newStatus);
+    _applyQuantityCounterUpdates(updates, data, items, action, newStatus);
+    return updates;
+  }
+
+  /// Updates per-variant stock quantities and OOS derived fields.
+  void _applyVariantStockUpdates(
+    Map<String, dynamic> updates,
+    Map<String, dynamic> data,
+    List<CartItemModel> items,
+    InventoryAction action,
+    OrderStatus newStatus,
+  ) {
+    final rawVariants =
+        Map<String, dynamic>.from(data['variants'] as Map? ?? {});
+    final variantStocks = rawVariants.map((key, val) {
+      final map = val as Map;
+      return MapEntry(key, (map['stockQuantity'] as num?)?.toInt() ?? 0);
+    });
+
+    for (final item in items) {
+      final key = item.variantKey;
+      final currentStock = variantStocks[key] ?? 0;
+      final int newStock = switch (action) {
+        InventoryAction.delivery =>
+          (currentStock - item.quantity).clamp(0, 999999),
+        InventoryAction.cancellation => currentStock + item.quantity,
+        InventoryAction.uncancellation when newStatus == OrderStatus.delivered =>
+          (currentStock - item.quantity).clamp(0, 999999),
+        _ => currentStock,
+      };
+      variantStocks[key] = newStock;
+      if (newStock != currentStock) {
+        // Atomic dot-notation update — does not overwrite other variant fields.
+        updates['variants.$key.stockQuantity'] = newStock;
+      }
+    }
+
+    final outOfStockVariants =
+        variantStocks.entries.where((e) => e.value <= 0).map((e) => e.key).toList();
+    updates['outOfStockVariants'] = outOfStockVariants;
+    updates['hasOutOfStockVariants'] = outOfStockVariants.isNotEmpty;
+    updates['totalStock'] =
+        variantStocks.values.fold<int>(0, (acc, v) => acc + v);
+  }
+
+  /// Updates soldQuantity and refundedQuantity counters based on the action.
+  void _applyQuantityCounterUpdates(
+    Map<String, dynamic> updates,
+    Map<String, dynamic> data,
+    List<CartItemModel> items,
+    InventoryAction action,
+    OrderStatus newStatus,
+  ) {
     final totalQty = items.fold<int>(0, (acc, it) => acc + it.quantity);
     final int currentSold = (data['soldQuantity'] as num?)?.toInt() ?? 0;
     final int currentRefunded =
         (data['refundedQuantity'] as num?)?.toInt() ?? 0;
-    final List<dynamic> rawColors =
-        List<dynamic>.from(data['colors'] as List? ?? []);
-
-    final updatedColors = rawColors.map((c) {
-      final map = Map<String, dynamic>.from(c as Map);
-      final int variantHex = (map['hex'] as num).toInt();
-      final int itemQty = items
-          .where((it) => it.selectedColor.toARGB32() == variantHex)
-          .fold<int>(0, (acc, it) => acc + it.quantity);
-      if (itemQty == 0) return map;
-
-      final int currentStock = (map['stockQuantity'] as num?)?.toInt() ?? 0;
-      map['stockQuantity'] = switch (action) {
-        InventoryAction.delivery => (currentStock - itemQty).clamp(0, 999999),
-        InventoryAction.cancellation => currentStock + itemQty,
-        InventoryAction.uncancellation when newStatus == OrderStatus.delivered =>
-          (currentStock - itemQty).clamp(0, 999999),
-        _ => currentStock,
-      };
-      return map;
-    }).toList();
-
-    final newStockQuantity = updatedColors.fold<int>(
-      0,
-      (acc, c) => acc + (((c as Map)['stockQuantity'] as num?)?.toInt() ?? 0),
-    );
-
-    final updates = <String, dynamic>{
-      'colors': updatedColors,
-      'stockQuantity': newStockQuantity,
-    };
 
     switch (action) {
       case InventoryAction.delivery:
@@ -159,8 +189,6 @@ class OrdersRemoteDataSource {
       case InventoryAction.none:
         break;
     }
-
-    return updates;
   }
 
   Future<CustomerModel> getCustomer({required String customerId}) async {

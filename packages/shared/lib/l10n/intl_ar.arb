@@ -613,5 +613,26 @@
   "@staffRoleChangedSuccess": {},
 
   "cannotDeleteLastSuperAdmin": "لا يمكن حذف آخر مدير عام. قم بتعيين مدير عام آخر أولاً.",
-  "@cannotDeleteLastSuperAdmin": {}
+  "@cannotDeleteLastSuperAdmin": {},
+
+  "outOfStockLabel": "نفذ المخزون",
+  "@outOfStockLabel": {},
+
+  "someItemsUnavailableError": "بعض المنتجات نفذت من المخزون",
+  "@someItemsUnavailableError": {},
+
+  "outOfStockProduct": "المنتج {productName} غير متوفر حالياً",
+  "@outOfStockProduct": {
+    "placeholders": {
+      "productName": { "type": "String" }
+    }
+  },
+
+  "lowStockProduct": "المنتج {productName} متوفر {available} قطعة فقط",
+  "@lowStockProduct": {
+    "placeholders": {
+      "productName": { "type": "String" },
+      "available": { "type": "int" }
+    }
+  }
 }

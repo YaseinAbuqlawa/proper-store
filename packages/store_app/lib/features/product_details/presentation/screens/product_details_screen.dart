@@ -8,9 +8,7 @@ import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/helpers/app_snackbar.dart';
-import 'package:proper_store_shared/models/cart_item_model.dart';
 import 'package:proper_store_shared/models/product_model.dart';
-import 'package:proper_store_shared/models/product_variant.dart';
 
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/helpers/auth_guard_dialog.dart';
@@ -21,6 +19,7 @@ import 'package:proper_store/core/products/presentation/widgets/product_price.da
 import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/core/widgets/app_spacer.dart';
 import 'package:proper_store/core/widgets/section_title.dart';
+import 'package:proper_store/features/product_details/presentation/widgets/colors_row.dart';
 import 'package:proper_store/core/widgets/shopping_bag_button.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/favorites/presentation/cubit/favorites_cubit.dart';
@@ -203,6 +202,37 @@ class ProductDetailsScreen extends StatelessWidget {
                                   const AppSpacer(height: 8),
                                   ColorsRow(
                                     productColors: productDetails.variants.values.toList(),
+                                    outOfStockVariants: productDetails.outOfStockVariants,
+                                  ),
+                                  // OOS label for the currently selected variant
+                                  BlocSelector<
+                                    ProductDetailsCubit,
+                                    ProductDetailsState,
+                                    bool
+                                  >(
+                                    selector: (state) => state.maybeWhen(
+                                      orElse: () => false,
+                                      success: (p, _, _) {
+                                        final selected = p?.selectedColor ??
+                                            p?.variants.values.firstOrNull;
+                                        return selected != null &&
+                                            selected.stockQuantity == 0;
+                                      },
+                                    ),
+                                    builder: (context, isOos) {
+                                      if (!isOos) return const SizedBox.shrink();
+                                      return Padding(
+                                        padding: const EdgeInsets.only(top: 6),
+                                        child: Text(
+                                          S.of(context).outOfStockLabel,
+                                          style: AppTextStyles.bodyDescription
+                                              .copyWith(
+                                                color: Colors.red,
+                                                fontSize: 12,
+                                              ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                   const SizedBox(height: 16),
                                   SectionTitle(
@@ -303,24 +333,42 @@ class ProductDetailsScreen extends StatelessWidget {
                 );
               },
             ),
-            bottomNavigationBar: Container(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: AddToCartButton(
-                      onPressed: () => _addToCart(context),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    flex: 4,
-                    child: BuyNowButton(onPressed: () => _buyNow(context)),
-                  ),
-                ],
+            bottomNavigationBar: BlocSelector<
+              ProductDetailsCubit,
+              ProductDetailsState,
+              bool
+            >(
+              selector: (state) => state.maybeWhen(
+                orElse: () => false,
+                success: (p, _, _) {
+                  final selected =
+                      p?.selectedColor ?? p?.variants.values.firstOrNull;
+                  return selected != null && selected.stockQuantity == 0;
+                },
               ),
+              builder: (context, isOos) {
+                return Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: AddToCartButton(
+                          onPressed: isOos ? null : () => _addToCart(context),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        flex: 4,
+                        child: BuyNowButton(
+                          onPressed: isOos ? null : () => _buyNow(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           );
         },
@@ -328,25 +376,8 @@ class ProductDetailsScreen extends StatelessWidget {
     );
   }
 
-  ProductModel? _currentProduct(BuildContext context) {
-    return context.read<ProductDetailsCubit>().state.maybeWhen(
-      success: (product, _, _) => product,
-      orElse: () => null,
-    );
-  }
-
-  CartItemModel? _buildCartItem(ProductModel product) {
-    final productVariant = product.selectedColor ?? product.variants.values.firstOrNull;
-    if (productVariant == null) return null;
-    return CartItemModel.fromProductModel(
-      product.copyWith(selectedColor: productVariant),
-    );
-  }
-
   void _addToCart(BuildContext context) {
-    final product = _currentProduct(context);
-    if (product == null) return;
-    final item = _buildCartItem(product);
+    final item = context.read<ProductDetailsCubit>().buildCartItem();
     if (item == null) return;
     context.read<CartCubit>().addProductToCart(item);
     AppSnackbar.successSnackbar(
@@ -356,88 +387,17 @@ class ProductDetailsScreen extends StatelessWidget {
   }
 
   Future<void> _buyNow(BuildContext context) async {
-    final product = _currentProduct(context);
-    if (product == null) return;
-    final item = _buildCartItem(product);
+    final cubit = context.read<ProductDetailsCubit>();
+    final item = cubit.buildCartItem();
     if (item == null) return;
 
-    final isAnonymous = context.read<ProductDetailsCubit>().isUserAnonymous;
-    if (isAnonymous) {
+    if (cubit.isUserAnonymous) {
       final proceed = await AuthGuardDialog.show(context);
       if (!proceed || !context.mounted) return;
     }
     if (context.mounted) {
       context.push(AppRoutes.checkout.path, extra: [item]);
     }
-  }
-}
-
-class ColorsRow extends StatelessWidget {
-  final List<ProductVariant> productColors;
-  const ColorsRow({super.key, required this.productColors});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<
-      ProductDetailsCubit,
-      ProductDetailsState,
-      ProductVariant?
-    >(
-      selector: (state) {
-        return state.maybeWhen(
-          orElse: () => null,
-          success: (productDetails, activeIndex, relatedProductsList) =>
-              productDetails?.selectedColor,
-        );
-      },
-      builder: (context, selectedColor) {
-        return Wrap(
-          children: List.generate(productColors.length, (index) {
-            selectedColor ??= productColors[0];
-            final productColor = productColors[index];
-            final isSelected = productColor == selectedColor;
-            return Tooltip(
-              message: productColor.name,
-              child: InkWell(
-                onTap: () {
-                  context.read<ProductDetailsCubit>().selectColor(productColor);
-                },
-                overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
-                  margin: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      if (isSelected)
-                        const BoxShadow(
-                          color: AppColors.goldRoyal,
-                          blurRadius: 5,
-                        ),
-                    ],
-                    border: isSelected
-                        ? Border.all(color: AppColors.goldRoyal)
-                        : null,
-                    borderRadius: BorderRadius.circular(50),
-                    color: productColor.color,
-                  ),
-                  width: 30,
-                  height: 30,
-                  child: isSelected
-                      ? Icon(
-                          Icons.check,
-                          size: 16,
-                          color: productColor.color.computeLuminance() > 0.5
-                              ? Colors.black
-                              : Colors.white,
-                        )
-                      : null,
-                ),
-              ),
-            );
-          }),
-        );
-      },
-    );
   }
 }
 

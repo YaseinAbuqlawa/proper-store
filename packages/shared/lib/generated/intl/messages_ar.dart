@@ -22,9 +22,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(percentage) => "خصم ${percentage}%";
 
-  static String m1(count) => "+${count} منتجات أخرى";
+  static String m1(productName, available) =>
+      "المنتج ${productName} متوفر ${available} قطعة فقط";
 
-  static String m2(count) => "الكمية: ${count}";
+  static String m2(count) => "+${count} منتجات أخرى";
+
+  static String m3(productName) => "المنتج ${productName} غير متوفر حالياً";
+
+  static String m4(count) => "الكمية: ${count}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -276,10 +281,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "سجلي دخولك لمتابعة طلباتك والاستمتاع بأفضل تجربة تسوق",
     ),
     "logoutButton": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+    "lowStockProduct": m1,
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "تسوقي الان",
     ),
-    "moreProductsLabel": m1,
+    "moreProductsLabel": m2,
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
       "الاكثر مبيعاً",
     ),
@@ -368,6 +374,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpSentSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم ارسال رمز التحقق",
     ),
+    "outOfStockLabel": MessageLookupByLibrary.simpleMessage("نفذ المخزون"),
+    "outOfStockProduct": m3,
     "passwordLabel": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwordValidation": MessageLookupByLibrary.simpleMessage(
       "أدخل كلمة المرور",
@@ -484,7 +492,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "productsTitle": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),
-    "quantityLabel": m2,
+    "quantityLabel": m4,
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "retryBtn": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("سياسة الاسترجاع"),
@@ -536,6 +544,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "similarProducts": MessageLookupByLibrary.simpleMessage("منتجات مشابهة"),
+    "someItemsUnavailableError": MessageLookupByLibrary.simpleMessage(
+      "بعض المنتجات نفذت من المخزون",
+    ),
     "staffCreatedAtLabel": MessageLookupByLibrary.simpleMessage(
       "تاريخ الإنشاء",
     ),

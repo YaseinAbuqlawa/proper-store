@@ -47,6 +47,7 @@ void main() {
   final testCartItem = CartItemModel(
     id: 'item-1',
     productId: 'prod-1',
+    variantKey: 'ffffffff',
     name: 'Test Product',
     selectedColor: const Color(0xFFFFFFFF),
     imageUrl: 'https://example.com/image.jpg',

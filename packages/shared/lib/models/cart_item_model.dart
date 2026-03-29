@@ -15,6 +15,7 @@ abstract class CartItemModel with _$CartItemModel {
   const factory CartItemModel({
     required String id,
     required String productId,
+    required String variantKey,
     required String name,
     @ColorConverter() required Color selectedColor,
     required String imageUrl,
@@ -34,6 +35,7 @@ abstract class CartItemModel with _$CartItemModel {
     return CartItemModel(
       id: product.id + productVariant.color.toARGB32().toString(),
       productId: product.id,
+      variantKey: productVariant.hexKey,
       name: product.name,
       selectedColor: productVariant.color,
       imageUrl: productVariant.imageUrls.isNotEmpty

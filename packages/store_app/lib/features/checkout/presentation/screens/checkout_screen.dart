@@ -91,6 +91,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               extra: orderId,
             );
           },
+          outOfStock: (productName, variantName, available) {
+            if (!context.mounted) return;
+            final label = variantName.isNotEmpty
+                ? '$productName ($variantName)'
+                : productName;
+            final displayMessage = available == 0
+                ? S.of(context).outOfStockProduct(label)
+                : S.of(context).lowStockProduct(label, available);
+            AppSnackbar.errorSnackbar(
+              context: context,
+              failureMessage: displayMessage,
+            );
+          },
           failure: (message) {
             if (!context.mounted) return;
             AppSnackbar.errorSnackbar(

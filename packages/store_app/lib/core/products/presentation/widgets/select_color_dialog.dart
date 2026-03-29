@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:proper_store/features/product_details/presentation/cubit/product_details_cubit.dart';
-import 'package:proper_store/features/product_details/presentation/screens/product_details_screen.dart';
+import 'package:proper_store/features/product_details/presentation/widgets/colors_row.dart';
 import 'package:proper_store_shared/models/cart_item_model.dart';
 import 'package:proper_store_shared/models/product_model.dart';
+import 'package:proper_store_shared/models/product_variant.dart';
 
 class SelectColorDialog extends StatelessWidget {
   final ProductModel product;
@@ -22,8 +23,12 @@ class SelectColorDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("اختر لون:"),
-                ColorsRow(productColors: product.variants.values.toList()),
+                const Text("اختر لون:"),
+                ColorsRow(
+                  productColors: product.variants.values.toList(),
+                  outOfStockVariants: product.outOfStockVariants,
+                  allowSelectOos: false,
+                ),
               ],
             ),
             actions: [
@@ -34,7 +39,7 @@ class SelectColorDialog extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.transparent,
                   foregroundColor: Theme.of(context).textTheme.bodyMedium?.color,
-                  padding: EdgeInsets.all(0),
+                  padding: EdgeInsets.zero,
                 ),
                 child: const Text("الغاء"),
               ),
@@ -52,21 +57,28 @@ class SelectColorDialog extends StatelessWidget {
                   );
                 },
                 builder: (context, productDetails) {
+                  final ProductVariant? effectiveVariant =
+                      productDetails.selectedColor ??
+                      productDetails.variants.values.firstOrNull;
+                  final bool isOos = effectiveVariant != null &&
+                      productDetails.outOfStockVariants
+                          .contains(effectiveVariant.hexKey);
+
                   return ElevatedButton(
-                    onPressed: () {
-                      context.read<CartCubit>().addProductToCart(
-                        CartItemModel.fromProductModel(
-                          productDetails.copyWith(
-                            selectedColor:
-                                productDetails.selectedColor ??
-                                productDetails.variants.values.firstOrNull,
-                          ),
-                        ),
-                      );
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(padding: EdgeInsets.all(0)),
-                    child: Text("تأكيد"),
+                    onPressed: isOos
+                        ? null
+                        : () {
+                            context.read<CartCubit>().addProductToCart(
+                              CartItemModel.fromProductModel(
+                                productDetails.copyWith(
+                                  selectedColor: effectiveVariant,
+                                ),
+                              ),
+                            );
+                            Navigator.pop(context);
+                          },
+                    style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
+                    child: const Text("تأكيد"),
                   );
                 },
               ),

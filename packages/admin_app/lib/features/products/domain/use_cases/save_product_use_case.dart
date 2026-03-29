@@ -143,6 +143,12 @@ class SaveProductUseCase {
       (previous, current) => previous + current.stockQuantity,
     );
     final variantsMap = {for (final v in productVariants) v.hexKey: v};
+
+    final outOfStockVariants = variantsMap.entries
+        .where((e) => e.value.stockQuantity <= 0)
+        .map((e) => e.key)
+        .toList();
+
     return ProductModel(
       id: productId,
       name: params.name,
@@ -154,6 +160,8 @@ class SaveProductUseCase {
       sizes: const [],
       stockQuantity: totalStockQuantity,
       totalStock: totalStockQuantity,
+      outOfStockVariants: outOfStockVariants,
+      hasOutOfStockVariants: outOfStockVariants.isNotEmpty,
       sellingPrice: params.sellingPrice,
       discountPercentage: params.discountPercentage,
       discountValue: params.discountValue,

@@ -24,11 +24,37 @@ class CartCubit extends Cubit<CartState> {
         super(CartState(cartState: CartStates.initial));
 
   Future<void> loadCart(String customerId) async {
+    final guestItems = List<CartItemModel>.from(state.products);
     _currentUserId = customerId;
     final result = await _loadCartItems(customerId: customerId);
+    if (_currentUserId != customerId) return; // stale request — user switched
     result.fold(
-      (_) {},
-      (items) => emit(state.copyWith(products: items)),
+      (failure) {
+        // Load failed — persist guest items if any, otherwise surface the error.
+        if (guestItems.isNotEmpty) {
+          _syncToFirestore();
+        } else {
+          emit(state.copyWith(
+            cartState: CartStates.failure,
+            errorMessage: failure.code,
+          ));
+        }
+      },
+      (savedItems) {
+        if (guestItems.isEmpty) {
+          emit(state.copyWith(products: savedItems));
+        } else {
+          // Guest items take priority; append saved items not already present
+          final merged = [...guestItems];
+          for (final saved in savedItems) {
+            if (!merged.any((g) => g.id == saved.id)) {
+              merged.add(saved);
+            }
+          }
+          emit(state.copyWith(products: merged));
+          _syncToFirestore();
+        }
+      },
     );
   }
 

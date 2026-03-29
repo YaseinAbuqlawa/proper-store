@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:proper_store/core/helpers/extensions.dart';
+import 'package:proper_store/core/failures/app_failures.dart';
 import 'package:proper_store_shared/models/address_model.dart';
 import 'package:proper_store_shared/models/cart_item_model.dart';
 import 'package:proper_store_shared/models/shipping_cost_model.dart';
@@ -63,8 +64,17 @@ class CheckoutCubit extends Cubit<CheckoutState> {
 
     final result = await createOrderUseCase.call(order: order);
     result.fold(
-      (failure) =>
-          emit(CheckoutState.failure(failureMessage: failure.errorMessage)),
+      (failure) {
+        if (failure is OutOfStockFailure) {
+          emit(CheckoutState.outOfStock(
+            productName: failure.productName,
+            variantName: failure.variantName,
+            available: failure.available,
+          ));
+        } else {
+          emit(CheckoutState.failure(failureMessage: failure.code));
+        }
+      },
       (orderId) => emit(CheckoutState.success(orderId: orderId)),
     );
   }

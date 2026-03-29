@@ -10,6 +10,7 @@ _CartItemModel _$CartItemModelFromJson(Map<String, dynamic> json) =>
     _CartItemModel(
       id: json['id'] as String,
       productId: json['productId'] as String,
+      variantKey: json['variantKey'] as String,
       name: json['name'] as String,
       selectedColor: const ColorConverter().fromJson(
         (json['selectedColor'] as num).toInt(),
@@ -24,6 +25,7 @@ Map<String, dynamic> _$CartItemModelToJson(_CartItemModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'productId': instance.productId,
+      'variantKey': instance.variantKey,
       'name': instance.name,
       'selectedColor': const ColorConverter().toJson(instance.selectedColor),
       'imageUrl': instance.imageUrl,

@@ -55,14 +55,15 @@ extension CheckoutStatePatterns on CheckoutState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Placing value)?  placing,TResult Function( _Success value)?  success,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Placing value)?  placing,TResult Function( _Success value)?  success,TResult Function( _Failure value)?  failure,TResult Function( _OutOfStock value)?  outOfStock,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Placing() when placing != null:
 return placing(_that);case _Success() when success != null:
 return success(_that);case _Failure() when failure != null:
-return failure(_that);case _:
+return failure(_that);case _OutOfStock() when outOfStock != null:
+return outOfStock(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Placing value)  placing,required TResult Function( _Success value)  success,required TResult Function( _Failure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Placing value)  placing,required TResult Function( _Success value)  success,required TResult Function( _Failure value)  failure,required TResult Function( _OutOfStock value)  outOfStock,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case _Placing():
 return placing(_that);case _Success():
 return success(_that);case _Failure():
-return failure(_that);case _:
+return failure(_that);case _OutOfStock():
+return outOfStock(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +106,15 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Placing value)?  placing,TResult? Function( _Success value)?  success,TResult? Function( _Failure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Placing value)?  placing,TResult? Function( _Success value)?  success,TResult? Function( _Failure value)?  failure,TResult? Function( _OutOfStock value)?  outOfStock,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Placing() when placing != null:
 return placing(_that);case _Success() when success != null:
 return success(_that);case _Failure() when failure != null:
-return failure(_that);case _:
+return failure(_that);case _OutOfStock() when outOfStock != null:
+return outOfStock(_that);case _:
   return null;
 
 }
@@ -128,13 +131,14 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  placing,TResult Function( String orderId)?  success,TResult Function( String failureMessage)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  placing,TResult Function( String orderId)?  success,TResult Function( String failureMessage)?  failure,TResult Function( String productName,  String variantName,  int available)?  outOfStock,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Placing() when placing != null:
 return placing();case _Success() when success != null:
 return success(_that.orderId);case _Failure() when failure != null:
-return failure(_that.failureMessage);case _:
+return failure(_that.failureMessage);case _OutOfStock() when outOfStock != null:
+return outOfStock(_that.productName,_that.variantName,_that.available);case _:
   return orElse();
 
 }
@@ -152,13 +156,14 @@ return failure(_that.failureMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  placing,required TResult Function( String orderId)  success,required TResult Function( String failureMessage)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  placing,required TResult Function( String orderId)  success,required TResult Function( String failureMessage)  failure,required TResult Function( String productName,  String variantName,  int available)  outOfStock,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Placing():
 return placing();case _Success():
 return success(_that.orderId);case _Failure():
-return failure(_that.failureMessage);case _:
+return failure(_that.failureMessage);case _OutOfStock():
+return outOfStock(_that.productName,_that.variantName,_that.available);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +180,14 @@ return failure(_that.failureMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  placing,TResult? Function( String orderId)?  success,TResult? Function( String failureMessage)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  placing,TResult? Function( String orderId)?  success,TResult? Function( String failureMessage)?  failure,TResult? Function( String productName,  String variantName,  int available)?  outOfStock,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Placing() when placing != null:
 return placing();case _Success() when success != null:
 return success(_that.orderId);case _Failure() when failure != null:
-return failure(_that.failureMessage);case _:
+return failure(_that.failureMessage);case _OutOfStock() when outOfStock != null:
+return outOfStock(_that.productName,_that.variantName,_that.available);case _:
   return null;
 
 }
@@ -379,6 +385,76 @@ class __$FailureCopyWithImpl<$Res>
   return _then(_Failure(
 failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
 as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _OutOfStock implements CheckoutState {
+  const _OutOfStock({required this.productName, required this.variantName, required this.available});
+  
+
+ final  String productName;
+ final  String variantName;
+ final  int available;
+
+/// Create a copy of CheckoutState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$OutOfStockCopyWith<_OutOfStock> get copyWith => __$OutOfStockCopyWithImpl<_OutOfStock>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OutOfStock&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.variantName, variantName) || other.variantName == variantName)&&(identical(other.available, available) || other.available == available));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,productName,variantName,available);
+
+@override
+String toString() {
+  return 'CheckoutState.outOfStock(productName: $productName, variantName: $variantName, available: $available)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$OutOfStockCopyWith<$Res> implements $CheckoutStateCopyWith<$Res> {
+  factory _$OutOfStockCopyWith(_OutOfStock value, $Res Function(_OutOfStock) _then) = __$OutOfStockCopyWithImpl;
+@useResult
+$Res call({
+ String productName, String variantName, int available
+});
+
+
+
+
+}
+/// @nodoc
+class __$OutOfStockCopyWithImpl<$Res>
+    implements _$OutOfStockCopyWith<$Res> {
+  __$OutOfStockCopyWithImpl(this._self, this._then);
+
+  final _OutOfStock _self;
+  final $Res Function(_OutOfStock) _then;
+
+/// Create a copy of CheckoutState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? productName = null,Object? variantName = null,Object? available = null,}) {
+  return _then(_OutOfStock(
+productName: null == productName ? _self.productName : productName // ignore: cast_nullable_to_non_nullable
+as String,variantName: null == variantName ? _self.variantName : variantName // ignore: cast_nullable_to_non_nullable
+as String,available: null == available ? _self.available : available // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

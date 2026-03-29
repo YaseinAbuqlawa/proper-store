@@ -41,6 +41,7 @@ void main() {
   final testCartItem = CartItemModel(
     id: 'item-1',
     productId: 'prod-1',
+    variantKey: 'ffffffff',
     name: 'Test Product',
     selectedColor: const Color(0xFFFFFFFF),
     imageUrl: 'https://example.com/image.jpg',
@@ -166,7 +167,7 @@ void main() {
     );
 
     blocTest<CheckoutCubit, CheckoutState>(
-      'emits [placing, failure] on use case error',
+      'emits [placing, failure] on generic use case error',
       build: () {
         when(
           mockCreateOrderUseCase.call(order: anyNamed('order')),
@@ -186,6 +187,41 @@ void main() {
             orElse: () => false,
           ),
           'has failure message',
+          isTrue,
+        ),
+      ],
+    );
+
+    blocTest<CheckoutCubit, CheckoutState>(
+      'emits [placing, outOfStock] on OutOfStockFailure',
+      build: () {
+        when(
+          mockCreateOrderUseCase.call(order: anyNamed('order')),
+        ).thenAnswer(
+          (_) async => Left(
+            const OutOfStockFailure(
+              productName: 'قميص',
+              variantName: 'أحمر',
+              available: 0,
+            ),
+          ),
+        );
+        return buildCubit();
+      },
+      act: (cubit) => cubit.placeOrder(
+        products: [testCartItem],
+        shippingAddress: testAddress,
+        shippingCost: 0.0,
+      ),
+      expect: () => [
+        const CheckoutState.placing(),
+        isA<CheckoutState>().having(
+          (s) => s.maybeWhen(
+            outOfStock: (name, variant, available) =>
+                name == 'قميص' && variant == 'أحمر' && available == 0,
+            orElse: () => false,
+          ),
+          'outOfStock state with correct fields',
           isTrue,
         ),
       ],

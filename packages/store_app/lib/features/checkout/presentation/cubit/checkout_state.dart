@@ -7,4 +7,9 @@ abstract class CheckoutState with _$CheckoutState {
   const factory CheckoutState.success({required String orderId}) = _Success;
   const factory CheckoutState.failure({required String failureMessage}) =
       _Failure;
+  const factory CheckoutState.outOfStock({
+    required String productName,
+    required String variantName,
+    required int available,
+  }) = _OutOfStock;
 }

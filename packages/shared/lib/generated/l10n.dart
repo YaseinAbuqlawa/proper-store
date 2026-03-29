@@ -2638,6 +2638,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Out of Stock`
+  String get outOfStockLabel {
+    return Intl.message(
+      'Out of Stock',
+      name: 'outOfStockLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Some items are out of stock`
+  String get someItemsUnavailableError {
+    return Intl.message(
+      'Some items are out of stock',
+      name: 'someItemsUnavailableError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product {productName} is currently out of stock`
+  String outOfStockProduct(String productName) {
+    return Intl.message(
+      'Product $productName is currently out of stock',
+      name: 'outOfStockProduct',
+      desc: '',
+      args: [productName],
+    );
+  }
+
+  /// `Only {available} left for {productName}`
+  String lowStockProduct(String productName, int available) {
+    return Intl.message(
+      'Only $available left for $productName',
+      name: 'lowStockProduct',
+      desc: '',
+      args: [productName, available],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

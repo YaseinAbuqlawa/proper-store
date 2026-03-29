@@ -613,5 +613,26 @@
   "@staffRoleChangedSuccess": {},
 
   "cannotDeleteLastSuperAdmin": "Cannot delete the last super admin. Assign another super admin first.",
-  "@cannotDeleteLastSuperAdmin": {}
+  "@cannotDeleteLastSuperAdmin": {},
+
+  "outOfStockLabel": "Out of Stock",
+  "@outOfStockLabel": {},
+
+  "someItemsUnavailableError": "Some items are out of stock",
+  "@someItemsUnavailableError": {},
+
+  "outOfStockProduct": "Product {productName} is currently out of stock",
+  "@outOfStockProduct": {
+    "placeholders": {
+      "productName": { "type": "String" }
+    }
+  },
+
+  "lowStockProduct": "Only {available} left for {productName}",
+  "@lowStockProduct": {
+    "placeholders": {
+      "productName": { "type": "String" },
+      "available": { "type": "int" }
+    }
+  }
 }
