@@ -25,6 +25,8 @@ migrate_working_dir/
 .claude/
 CLAUDE.md
 execution_plan.md
+AGENTS.md
+PATTERNS.md
 
 # Flutter/Dart/Pub related
 **/doc/api/
