@@ -10,7 +10,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:admin/core/di/injection_container.dart' as _i600;
-import 'package:admin/core/services/image_compression_service.dart' as _i935;
 import 'package:admin/features/auth/data/data_sources/auth_remote_data_source.dart'
     as _i529;
 import 'package:admin/features/auth/data/repo/auth_repo_impl.dart' as _i1072;
@@ -142,9 +141,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i59.FirebaseAuth>(() => externalModules.auth);
     gh.lazySingleton<_i457.FirebaseStorage>(() => externalModules.storage);
     gh.lazySingleton<_i809.FirebaseFunctions>(() => externalModules.functions);
-    gh.lazySingleton<_i935.ImageCompressionService>(
-      () => _i935.ImageCompressionService(),
-    );
     gh.lazySingleton<_i499.StaffRemoteDataSource>(
       () => _i499.StaffRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -280,11 +276,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i300.UpdateOrderStatusUseCase>(
       () => _i300.UpdateOrderStatusUseCase(repo: gh<_i978.OrdersRepo>()),
     );
+    gh.lazySingleton<_i839.AddCategoryUseCase>(
+      () => _i839.AddCategoryUseCase(gh<_i1053.StoreConfigRepo>()),
+    );
     gh.lazySingleton<_i483.DeleteCategoryUseCase>(
       () => _i483.DeleteCategoryUseCase(gh<_i1053.StoreConfigRepo>()),
     );
     gh.lazySingleton<_i30.GetStoreConfigUseCase>(
       () => _i30.GetStoreConfigUseCase(gh<_i1053.StoreConfigRepo>()),
+    );
+    gh.lazySingleton<_i214.UpdateCollectionBannerUseCase>(
+      () => _i214.UpdateCollectionBannerUseCase(gh<_i1053.StoreConfigRepo>()),
     );
     gh.lazySingleton<_i252.UpdateShippingCostsUseCase>(
       () => _i252.UpdateShippingCostsUseCase(gh<_i1053.StoreConfigRepo>()),
@@ -305,6 +307,15 @@ extension GetItInjectableX on _i174.GetIt {
         getProductsByIds: gh<_i359.GetProductsByIdsUseCase>(),
       ),
     );
+    gh.factory<_i625.StoreConfigCubit>(
+      () => _i625.StoreConfigCubit(
+        getStoreConfig: gh<_i30.GetStoreConfigUseCase>(),
+        updateShippingCosts: gh<_i252.UpdateShippingCostsUseCase>(),
+        addCategory: gh<_i839.AddCategoryUseCase>(),
+        deleteCategory: gh<_i483.DeleteCategoryUseCase>(),
+        updateBanner: gh<_i214.UpdateCollectionBannerUseCase>(),
+      ),
+    );
     gh.lazySingleton<_i482.SignInUseCase>(
       () => _i482.SignInUseCase(repo: gh<_i745.AuthRepo>()),
     );
@@ -320,18 +331,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i593.ProductFormCubit>(
       () => _i593.ProductFormCubit(
         saveProductUseCase: gh<_i717.SaveProductUseCase>(),
-      ),
-    );
-    gh.lazySingleton<_i839.AddCategoryUseCase>(
-      () => _i839.AddCategoryUseCase(
-        gh<_i1053.StoreConfigRepo>(),
-        gh<_i935.ImageCompressionService>(),
-      ),
-    );
-    gh.lazySingleton<_i214.UpdateCollectionBannerUseCase>(
-      () => _i214.UpdateCollectionBannerUseCase(
-        gh<_i1053.StoreConfigRepo>(),
-        gh<_i935.ImageCompressionService>(),
       ),
     );
     gh.factory<_i25.GetDashboardStatsUseCase>(
@@ -350,15 +349,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i469.AuthCubit(
         signInUseCase: gh<_i482.SignInUseCase>(),
         signOutUseCase: gh<_i868.SignOutUseCase>(),
-      ),
-    );
-    gh.factory<_i625.StoreConfigCubit>(
-      () => _i625.StoreConfigCubit(
-        getStoreConfig: gh<_i30.GetStoreConfigUseCase>(),
-        updateShippingCosts: gh<_i252.UpdateShippingCostsUseCase>(),
-        addCategory: gh<_i839.AddCategoryUseCase>(),
-        deleteCategory: gh<_i483.DeleteCategoryUseCase>(),
-        updateBanner: gh<_i214.UpdateCollectionBannerUseCase>(),
       ),
     );
     gh.factory<_i267.ReportsCubit>(
