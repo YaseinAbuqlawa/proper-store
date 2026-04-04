@@ -14,5 +14,7 @@ enum StaffRole {
   bool get canAccessStoreConfig =>
       this == StaffRole.superAdmin || this == StaffRole.admin;
 
+  bool get canAccessReports => this == StaffRole.superAdmin;
+
   bool get canManageStaff => this == StaffRole.superAdmin;
 }

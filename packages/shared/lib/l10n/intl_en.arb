@@ -634,5 +634,61 @@
       "productName": { "type": "String" },
       "available": { "type": "int" }
     }
+  },
+
+  "reportsTitle": "Reports",
+  "@reportsTitle": {},
+
+  "totalRevenueLabel": "Total Revenue",
+  "@totalRevenueLabel": {},
+
+  "totalOrdersLabel": "Total Orders",
+  "@totalOrdersLabel": {},
+
+  "avgOrderValueLabel": "Average Order Value",
+  "@avgOrderValueLabel": {},
+
+  "totalCustomersLabel": "Total Customers",
+  "@totalCustomersLabel": {},
+
+  "topSellersLabel": "Top Selling",
+  "@topSellersLabel": {},
+
+  "topSpendersLabel": "Top Spenders",
+  "@topSpendersLabel": {},
+
+  "cancellationRateLabel": "Cancellation Rate",
+  "@cancellationRateLabel": {},
+
+  "dailyRevenueChartTitle": "Daily Revenue (Last 30 Days)",
+  "@dailyRevenueChartTitle": {},
+
+  "monthlyRevenueChartTitle": "Monthly Revenue",
+  "@monthlyRevenueChartTitle": {},
+
+  "ordersStatusChartTitle": "Orders by Status",
+  "@ordersStatusChartTitle": {},
+
+  "loadOutOfStockBtn": "Load Out-of-Stock Products",
+  "@loadOutOfStockBtn": {},
+
+  "loadOutOfStockError": "Failed to load out-of-stock products",
+  "@loadOutOfStockError": {},
+
+  "noDataAvailable": "No data available",
+  "@noDataAvailable": {},
+
+  "orderCountLabel": "{count} orders",
+  "@orderCountLabel": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "totalSoldLabel": "{count} sold",
+  "@totalSoldLabel": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
   }
 }

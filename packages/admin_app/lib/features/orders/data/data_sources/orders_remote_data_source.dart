@@ -108,7 +108,7 @@ class OrdersRemoteDataSource {
     });
   }
 
-  Map<String, dynamic> buildProductUpdates({
+  static Map<String, dynamic> buildProductUpdates({
     required Map<String, dynamic> data,
     required List<CartItemModel> items,
     required InventoryAction action,
@@ -121,7 +121,7 @@ class OrdersRemoteDataSource {
   }
 
   /// Updates per-variant stock quantities and OOS derived fields.
-  void _applyVariantStockUpdates(
+  static void _applyVariantStockUpdates(
     Map<String, dynamic> updates,
     Map<String, dynamic> data,
     List<CartItemModel> items,
@@ -162,7 +162,7 @@ class OrdersRemoteDataSource {
   }
 
   /// Updates soldQuantity and refundedQuantity counters based on the action.
-  void _applyQuantityCounterUpdates(
+  static void _applyQuantityCounterUpdates(
     Map<String, dynamic> updates,
     Map<String, dynamic> data,
     List<CartItemModel> items,
@@ -197,6 +197,9 @@ class OrdersRemoteDataSource {
         .doc(customerId)
         .get();
 
+    if (!doc.exists || doc.data() == null) {
+      throw FirebaseException(plugin: 'cloud_firestore', code: 'not-found');
+    }
     return CustomerModel.fromJson(doc.data()!);
   }
 }

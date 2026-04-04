@@ -49,26 +49,31 @@ CartItemModel _item({
   );
 }
 
+// Convenience alias — the method is static so no instance is needed.
+Map<String, dynamic> _build({
+  required Map<String, dynamic> data,
+  required List<CartItemModel> items,
+  required InventoryAction action,
+  required OrderStatus newStatus,
+}) =>
+    OrdersRemoteDataSource.buildProductUpdates(
+      data: data,
+      items: items,
+      action: action,
+      newStatus: newStatus,
+    );
+
 // ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------
 
 void main() {
-  // We test through the instance method (non-private after rename)
-  // with a dummy FirebaseFirestore — the method under test is pure.
-  late OrdersRemoteDataSource sut;
-
-  setUp(() {
-    // Pass a null firestore — buildProductUpdates does not use it.
-    sut = OrdersRemoteDataSource(firestore: null as dynamic);
-  });
-
   group('buildProductUpdates — delivery', () {
     test('decrements stock and marks variant OOS when stock reaches 0', () {
       final data = _productData(variantStocks: {'ffab0000': 2});
       final items = [_item(variantKey: 'ffab0000', quantity: 2)];
 
-      final updates = sut.buildProductUpdates(
+      final updates = _build(
         data: data,
         items: items,
         action: InventoryAction.delivery,
@@ -86,7 +91,7 @@ void main() {
       final data = _productData(variantStocks: {'ffab0000': 1});
       final items = [_item(variantKey: 'ffab0000', quantity: 5)];
 
-      final updates = sut.buildProductUpdates(
+      final updates = _build(
         data: data,
         items: items,
         action: InventoryAction.delivery,
@@ -106,7 +111,7 @@ void main() {
       });
       final items = [_item(variantKey: 'ffab0000', quantity: 1)];
 
-      final updates = sut.buildProductUpdates(
+      final updates = _build(
         data: data,
         items: items,
         action: InventoryAction.delivery,
@@ -127,7 +132,7 @@ void main() {
       );
       final items = [_item(variantKey: 'ffab0000', quantity: 2)];
 
-      final updates = sut.buildProductUpdates(
+      final updates = _build(
         data: data,
         items: items,
         action: InventoryAction.cancellation,
@@ -149,7 +154,7 @@ void main() {
       );
       final items = [_item(variantKey: 'ffab0000', quantity: 5)];
 
-      final updates = sut.buildProductUpdates(
+      final updates = _build(
         data: data,
         items: items,
         action: InventoryAction.cancellation,
@@ -161,14 +166,15 @@ void main() {
   });
 
   group('buildProductUpdates — uncancellation', () {
-    test('when newStatus=delivered: decrements stock and increments soldQty', () {
+    test('when newStatus=delivered: decrements stock and increments soldQty',
+        () {
       final data = _productData(
         variantStocks: {'ffab0000': 4},
         refundedQuantity: 2,
       );
       final items = [_item(variantKey: 'ffab0000', quantity: 2)];
 
-      final updates = sut.buildProductUpdates(
+      final updates = _build(
         data: data,
         items: items,
         action: InventoryAction.uncancellation,
@@ -188,7 +194,7 @@ void main() {
       );
       final items = [_item(variantKey: 'ffab0000', quantity: 1)];
 
-      final updates = sut.buildProductUpdates(
+      final updates = _build(
         data: data,
         items: items,
         action: InventoryAction.uncancellation,
@@ -211,7 +217,7 @@ void main() {
       });
       final items = [_item(variantKey: 'ffab0000', quantity: 1)];
 
-      final updates = sut.buildProductUpdates(
+      final updates = _build(
         data: data,
         items: items,
         action: InventoryAction.delivery,

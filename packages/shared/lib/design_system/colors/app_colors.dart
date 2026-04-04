@@ -28,6 +28,9 @@ class AppColors {
     BoxShadow(color: Color(0x12000000), blurRadius: 8, offset: Offset(0, 2)),
   ];
 
+  // Chart grid line — subtle horizontal rule on light backgrounds
+  static const Color chartGridLine = Color(0x1A000000);
+
   // Order status badge colors
   static const Color statusPendingBg = Color(0xFFF7E1A6);
   static const Color statusPendingFg = Color(0xFF736334);

@@ -27,9 +27,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(count) => "+${count} منتجات أخرى";
 
-  static String m3(productName) => "المنتج ${productName} غير متوفر حالياً";
+  static String m3(count) => "${count} طلبات";
 
-  static String m4(count) => "الكمية: ${count}";
+  static String m4(productName) => "المنتج ${productName} غير متوفر حالياً";
+
+  static String m5(count) => "الكمية: ${count}";
+
+  static String m6(count) => "${count} مبيعة";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -64,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "apartmentLabel": MessageLookupByLibrary.simpleMessage("رقم الشقة"),
     "appTitle": MessageLookupByLibrary.simpleMessage("لوحة تحكم المتجر"),
     "areaLabel": MessageLookupByLibrary.simpleMessage("المنطقة / الحي"),
+    "avgOrderValueLabel": MessageLookupByLibrary.simpleMessage(
+      "متوسط قيمة الطلب",
+    ),
     "backToHome": MessageLookupByLibrary.simpleMessage("العودة للرئيسية"),
     "bannerBadgeLabel": MessageLookupByLibrary.simpleMessage("نص الشارة"),
     "bannerCollectionLabel": MessageLookupByLibrary.simpleMessage(
@@ -80,6 +87,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cancelLabel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "cancellationRateLabel": MessageLookupByLibrary.simpleMessage(
+      "نسبة الإلغاء",
+    ),
     "cannotDeleteLastSuperAdmin": MessageLookupByLibrary.simpleMessage(
       "لا يمكن حذف آخر مدير عام. قم بتعيين مدير عام آخر أولاً.",
     ),
@@ -136,6 +146,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "customersEmpty": MessageLookupByLibrary.simpleMessage("لا يوجد عملاء"),
     "customersSearchHint": MessageLookupByLibrary.simpleMessage(
       "ابحث بالاسم أو البريد الإلكتروني...",
+    ),
+    "dailyRevenueChartTitle": MessageLookupByLibrary.simpleMessage(
+      "الإيرادات اليومية (آخر 30 يوم)",
     ),
     "darkModeLabel": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "dashboardTitle": MessageLookupByLibrary.simpleMessage("لوحة التحكم"),
@@ -270,6 +283,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "highQuality": MessageLookupByLibrary.simpleMessage("جودة عالية"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "loadOutOfStockBtn": MessageLookupByLibrary.simpleMessage(
+      "تحميل المنتجات النافذة",
+    ),
+    "loadOutOfStockError": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل المنتجات النافذة",
+    ),
     "loadingTitle": MessageLookupByLibrary.simpleMessage("جاري التحميل"),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginSuccess": MessageLookupByLibrary.simpleMessage(
@@ -284,6 +303,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "lowStockProduct": m1,
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "تسوقي الان",
+    ),
+    "monthlyRevenueChartTitle": MessageLookupByLibrary.simpleMessage(
+      "الإيرادات الشهرية",
     ),
     "moreProductsLabel": m2,
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
@@ -304,6 +326,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noAddressesYet": MessageLookupByLibrary.simpleMessage(
       "لا توجد عناوين بعد",
     ),
+    "noDataAvailable": MessageLookupByLibrary.simpleMessage("لا توجد بيانات"),
     "noGovernoratesToAdd": MessageLookupByLibrary.simpleMessage(
       "جميع المحافظات مضافة",
     ),
@@ -325,6 +348,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orderConfirmedTitle": MessageLookupByLibrary.simpleMessage(
       "تم تأكيد طلبك!",
     ),
+    "orderCountLabel": m3,
     "orderCustomerLabel": MessageLookupByLibrary.simpleMessage("العميل"),
     "orderDateLabel": MessageLookupByLibrary.simpleMessage("التاريخ"),
     "orderDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
@@ -366,6 +390,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "ordersSearchScopeHint": MessageLookupByLibrary.simpleMessage(
       "البحث في الطلبات المحملة فقط",
     ),
+    "ordersStatusChartTitle": MessageLookupByLibrary.simpleMessage(
+      "الطلبات حسب الحالة",
+    ),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("طلباتي"),
     "otpCodeLabel": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
     "otpMustBe6Digits": MessageLookupByLibrary.simpleMessage(
@@ -375,7 +402,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم ارسال رمز التحقق",
     ),
     "outOfStockLabel": MessageLookupByLibrary.simpleMessage("نفذ المخزون"),
-    "outOfStockProduct": m3,
+    "outOfStockProduct": m4,
     "passwordLabel": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwordValidation": MessageLookupByLibrary.simpleMessage(
       "أدخل كلمة المرور",
@@ -492,7 +519,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "productsTitle": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),
-    "quantityLabel": m4,
+    "quantityLabel": m5,
+    "reportsTitle": MessageLookupByLibrary.simpleMessage("التقارير"),
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "retryBtn": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("سياسة الاسترجاع"),
@@ -580,6 +608,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "streetLabel": MessageLookupByLibrary.simpleMessage("الشارع"),
     "subtotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي قبل الخصم"),
     "successTitle": MessageLookupByLibrary.simpleMessage("نجاح"),
+    "topSellersLabel": MessageLookupByLibrary.simpleMessage("الأكثر مبيعاً"),
+    "topSpendersLabel": MessageLookupByLibrary.simpleMessage(
+      "أعلى المشترين إنفاقاً",
+    ),
+    "totalCustomersLabel": MessageLookupByLibrary.simpleMessage(
+      "إجمالي العملاء",
+    ),
+    "totalOrdersLabel": MessageLookupByLibrary.simpleMessage("إجمالي الطلبات"),
+    "totalRevenueLabel": MessageLookupByLibrary.simpleMessage(
+      "إجمالي الإيرادات",
+    ),
+    "totalSoldLabel": m6,
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("إجمالي الوحدات"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("تحديث الحالة"),
     "uploadPhoto": MessageLookupByLibrary.simpleMessage("رفع صورة"),
