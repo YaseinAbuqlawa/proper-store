@@ -1,11 +1,11 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
-
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/auth/domain/entities/staff_role.dart';
 import 'package:admin/features/staff/domain/entities/staff_list_item.dart';
 import 'package:admin/features/staff/domain/repo/staff_repo.dart';
 import 'package:admin/features/staff/domain/use_cases/create_staff_use_case.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:proper_store_shared/helpers/app_consts.dart';
 
 class _FakeStaffRepo implements StaffRepo {
   Either<ServerFailure, void>? createResult;
@@ -21,8 +21,7 @@ class _FakeStaffRepo implements StaffRepo {
     required String username,
     required String password,
     required StaffRole role,
-  }) async =>
-      createResult ?? const Right(null);
+  }) async => createResult ?? const Right(null);
 
   @override
   Future<Either<ServerFailure, void>> changeRole({
@@ -57,7 +56,9 @@ void main() {
   test('returns failure when repo fails', () async {
     final useCase = CreateStaffUseCase(
       repo: _FakeStaffRepo(
-        createResult: Left(const ServerFailure(code: 'unexpected-error')),
+        createResult: Left(
+          const ServerFailure(code: AppConsts.unexpectedErrorText),
+        ),
       ),
     );
 
@@ -69,7 +70,7 @@ void main() {
 
     expect(result.isLeft(), true);
     result.fold(
-      (f) => expect(f.code, 'unexpected-error'),
+      (f) => expect(f.code, AppConsts.unexpectedErrorText),
       (_) => fail('expected Left'),
     );
   });

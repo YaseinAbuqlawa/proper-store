@@ -21,9 +21,9 @@ class StaffRepoImpl implements StaffRepo {
     try {
       return Right(await dataSource.getStaff());
     } on FirebaseFunctionsException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -41,9 +41,9 @@ class StaffRepoImpl implements StaffRepo {
       );
       return const Right(null);
     } on FirebaseFunctionsException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -56,9 +56,9 @@ class StaffRepoImpl implements StaffRepo {
       await dataSource.changeRole(uid: uid, role: role);
       return const Right(null);
     } on FirebaseFunctionsException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -71,9 +71,9 @@ class StaffRepoImpl implements StaffRepo {
       await dataSource.changePassword(uid: uid, newPassword: newPassword);
       return const Right(null);
     } on FirebaseFunctionsException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -83,9 +83,9 @@ class StaffRepoImpl implements StaffRepo {
       await dataSource.deleteStaff(uid);
       return const Right(null);
     } on FirebaseFunctionsException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 }

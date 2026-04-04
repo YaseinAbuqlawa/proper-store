@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 
 import 'package:admin/core/failures/app_failures.dart';
+import 'package:admin/core/helpers/app_consts.dart';
 import 'package:admin/features/products/data/data_sources/products_remote_data_source.dart';
 import 'package:admin/features/products/domain/repo/products_repo.dart';
 
@@ -29,9 +30,9 @@ class ProductsRepoImpl implements ProductsRepo {
         ),
       );
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -42,9 +43,9 @@ class ProductsRepoImpl implements ProductsRepo {
     try {
       return Right(await dataSource.searchProducts(query: query));
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -55,9 +56,9 @@ class ProductsRepoImpl implements ProductsRepo {
     try {
       return Right(await dataSource.addProduct(product: product));
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -69,9 +70,9 @@ class ProductsRepoImpl implements ProductsRepo {
       await dataSource.updateProduct(product: product);
       return Right(null);
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -83,9 +84,9 @@ class ProductsRepoImpl implements ProductsRepo {
       await dataSource.deleteProduct(id: id);
       return Right(null);
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -97,9 +98,9 @@ class ProductsRepoImpl implements ProductsRepo {
       await dataSource.deleteProductImage(url: url);
       return const Right(unit);
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -116,9 +117,9 @@ class ProductsRepoImpl implements ProductsRepo {
         ),
       );
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -139,9 +140,9 @@ class ProductsRepoImpl implements ProductsRepo {
         ),
       );
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -158,9 +159,9 @@ class ProductsRepoImpl implements ProductsRepo {
         ),
       );
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -171,9 +172,9 @@ class ProductsRepoImpl implements ProductsRepo {
     try {
       return Right(await dataSource.getProductsByIds(ids));
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -182,9 +183,9 @@ class ProductsRepoImpl implements ProductsRepo {
     try {
       return Right(await dataSource.getCategories());
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -197,9 +198,9 @@ class ProductsRepoImpl implements ProductsRepo {
       await dataSource.addCategory(name: name, imageUrl: imageUrl);
       return const Right(unit);
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 }

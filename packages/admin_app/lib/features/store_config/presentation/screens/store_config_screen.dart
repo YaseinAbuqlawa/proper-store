@@ -1,4 +1,5 @@
 import 'package:admin/core/di/injection_container.dart';
+import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/store_config/presentation/cubit/store_config_cubit.dart';
 import 'package:admin/features/store_config/presentation/widgets/categories_section.dart';
 import 'package:admin/features/store_config/presentation/widgets/collection_banner_section.dart';
@@ -76,7 +77,7 @@ class _StoreConfigView extends StatelessWidget {
                     ),
                   ],
                 ),
-            failure: (message) => Center(
+            failure: (failure) => Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -86,7 +87,7 @@ class _StoreConfigView extends StatelessWidget {
                     color: AppColors.errorRed,
                   ),
                   const SizedBox(height: AppSpacing.medium),
-                  Text(message, style: AppTextStyles.bodyDescription),
+                  Text(failure.fromException(context: context), style: AppTextStyles.bodyDescription),
                   const SizedBox(height: AppSpacing.medium),
                   FilledButton(
                     onPressed: () => context.read<StoreConfigCubit>().loadAll(),

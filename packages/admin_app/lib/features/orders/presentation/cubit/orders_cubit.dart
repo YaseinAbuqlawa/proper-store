@@ -17,12 +17,14 @@ class OrdersCubit extends Cubit<OrdersState> {
   }) : super(const OrdersState());
 
   void setCustomerFilter(String customerId) {
-    emit(state.copyWith(
-      customerIdFilter: customerId,
-      orders: [],
-      lastDoc: null,
-      hasMore: true,
-    ));
+    emit(
+      state.copyWith(
+        customerIdFilter: customerId,
+        orders: [],
+        lastDoc: null,
+        hasMore: true,
+      ),
+    );
   }
 
   Future<void> loadOrders() async {
@@ -33,12 +35,8 @@ class OrdersCubit extends Cubit<OrdersState> {
     );
 
     result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: OrdersStatus.failure,
-          failureMessage: failure.code,
-        ),
-      ),
+      (failure) =>
+          emit(state.copyWith(status: OrdersStatus.failure, failure: failure)),
       (tuple) {
         final (orders, lastDoc) = tuple;
         emit(
@@ -47,7 +45,7 @@ class OrdersCubit extends Cubit<OrdersState> {
             orders: orders,
             hasMore: orders.length == 20,
             lastDoc: lastDoc,
-            failureMessage: '',
+            failure: null,
           ),
         );
       },
@@ -69,7 +67,7 @@ class OrdersCubit extends Cubit<OrdersState> {
         state.copyWith(
           status: OrdersStatus.loaded,
           hasMore: false,
-          failureMessage: failure.code,
+          failure: failure,
         ),
       ),
       (tuple) {
@@ -80,7 +78,7 @@ class OrdersCubit extends Cubit<OrdersState> {
             orders: [...state.orders, ...newOrders],
             hasMore: newOrders.length == 20,
             lastDoc: lastDoc,
-            failureMessage: '',
+            failure: null,
           ),
         );
       },
@@ -105,14 +103,11 @@ class OrdersCubit extends Cubit<OrdersState> {
       newStatus: newStatus,
     );
 
-    result.fold(
-      (failure) => emit(state.copyWith(failureMessage: failure.code)),
-      (_) {
-        final updated = state.orders.map((o) {
-          return o.id == order.id ? o.copyWith(status: newStatus) : o;
-        }).toList();
-        emit(state.copyWith(orders: updated, failureMessage: ''));
-      },
-    );
+    result.fold((failure) => emit(state.copyWith(failure: failure)), (_) {
+      final updated = state.orders.map((o) {
+        return o.id == order.id ? o.copyWith(status: newStatus) : o;
+      }).toList();
+      emit(state.copyWith(orders: updated, failure: null));
+    });
   }
 }

@@ -10,5 +10,6 @@ abstract class ReportsState with _$ReportsState {
     required bool isLoadingOos,
     String? oosFailure,
   }) = _ReportsLoaded;
-  const factory ReportsState.reportsFailure(String message) = _ReportsFailure;
+  const factory ReportsState.reportsFailure(ServerFailure failure) =
+      _ReportsFailure;
 }

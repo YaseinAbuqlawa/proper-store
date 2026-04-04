@@ -5,7 +5,7 @@ import 'package:proper_store_shared/generated/l10n.dart';
 
 export 'package:proper_store_shared/failures/app_failures.dart';
 
-extension FirebaseFailureExt on FirebaseFailure {
+extension ServerFailureExt on ServerFailure {
   String fromException({required BuildContext context}) {
     final s = S.of(context);
 

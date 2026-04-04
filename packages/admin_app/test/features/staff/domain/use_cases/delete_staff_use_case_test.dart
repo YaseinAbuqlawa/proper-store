@@ -1,11 +1,11 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
-
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/auth/domain/entities/staff_role.dart';
 import 'package:admin/features/staff/domain/entities/staff_list_item.dart';
 import 'package:admin/features/staff/domain/repo/staff_repo.dart';
 import 'package:admin/features/staff/domain/use_cases/delete_staff_use_case.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:proper_store_shared/helpers/app_consts.dart';
 
 class _FakeStaffRepo implements StaffRepo {
   Either<ServerFailure, void>? deleteResult;
@@ -41,11 +41,11 @@ class _FakeStaffRepo implements StaffRepo {
 }
 
 StaffListItem _makeItem(String uid, StaffRole role) => StaffListItem(
-      uid: uid,
-      username: uid,
-      role: role,
-      createdAt: DateTime(2024),
-    );
+  uid: uid,
+  username: uid,
+  role: role,
+  createdAt: DateTime(2024),
+);
 
 void main() {
   test('returns Right when staff deleted successfully', () async {
@@ -63,7 +63,9 @@ void main() {
   test('returns failure when repo fails', () async {
     final useCase = DeleteStaffUseCase(
       repo: _FakeStaffRepo(
-        deleteResult: Left(const ServerFailure(code: 'unexpected-error')),
+        deleteResult: Left(
+          const ServerFailure(code: AppConsts.unexpectedErrorText),
+        ),
       ),
     );
     final staff = [_makeItem('uid-1', StaffRole.admin)];
@@ -73,23 +75,24 @@ void main() {
     expect(result.isLeft(), true);
   });
 
-  test('returns last-superAdmin failure when deleting the only superAdmin',
-      () async {
-    final useCase = DeleteStaffUseCase(repo: _FakeStaffRepo());
-    final staff = [
-      _makeItem('uid-super', StaffRole.superAdmin),
-      _makeItem('uid-admin', StaffRole.admin),
-    ];
+  test(
+    'returns last-superAdmin failure when deleting the only superAdmin',
+    () async {
+      final useCase = DeleteStaffUseCase(repo: _FakeStaffRepo());
+      final staff = [
+        _makeItem('uid-super', StaffRole.superAdmin),
+        _makeItem('uid-admin', StaffRole.admin),
+      ];
 
-    final result =
-        await useCase(uid: 'uid-super', currentStaff: staff);
+      final result = await useCase(uid: 'uid-super', currentStaff: staff);
 
-    expect(result.isLeft(), true);
-    result.fold(
-      (f) => expect(f.code, 'last-superAdmin'),
-      (_) => fail('expected Left'),
-    );
-  });
+      expect(result.isLeft(), true);
+      result.fold(
+        (f) => expect(f.code, 'last-superAdmin'),
+        (_) => fail('expected Left'),
+      );
+    },
+  );
 
   test('allows deleting a superAdmin when another superAdmin exists', () async {
     final useCase = DeleteStaffUseCase(repo: _FakeStaffRepo());
@@ -98,8 +101,7 @@ void main() {
       _makeItem('uid-super2', StaffRole.superAdmin),
     ];
 
-    final result =
-        await useCase(uid: 'uid-super1', currentStaff: staff);
+    final result = await useCase(uid: 'uid-super1', currentStaff: staff);
 
     expect(result.isRight(), true);
   });

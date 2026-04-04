@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:admin/core/failures/app_failures.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -26,7 +27,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
     result.fold(
       (failure) => emit(
         state.copyWith(
-          failureMessage: failure.code,
+          failure: failure,
           status: CategoriesStatus.failure,
         ),
       ),
@@ -49,7 +50,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
     result.fold(
       (failure) => emit(
         state.copyWith(
-          failureMessage: failure.code,
+          failure: failure,
           status: CategoriesStatus.failure,
         ),
       ),

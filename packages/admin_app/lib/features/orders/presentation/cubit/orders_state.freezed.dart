@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$OrdersState {
 
- OrdersStatus get status; List<OrderModel> get orders; bool get hasMore; DocumentSnapshot? get lastDoc; String get failureMessage; OrderStatus? get activeFilter; String? get customerIdFilter;
+ OrdersStatus get status; List<OrderModel> get orders; bool get hasMore; DocumentSnapshot? get lastDoc; ServerFailure? get failure; OrderStatus? get activeFilter; String? get customerIdFilter;
 /// Create a copy of OrdersState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $OrdersStateCopyWith<OrdersState> get copyWith => _$OrdersStateCopyWithImpl<Orde
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OrdersState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.orders, orders)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.lastDoc, lastDoc) || other.lastDoc == lastDoc)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage)&&(identical(other.activeFilter, activeFilter) || other.activeFilter == activeFilter)&&(identical(other.customerIdFilter, customerIdFilter) || other.customerIdFilter == customerIdFilter));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OrdersState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.orders, orders)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.lastDoc, lastDoc) || other.lastDoc == lastDoc)&&(identical(other.failure, failure) || other.failure == failure)&&(identical(other.activeFilter, activeFilter) || other.activeFilter == activeFilter)&&(identical(other.customerIdFilter, customerIdFilter) || other.customerIdFilter == customerIdFilter));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(orders),hasMore,lastDoc,failureMessage,activeFilter,customerIdFilter);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(orders),hasMore,lastDoc,failure,activeFilter,customerIdFilter);
 
 @override
 String toString() {
-  return 'OrdersState(status: $status, orders: $orders, hasMore: $hasMore, lastDoc: $lastDoc, failureMessage: $failureMessage, activeFilter: $activeFilter, customerIdFilter: $customerIdFilter)';
+  return 'OrdersState(status: $status, orders: $orders, hasMore: $hasMore, lastDoc: $lastDoc, failure: $failure, activeFilter: $activeFilter, customerIdFilter: $customerIdFilter)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $OrdersStateCopyWith<$Res>  {
   factory $OrdersStateCopyWith(OrdersState value, $Res Function(OrdersState) _then) = _$OrdersStateCopyWithImpl;
 @useResult
 $Res call({
- OrdersStatus status, List<OrderModel> orders, bool hasMore, DocumentSnapshot? lastDoc, String failureMessage, OrderStatus? activeFilter, String? customerIdFilter
+ OrdersStatus status, List<OrderModel> orders, bool hasMore, DocumentSnapshot? lastDoc, ServerFailure? failure, OrderStatus? activeFilter, String? customerIdFilter
 });
 
 
@@ -62,14 +62,14 @@ class _$OrdersStateCopyWithImpl<$Res>
 
 /// Create a copy of OrdersState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? orders = null,Object? hasMore = null,Object? lastDoc = freezed,Object? failureMessage = null,Object? activeFilter = freezed,Object? customerIdFilter = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? orders = null,Object? hasMore = null,Object? lastDoc = freezed,Object? failure = freezed,Object? activeFilter = freezed,Object? customerIdFilter = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as OrdersStatus,orders: null == orders ? _self.orders : orders // ignore: cast_nullable_to_non_nullable
 as List<OrderModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,lastDoc: freezed == lastDoc ? _self.lastDoc : lastDoc // ignore: cast_nullable_to_non_nullable
-as DocumentSnapshot?,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
-as String,activeFilter: freezed == activeFilter ? _self.activeFilter : activeFilter // ignore: cast_nullable_to_non_nullable
+as DocumentSnapshot?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure?,activeFilter: freezed == activeFilter ? _self.activeFilter : activeFilter // ignore: cast_nullable_to_non_nullable
 as OrderStatus?,customerIdFilter: freezed == customerIdFilter ? _self.customerIdFilter : customerIdFilter // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -156,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( OrdersStatus status,  List<OrderModel> orders,  bool hasMore,  DocumentSnapshot? lastDoc,  String failureMessage,  OrderStatus? activeFilter,  String? customerIdFilter)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( OrdersStatus status,  List<OrderModel> orders,  bool hasMore,  DocumentSnapshot? lastDoc,  ServerFailure? failure,  OrderStatus? activeFilter,  String? customerIdFilter)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OrdersState() when $default != null:
-return $default(_that.status,_that.orders,_that.hasMore,_that.lastDoc,_that.failureMessage,_that.activeFilter,_that.customerIdFilter);case _:
+return $default(_that.status,_that.orders,_that.hasMore,_that.lastDoc,_that.failure,_that.activeFilter,_that.customerIdFilter);case _:
   return orElse();
 
 }
@@ -177,10 +177,10 @@ return $default(_that.status,_that.orders,_that.hasMore,_that.lastDoc,_that.fail
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( OrdersStatus status,  List<OrderModel> orders,  bool hasMore,  DocumentSnapshot? lastDoc,  String failureMessage,  OrderStatus? activeFilter,  String? customerIdFilter)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( OrdersStatus status,  List<OrderModel> orders,  bool hasMore,  DocumentSnapshot? lastDoc,  ServerFailure? failure,  OrderStatus? activeFilter,  String? customerIdFilter)  $default,) {final _that = this;
 switch (_that) {
 case _OrdersState():
-return $default(_that.status,_that.orders,_that.hasMore,_that.lastDoc,_that.failureMessage,_that.activeFilter,_that.customerIdFilter);case _:
+return $default(_that.status,_that.orders,_that.hasMore,_that.lastDoc,_that.failure,_that.activeFilter,_that.customerIdFilter);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +197,10 @@ return $default(_that.status,_that.orders,_that.hasMore,_that.lastDoc,_that.fail
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( OrdersStatus status,  List<OrderModel> orders,  bool hasMore,  DocumentSnapshot? lastDoc,  String failureMessage,  OrderStatus? activeFilter,  String? customerIdFilter)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( OrdersStatus status,  List<OrderModel> orders,  bool hasMore,  DocumentSnapshot? lastDoc,  ServerFailure? failure,  OrderStatus? activeFilter,  String? customerIdFilter)?  $default,) {final _that = this;
 switch (_that) {
 case _OrdersState() when $default != null:
-return $default(_that.status,_that.orders,_that.hasMore,_that.lastDoc,_that.failureMessage,_that.activeFilter,_that.customerIdFilter);case _:
+return $default(_that.status,_that.orders,_that.hasMore,_that.lastDoc,_that.failure,_that.activeFilter,_that.customerIdFilter);case _:
   return null;
 
 }
@@ -212,7 +212,7 @@ return $default(_that.status,_that.orders,_that.hasMore,_that.lastDoc,_that.fail
 
 
 class _OrdersState implements OrdersState {
-  const _OrdersState({this.status = OrdersStatus.initial, final  List<OrderModel> orders = const [], this.hasMore = true, this.lastDoc, this.failureMessage = '', this.activeFilter = null, this.customerIdFilter = null}): _orders = orders;
+  const _OrdersState({this.status = OrdersStatus.initial, final  List<OrderModel> orders = const [], this.hasMore = true, this.lastDoc, this.failure, this.activeFilter = null, this.customerIdFilter = null}): _orders = orders;
   
 
 @override@JsonKey() final  OrdersStatus status;
@@ -225,7 +225,7 @@ class _OrdersState implements OrdersState {
 
 @override@JsonKey() final  bool hasMore;
 @override final  DocumentSnapshot? lastDoc;
-@override@JsonKey() final  String failureMessage;
+@override final  ServerFailure? failure;
 @override@JsonKey() final  OrderStatus? activeFilter;
 @override@JsonKey() final  String? customerIdFilter;
 
@@ -239,16 +239,16 @@ _$OrdersStateCopyWith<_OrdersState> get copyWith => __$OrdersStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OrdersState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._orders, _orders)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.lastDoc, lastDoc) || other.lastDoc == lastDoc)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage)&&(identical(other.activeFilter, activeFilter) || other.activeFilter == activeFilter)&&(identical(other.customerIdFilter, customerIdFilter) || other.customerIdFilter == customerIdFilter));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OrdersState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._orders, _orders)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.lastDoc, lastDoc) || other.lastDoc == lastDoc)&&(identical(other.failure, failure) || other.failure == failure)&&(identical(other.activeFilter, activeFilter) || other.activeFilter == activeFilter)&&(identical(other.customerIdFilter, customerIdFilter) || other.customerIdFilter == customerIdFilter));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_orders),hasMore,lastDoc,failureMessage,activeFilter,customerIdFilter);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_orders),hasMore,lastDoc,failure,activeFilter,customerIdFilter);
 
 @override
 String toString() {
-  return 'OrdersState(status: $status, orders: $orders, hasMore: $hasMore, lastDoc: $lastDoc, failureMessage: $failureMessage, activeFilter: $activeFilter, customerIdFilter: $customerIdFilter)';
+  return 'OrdersState(status: $status, orders: $orders, hasMore: $hasMore, lastDoc: $lastDoc, failure: $failure, activeFilter: $activeFilter, customerIdFilter: $customerIdFilter)';
 }
 
 
@@ -259,7 +259,7 @@ abstract mixin class _$OrdersStateCopyWith<$Res> implements $OrdersStateCopyWith
   factory _$OrdersStateCopyWith(_OrdersState value, $Res Function(_OrdersState) _then) = __$OrdersStateCopyWithImpl;
 @override @useResult
 $Res call({
- OrdersStatus status, List<OrderModel> orders, bool hasMore, DocumentSnapshot? lastDoc, String failureMessage, OrderStatus? activeFilter, String? customerIdFilter
+ OrdersStatus status, List<OrderModel> orders, bool hasMore, DocumentSnapshot? lastDoc, ServerFailure? failure, OrderStatus? activeFilter, String? customerIdFilter
 });
 
 
@@ -276,14 +276,14 @@ class __$OrdersStateCopyWithImpl<$Res>
 
 /// Create a copy of OrdersState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? orders = null,Object? hasMore = null,Object? lastDoc = freezed,Object? failureMessage = null,Object? activeFilter = freezed,Object? customerIdFilter = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? orders = null,Object? hasMore = null,Object? lastDoc = freezed,Object? failure = freezed,Object? activeFilter = freezed,Object? customerIdFilter = freezed,}) {
   return _then(_OrdersState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as OrdersStatus,orders: null == orders ? _self._orders : orders // ignore: cast_nullable_to_non_nullable
 as List<OrderModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,lastDoc: freezed == lastDoc ? _self.lastDoc : lastDoc // ignore: cast_nullable_to_non_nullable
-as DocumentSnapshot?,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
-as String,activeFilter: freezed == activeFilter ? _self.activeFilter : activeFilter // ignore: cast_nullable_to_non_nullable
+as DocumentSnapshot?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure?,activeFilter: freezed == activeFilter ? _self.activeFilter : activeFilter // ignore: cast_nullable_to_non_nullable
 as OrderStatus?,customerIdFilter: freezed == customerIdFilter ? _self.customerIdFilter : customerIdFilter // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

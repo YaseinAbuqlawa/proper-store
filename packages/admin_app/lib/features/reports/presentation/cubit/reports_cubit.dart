@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:proper_store_shared/failures/app_failures.dart';
 
 import '../../domain/entities/dashboard_stats.dart';
 import '../../domain/entities/out_of_stock_product.dart';
@@ -27,7 +28,7 @@ class ReportsCubit extends Cubit<ReportsState> {
     emit(const ReportsState.reportsLoading());
     final result = await getDashboardStatsUseCase();
     result.fold(
-      (failure) => emit(ReportsState.reportsFailure(failure.code)),
+      (failure) => emit(ReportsState.reportsFailure(failure)),
       (stats) => emit(
         ReportsState.reportsLoaded(
           stats: stats,

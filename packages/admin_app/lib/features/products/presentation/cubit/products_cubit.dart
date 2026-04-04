@@ -23,7 +23,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       (failure) => emit(
         state.copyWith(
           status: ProductsStatus.failure,
-          failureMessage: failure.code,
+          failure: failure,
         ),
       ),
       (tuple) {
@@ -34,7 +34,7 @@ class ProductsCubit extends Cubit<ProductsState> {
             products: products,
             hasMore: products.length == 20,
             lastDoc: lastDoc,
-            failureMessage: "",
+            failure: null,
           ),
         );
       },
@@ -52,7 +52,7 @@ class ProductsCubit extends Cubit<ProductsState> {
         state.copyWith(
           status: ProductsStatus.loaded,
           hasMore: false,
-          failureMessage: failure.code,
+          failure: failure,
         ),
       ),
       (tuple) {
@@ -63,7 +63,7 @@ class ProductsCubit extends Cubit<ProductsState> {
             products: [...state.products, ...newProducts],
             hasMore: newProducts.length == 20,
             lastDoc: lastDoc,
-            failureMessage: "",
+            failure: null,
           ),
         );
       },
@@ -81,14 +81,14 @@ class ProductsCubit extends Cubit<ProductsState> {
       (failure) => emit(
         state.copyWith(
           status: ProductsStatus.failure,
-          failureMessage: failure.code,
+          failure: failure,
         ),
       ),
       (_) {
         emit(
           state.copyWith(
             products: state.products.where((p) => p.id != id).toList(),
-            failureMessage: "",
+            failure: null,
           ),
         );
       },

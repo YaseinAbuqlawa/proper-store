@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+import 'package:admin/core/failures/app_failures.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -87,7 +89,7 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
           if (state.status == CategoriesStatus.failure) {
             AppSnackbar.errorSnackbar(
               context: context,
-              failureMessage: state.failureMessage,
+              failureMessage: state.failure!.fromException(context: context),
             );
             setState(() => _pendingSaveName = '');
           } else if (state.status == CategoriesStatus.success) {

@@ -11,6 +11,7 @@ import 'package:admin/features/store_config/domain/use_cases/add_category_use_ca
 import 'package:admin/features/store_config/domain/use_cases/delete_category_use_case.dart';
 import 'package:admin/features/store_config/domain/use_cases/get_store_config_use_case.dart';
 import 'package:admin/features/store_config/domain/use_cases/update_collection_banner_use_case.dart';
+import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/store_config/domain/use_cases/update_shipping_costs_use_case.dart';
 
 part 'store_config_cubit.freezed.dart';
@@ -42,7 +43,7 @@ class StoreConfigCubit extends Cubit<StoreConfigState> {
     final result = await _getStoreConfig();
     if (isClosed) return;
     result.fold(
-      (failure) => emit(StoreConfigState.failure(message: failure.code)),
+      (failure) => emit(StoreConfigState.failure(failure)),
       (data) => emit(
         StoreConfigState.loaded(
           shippingCosts: data.shippingCosts,

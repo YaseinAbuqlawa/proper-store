@@ -8,11 +8,11 @@ abstract class StaffState with _$StaffState {
       _Loaded;
 
   /// Fatal load failure — replaces the list.
-  const factory StaffState.failure({required String message}) = _Failure;
+  const factory StaffState.failure(ServerFailure failure) = _Failure;
 
   /// Mutation failure — list is still available; UI shows a snackbar.
   const factory StaffState.mutationFailure({
-    required String message,
+    required ServerFailure failure,
     required List<StaffListItem> items,
   }) = _MutationFailure;
 }

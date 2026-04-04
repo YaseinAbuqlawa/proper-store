@@ -1,7 +1,7 @@
 import 'package:admin/core/di/injection_container.dart';
-import 'package:admin/core/widgets/admin_search_bar.dart';
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/core/router/app_routes.dart';
+import 'package:admin/core/widgets/admin_search_bar.dart';
 import 'package:admin/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:admin/features/orders/presentation/cubit/orders_state.dart';
 import 'package:admin/features/orders/presentation/widgets/order_card.dart';
@@ -121,9 +121,6 @@ class _OrdersViewState extends State<_OrdersView> {
                 isLoadingMore: state.status == OrdersStatus.loadingMore,
               );
             case OrdersStatus.failure:
-              final message = FirebaseFailure(
-                code: state.failureMessage,
-              ).fromException(context: context);
               return Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -134,7 +131,10 @@ class _OrdersViewState extends State<_OrdersView> {
                       color: AppColors.errorRed,
                     ),
                     const SizedBox(height: 12),
-                    Text(message, style: AppTextStyles.sectionTitle),
+                    Text(
+                      state.failure!.fromException(context: context),
+                      style: AppTextStyles.sectionTitle,
+                    ),
                     const SizedBox(height: 12),
                     FilledButton(
                       onPressed: () => context.read<OrdersCubit>().loadOrders(),

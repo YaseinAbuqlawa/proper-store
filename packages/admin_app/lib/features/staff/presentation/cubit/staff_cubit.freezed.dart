@@ -131,14 +131,14 @@ return mutationFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<StaffListItem> items)?  loaded,TResult Function( String message)?  failure,TResult Function( String message,  List<StaffListItem> items)?  mutationFailure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<StaffListItem> items)?  loaded,TResult Function( ServerFailure failure)?  failure,TResult Function( ServerFailure failure,  List<StaffListItem> items)?  mutationFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
 return loaded(_that.items);case _Failure() when failure != null:
-return failure(_that.message);case _MutationFailure() when mutationFailure != null:
-return mutationFailure(_that.message,_that.items);case _:
+return failure(_that.failure);case _MutationFailure() when mutationFailure != null:
+return mutationFailure(_that.failure,_that.items);case _:
   return orElse();
 
 }
@@ -156,14 +156,14 @@ return mutationFailure(_that.message,_that.items);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<StaffListItem> items)  loaded,required TResult Function( String message)  failure,required TResult Function( String message,  List<StaffListItem> items)  mutationFailure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<StaffListItem> items)  loaded,required TResult Function( ServerFailure failure)  failure,required TResult Function( ServerFailure failure,  List<StaffListItem> items)  mutationFailure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Loaded():
 return loaded(_that.items);case _Failure():
-return failure(_that.message);case _MutationFailure():
-return mutationFailure(_that.message,_that.items);case _:
+return failure(_that.failure);case _MutationFailure():
+return mutationFailure(_that.failure,_that.items);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +180,14 @@ return mutationFailure(_that.message,_that.items);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<StaffListItem> items)?  loaded,TResult? Function( String message)?  failure,TResult? Function( String message,  List<StaffListItem> items)?  mutationFailure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<StaffListItem> items)?  loaded,TResult? Function( ServerFailure failure)?  failure,TResult? Function( ServerFailure failure,  List<StaffListItem> items)?  mutationFailure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
 return loaded(_that.items);case _Failure() when failure != null:
-return failure(_that.message);case _MutationFailure() when mutationFailure != null:
-return mutationFailure(_that.message,_that.items);case _:
+return failure(_that.failure);case _MutationFailure() when mutationFailure != null:
+return mutationFailure(_that.failure,_that.items);case _:
   return null;
 
 }
@@ -335,10 +335,10 @@ as List<StaffListItem>,
 
 
 class _Failure implements StaffState {
-  const _Failure({required this.message});
+  const _Failure(this.failure);
   
 
- final  String message;
+ final  ServerFailure failure;
 
 /// Create a copy of StaffState
 /// with the given fields replaced by the non-null parameter values.
@@ -350,16 +350,16 @@ _$FailureCopyWith<_Failure> get copyWith => __$FailureCopyWithImpl<_Failure>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Failure&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Failure&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'StaffState.failure(message: $message)';
+  return 'StaffState.failure(failure: $failure)';
 }
 
 
@@ -370,7 +370,7 @@ abstract mixin class _$FailureCopyWith<$Res> implements $StaffStateCopyWith<$Res
   factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) = __$FailureCopyWithImpl;
 @useResult
 $Res call({
- String message
+ ServerFailure failure
 });
 
 
@@ -387,10 +387,10 @@ class __$FailureCopyWithImpl<$Res>
 
 /// Create a copy of StaffState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_Failure(
-message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure,
   ));
 }
 
@@ -401,10 +401,10 @@ as String,
 
 
 class _MutationFailure implements StaffState {
-  const _MutationFailure({required this.message, required final  List<StaffListItem> items}): _items = items;
+  const _MutationFailure({required this.failure, required final  List<StaffListItem> items}): _items = items;
   
 
- final  String message;
+ final  ServerFailure failure;
  final  List<StaffListItem> _items;
  List<StaffListItem> get items {
   if (_items is EqualUnmodifiableListView) return _items;
@@ -423,16 +423,16 @@ _$MutationFailureCopyWith<_MutationFailure> get copyWith => __$MutationFailureCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MutationFailure&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._items, _items));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MutationFailure&&(identical(other.failure, failure) || other.failure == failure)&&const DeepCollectionEquality().equals(other._items, _items));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message,const DeepCollectionEquality().hash(_items));
+int get hashCode => Object.hash(runtimeType,failure,const DeepCollectionEquality().hash(_items));
 
 @override
 String toString() {
-  return 'StaffState.mutationFailure(message: $message, items: $items)';
+  return 'StaffState.mutationFailure(failure: $failure, items: $items)';
 }
 
 
@@ -443,7 +443,7 @@ abstract mixin class _$MutationFailureCopyWith<$Res> implements $StaffStateCopyW
   factory _$MutationFailureCopyWith(_MutationFailure value, $Res Function(_MutationFailure) _then) = __$MutationFailureCopyWithImpl;
 @useResult
 $Res call({
- String message, List<StaffListItem> items
+ ServerFailure failure, List<StaffListItem> items
 });
 
 
@@ -460,10 +460,10 @@ class __$MutationFailureCopyWithImpl<$Res>
 
 /// Create a copy of StaffState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,Object? items = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,Object? items = null,}) {
   return _then(_MutationFailure(
-message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+failure: null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
 as List<StaffListItem>,
   ));
 }

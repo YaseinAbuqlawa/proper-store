@@ -54,9 +54,7 @@ class _ReportsView extends StatelessWidget {
             reportsLoading: () =>
                 const Center(child: CircularProgressIndicator()),
             reportsFailure: (message) => _ErrorView(
-              message: FirebaseFailure(
-                code: message,
-              ).fromException(context: context),
+              message: message.fromException(context: context),
               onRetry: () => context.read<ReportsCubit>().loadDashboard(),
             ),
             reportsLoaded:

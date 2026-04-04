@@ -1,3 +1,4 @@
+import 'package:admin/core/failures/app_failures.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:proper_store_shared/models/order_model.dart';
@@ -13,7 +14,7 @@ abstract class OrdersState with _$OrdersState {
     @Default([]) List<OrderModel> orders,
     @Default(true) bool hasMore,
     DocumentSnapshot? lastDoc,
-    @Default('') String failureMessage,
+    ServerFailure? failure,
     @Default(null) OrderStatus? activeFilter,
     @Default(null) String? customerIdFilter,
   }) = _OrdersState;

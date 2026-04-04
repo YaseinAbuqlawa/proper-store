@@ -39,10 +39,8 @@ class _StaffView extends StatelessWidget {
       body: BlocConsumer<StaffCubit, StaffState>(
         listener: (context, state) {
           state.whenOrNull(
-            mutationFailure: (message, _) {
-              final text = FirebaseFailure(
-                code: message,
-              ).fromException(context: context);
+            mutationFailure: (failure, _) {
+              final text = failure.fromException(context: context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(text),
@@ -58,7 +56,7 @@ class _StaffView extends StatelessWidget {
             loading: () => const Center(child: CircularProgressIndicator()),
             loaded: (items) => _buildList(context, s, items),
             mutationFailure: (_, items) => _buildList(context, s, items),
-            failure: (message) => Center(
+            failure: (failure) => Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -69,9 +67,7 @@ class _StaffView extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    FirebaseFailure(
-                      code: message,
-                    ).fromException(context: context),
+                    failure.fromException(context: context),
                     style: AppTextStyles.sectionTitle,
                   ),
                   const SizedBox(height: 12),

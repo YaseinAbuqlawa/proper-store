@@ -1,4 +1,5 @@
 import 'package:admin/core/failures/app_failures.dart';
+import 'package:admin/core/helpers/app_consts.dart';
 import 'package:admin/features/orders/data/data_sources/orders_remote_data_source.dart';
 import 'package:admin/features/orders/domain/entities/inventory_action.dart';
 import 'package:admin/features/orders/domain/repo/orders_repo.dart';
@@ -32,9 +33,9 @@ class OrdersRepoImpl implements OrdersRepo {
         ),
       );
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -52,9 +53,9 @@ class OrdersRepoImpl implements OrdersRepo {
       );
       return const Right(null);
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 
@@ -65,9 +66,9 @@ class OrdersRepoImpl implements OrdersRepo {
     try {
       return Right(await dataSource.getCustomer(customerId: customerId));
     } on FirebaseException catch (e) {
-      return Left(ServerFailure(code: e.code));
+      return Left(FirebaseFailure(code: e.code));
     } catch (e) {
-      return Left(ServerFailure(code: e.toString()));
+      return Left(const ServerFailure(code: AppConsts.unexpectedErrorText));
     }
   }
 }
