@@ -1,16 +1,13 @@
-import 'package:flutter/material.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-
-import 'package:proper_store_shared/design_system/colors/app_colors.dart';
-import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
-import 'package:proper_store_shared/generated/l10n.dart';
-
 import 'package:admin/core/router/app_routes.dart';
 import 'package:admin/features/auth/domain/entities/staff_role.dart';
 import 'package:admin/features/auth/domain/entities/staff_user.dart';
 import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proper_store_shared/design_system/colors/app_colors.dart';
+import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
+import 'package:proper_store_shared/generated/l10n.dart';
 
 class ShellLayout extends StatelessWidget {
   final Widget child;
@@ -263,7 +260,10 @@ class _MobileLayout extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(items.where((i) => i.route.path == currentPath).firstOrNull?.label ?? S.of(context).dashboardTitle),
+        title: Text(
+          items.where((i) => i.route.path == currentPath).firstOrNull?.label ??
+              S.of(context).dashboardTitle,
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout_outlined),
@@ -385,6 +385,16 @@ List<_NavItem> _navItems(BuildContext context, StaffRole? role) {
         icon: Icons.settings_outlined,
         label: s.navStoreConfig,
         route: AppRoutes.storeConfig,
+      ),
+    );
+  }
+
+  if (role == null || role.canAccessReports) {
+    items.add(
+      _NavItem(
+        icon: Icons.bar_chart_outlined,
+        label: s.reportsTitle,
+        route: AppRoutes.reports,
       ),
     );
   }

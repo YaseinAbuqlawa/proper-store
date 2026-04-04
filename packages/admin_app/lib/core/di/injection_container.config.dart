@@ -77,6 +77,17 @@ import 'package:admin/features/products/presentation/cubit/product_form_data_cub
     as _i902;
 import 'package:admin/features/products/presentation/cubit/products_cubit.dart'
     as _i177;
+import 'package:admin/features/reports/data/data_sources/reports_remote_data_source.dart'
+    as _i754;
+import 'package:admin/features/reports/data/repo/reports_repo_impl.dart'
+    as _i189;
+import 'package:admin/features/reports/domain/repo/reports_repo.dart' as _i922;
+import 'package:admin/features/reports/domain/use_cases/get_dashboard_stats_use_case.dart'
+    as _i25;
+import 'package:admin/features/reports/domain/use_cases/get_out_of_stock_products_use_case.dart'
+    as _i145;
+import 'package:admin/features/reports/presentation/cubit/reports_cubit.dart'
+    as _i267;
 import 'package:admin/features/staff/data/data_sources/staff_remote_data_source.dart'
     as _i499;
 import 'package:admin/features/staff/data/repo/staff_repo_impl.dart' as _i662;
@@ -168,6 +179,11 @@ extension GetItInjectableX on _i174.GetIt {
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
     );
+    gh.lazySingleton<_i754.ReportsRemoteDataSource>(
+      () => _i754.ReportsRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+      ),
+    );
     gh.lazySingleton<_i442.ProductsRemoteDataSource>(
       () => _i442.ProductsRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -244,6 +260,11 @@ extension GetItInjectableX on _i174.GetIt {
         deleteProductUseCase: gh<_i836.DeleteProductUseCase>(),
       ),
     );
+    gh.lazySingleton<_i922.ReportsRepo>(
+      () => _i189.ReportsRepoImpl(
+        dataSource: gh<_i754.ReportsRemoteDataSource>(),
+      ),
+    );
     gh.lazySingleton<_i1053.StoreConfigRepo>(
       () => _i37.StoreConfigRepoImpl(gh<_i883.StoreConfigRemoteDataSource>()),
     );
@@ -313,6 +334,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i935.ImageCompressionService>(),
       ),
     );
+    gh.factory<_i25.GetDashboardStatsUseCase>(
+      () => _i25.GetDashboardStatsUseCase(repo: gh<_i922.ReportsRepo>()),
+    );
+    gh.factory<_i145.GetOutOfStockProductsUseCase>(
+      () => _i145.GetOutOfStockProductsUseCase(repo: gh<_i922.ReportsRepo>()),
+    );
     gh.factory<_i84.OrdersCubit>(
       () => _i84.OrdersCubit(
         getOrdersUseCase: gh<_i447.GetOrdersUseCase>(),
@@ -332,6 +359,12 @@ extension GetItInjectableX on _i174.GetIt {
         addCategory: gh<_i839.AddCategoryUseCase>(),
         deleteCategory: gh<_i483.DeleteCategoryUseCase>(),
         updateBanner: gh<_i214.UpdateCollectionBannerUseCase>(),
+      ),
+    );
+    gh.factory<_i267.ReportsCubit>(
+      () => _i267.ReportsCubit(
+        getDashboardStatsUseCase: gh<_i25.GetDashboardStatsUseCase>(),
+        getOutOfStockProductsUseCase: gh<_i145.GetOutOfStockProductsUseCase>(),
       ),
     );
     return this;

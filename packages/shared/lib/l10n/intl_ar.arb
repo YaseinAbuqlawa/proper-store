@@ -634,5 +634,61 @@
       "productName": { "type": "String" },
       "available": { "type": "int" }
     }
+  },
+
+  "reportsTitle": "التقارير",
+  "@reportsTitle": {},
+
+  "totalRevenueLabel": "إجمالي الإيرادات",
+  "@totalRevenueLabel": {},
+
+  "totalOrdersLabel": "إجمالي الطلبات",
+  "@totalOrdersLabel": {},
+
+  "avgOrderValueLabel": "متوسط قيمة الطلب",
+  "@avgOrderValueLabel": {},
+
+  "totalCustomersLabel": "إجمالي العملاء",
+  "@totalCustomersLabel": {},
+
+  "topSellersLabel": "الأكثر مبيعاً",
+  "@topSellersLabel": {},
+
+  "topSpendersLabel": "أعلى المشترين إنفاقاً",
+  "@topSpendersLabel": {},
+
+  "cancellationRateLabel": "نسبة الإلغاء",
+  "@cancellationRateLabel": {},
+
+  "dailyRevenueChartTitle": "الإيرادات اليومية (آخر 30 يوم)",
+  "@dailyRevenueChartTitle": {},
+
+  "monthlyRevenueChartTitle": "الإيرادات الشهرية",
+  "@monthlyRevenueChartTitle": {},
+
+  "ordersStatusChartTitle": "الطلبات حسب الحالة",
+  "@ordersStatusChartTitle": {},
+
+  "loadOutOfStockBtn": "تحميل المنتجات النافذة",
+  "@loadOutOfStockBtn": {},
+
+  "loadOutOfStockError": "فشل تحميل المنتجات النافذة",
+  "@loadOutOfStockError": {},
+
+  "noDataAvailable": "لا توجد بيانات",
+  "@noDataAvailable": {},
+
+  "orderCountLabel": "{count} طلبات",
+  "@orderCountLabel": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "totalSoldLabel": "{count} مبيعة",
+  "@totalSoldLabel": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
   }
 }

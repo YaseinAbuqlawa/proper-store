@@ -2678,6 +2678,161 @@ class S {
       args: [productName, available],
     );
   }
+
+  /// `Reports`
+  String get reportsTitle {
+    return Intl.message('Reports', name: 'reportsTitle', desc: '', args: []);
+  }
+
+  /// `Total Revenue`
+  String get totalRevenueLabel {
+    return Intl.message(
+      'Total Revenue',
+      name: 'totalRevenueLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Orders`
+  String get totalOrdersLabel {
+    return Intl.message(
+      'Total Orders',
+      name: 'totalOrdersLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Average Order Value`
+  String get avgOrderValueLabel {
+    return Intl.message(
+      'Average Order Value',
+      name: 'avgOrderValueLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Customers`
+  String get totalCustomersLabel {
+    return Intl.message(
+      'Total Customers',
+      name: 'totalCustomersLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Selling`
+  String get topSellersLabel {
+    return Intl.message(
+      'Top Selling',
+      name: 'topSellersLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Spenders`
+  String get topSpendersLabel {
+    return Intl.message(
+      'Top Spenders',
+      name: 'topSpendersLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancellation Rate`
+  String get cancellationRateLabel {
+    return Intl.message(
+      'Cancellation Rate',
+      name: 'cancellationRateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily Revenue (Last 30 Days)`
+  String get dailyRevenueChartTitle {
+    return Intl.message(
+      'Daily Revenue (Last 30 Days)',
+      name: 'dailyRevenueChartTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly Revenue`
+  String get monthlyRevenueChartTitle {
+    return Intl.message(
+      'Monthly Revenue',
+      name: 'monthlyRevenueChartTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Orders by Status`
+  String get ordersStatusChartTitle {
+    return Intl.message(
+      'Orders by Status',
+      name: 'ordersStatusChartTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load Out-of-Stock Products`
+  String get loadOutOfStockBtn {
+    return Intl.message(
+      'Load Out-of-Stock Products',
+      name: 'loadOutOfStockBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load out-of-stock products`
+  String get loadOutOfStockError {
+    return Intl.message(
+      'Failed to load out-of-stock products',
+      name: 'loadOutOfStockError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data available`
+  String get noDataAvailable {
+    return Intl.message(
+      'No data available',
+      name: 'noDataAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} orders`
+  String orderCountLabel(int count) {
+    return Intl.message(
+      '$count orders',
+      name: 'orderCountLabel',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count} sold`
+  String totalSoldLabel(int count) {
+    return Intl.message(
+      '$count sold',
+      name: 'totalSoldLabel',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

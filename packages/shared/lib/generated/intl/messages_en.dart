@@ -27,10 +27,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(count) => "+${count} more items";
 
-  static String m3(productName) =>
+  static String m3(count) => "${count} orders";
+
+  static String m4(productName) =>
       "Product ${productName} is currently out of stock";
 
-  static String m4(count) => "Qty: ${count}";
+  static String m5(count) => "Qty: ${count}";
+
+  static String m6(count) => "${count} sold";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -65,6 +69,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "apartmentLabel": MessageLookupByLibrary.simpleMessage("Apartment number"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Store Admin Dashboard"),
     "areaLabel": MessageLookupByLibrary.simpleMessage("Area / Neighborhood"),
+    "avgOrderValueLabel": MessageLookupByLibrary.simpleMessage(
+      "Average Order Value",
+    ),
     "backToHome": MessageLookupByLibrary.simpleMessage("Back to home"),
     "bannerBadgeLabel": MessageLookupByLibrary.simpleMessage("Badge Text"),
     "bannerCollectionLabel": MessageLookupByLibrary.simpleMessage(
@@ -87,6 +94,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cancellationRateLabel": MessageLookupByLibrary.simpleMessage(
+      "Cancellation Rate",
+    ),
     "cannotDeleteLastSuperAdmin": MessageLookupByLibrary.simpleMessage(
       "Cannot delete the last super admin. Assign another super admin first.",
     ),
@@ -159,6 +169,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "customersSearchHint": MessageLookupByLibrary.simpleMessage(
       "Search by name or email...",
+    ),
+    "dailyRevenueChartTitle": MessageLookupByLibrary.simpleMessage(
+      "Daily Revenue (Last 30 Days)",
     ),
     "darkModeLabel": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "dashboardTitle": MessageLookupByLibrary.simpleMessage("Dashboard"),
@@ -295,6 +308,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "highQuality": MessageLookupByLibrary.simpleMessage("High quality"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("Home"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "loadOutOfStockBtn": MessageLookupByLibrary.simpleMessage(
+      "Load Out-of-Stock Products",
+    ),
+    "loadOutOfStockError": MessageLookupByLibrary.simpleMessage(
+      "Failed to load out-of-stock products",
+    ),
     "loadingTitle": MessageLookupByLibrary.simpleMessage("Loading"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Sign In"),
     "loginSuccess": MessageLookupByLibrary.simpleMessage(
@@ -309,6 +328,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "lowStockProduct": m1,
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "Shop now",
+    ),
+    "monthlyRevenueChartTitle": MessageLookupByLibrary.simpleMessage(
+      "Monthly Revenue",
     ),
     "moreProductsLabel": m2,
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
@@ -327,6 +349,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please select a shipping address",
     ),
     "noAddressesYet": MessageLookupByLibrary.simpleMessage("No addresses yet"),
+    "noDataAvailable": MessageLookupByLibrary.simpleMessage(
+      "No data available",
+    ),
     "noGovernoratesToAdd": MessageLookupByLibrary.simpleMessage(
       "All governorates are already added",
     ),
@@ -346,6 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orderConfirmedTitle": MessageLookupByLibrary.simpleMessage(
       "Order Confirmed!",
     ),
+    "orderCountLabel": m3,
     "orderCustomerLabel": MessageLookupByLibrary.simpleMessage("Customer"),
     "orderDateLabel": MessageLookupByLibrary.simpleMessage("Date"),
     "orderDetails": MessageLookupByLibrary.simpleMessage("View details"),
@@ -387,6 +413,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "ordersSearchScopeHint": MessageLookupByLibrary.simpleMessage(
       "Search applies to loaded orders only",
     ),
+    "ordersStatusChartTitle": MessageLookupByLibrary.simpleMessage(
+      "Orders by Status",
+    ),
     "ordersTitle": MessageLookupByLibrary.simpleMessage("My Orders"),
     "otpCodeLabel": MessageLookupByLibrary.simpleMessage("Verification code"),
     "otpMustBe6Digits": MessageLookupByLibrary.simpleMessage(
@@ -396,7 +425,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Verification code sent",
     ),
     "outOfStockLabel": MessageLookupByLibrary.simpleMessage("Out of Stock"),
-    "outOfStockProduct": m3,
+    "outOfStockProduct": m4,
     "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordValidation": MessageLookupByLibrary.simpleMessage(
       "Enter your password",
@@ -527,7 +556,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "productsTitle": MessageLookupByLibrary.simpleMessage("Products"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("My Account"),
-    "quantityLabel": m4,
+    "quantityLabel": m5,
+    "reportsTitle": MessageLookupByLibrary.simpleMessage("Reports"),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "retryBtn": MessageLookupByLibrary.simpleMessage("Retry"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("Return policy"),
@@ -621,6 +651,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "streetLabel": MessageLookupByLibrary.simpleMessage("Street"),
     "subtotalLabel": MessageLookupByLibrary.simpleMessage("Subtotal"),
     "successTitle": MessageLookupByLibrary.simpleMessage("Success"),
+    "topSellersLabel": MessageLookupByLibrary.simpleMessage("Top Selling"),
+    "topSpendersLabel": MessageLookupByLibrary.simpleMessage("Top Spenders"),
+    "totalCustomersLabel": MessageLookupByLibrary.simpleMessage(
+      "Total Customers",
+    ),
+    "totalOrdersLabel": MessageLookupByLibrary.simpleMessage("Total Orders"),
+    "totalRevenueLabel": MessageLookupByLibrary.simpleMessage("Total Revenue"),
+    "totalSoldLabel": m6,
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("Total units"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("Update Status"),
     "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
