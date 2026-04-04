@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/use_cases/params/product_save_params.dart';
+import 'package:admin/core/failures/app_failures.dart';
 import '../../domain/use_cases/save_product_use_case.dart';
 
 part 'product_form_cubit.freezed.dart';
@@ -19,7 +20,7 @@ class ProductFormCubit extends Cubit<ProductFormState> {
     emit(const ProductFormState.submitting());
     final result = await saveProductUseCase.call(params);
     result.fold(
-      (failure) => emit(ProductFormState.failure(failure.code)),
+      (failure) => emit(ProductFormState.failure(failure)),
       (_) => emit(const ProductFormState.success()),
     );
   }

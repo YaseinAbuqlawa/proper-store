@@ -1,4 +1,5 @@
 import 'package:admin/core/di/injection_container.dart';
+import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/core/widgets/admin_button.dart';
 import 'package:admin/features/products/domain/use_cases/params/product_save_params.dart';
 import 'package:admin/features/products/presentation/cubit/categories_cubit.dart';
@@ -240,7 +241,7 @@ class _ProductFormViewState extends State<_ProductFormView> {
             if (state.status == CategoriesStatus.failure) {
               AppSnackbar.errorSnackbar(
                 context: context,
-                failureMessage: state.failureMessage,
+                failureMessage: state.failure!.fromException(context: context),
               );
             }
           },
@@ -273,11 +274,11 @@ class _ProductFormViewState extends State<_ProductFormView> {
                 );
                 context.pop();
               },
-              failure: (msg) {
+              failure: (failure) {
                 Navigator.of(context, rootNavigator: true).pop();
                 AppSnackbar.errorSnackbar(
                   context: context,
-                  failureMessage: msg,
+                  failureMessage: failure.fromException(context: context),
                 );
               },
             );

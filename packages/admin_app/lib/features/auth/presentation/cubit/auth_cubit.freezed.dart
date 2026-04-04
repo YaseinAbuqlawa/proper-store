@@ -128,13 +128,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( StaffModel user)?  authenticated,TResult Function( String failureMessage)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( StaffModel user)?  authenticated,TResult Function( ServerFailure failure)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Authenticated() when authenticated != null:
 return authenticated(_that.user);case _Failure() when failure != null:
-return failure(_that.failureMessage);case _:
+return failure(_that.failure);case _:
   return orElse();
 
 }
@@ -152,13 +152,13 @@ return failure(_that.failureMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( StaffModel user)  authenticated,required TResult Function( String failureMessage)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( StaffModel user)  authenticated,required TResult Function( ServerFailure failure)  failure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Authenticated():
 return authenticated(_that.user);case _Failure():
-return failure(_that.failureMessage);case _:
+return failure(_that.failure);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +175,13 @@ return failure(_that.failureMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( StaffModel user)?  authenticated,TResult? Function( String failureMessage)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( StaffModel user)?  authenticated,TResult? Function( ServerFailure failure)?  failure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Authenticated() when authenticated != null:
 return authenticated(_that.user);case _Failure() when failure != null:
-return failure(_that.failureMessage);case _:
+return failure(_that.failure);case _:
   return null;
 
 }
@@ -332,10 +332,10 @@ $StaffModelCopyWith<$Res> get user {
 
 
 class _Failure implements AuthState {
-  const _Failure({required this.failureMessage});
+  const _Failure(this.failure);
   
 
- final  String failureMessage;
+ final  ServerFailure failure;
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
@@ -347,16 +347,16 @@ _$FailureCopyWith<_Failure> get copyWith => __$FailureCopyWithImpl<_Failure>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Failure&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Failure&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,failureMessage);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'AuthState.failure(failureMessage: $failureMessage)';
+  return 'AuthState.failure(failure: $failure)';
 }
 
 
@@ -367,7 +367,7 @@ abstract mixin class _$FailureCopyWith<$Res> implements $AuthStateCopyWith<$Res>
   factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) = __$FailureCopyWithImpl;
 @useResult
 $Res call({
- String failureMessage
+ ServerFailure failure
 });
 
 
@@ -384,10 +384,10 @@ class __$FailureCopyWithImpl<$Res>
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? failureMessage = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_Failure(
-failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure,
   ));
 }
 

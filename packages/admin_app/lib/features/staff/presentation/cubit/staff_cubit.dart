@@ -1,3 +1,4 @@
+import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/auth/domain/entities/staff_role.dart';
 import 'package:admin/features/staff/domain/entities/staff_list_item.dart';
 import 'package:admin/features/staff/domain/use_cases/change_password_use_case.dart';
@@ -37,7 +38,7 @@ class StaffCubit extends Cubit<StaffState> {
     emit(const StaffState.loading());
     final result = await _getStaff();
     result.fold(
-      (failure) => emit(StaffState.failure(message: failure.code)),
+      (failure) => emit(StaffState.failure(failure)),
       (items) => emit(StaffState.loaded(items: items)),
     );
   }
@@ -55,7 +56,7 @@ class StaffCubit extends Cubit<StaffState> {
       role: role,
     );
     result.fold(
-      (failure) => _emitMutationFailure(failure.code, currentItems),
+      (failure) => _emitMutationFailure(failure, currentItems),
       (_) => loadStaff(),
     );
   }
@@ -68,7 +69,7 @@ class StaffCubit extends Cubit<StaffState> {
     emit(const StaffState.loading());
     final result = await _changeRole(uid: uid, role: role);
     result.fold(
-      (failure) => _emitMutationFailure(failure.code, currentItems),
+      (failure) => _emitMutationFailure(failure, currentItems),
       (_) => loadStaff(),
     );
   }
@@ -81,7 +82,7 @@ class StaffCubit extends Cubit<StaffState> {
     emit(const StaffState.loading());
     final result = await _changePassword(uid: uid, newPassword: newPassword);
     result.fold(
-      (failure) => _emitMutationFailure(failure.code, currentItems),
+      (failure) => _emitMutationFailure(failure, currentItems),
       (_) => loadStaff(),
     );
   }
@@ -93,16 +94,16 @@ class StaffCubit extends Cubit<StaffState> {
     emit(const StaffState.loading());
     final result = await _deleteStaff(uid: uid, currentStaff: currentItems);
     result.fold(
-      (failure) => _emitMutationFailure(failure.code, currentItems),
+      (failure) => _emitMutationFailure(failure, currentItems),
       (_) => loadStaff(),
     );
   }
 
-  void _emitMutationFailure(String code, List<StaffListItem>? currentItems) {
+  void _emitMutationFailure(ServerFailure failure, List<StaffListItem>? currentItems) {
     if (currentItems != null) {
-      emit(StaffState.mutationFailure(message: code, items: currentItems));
+      emit(StaffState.mutationFailure(failure: failure, items: currentItems));
     } else {
-      emit(StaffState.failure(message: code));
+      emit(StaffState.failure(failure));
     }
   }
 }

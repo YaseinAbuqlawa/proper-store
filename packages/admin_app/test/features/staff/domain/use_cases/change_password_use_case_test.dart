@@ -1,11 +1,11 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
-
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/auth/domain/entities/staff_role.dart';
 import 'package:admin/features/staff/domain/entities/staff_list_item.dart';
 import 'package:admin/features/staff/domain/repo/staff_repo.dart';
 import 'package:admin/features/staff/domain/use_cases/change_password_use_case.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:proper_store_shared/helpers/app_consts.dart';
 
 class _FakeStaffRepo implements StaffRepo {
   Either<ServerFailure, void>? changePasswordResult;
@@ -33,8 +33,7 @@ class _FakeStaffRepo implements StaffRepo {
   Future<Either<ServerFailure, void>> changePassword({
     required String uid,
     required String newPassword,
-  }) async =>
-      changePasswordResult ?? const Right(null);
+  }) async => changePasswordResult ?? const Right(null);
 
   @override
   Future<Either<ServerFailure, void>> deleteStaff(String uid) async =>
@@ -53,8 +52,9 @@ void main() {
   test('returns failure when repo fails', () async {
     final useCase = ChangePasswordUseCase(
       repo: _FakeStaffRepo(
-        changePasswordResult:
-            Left(const ServerFailure(code: 'unexpected-error')),
+        changePasswordResult: Left(
+          const ServerFailure(code: AppConsts.unexpectedErrorText),
+        ),
       ),
     );
 

@@ -67,11 +67,8 @@ class _CustomersViewState extends State<_CustomersView> {
             case CustomersStatus.loaded:
               return _buildContent(context, state);
             case CustomersStatus.failure:
-              final message = FirebaseFailure(
-                code: state.failureMessage,
-              ).fromException(context: context);
               return _ErrorView(
-                message: message,
+                message: state.failure!.fromException(context: context),
                 onRetry: () => context.read<CustomersCubit>().loadCustomers(),
               );
             default:

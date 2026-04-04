@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CustomersState {
 
- CustomersStatus get status; List<CustomerModel> get allCustomers; List<CustomerModel> get filteredCustomers; String get failureMessage;
+ CustomersStatus get status; List<CustomerModel> get allCustomers; List<CustomerModel> get filteredCustomers; ServerFailure? get failure;
 /// Create a copy of CustomersState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CustomersStateCopyWith<CustomersState> get copyWith => _$CustomersStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomersState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.allCustomers, allCustomers)&&const DeepCollectionEquality().equals(other.filteredCustomers, filteredCustomers)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomersState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.allCustomers, allCustomers)&&const DeepCollectionEquality().equals(other.filteredCustomers, filteredCustomers)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(allCustomers),const DeepCollectionEquality().hash(filteredCustomers),failureMessage);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(allCustomers),const DeepCollectionEquality().hash(filteredCustomers),failure);
 
 @override
 String toString() {
-  return 'CustomersState(status: $status, allCustomers: $allCustomers, filteredCustomers: $filteredCustomers, failureMessage: $failureMessage)';
+  return 'CustomersState(status: $status, allCustomers: $allCustomers, filteredCustomers: $filteredCustomers, failure: $failure)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CustomersStateCopyWith<$Res>  {
   factory $CustomersStateCopyWith(CustomersState value, $Res Function(CustomersState) _then) = _$CustomersStateCopyWithImpl;
 @useResult
 $Res call({
- CustomersStatus status, List<CustomerModel> allCustomers, List<CustomerModel> filteredCustomers, String failureMessage
+ CustomersStatus status, List<CustomerModel> allCustomers, List<CustomerModel> filteredCustomers, ServerFailure? failure
 });
 
 
@@ -62,13 +62,13 @@ class _$CustomersStateCopyWithImpl<$Res>
 
 /// Create a copy of CustomersState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? allCustomers = null,Object? filteredCustomers = null,Object? failureMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? allCustomers = null,Object? filteredCustomers = null,Object? failure = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as CustomersStatus,allCustomers: null == allCustomers ? _self.allCustomers : allCustomers // ignore: cast_nullable_to_non_nullable
 as List<CustomerModel>,filteredCustomers: null == filteredCustomers ? _self.filteredCustomers : filteredCustomers // ignore: cast_nullable_to_non_nullable
-as List<CustomerModel>,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as List<CustomerModel>,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure?,
   ));
 }
 
@@ -153,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CustomersStatus status,  List<CustomerModel> allCustomers,  List<CustomerModel> filteredCustomers,  String failureMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CustomersStatus status,  List<CustomerModel> allCustomers,  List<CustomerModel> filteredCustomers,  ServerFailure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CustomersState() when $default != null:
-return $default(_that.status,_that.allCustomers,_that.filteredCustomers,_that.failureMessage);case _:
+return $default(_that.status,_that.allCustomers,_that.filteredCustomers,_that.failure);case _:
   return orElse();
 
 }
@@ -174,10 +174,10 @@ return $default(_that.status,_that.allCustomers,_that.filteredCustomers,_that.fa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CustomersStatus status,  List<CustomerModel> allCustomers,  List<CustomerModel> filteredCustomers,  String failureMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CustomersStatus status,  List<CustomerModel> allCustomers,  List<CustomerModel> filteredCustomers,  ServerFailure? failure)  $default,) {final _that = this;
 switch (_that) {
 case _CustomersState():
-return $default(_that.status,_that.allCustomers,_that.filteredCustomers,_that.failureMessage);case _:
+return $default(_that.status,_that.allCustomers,_that.filteredCustomers,_that.failure);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +194,10 @@ return $default(_that.status,_that.allCustomers,_that.filteredCustomers,_that.fa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CustomersStatus status,  List<CustomerModel> allCustomers,  List<CustomerModel> filteredCustomers,  String failureMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CustomersStatus status,  List<CustomerModel> allCustomers,  List<CustomerModel> filteredCustomers,  ServerFailure? failure)?  $default,) {final _that = this;
 switch (_that) {
 case _CustomersState() when $default != null:
-return $default(_that.status,_that.allCustomers,_that.filteredCustomers,_that.failureMessage);case _:
+return $default(_that.status,_that.allCustomers,_that.filteredCustomers,_that.failure);case _:
   return null;
 
 }
@@ -209,7 +209,7 @@ return $default(_that.status,_that.allCustomers,_that.filteredCustomers,_that.fa
 
 
 class _CustomersState implements CustomersState {
-  const _CustomersState({this.status = CustomersStatus.initial, final  List<CustomerModel> allCustomers = const [], final  List<CustomerModel> filteredCustomers = const [], this.failureMessage = ''}): _allCustomers = allCustomers,_filteredCustomers = filteredCustomers;
+  const _CustomersState({this.status = CustomersStatus.initial, final  List<CustomerModel> allCustomers = const [], final  List<CustomerModel> filteredCustomers = const [], this.failure}): _allCustomers = allCustomers,_filteredCustomers = filteredCustomers;
   
 
 @override@JsonKey() final  CustomersStatus status;
@@ -227,7 +227,7 @@ class _CustomersState implements CustomersState {
   return EqualUnmodifiableListView(_filteredCustomers);
 }
 
-@override@JsonKey() final  String failureMessage;
+@override final  ServerFailure? failure;
 
 /// Create a copy of CustomersState
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +239,16 @@ _$CustomersStateCopyWith<_CustomersState> get copyWith => __$CustomersStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomersState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._allCustomers, _allCustomers)&&const DeepCollectionEquality().equals(other._filteredCustomers, _filteredCustomers)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomersState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._allCustomers, _allCustomers)&&const DeepCollectionEquality().equals(other._filteredCustomers, _filteredCustomers)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_allCustomers),const DeepCollectionEquality().hash(_filteredCustomers),failureMessage);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_allCustomers),const DeepCollectionEquality().hash(_filteredCustomers),failure);
 
 @override
 String toString() {
-  return 'CustomersState(status: $status, allCustomers: $allCustomers, filteredCustomers: $filteredCustomers, failureMessage: $failureMessage)';
+  return 'CustomersState(status: $status, allCustomers: $allCustomers, filteredCustomers: $filteredCustomers, failure: $failure)';
 }
 
 
@@ -259,7 +259,7 @@ abstract mixin class _$CustomersStateCopyWith<$Res> implements $CustomersStateCo
   factory _$CustomersStateCopyWith(_CustomersState value, $Res Function(_CustomersState) _then) = __$CustomersStateCopyWithImpl;
 @override @useResult
 $Res call({
- CustomersStatus status, List<CustomerModel> allCustomers, List<CustomerModel> filteredCustomers, String failureMessage
+ CustomersStatus status, List<CustomerModel> allCustomers, List<CustomerModel> filteredCustomers, ServerFailure? failure
 });
 
 
@@ -276,13 +276,13 @@ class __$CustomersStateCopyWithImpl<$Res>
 
 /// Create a copy of CustomersState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? allCustomers = null,Object? filteredCustomers = null,Object? failureMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? allCustomers = null,Object? filteredCustomers = null,Object? failure = freezed,}) {
   return _then(_CustomersState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as CustomersStatus,allCustomers: null == allCustomers ? _self._allCustomers : allCustomers // ignore: cast_nullable_to_non_nullable
 as List<CustomerModel>,filteredCustomers: null == filteredCustomers ? _self._filteredCustomers : filteredCustomers // ignore: cast_nullable_to_non_nullable
-as List<CustomerModel>,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as List<CustomerModel>,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure?,
   ));
 }
 

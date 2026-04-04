@@ -180,14 +180,12 @@ class _ErrorMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<AuthCubit, AuthState, String?>(
+    return BlocSelector<AuthCubit, AuthState, ServerFailure?>(
       selector: (state) =>
-          state.whenOrNull(failure: (failureMessage) => failureMessage),
-      builder: (context, failureCode) {
-        if (failureCode == null) return const SizedBox.shrink();
-        final message = FirebaseFailure(
-          code: failureCode,
-        ).fromException(context: context);
+          state.whenOrNull(failure: (failure) => failure),
+      builder: (context, failure) {
+        if (failure == null) return const SizedBox.shrink();
+        final message = failure.fromException(context: context);
         return Padding(
           padding: const EdgeInsets.only(top: 8),
           child: Container(

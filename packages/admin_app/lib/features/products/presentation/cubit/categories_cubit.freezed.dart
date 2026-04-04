@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CategoriesState {
 
- CategoriesStatus get status; List<String> get categories; String get failureMessage;
+ CategoriesStatus get status; List<String> get categories; ServerFailure? get failure;
 /// Create a copy of CategoriesState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CategoriesStateCopyWith<CategoriesState> get copyWith => _$CategoriesStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoriesState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoriesState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(categories),failureMessage);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(categories),failure);
 
 @override
 String toString() {
-  return 'CategoriesState(status: $status, categories: $categories, failureMessage: $failureMessage)';
+  return 'CategoriesState(status: $status, categories: $categories, failure: $failure)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CategoriesStateCopyWith<$Res>  {
   factory $CategoriesStateCopyWith(CategoriesState value, $Res Function(CategoriesState) _then) = _$CategoriesStateCopyWithImpl;
 @useResult
 $Res call({
- CategoriesStatus status, List<String> categories, String failureMessage
+ CategoriesStatus status, List<String> categories, ServerFailure? failure
 });
 
 
@@ -62,12 +62,12 @@ class _$CategoriesStateCopyWithImpl<$Res>
 
 /// Create a copy of CategoriesState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? categories = null,Object? failureMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? categories = null,Object? failure = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as CategoriesStatus,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
-as List<String>,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as List<String>,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure?,
   ));
 }
 
@@ -152,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CategoriesStatus status,  List<String> categories,  String failureMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CategoriesStatus status,  List<String> categories,  ServerFailure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CategoriesState() when $default != null:
-return $default(_that.status,_that.categories,_that.failureMessage);case _:
+return $default(_that.status,_that.categories,_that.failure);case _:
   return orElse();
 
 }
@@ -173,10 +173,10 @@ return $default(_that.status,_that.categories,_that.failureMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CategoriesStatus status,  List<String> categories,  String failureMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CategoriesStatus status,  List<String> categories,  ServerFailure? failure)  $default,) {final _that = this;
 switch (_that) {
 case _CategoriesState():
-return $default(_that.status,_that.categories,_that.failureMessage);case _:
+return $default(_that.status,_that.categories,_that.failure);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +193,10 @@ return $default(_that.status,_that.categories,_that.failureMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CategoriesStatus status,  List<String> categories,  String failureMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CategoriesStatus status,  List<String> categories,  ServerFailure? failure)?  $default,) {final _that = this;
 switch (_that) {
 case _CategoriesState() when $default != null:
-return $default(_that.status,_that.categories,_that.failureMessage);case _:
+return $default(_that.status,_that.categories,_that.failure);case _:
   return null;
 
 }
@@ -208,7 +208,7 @@ return $default(_that.status,_that.categories,_that.failureMessage);case _:
 
 
 class _CategoriesState implements CategoriesState {
-  const _CategoriesState({this.status = CategoriesStatus.initial, final  List<String> categories = const [], this.failureMessage = ""}): _categories = categories;
+  const _CategoriesState({this.status = CategoriesStatus.initial, final  List<String> categories = const [], this.failure}): _categories = categories;
   
 
 @override@JsonKey() final  CategoriesStatus status;
@@ -219,7 +219,7 @@ class _CategoriesState implements CategoriesState {
   return EqualUnmodifiableListView(_categories);
 }
 
-@override@JsonKey() final  String failureMessage;
+@override final  ServerFailure? failure;
 
 /// Create a copy of CategoriesState
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +231,16 @@ _$CategoriesStateCopyWith<_CategoriesState> get copyWith => __$CategoriesStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoriesState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoriesState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_categories),failureMessage);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_categories),failure);
 
 @override
 String toString() {
-  return 'CategoriesState(status: $status, categories: $categories, failureMessage: $failureMessage)';
+  return 'CategoriesState(status: $status, categories: $categories, failure: $failure)';
 }
 
 
@@ -251,7 +251,7 @@ abstract mixin class _$CategoriesStateCopyWith<$Res> implements $CategoriesState
   factory _$CategoriesStateCopyWith(_CategoriesState value, $Res Function(_CategoriesState) _then) = __$CategoriesStateCopyWithImpl;
 @override @useResult
 $Res call({
- CategoriesStatus status, List<String> categories, String failureMessage
+ CategoriesStatus status, List<String> categories, ServerFailure? failure
 });
 
 
@@ -268,12 +268,12 @@ class __$CategoriesStateCopyWithImpl<$Res>
 
 /// Create a copy of CategoriesState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? categories = null,Object? failureMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? categories = null,Object? failure = freezed,}) {
   return _then(_CategoriesState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as CategoriesStatus,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
-as List<String>,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as List<String>,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure?,
   ));
 }
 

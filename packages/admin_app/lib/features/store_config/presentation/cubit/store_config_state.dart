@@ -12,5 +12,5 @@ sealed class StoreConfigState with _$StoreConfigState {
     @Default(false) bool isSavingCategory,
     @Default(false) bool isSavingBanner,
   }) = StoreConfigLoaded;
-  const factory StoreConfigState.failure({required String message}) = _Failure;
+  const factory StoreConfigState.failure(ServerFailure failure) = _Failure;
 }

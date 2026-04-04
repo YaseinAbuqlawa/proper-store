@@ -10,6 +10,7 @@ import 'package:proper_store_shared/helpers/app_consts.dart';
 import 'package:proper_store_shared/models/product_model.dart';
 
 import 'package:admin/core/di/injection_container.dart';
+import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/core/widgets/admin_button.dart';
 import 'package:admin/core/widgets/admin_search_bar.dart';
 import 'package:admin/core/router/app_routes.dart';
@@ -140,7 +141,7 @@ class _ProductsViewState extends State<_ProductsView> {
                           ),
                           const SizedBox(height: 12),
                           Text(
-                            state.failureMessage,
+                            state.failure!.fromException(context: context),
                             style: AppTextStyles.sectionTitle,
                           ),
                           const SizedBox(height: 12),

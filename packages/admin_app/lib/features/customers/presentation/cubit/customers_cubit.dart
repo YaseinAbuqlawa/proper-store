@@ -9,7 +9,7 @@ class CustomersCubit extends Cubit<CustomersState> {
   final GetCustomersUseCase getCustomersUseCase;
 
   CustomersCubit({required this.getCustomersUseCase})
-      : super(const CustomersState());
+    : super(const CustomersState());
 
   Future<void> loadCustomers() async {
     emit(state.copyWith(status: CustomersStatus.loading));
@@ -18,17 +18,14 @@ class CustomersCubit extends Cubit<CustomersState> {
 
     result.fold(
       (failure) => emit(
-        state.copyWith(
-          status: CustomersStatus.failure,
-          failureMessage: failure.code,
-        ),
+        state.copyWith(status: CustomersStatus.failure, failure: failure),
       ),
       (customers) => emit(
         state.copyWith(
           status: CustomersStatus.loaded,
           allCustomers: customers,
           filteredCustomers: customers,
-          failureMessage: '',
+          failure: null,
         ),
       ),
     );

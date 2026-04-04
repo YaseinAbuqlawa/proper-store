@@ -1,11 +1,11 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
-
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/auth/domain/entities/staff_role.dart';
 import 'package:admin/features/staff/domain/entities/staff_list_item.dart';
 import 'package:admin/features/staff/domain/repo/staff_repo.dart';
 import 'package:admin/features/staff/domain/use_cases/change_role_use_case.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:proper_store_shared/helpers/app_consts.dart';
 
 class _FakeStaffRepo implements StaffRepo {
   Either<ServerFailure, void>? changeRoleResult;
@@ -27,8 +27,7 @@ class _FakeStaffRepo implements StaffRepo {
   Future<Either<ServerFailure, void>> changeRole({
     required String uid,
     required StaffRole role,
-  }) async =>
-      changeRoleResult ?? const Right(null);
+  }) async => changeRoleResult ?? const Right(null);
 
   @override
   Future<Either<ServerFailure, void>> changePassword({
@@ -53,7 +52,9 @@ void main() {
   test('returns failure when repo fails', () async {
     final useCase = ChangeRoleUseCase(
       repo: _FakeStaffRepo(
-        changeRoleResult: Left(const ServerFailure(code: 'unexpected-error')),
+        changeRoleResult: Left(
+          const ServerFailure(code: AppConsts.unexpectedErrorText),
+        ),
       ),
     );
 

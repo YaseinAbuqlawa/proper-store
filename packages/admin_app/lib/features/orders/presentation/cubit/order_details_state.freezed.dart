@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$OrderDetailsState {
 
- OrderModel? get order; CustomerModel? get customer; bool get isLoadingCustomer; bool get isUpdatingStatus; String get failureMessage;
+ OrderModel? get order; CustomerModel? get customer; bool get isLoadingCustomer; bool get isUpdatingStatus; ServerFailure? get failure;
 /// Create a copy of OrderDetailsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $OrderDetailsStateCopyWith<OrderDetailsState> get copyWith => _$OrderDetailsStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OrderDetailsState&&(identical(other.order, order) || other.order == order)&&(identical(other.customer, customer) || other.customer == customer)&&(identical(other.isLoadingCustomer, isLoadingCustomer) || other.isLoadingCustomer == isLoadingCustomer)&&(identical(other.isUpdatingStatus, isUpdatingStatus) || other.isUpdatingStatus == isUpdatingStatus)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OrderDetailsState&&(identical(other.order, order) || other.order == order)&&(identical(other.customer, customer) || other.customer == customer)&&(identical(other.isLoadingCustomer, isLoadingCustomer) || other.isLoadingCustomer == isLoadingCustomer)&&(identical(other.isUpdatingStatus, isUpdatingStatus) || other.isUpdatingStatus == isUpdatingStatus)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,order,customer,isLoadingCustomer,isUpdatingStatus,failureMessage);
+int get hashCode => Object.hash(runtimeType,order,customer,isLoadingCustomer,isUpdatingStatus,failure);
 
 @override
 String toString() {
-  return 'OrderDetailsState(order: $order, customer: $customer, isLoadingCustomer: $isLoadingCustomer, isUpdatingStatus: $isUpdatingStatus, failureMessage: $failureMessage)';
+  return 'OrderDetailsState(order: $order, customer: $customer, isLoadingCustomer: $isLoadingCustomer, isUpdatingStatus: $isUpdatingStatus, failure: $failure)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $OrderDetailsStateCopyWith<$Res>  {
   factory $OrderDetailsStateCopyWith(OrderDetailsState value, $Res Function(OrderDetailsState) _then) = _$OrderDetailsStateCopyWithImpl;
 @useResult
 $Res call({
- OrderModel? order, CustomerModel? customer, bool isLoadingCustomer, bool isUpdatingStatus, String failureMessage
+ OrderModel? order, CustomerModel? customer, bool isLoadingCustomer, bool isUpdatingStatus, ServerFailure? failure
 });
 
 
@@ -62,14 +62,14 @@ class _$OrderDetailsStateCopyWithImpl<$Res>
 
 /// Create a copy of OrderDetailsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? order = freezed,Object? customer = freezed,Object? isLoadingCustomer = null,Object? isUpdatingStatus = null,Object? failureMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? order = freezed,Object? customer = freezed,Object? isLoadingCustomer = null,Object? isUpdatingStatus = null,Object? failure = freezed,}) {
   return _then(_self.copyWith(
 order: freezed == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
 as OrderModel?,customer: freezed == customer ? _self.customer : customer // ignore: cast_nullable_to_non_nullable
 as CustomerModel?,isLoadingCustomer: null == isLoadingCustomer ? _self.isLoadingCustomer : isLoadingCustomer // ignore: cast_nullable_to_non_nullable
 as bool,isUpdatingStatus: null == isUpdatingStatus ? _self.isUpdatingStatus : isUpdatingStatus // ignore: cast_nullable_to_non_nullable
-as bool,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as bool,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure?,
   ));
 }
 /// Create a copy of OrderDetailsState
@@ -178,10 +178,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( OrderModel? order,  CustomerModel? customer,  bool isLoadingCustomer,  bool isUpdatingStatus,  String failureMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( OrderModel? order,  CustomerModel? customer,  bool isLoadingCustomer,  bool isUpdatingStatus,  ServerFailure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OrderDetailsState() when $default != null:
-return $default(_that.order,_that.customer,_that.isLoadingCustomer,_that.isUpdatingStatus,_that.failureMessage);case _:
+return $default(_that.order,_that.customer,_that.isLoadingCustomer,_that.isUpdatingStatus,_that.failure);case _:
   return orElse();
 
 }
@@ -199,10 +199,10 @@ return $default(_that.order,_that.customer,_that.isLoadingCustomer,_that.isUpdat
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( OrderModel? order,  CustomerModel? customer,  bool isLoadingCustomer,  bool isUpdatingStatus,  String failureMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( OrderModel? order,  CustomerModel? customer,  bool isLoadingCustomer,  bool isUpdatingStatus,  ServerFailure? failure)  $default,) {final _that = this;
 switch (_that) {
 case _OrderDetailsState():
-return $default(_that.order,_that.customer,_that.isLoadingCustomer,_that.isUpdatingStatus,_that.failureMessage);case _:
+return $default(_that.order,_that.customer,_that.isLoadingCustomer,_that.isUpdatingStatus,_that.failure);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -219,10 +219,10 @@ return $default(_that.order,_that.customer,_that.isLoadingCustomer,_that.isUpdat
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( OrderModel? order,  CustomerModel? customer,  bool isLoadingCustomer,  bool isUpdatingStatus,  String failureMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( OrderModel? order,  CustomerModel? customer,  bool isLoadingCustomer,  bool isUpdatingStatus,  ServerFailure? failure)?  $default,) {final _that = this;
 switch (_that) {
 case _OrderDetailsState() when $default != null:
-return $default(_that.order,_that.customer,_that.isLoadingCustomer,_that.isUpdatingStatus,_that.failureMessage);case _:
+return $default(_that.order,_that.customer,_that.isLoadingCustomer,_that.isUpdatingStatus,_that.failure);case _:
   return null;
 
 }
@@ -234,14 +234,14 @@ return $default(_that.order,_that.customer,_that.isLoadingCustomer,_that.isUpdat
 
 
 class _OrderDetailsState implements OrderDetailsState {
-  const _OrderDetailsState({this.order, this.customer, this.isLoadingCustomer = false, this.isUpdatingStatus = false, this.failureMessage = ''});
+  const _OrderDetailsState({this.order, this.customer, this.isLoadingCustomer = false, this.isUpdatingStatus = false, this.failure});
   
 
 @override final  OrderModel? order;
 @override final  CustomerModel? customer;
 @override@JsonKey() final  bool isLoadingCustomer;
 @override@JsonKey() final  bool isUpdatingStatus;
-@override@JsonKey() final  String failureMessage;
+@override final  ServerFailure? failure;
 
 /// Create a copy of OrderDetailsState
 /// with the given fields replaced by the non-null parameter values.
@@ -253,16 +253,16 @@ _$OrderDetailsStateCopyWith<_OrderDetailsState> get copyWith => __$OrderDetailsS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OrderDetailsState&&(identical(other.order, order) || other.order == order)&&(identical(other.customer, customer) || other.customer == customer)&&(identical(other.isLoadingCustomer, isLoadingCustomer) || other.isLoadingCustomer == isLoadingCustomer)&&(identical(other.isUpdatingStatus, isUpdatingStatus) || other.isUpdatingStatus == isUpdatingStatus)&&(identical(other.failureMessage, failureMessage) || other.failureMessage == failureMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OrderDetailsState&&(identical(other.order, order) || other.order == order)&&(identical(other.customer, customer) || other.customer == customer)&&(identical(other.isLoadingCustomer, isLoadingCustomer) || other.isLoadingCustomer == isLoadingCustomer)&&(identical(other.isUpdatingStatus, isUpdatingStatus) || other.isUpdatingStatus == isUpdatingStatus)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,order,customer,isLoadingCustomer,isUpdatingStatus,failureMessage);
+int get hashCode => Object.hash(runtimeType,order,customer,isLoadingCustomer,isUpdatingStatus,failure);
 
 @override
 String toString() {
-  return 'OrderDetailsState(order: $order, customer: $customer, isLoadingCustomer: $isLoadingCustomer, isUpdatingStatus: $isUpdatingStatus, failureMessage: $failureMessage)';
+  return 'OrderDetailsState(order: $order, customer: $customer, isLoadingCustomer: $isLoadingCustomer, isUpdatingStatus: $isUpdatingStatus, failure: $failure)';
 }
 
 
@@ -273,7 +273,7 @@ abstract mixin class _$OrderDetailsStateCopyWith<$Res> implements $OrderDetailsS
   factory _$OrderDetailsStateCopyWith(_OrderDetailsState value, $Res Function(_OrderDetailsState) _then) = __$OrderDetailsStateCopyWithImpl;
 @override @useResult
 $Res call({
- OrderModel? order, CustomerModel? customer, bool isLoadingCustomer, bool isUpdatingStatus, String failureMessage
+ OrderModel? order, CustomerModel? customer, bool isLoadingCustomer, bool isUpdatingStatus, ServerFailure? failure
 });
 
 
@@ -290,14 +290,14 @@ class __$OrderDetailsStateCopyWithImpl<$Res>
 
 /// Create a copy of OrderDetailsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? order = freezed,Object? customer = freezed,Object? isLoadingCustomer = null,Object? isUpdatingStatus = null,Object? failureMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? order = freezed,Object? customer = freezed,Object? isLoadingCustomer = null,Object? isUpdatingStatus = null,Object? failure = freezed,}) {
   return _then(_OrderDetailsState(
 order: freezed == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
 as OrderModel?,customer: freezed == customer ? _self.customer : customer // ignore: cast_nullable_to_non_nullable
 as CustomerModel?,isLoadingCustomer: null == isLoadingCustomer ? _self.isLoadingCustomer : isLoadingCustomer // ignore: cast_nullable_to_non_nullable
 as bool,isUpdatingStatus: null == isUpdatingStatus ? _self.isUpdatingStatus : isUpdatingStatus // ignore: cast_nullable_to_non_nullable
-as bool,failureMessage: null == failureMessage ? _self.failureMessage : failureMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as bool,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure?,
   ));
 }
 

@@ -128,13 +128,13 @@ return reportsFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  reportsInitial,TResult Function()?  reportsLoading,TResult Function( DashboardStats stats,  List<OutOfStockProduct> outOfStockProducts,  bool isLoadingOos,  String? oosFailure)?  reportsLoaded,TResult Function( String message)?  reportsFailure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  reportsInitial,TResult Function()?  reportsLoading,TResult Function( DashboardStats stats,  List<OutOfStockProduct> outOfStockProducts,  bool isLoadingOos,  String? oosFailure)?  reportsLoaded,TResult Function( ServerFailure failure)?  reportsFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ReportsInitial() when reportsInitial != null:
 return reportsInitial();case _ReportsLoading() when reportsLoading != null:
 return reportsLoading();case _ReportsLoaded() when reportsLoaded != null:
 return reportsLoaded(_that.stats,_that.outOfStockProducts,_that.isLoadingOos,_that.oosFailure);case _ReportsFailure() when reportsFailure != null:
-return reportsFailure(_that.message);case _:
+return reportsFailure(_that.failure);case _:
   return orElse();
 
 }
@@ -152,13 +152,13 @@ return reportsFailure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  reportsInitial,required TResult Function()  reportsLoading,required TResult Function( DashboardStats stats,  List<OutOfStockProduct> outOfStockProducts,  bool isLoadingOos,  String? oosFailure)  reportsLoaded,required TResult Function( String message)  reportsFailure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  reportsInitial,required TResult Function()  reportsLoading,required TResult Function( DashboardStats stats,  List<OutOfStockProduct> outOfStockProducts,  bool isLoadingOos,  String? oosFailure)  reportsLoaded,required TResult Function( ServerFailure failure)  reportsFailure,}) {final _that = this;
 switch (_that) {
 case _ReportsInitial():
 return reportsInitial();case _ReportsLoading():
 return reportsLoading();case _ReportsLoaded():
 return reportsLoaded(_that.stats,_that.outOfStockProducts,_that.isLoadingOos,_that.oosFailure);case _ReportsFailure():
-return reportsFailure(_that.message);case _:
+return reportsFailure(_that.failure);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +175,13 @@ return reportsFailure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  reportsInitial,TResult? Function()?  reportsLoading,TResult? Function( DashboardStats stats,  List<OutOfStockProduct> outOfStockProducts,  bool isLoadingOos,  String? oosFailure)?  reportsLoaded,TResult? Function( String message)?  reportsFailure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  reportsInitial,TResult? Function()?  reportsLoading,TResult? Function( DashboardStats stats,  List<OutOfStockProduct> outOfStockProducts,  bool isLoadingOos,  String? oosFailure)?  reportsLoaded,TResult? Function( ServerFailure failure)?  reportsFailure,}) {final _that = this;
 switch (_that) {
 case _ReportsInitial() when reportsInitial != null:
 return reportsInitial();case _ReportsLoading() when reportsLoading != null:
 return reportsLoading();case _ReportsLoaded() when reportsLoaded != null:
 return reportsLoaded(_that.stats,_that.outOfStockProducts,_that.isLoadingOos,_that.oosFailure);case _ReportsFailure() when reportsFailure != null:
-return reportsFailure(_that.message);case _:
+return reportsFailure(_that.failure);case _:
   return null;
 
 }
@@ -335,10 +335,10 @@ as String?,
 
 
 class _ReportsFailure implements ReportsState {
-  const _ReportsFailure(this.message);
+  const _ReportsFailure(this.failure);
   
 
- final  String message;
+ final  ServerFailure failure;
 
 /// Create a copy of ReportsState
 /// with the given fields replaced by the non-null parameter values.
@@ -350,16 +350,16 @@ _$ReportsFailureCopyWith<_ReportsFailure> get copyWith => __$ReportsFailureCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReportsFailure&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReportsFailure&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'ReportsState.reportsFailure(message: $message)';
+  return 'ReportsState.reportsFailure(failure: $failure)';
 }
 
 
@@ -370,7 +370,7 @@ abstract mixin class _$ReportsFailureCopyWith<$Res> implements $ReportsStateCopy
   factory _$ReportsFailureCopyWith(_ReportsFailure value, $Res Function(_ReportsFailure) _then) = __$ReportsFailureCopyWithImpl;
 @useResult
 $Res call({
- String message
+ ServerFailure failure
 });
 
 
@@ -387,10 +387,10 @@ class __$ReportsFailureCopyWithImpl<$Res>
 
 /// Create a copy of ReportsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_ReportsFailure(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as ServerFailure,
   ));
 }
 

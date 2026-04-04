@@ -7,6 +7,6 @@ abstract class CategoriesState with _$CategoriesState {
   const factory CategoriesState({
     @Default(CategoriesStatus.initial) CategoriesStatus status,
     @Default([]) List<String> categories,
-    @Default("") String failureMessage,
+    ServerFailure? failure,
   }) = _CategoriesState;
 }

@@ -1,4 +1,5 @@
 import 'package:admin/core/di/injection_container.dart';
+import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/orders/presentation/cubit/order_details_cubit.dart';
 import 'package:admin/features/orders/presentation/cubit/order_details_state.dart';
 import 'package:admin/features/orders/presentation/widgets/customer_card.dart';
@@ -68,10 +69,10 @@ class _OrderDetailsView extends StatelessWidget {
                   order: order,
                   isUpdating: state.isUpdatingStatus,
                 ),
-                if (state.failureMessage.isNotEmpty) ...[
+                if (state.failure != null) ...[
                   const SizedBox(height: 8),
                   Text(
-                    state.failureMessage,
+                    state.failure!.fromException(context: context),
                     style: const TextStyle(
                       color: AppColors.errorRed,
                       fontSize: 13,

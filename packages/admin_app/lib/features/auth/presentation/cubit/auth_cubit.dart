@@ -23,13 +23,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthState.loading());
     final result = await signInUseCase(email: email, password: password);
     result.fold(
-      (failure) => emit(
-        AuthState.failure(
-          failureMessage: failure is FirebaseFailure
-              ? failure.code
-              : AppConsts.unexpectedErrorText,
-        ),
-      ),
+      (failure) => emit(AuthState.failure(failure)),
       (user) => emit(AuthState.authenticated(user: user)),
     );
   }

@@ -1,11 +1,11 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
-
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/features/auth/domain/entities/staff_role.dart';
 import 'package:admin/features/staff/domain/entities/staff_list_item.dart';
 import 'package:admin/features/staff/domain/repo/staff_repo.dart';
 import 'package:admin/features/staff/domain/use_cases/get_staff_use_case.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:proper_store_shared/helpers/app_consts.dart';
 
 class _FakeStaffRepo implements StaffRepo {
   final Either<ServerFailure, List<StaffListItem>> result;
@@ -13,8 +13,7 @@ class _FakeStaffRepo implements StaffRepo {
   _FakeStaffRepo(this.result);
 
   @override
-  Future<Either<ServerFailure, List<StaffListItem>>> getStaff() async =>
-      result;
+  Future<Either<ServerFailure, List<StaffListItem>>> getStaff() async => result;
 
   @override
   Future<Either<ServerFailure, void>> createStaff({
@@ -49,9 +48,7 @@ void main() {
   );
 
   test('returns list on success', () async {
-    final useCase = GetStaffUseCase(
-      repo: _FakeStaffRepo(Right([sampleItem])),
-    );
+    final useCase = GetStaffUseCase(repo: _FakeStaffRepo(Right([sampleItem])));
 
     final result = await useCase();
 
@@ -65,7 +62,7 @@ void main() {
   test('returns failure on error', () async {
     final useCase = GetStaffUseCase(
       repo: _FakeStaffRepo(
-        Left(const ServerFailure(code: 'unexpected-error')),
+        Left(const ServerFailure(code: AppConsts.unexpectedErrorText)),
       ),
     );
 
@@ -73,7 +70,7 @@ void main() {
 
     expect(result.isLeft(), true);
     result.fold(
-      (f) => expect(f.code, 'unexpected-error'),
+      (f) => expect(f.code, AppConsts.unexpectedErrorText),
       (_) => fail('expected Left'),
     );
   });

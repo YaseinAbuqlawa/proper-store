@@ -26,14 +26,13 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     final result = await getCustomerUseCase.call(customerId: customerId);
 
     result.fold(
-      (failure) => emit(
-        state.copyWith(isLoadingCustomer: false, failureMessage: failure.code),
-      ),
+      (failure) =>
+          emit(state.copyWith(isLoadingCustomer: false, failure: failure)),
       (customer) => emit(
         state.copyWith(
           isLoadingCustomer: false,
           customer: customer,
-          failureMessage: '',
+          failure: null,
         ),
       ),
     );
@@ -43,21 +42,20 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     final current = state.order;
     if (current == null) return;
 
-    emit(state.copyWith(isUpdatingStatus: true, failureMessage: ''));
+    emit(state.copyWith(isUpdatingStatus: true, failure: null));
     final result = await updateOrderStatusUseCase.call(
       order: current,
       newStatus: newStatus,
     );
 
     result.fold(
-      (failure) => emit(
-        state.copyWith(isUpdatingStatus: false, failureMessage: failure.code),
-      ),
+      (failure) =>
+          emit(state.copyWith(isUpdatingStatus: false, failure: failure)),
       (_) => emit(
         state.copyWith(
           isUpdatingStatus: false,
           order: current.copyWith(status: newStatus),
-          failureMessage: '',
+          failure: null,
         ),
       ),
     );
