@@ -1,11 +1,10 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
-
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/core/helpers/app_consts.dart';
 import 'package:admin/features/auth/domain/entities/staff_role.dart';
-import 'package:admin/features/auth/domain/repo/auth_repo.dart';
 import 'package:admin/features/auth/domain/entities/staff_user.dart';
+import 'package:admin/features/auth/domain/repo/auth_repo.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 
 // Fake repo to test that role is read correctly by the repo layer.
 // The data source itself requires FirebaseAuth which cannot be unit-tested
@@ -20,6 +19,10 @@ class _FakeAuthRepo implements AuthRepo {
     required String email,
     required String password,
   }) async => result;
+
+  @override
+  Future<Either<ServerFailure, StaffModel?>> getCurrentUser() async =>
+      const Right(null);
 
   @override
   Future<void> signOut() async {}
@@ -41,32 +44,31 @@ void main() {
       );
 
       expect(result.isRight(), true);
-      result.fold(
-        (_) => fail('expected Right'),
-        (user) {
-          expect(user.role, StaffRole.superAdmin);
-          expect(user.uid, 'uid-abc');
-        },
-      );
+      result.fold((_) => fail('expected Right'), (user) {
+        expect(user.role, StaffRole.superAdmin);
+        expect(user.uid, 'uid-abc');
+      });
     });
 
-    test('returns FirebaseFailure with not-found when role claim is absent',
-        () async {
-      final repo = _FakeAuthRepo(
-        Left(const FirebaseFailure(code: 'not-found')),
-      );
+    test(
+      'returns FirebaseFailure with not-found when role claim is absent',
+      () async {
+        final repo = _FakeAuthRepo(
+          Left(const FirebaseFailure(code: 'not-found')),
+        );
 
-      final result = await repo.signInWithEmailAndPassword(
-        email: 'noRole@properstaff.com',
-        password: 'secret',
-      );
+        final result = await repo.signInWithEmailAndPassword(
+          email: 'noRole@properstaff.com',
+          password: 'secret',
+        );
 
-      expect(result.isLeft(), true);
-      result.fold(
-        (f) => expect(f.code, 'not-found'),
-        (_) => fail('expected Left'),
-      );
-    });
+        expect(result.isLeft(), true);
+        result.fold(
+          (f) => expect(f.code, 'not-found'),
+          (_) => fail('expected Left'),
+        );
+      },
+    );
 
     test('returns unexpected-error failure on generic exception', () async {
       final repo = _FakeAuthRepo(
