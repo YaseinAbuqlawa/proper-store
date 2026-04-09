@@ -18,4 +18,5 @@ abstract final class AppConsts {
   static const String dashboardStatsDoc = 'dashboard';
   static const String hasOutOfStockVariantsField = 'hasOutOfStockVariants';
   static const int oosProductsPageSize = 20;
+  static const String staffEmailDomain = '@properstaff.com';
 }
