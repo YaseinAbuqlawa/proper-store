@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:admin/core/di/injection_container.dart';
 import 'package:admin/core/router/app_router.dart';
+import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:admin/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +18,10 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   configureDependencies();
+
+  // Rehydrate auth state from persisted Firebase session before the router
+  // evaluates its redirect guard — prevents role == null on cold start.
+  unawaited(sl<AuthCubit>().rehydrate());
 
   runApp(const AdminApp());
 }

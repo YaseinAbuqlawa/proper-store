@@ -45,6 +45,9 @@
   "dashboardTitle": "Dashboard",
   "@dashboardTitle": {},
 
+  "adminAppSubtitle": "Proper Store Admin",
+  "@adminAppSubtitle": {},
+
   "emailValidation": "Enter your email",
   "@emailValidation": {},
 

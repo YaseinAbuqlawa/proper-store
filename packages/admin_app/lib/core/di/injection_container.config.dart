@@ -14,6 +14,8 @@ import 'package:admin/features/auth/data/data_sources/auth_remote_data_source.da
     as _i529;
 import 'package:admin/features/auth/data/repo/auth_repo_impl.dart' as _i1072;
 import 'package:admin/features/auth/domain/repo/auth_repo.dart' as _i745;
+import 'package:admin/features/auth/domain/use_cases/get_current_user_use_case.dart'
+    as _i214;
 import 'package:admin/features/auth/domain/use_cases/sign_in_use_case.dart'
     as _i482;
 import 'package:admin/features/auth/domain/use_cases/sign_out_use_case.dart'
@@ -316,6 +318,9 @@ extension GetItInjectableX on _i174.GetIt {
         updateBanner: gh<_i214.UpdateCollectionBannerUseCase>(),
       ),
     );
+    gh.lazySingleton<_i214.GetCurrentUserUseCase>(
+      () => _i214.GetCurrentUserUseCase(repo: gh<_i745.AuthRepo>()),
+    );
     gh.lazySingleton<_i482.SignInUseCase>(
       () => _i482.SignInUseCase(repo: gh<_i745.AuthRepo>()),
     );
@@ -349,6 +354,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i469.AuthCubit(
         signInUseCase: gh<_i482.SignInUseCase>(),
         signOutUseCase: gh<_i868.SignOutUseCase>(),
+        getCurrentUserUseCase: gh<_i214.GetCurrentUserUseCase>(),
       ),
     );
     gh.factory<_i267.ReportsCubit>(
