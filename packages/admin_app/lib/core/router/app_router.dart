@@ -44,26 +44,20 @@ final GoRouter appRouter = GoRouter(
       final role = sl<AuthCubit>().state.mapOrNull(
         authenticated: (s) => s.user.role,
       );
-
-      // Rehydration still in flight — guard sensitive routes until role is known.
-      if (role == null) {
+      if (role != null) {
         final path = state.fullPath ?? '';
-        if (path != AppRoutes.orders.path) return AppRoutes.orders.path;
-        return null;
-      }
-
-      final path = state.fullPath ?? '';
-      if (path.startsWith('/products') && !role.canAccessProducts) {
-        return AppRoutes.orders.path;
-      }
-      if (path == AppRoutes.storeConfig.path && !role.canAccessStoreConfig) {
-        return AppRoutes.orders.path;
-      }
-      if (path == AppRoutes.reports.path && !role.canAccessReports) {
-        return AppRoutes.orders.path;
-      }
-      if (path == AppRoutes.staff.path && !role.canManageStaff) {
-        return AppRoutes.orders.path;
+        if (path.startsWith('/products') && !role.canAccessProducts) {
+          return AppRoutes.orders.path;
+        }
+        if (path == AppRoutes.storeConfig.path && !role.canAccessStoreConfig) {
+          return AppRoutes.orders.path;
+        }
+        if (path == AppRoutes.reports.path && !role.canAccessReports) {
+          return AppRoutes.orders.path;
+        }
+        if (path == AppRoutes.staff.path && !role.canManageStaff) {
+          return AppRoutes.orders.path;
+        }
       }
     }
 

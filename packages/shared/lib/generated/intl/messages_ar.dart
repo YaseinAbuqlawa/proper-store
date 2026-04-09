@@ -64,9 +64,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addressSaved": MessageLookupByLibrary.simpleMessage(
       "تم حفظ العنوان بنجاح",
     ),
-    "adminAppSubtitle": MessageLookupByLibrary.simpleMessage(
-      "Proper Store Admin",
-    ),
     "allOrdersFilter": MessageLookupByLibrary.simpleMessage("الكل"),
     "apartmentLabel": MessageLookupByLibrary.simpleMessage("رقم الشقة"),
     "appTitle": MessageLookupByLibrary.simpleMessage("لوحة تحكم المتجر"),

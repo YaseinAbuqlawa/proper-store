@@ -1,5 +1,4 @@
 import 'package:admin/core/failures/app_failures.dart';
-import 'package:admin/core/helpers/app_consts.dart';
 import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,8 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _submit() {
     if (!(_formKey.currentState?.validate() ?? false)) return;
-    final email =
-        '${usernameController.text.trim()}${AppConsts.staffEmailDomain}';
+    final email = '${usernameController.text.trim()}@properstaff.com';
     context.read<AuthCubit>().signIn(
       email: email,
       password: passwordController.text,
@@ -171,7 +169,7 @@ class _Logo extends StatelessWidget {
         const SizedBox(height: 16),
         Text(S.of(context).dashboardTitle, style: AppTextStyles.heroHeadline),
         const SizedBox(height: 4),
-        Text(S.of(context).adminAppSubtitle, style: AppTextStyles.sectionTitle),
+        const Text('Proper Store Admin', style: AppTextStyles.sectionTitle),
       ],
     );
   }

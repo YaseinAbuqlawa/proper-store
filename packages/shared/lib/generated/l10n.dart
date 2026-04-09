@@ -154,16 +154,6 @@ class S {
     );
   }
 
-  /// `Proper Store Admin`
-  String get adminAppSubtitle {
-    return Intl.message(
-      'Proper Store Admin',
-      name: 'adminAppSubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Enter your email`
   String get emailValidation {
     return Intl.message(

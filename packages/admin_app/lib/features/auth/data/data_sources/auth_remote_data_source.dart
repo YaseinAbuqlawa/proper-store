@@ -46,22 +46,5 @@ class AuthRemoteDataSource {
     return StaffModel(uid: user.uid, email: user.email ?? '', role: role);
   }
 
-  Future<StaffModel?> getCurrentUser() async {
-    final user = auth.currentUser;
-    if (user == null) return null;
-
-    final idTokenResult = await user.getIdTokenResult().timeout(
-      const Duration(seconds: 5),
-      onTimeout: () {
-        throw FirebaseAuthException(code: 'timeout');
-      },
-    );
-    final roleString = idTokenResult.claims?['role'] as String?;
-    final role = StaffRole.fromString(roleString);
-    if (role == null) return null;
-
-    return StaffModel(uid: user.uid, email: user.email ?? '', role: role);
-  }
-
   Future<void> signOut() => auth.signOut();
 }

@@ -65,9 +65,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addressSaved": MessageLookupByLibrary.simpleMessage(
       "Address saved successfully",
     ),
-    "adminAppSubtitle": MessageLookupByLibrary.simpleMessage(
-      "Proper Store Admin",
-    ),
     "allOrdersFilter": MessageLookupByLibrary.simpleMessage("All"),
     "apartmentLabel": MessageLookupByLibrary.simpleMessage("Apartment number"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Store Admin Dashboard"),
