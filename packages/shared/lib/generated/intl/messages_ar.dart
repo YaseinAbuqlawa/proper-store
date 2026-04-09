@@ -96,6 +96,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cannotDeleteLastSuperAdmin": MessageLookupByLibrary.simpleMessage(
       "لا يمكن حذف آخر مدير عام. قم بتعيين مدير عام آخر أولاً.",
     ),
+    "cannotDeleteYourself": MessageLookupByLibrary.simpleMessage(
+      "لا يمكنك حذف حسابك الخاص.",
+    ),
     "cartTitle": MessageLookupByLibrary.simpleMessage("السلة"),
     "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
     "categoriesEmpty": MessageLookupByLibrary.simpleMessage(

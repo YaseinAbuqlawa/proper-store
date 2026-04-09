@@ -70,7 +70,7 @@ class StaffCubit extends Cubit<StaffState> {
     final result = await _changeRole(uid: uid, role: role);
     result.fold(
       (failure) => _emitMutationFailure(failure, currentItems),
-      (_) => loadStaff(),
+      (_) => _emitMutationSuccess(StaffMutationSuccessType.roleChanged, currentItems),
     );
   }
 
@@ -83,7 +83,7 @@ class StaffCubit extends Cubit<StaffState> {
     final result = await _changePassword(uid: uid, newPassword: newPassword);
     result.fold(
       (failure) => _emitMutationFailure(failure, currentItems),
-      (_) => loadStaff(),
+      (_) => _emitMutationSuccess(StaffMutationSuccessType.passwordChanged, currentItems),
     );
   }
 
@@ -95,8 +95,16 @@ class StaffCubit extends Cubit<StaffState> {
     final result = await _deleteStaff(uid: uid, currentStaff: currentItems);
     result.fold(
       (failure) => _emitMutationFailure(failure, currentItems),
-      (_) => loadStaff(),
+      (_) => _emitMutationSuccess(StaffMutationSuccessType.deleted, currentItems),
     );
+  }
+
+  void _emitMutationSuccess(StaffMutationSuccessType type, List<StaffListItem>? currentItems) {
+    emit(StaffState.mutationSuccess(
+      type: type,
+      items: currentItems ?? const [],
+    ));
+    loadStaff();
   }
 
   void _emitMutationFailure(ServerFailure failure, List<StaffListItem>? currentItems) {

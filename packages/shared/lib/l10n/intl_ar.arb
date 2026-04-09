@@ -618,6 +618,9 @@
   "cannotDeleteLastSuperAdmin": "لا يمكن حذف آخر مدير عام. قم بتعيين مدير عام آخر أولاً.",
   "@cannotDeleteLastSuperAdmin": {},
 
+  "cannotDeleteYourself": "لا يمكنك حذف حسابك الخاص.",
+  "@cannotDeleteYourself": {},
+
   "outOfStockLabel": "نفذ المخزون",
   "@outOfStockLabel": {},
 

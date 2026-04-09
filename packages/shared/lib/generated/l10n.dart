@@ -2649,6 +2649,16 @@ class S {
     );
   }
 
+  /// `You cannot delete your own account.`
+  String get cannotDeleteYourself {
+    return Intl.message(
+      'You cannot delete your own account.',
+      name: 'cannotDeleteYourself',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Out of Stock`
   String get outOfStockLabel {
     return Intl.message(

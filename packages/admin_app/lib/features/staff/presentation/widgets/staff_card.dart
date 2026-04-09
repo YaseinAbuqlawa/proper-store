@@ -1,4 +1,6 @@
+import 'package:admin/core/widgets/admin_button.dart';
 import 'package:admin/features/auth/domain/entities/staff_role.dart';
+import 'package:admin/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:admin/features/staff/domain/entities/staff_list_item.dart';
 import 'package:admin/features/staff/presentation/cubit/staff_cubit.dart';
 import 'package:admin/features/staff/presentation/widgets/change_password_dialog.dart';
@@ -139,6 +141,25 @@ class _StaffCardState extends State<StaffCard> {
 
   void _confirmDelete(BuildContext context) {
     final s = S.of(context);
+    final currentUid = context.read<AuthCubit>().state.whenOrNull(
+      authenticated: (user) => user.uid,
+    );
+    if (currentUid != null && widget.item.uid == currentUid) {
+      showDialog<void>(
+        context: context,
+        builder: (dialogContext) => AlertDialog(
+          title: Text(s.deleteStaffBtn),
+          content: Text(s.cannotDeleteYourself),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text(s.cancelBtn),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
     if (widget.item.role == StaffRole.superAdmin) {
       final items =
           context.read<StaffCubit>().state.whenOrNull(
@@ -151,12 +172,12 @@ class _StaffCardState extends State<StaffCard> {
       if (superAdminCount <= 1) {
         showDialog<void>(
           context: context,
-          builder: (_) => AlertDialog(
+          builder: (dialogContext) => AlertDialog(
             title: Text(s.deleteStaffBtn),
             content: Text(s.cannotDeleteLastSuperAdmin),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(dialogContext).pop(),
                 child: Text(s.cancelBtn),
               ),
             ],
@@ -167,23 +188,20 @@ class _StaffCardState extends State<StaffCard> {
     }
     showDialog<void>(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: Text(s.deleteStaffBtn),
         content: Text(s.deleteStaffConfirm),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(s.cancelBtn),
+          AdminButton.secondary(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            label: s.cancelBtn,
           ),
-          TextButton(
+          AdminButton.primary(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(dialogContext).pop();
               context.read<StaffCubit>().deleteStaff(widget.item.uid);
             },
-            child: Text(
-              s.deleteStaffBtn,
-              style: const TextStyle(color: AppColors.errorRed),
-            ),
+            label: s.deleteStaffBtn,
           ),
         ],
       ),
