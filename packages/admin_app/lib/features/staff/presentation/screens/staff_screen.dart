@@ -48,6 +48,20 @@ class _StaffView extends StatelessWidget {
                 ),
               );
             },
+            mutationSuccess: (type, _) {
+              final s = S.of(context);
+              final text = switch (type) {
+                StaffMutationSuccessType.roleChanged => s.staffRoleChangedSuccess,
+                StaffMutationSuccessType.passwordChanged => s.staffPasswordChangedSuccess,
+                StaffMutationSuccessType.deleted => s.staffDeletedSuccess,
+              };
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(text),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            },
           );
         },
         builder: (context, state) {
@@ -56,6 +70,7 @@ class _StaffView extends StatelessWidget {
             loading: () => const Center(child: CircularProgressIndicator()),
             loaded: (items) => _buildList(context, s, items),
             mutationFailure: (_, items) => _buildList(context, s, items),
+            mutationSuccess: (_, items) => _buildList(context, s, items),
             failure: (failure) => Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

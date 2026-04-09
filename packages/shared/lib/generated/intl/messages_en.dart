@@ -103,6 +103,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cannotDeleteLastSuperAdmin": MessageLookupByLibrary.simpleMessage(
       "Cannot delete the last super admin. Assign another super admin first.",
     ),
+    "cannotDeleteYourself": MessageLookupByLibrary.simpleMessage(
+      "You cannot delete your own account.",
+    ),
     "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
     "categoriesEmpty": MessageLookupByLibrary.simpleMessage(

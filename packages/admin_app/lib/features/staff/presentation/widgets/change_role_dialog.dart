@@ -58,7 +58,10 @@ class _ChangeRoleDialogState extends State<ChangeRoleDialog> {
           onPressed: () => Navigator.of(context).pop(),
           label: s.cancelBtn,
         ),
-        AdminButton.primary(onPressed: _submit, label: s.changeRoleBtn),
+        AdminButton.primary(
+          onPressed: _selectedRole == widget.item.role ? null : _submit,
+          label: s.changeRoleBtn,
+        ),
       ],
     );
   }

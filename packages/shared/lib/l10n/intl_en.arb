@@ -618,6 +618,9 @@
   "cannotDeleteLastSuperAdmin": "Cannot delete the last super admin. Assign another super admin first.",
   "@cannotDeleteLastSuperAdmin": {},
 
+  "cannotDeleteYourself": "You cannot delete your own account.",
+  "@cannotDeleteYourself": {},
+
   "outOfStockLabel": "Out of Stock",
   "@outOfStockLabel": {},
 

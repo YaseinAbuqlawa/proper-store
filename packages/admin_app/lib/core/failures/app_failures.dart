@@ -40,6 +40,8 @@ extension ServerFailureExt on ServerFailure {
         return s.firebase_error_unimplemented;
       // TODO(l10n): restore specific auth error cases after running Flutter Intl gen
       // (keys are in ARBs but not yet in generated l10n.dart)
+      case 'last-superAdmin':
+        return s.cannotDeleteLastSuperAdmin;
       case 'unexpected-error':
         return s.firebase_error_unexpected;
       default:
