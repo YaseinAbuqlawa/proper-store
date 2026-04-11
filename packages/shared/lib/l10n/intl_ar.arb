@@ -285,6 +285,7 @@
   "orderStatusShipped": "تم الشحن",
   "orderStatusDelivered": "تم التسليم",
   "orderStatusCancelled": "ملغي",
+  "orderStatusRefunded": "تم الاسترداد",
   "orderTotalLabel": "الإجمالي",
   "paymentCOD": "الدفع عند الاستلام",
   "orderNumberLabel": "رقم الطلب",

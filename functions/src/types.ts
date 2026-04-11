@@ -18,6 +18,7 @@ export interface SpenderEntry {
   name: string;
   totalSpent: number;
   orderCount: number;
+  refundCount?: number;
 }
 
 export interface SellingEntry {

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:proper_store_shared/helpers/app_consts.dart';
 import 'package:proper_store_shared/helpers/cart_item_normalizer.dart';
 import 'package:proper_store_shared/models/order_model.dart';
@@ -20,10 +19,9 @@ class OrdersRemoteDataSource {
   });
 
   Future<String> createOrder({required OrderModel order}) async {
-    final callable = functions.httpsCallable('onOrderCreated');
+    final callable = functions.httpsCallable('createOrder');
     final result = await callable.call({
       'orderId': order.id,
-      'customerId': order.customerId,
       'customerName': auth.currentUser?.displayName ?? '',
       'items': order.products
           .map(
@@ -44,7 +42,6 @@ class OrdersRemoteDataSource {
       'shippingCost': order.shippingCost,
       'shippingAddress': order.shippingAddress.toJson(),
       'paymentMethod': order.paymentMethod,
-      'createdAt': order.createdAt,
     });
     return result.data['orderId'] as String;
   }
@@ -75,9 +72,7 @@ class OrdersRemoteDataSource {
         'createdAt': createdAtMs,
         'products': (data['products'] as List<dynamic>? ?? [])
             .map(
-              (e) => normalizeCartItemJson(
-                Map<String, dynamic>.from(e as Map),
-              ),
+              (e) => normalizeCartItemJson(Map<String, dynamic>.from(e as Map)),
             )
             .toList(),
       });

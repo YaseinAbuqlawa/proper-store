@@ -1414,6 +1414,16 @@ class S {
     );
   }
 
+  /// `Refunded`
+  String get orderStatusRefunded {
+    return Intl.message(
+      'Refunded',
+      name: 'orderStatusRefunded',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Total`
   String get orderTotalLabel {
     return Intl.message('Total', name: 'orderTotalLabel', desc: '', args: []);

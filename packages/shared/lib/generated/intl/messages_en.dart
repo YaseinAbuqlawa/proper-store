@@ -398,6 +398,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orderStatusConfirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
     "orderStatusDelivered": MessageLookupByLibrary.simpleMessage("Delivered"),
     "orderStatusPending": MessageLookupByLibrary.simpleMessage("Pending"),
+    "orderStatusRefunded": MessageLookupByLibrary.simpleMessage("Refunded"),
     "orderStatusShipped": MessageLookupByLibrary.simpleMessage("Shipped"),
     "orderStatusTitle": MessageLookupByLibrary.simpleMessage("Order Status"),
     "orderStatusUpdateFailed": MessageLookupByLibrary.simpleMessage(

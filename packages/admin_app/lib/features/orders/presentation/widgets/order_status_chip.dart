@@ -11,11 +11,12 @@ class OrderStatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = S.of(context);
     final (label, color) = switch (status) {
-      OrderStatus.pending   => (l.orderStatusPending,   Colors.amber),
+      OrderStatus.pending => (l.orderStatusPending, Colors.amber),
       OrderStatus.confirmed => (l.orderStatusConfirmed, Colors.blue),
-      OrderStatus.shipped   => (l.orderStatusShipped,   Colors.orange),
+      OrderStatus.shipped => (l.orderStatusShipped, Colors.orange),
       OrderStatus.delivered => (l.orderStatusDelivered, Colors.green),
       OrderStatus.cancelled => (l.orderStatusCancelled, Colors.red),
+      OrderStatus.refunded => (l.orderStatusRefunded, Colors.blueGrey),
     };
 
     return Chip(

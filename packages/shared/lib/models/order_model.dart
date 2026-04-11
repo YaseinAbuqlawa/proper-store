@@ -6,7 +6,7 @@ import 'cart_item_model.dart';
 part 'order_model.freezed.dart';
 part 'order_model.g.dart';
 
-enum OrderStatus { pending, confirmed, shipped, delivered, cancelled }
+enum OrderStatus { pending, confirmed, shipped, delivered, cancelled, refunded }
 
 OrderStatus _statusFromJson(dynamic value) => OrderStatus.values.firstWhere(
   (s) => s.name == value?.toString(),
