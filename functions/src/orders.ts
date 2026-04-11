@@ -21,7 +21,7 @@ const F = admin.firestore.FieldValue;
 const VALID_TRANSITIONS: Record<string, string[]> = {
   pending: ["confirmed", "cancelled"],
   confirmed: ["shipped", "cancelled"],
-  shipped: ["delivered"],
+  shipped: ["delivered", "refunded"],
   delivered: ["refunded"],
 };
 
