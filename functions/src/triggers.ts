@@ -8,7 +8,7 @@ const F = admin.firestore.FieldValue;
 
 export const onUserCreated = functions.firestore
   .document("customers/{uid}")
-  .onCreate(async (snap) => {
+  .onCreate(async (snap, context) => {
     const uid = snap.id;
 
     // Fetch the Auth user to inspect the sign-in provider.
@@ -29,30 +29,41 @@ export const onUserCreated = functions.firestore
       return;
     }
 
-    await db.doc(STATS_DOC).set(
-      {
+    // Idempotency guard
+    const processedRef = db.doc(`processedEvents/${context.eventId}`);
+    await db.runTransaction(async (tx) => {
+      const processed = await tx.get(processedRef);
+      if (processed.exists) return;
+
+      tx.set(db.doc(STATS_DOC), {
         totalCustomers: F.increment(1),
         lastUpdatedAt: F.serverTimestamp(),
-      },
-      { merge: true }
-    );
+      }, { merge: true });
+
+      tx.set(processedRef, { processedAt: F.serverTimestamp() });
+    });
   });
 
 export const onProductUpdated = functions.firestore
   .document("products/{productId}")
-  .onUpdate(async (change) => {
+  .onUpdate(async (change, context) => {
     const before = change.before.data();
     const after = change.after.data();
 
     if (before.hasOutOfStockVariants === after.hasOutOfStockVariants) return;
 
     const delta = after.hasOutOfStockVariants ? 1 : -1;
+    const processedRef = db.doc(`processedEvents/${context.eventId}`);
 
-    await db.doc(STATS_DOC).set(
-      {
+    await db.runTransaction(async (tx) => {
+      const processed = await tx.get(processedRef);
+      if (processed.exists) return;
+
+      tx.set(db.doc(STATS_DOC), {
         outOfStockCount: F.increment(delta),
         lastUpdatedAt: F.serverTimestamp(),
-      },
-      { merge: true }
-    );
+      }, { merge: true });
+
+      tx.set(processedRef, { processedAt: F.serverTimestamp() });
+    });
   });

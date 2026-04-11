@@ -10,7 +10,7 @@ import {
   upsertTopSelling,
   validateStock,
   buildVariantStockUpdates,
-  incrementSpenderRefundCount,
+  rollbackSpenderOnRefund,
 } from "./helpers";
 import { OrderItem, SellingEntry, SpenderEntry } from "./types";
 
@@ -125,15 +125,18 @@ export const createOrder = functions.https.onCall(async (data, context) => {
 
     // ── Update product stock ────────────────────────────────────────────────
     for (let i = 0; i < productIds.length; i++) {
+      const productItems = items.filter((x) => x.productId === productIds[i]);
+      const totalQtyForProduct = productItems.reduce((sum, x) => sum + x.quantity, 0);
       const { variantUpdates, oosKeys, totalStockDelta } = buildVariantStockUpdates(
         productSnaps[i].data()!,
-        items.filter((x) => x.productId === productIds[i])
+        productItems
       );
       tx.update(productRefs[i], {
         ...variantUpdates,
         outOfStockVariants: oosKeys,
         hasOutOfStockVariants: oosKeys.length > 0,
         totalStock: F.increment(totalStockDelta),
+        soldQuantity: F.increment(totalQtyForProduct),
       });
     }
 
@@ -157,224 +160,235 @@ export const createOrder = functions.https.onCall(async (data, context) => {
   return { orderId };
 });
 
-export const onOrderUpdated = functions.firestore
-  .document("orders/{orderId}")
-  .onUpdate(async (change) => {
-    const before = change.before.data();
-    const after = change.after.data();
+export const updateOrderStatus = functions.https.onCall(async (data, context) => {
+  // ── Auth: staff roles only ──────────────────────────────────────────────────
+  const role = context.auth?.token?.role as string | undefined;
+  if (!context.auth || !["superAdmin", "admin", "cs"].includes(role ?? "")) {
+    throw new functions.https.HttpsError("permission-denied", "Insufficient role.");
+  }
 
-    if (before.status === after.status) return;
+  const { orderId, newStatus } = data as { orderId: string; newStatus: string };
 
-    const oldStatus: string = before.status ?? "pending";
-    const newStatus: string = after.status ?? "pending";
+  const orderRef = db.doc(`orders/${orderId}`);
+  const statsRef = db.doc(STATS_DOC);
 
-    // ── Enforce state machine ────────────────────────────────────────────────
-    const allowed = VALID_TRANSITIONS[oldStatus] ?? [];
-    if (!allowed.includes(newStatus)) return;
+  // ── Cancellation ─────────────────────────────────────────────────────────────
+  if (newStatus === "cancelled") {
+    await db.runTransaction(async (tx) => {
+      // Read phase
+      const orderSnap = await tx.get(orderRef);
+      const statsSnap = await tx.get(statsRef);
 
-    const statsRef = db.doc(STATS_DOC);
+      if (!orderSnap.exists) throw new functions.https.HttpsError("not-found", "Order not found.");
+      const orderData = orderSnap.data()!;
+      const oldStatus: string = orderData.status ?? "pending";
 
-    // ── Cancellation ─────────────────────────────────────────────────────────
-    if (newStatus === "cancelled") {
-      const revenue: number = (before.netTotal ?? 0) + (before.shippingCost ?? 0);
-      const customerId: string = before.customerId ?? "";
-      const cancelledProducts: Array<{
-        productId: string;
-        variantKey: string;
-        quantity: number;
-      }> = before.products ?? [];
+      // Validate transition (natural idempotency)
+      const allowed = VALID_TRANSITIONS[oldStatus] ?? [];
+      if (!allowed.includes(newStatus)) {
+        throw new functions.https.HttpsError("failed-precondition", `Invalid transition: ${oldStatus} → ${newStatus}`);
+      }
 
-      // Use the order's original date keys — not today's date.
-      const orderDate = before.createdAt?.toDate?.() ?? new Date();
+      const revenue: number = (orderData.netTotal ?? 0) + (orderData.shippingCost ?? 0);
+      const customerId: string = orderData.customerId ?? "";
+      const cancelledProducts: Array<{ productId: string; variantKey: string; quantity: number }> =
+        orderData.products ?? [];
+
+      // Use order's original date keys (not today)
+      const orderDate = orderData.createdAt?.toDate?.() ?? new Date();
       const orderDayKey = orderDate.toISOString().slice(0, 10);
       const orderMonthKey = orderDate.toISOString().slice(0, 7);
 
       const productIds = [...new Set(cancelledProducts.map((p) => p.productId))];
       const productRefs = productIds.map((id) => db.doc(`products/${id}`));
+      const productSnaps = await Promise.all(productRefs.map((r) => tx.get(r)));
 
-      await db.runTransaction(async (tx) => {
-        const statsSnap = await tx.get(statsRef);
-        const productSnaps = await Promise.all(productRefs.map((r) => tx.get(r)));
-        const statsData = statsSnap.data() ?? {};
+      const statsData = statsSnap.data() ?? {};
+      const newDaily = pruneMap(statsData.dailyRevenue ?? {}, orderDayKey, -revenue, MAX_DAILY_DAYS);
+      const newMonthly = pruneMap(statsData.monthlyRevenue ?? {}, orderMonthKey, -revenue, MAX_MONTHLY_MONTHS);
 
-        const newDaily = pruneMap(statsData.dailyRevenue ?? {}, orderDayKey, -revenue, MAX_DAILY_DAYS);
-        const newMonthly = pruneMap(statsData.monthlyRevenue ?? {}, orderMonthKey, -revenue, MAX_MONTHLY_MONTHS);
-
-        // ── Roll back topSpenders ───────────────────────────────────────────
-        const existingSpenders: SpenderEntry[] = statsData.topSpenders ?? [];
-        const updatedSpenders = existingSpenders
-          .map((s) => {
-            if (s.customerId !== customerId) return s;
-            return {
-              ...s,
-              totalSpent: Math.max(0, s.totalSpent - revenue),
-              orderCount: Math.max(0, (s.orderCount ?? 0) - 1),
-            };
-          })
-          .filter((s) => s.orderCount > 0)
-          .sort((a, b) => b.totalSpent - a.totalSpent)
-          .slice(0, 10);
-
-        // ── Roll back topSelling ────────────────────────────────────────────
-        const existingSelling: SellingEntry[] = statsData.topSelling ?? [];
-        const sellingCopy = [...existingSelling];
-        for (const item of cancelledProducts) {
-          const entryId = `${item.productId}_${item.variantKey}`;
-          const idx = sellingCopy.findIndex((p) => p.id === entryId);
-          if (idx >= 0) {
-            sellingCopy[idx] = {
-              ...sellingCopy[idx],
-              totalSold: Math.max(0, sellingCopy[idx].totalSold - item.quantity),
-            };
-          }
-        }
-        const updatedSelling = sellingCopy
-          .filter((p) => p.totalSold > 0)
-          .sort((a, b) => b.totalSold - a.totalSold)
-          .slice(0, 10);
-
-        // ── Restore product stock ───────────────────────────────────────────
-        for (let i = 0; i < productIds.length; i++) {
-          if (!productSnaps[i].exists) continue;
-          const productData = productSnaps[i].data()!;
-          const variants: Record<string, { stockQuantity: number }> = {
-            ...productData.variants,
+      // Roll back topSpenders
+      const existingSpenders: SpenderEntry[] = statsData.topSpenders ?? [];
+      const updatedSpenders = existingSpenders
+        .map((s) => {
+          if (s.customerId !== customerId) return s;
+          return {
+            ...s,
+            totalSpent: Math.max(0, s.totalSpent - revenue),
+            orderCount: Math.max(0, (s.orderCount ?? 0) - 1),
           };
-          const variantUpdates: Record<string, unknown> = {};
-          let totalStockDelta = 0;
+        })
+        .filter((s) => s.orderCount > 0)
+        .sort((a, b) => b.totalSpent - a.totalSpent)
+        .slice(0, 10);
 
-          for (const item of cancelledProducts.filter((p) => p.productId === productIds[i])) {
-            const v = variants[item.variantKey];
-            if (!v) continue;
-            const restored = v.stockQuantity + item.quantity;
-            variantUpdates[`variants.${item.variantKey}.stockQuantity`] = restored;
-            variants[item.variantKey] = { ...v, stockQuantity: restored };
-            totalStockDelta += item.quantity;
-          }
+      // Roll back topSelling
+      const existingSelling: SellingEntry[] = statsData.topSelling ?? [];
+      const sellingCopy = [...existingSelling];
+      for (const item of cancelledProducts) {
+        const entryId = `${item.productId}_${item.variantKey}`;
+        const idx = sellingCopy.findIndex((p) => p.id === entryId);
+        if (idx >= 0) {
+          sellingCopy[idx] = {
+            ...sellingCopy[idx],
+            totalSold: Math.max(0, sellingCopy[idx].totalSold - item.quantity),
+          };
+        }
+      }
+      const updatedSelling = sellingCopy
+        .filter((p) => p.totalSold > 0)
+        .sort((a, b) => b.totalSold - a.totalSold)
+        .slice(0, 10);
 
-          const oosKeys = Object.entries(variants)
-            .filter(([, v]) => v.stockQuantity <= 0)
-            .map(([key]) => key);
+      // Restore product stock + roll back soldQuantity
+      for (let i = 0; i < productIds.length; i++) {
+        if (!productSnaps[i].exists) continue;
+        const productData = productSnaps[i].data()!;
+        const variants: Record<string, { stockQuantity: number }> = { ...productData.variants };
+        const variantUpdates: Record<string, unknown> = {};
+        let totalStockDelta = 0;
+        let totalQtyForProduct = 0;
 
-          tx.update(productRefs[i], {
-            ...variantUpdates,
-            outOfStockVariants: oosKeys,
-            hasOutOfStockVariants: oosKeys.length > 0,
-            totalStock: F.increment(totalStockDelta),
-          });
+        for (const item of cancelledProducts.filter((p) => p.productId === productIds[i])) {
+          const v = variants[item.variantKey];
+          if (!v) continue;
+          const restored = v.stockQuantity + item.quantity;
+          variantUpdates[`variants.${item.variantKey}.stockQuantity`] = restored;
+          variants[item.variantKey] = { ...v, stockQuantity: restored };
+          totalStockDelta += item.quantity;
+          totalQtyForProduct += item.quantity;
         }
 
-        tx.set(
-          statsRef,
-          {
-            totalRevenue: F.increment(-revenue),
-            totalOrders: F.increment(-1),
-            ordersByStatus: {
-              [oldStatus]: F.increment(-1),
-              [newStatus]: F.increment(1),
-            },
-            dailyRevenue: newDaily,
-            monthlyRevenue: newMonthly,
-            topSpenders: updatedSpenders,
-            topSelling: updatedSelling,
-            lastUpdatedAt: F.serverTimestamp(),
-          },
-          { merge: true }
-        );
-      });
-      return;
-    }
+        const oosKeys = Object.entries(variants)
+          .filter(([, v]) => v.stockQuantity <= 0)
+          .map(([key]) => key);
 
-    // ── Refund ───────────────────────────────────────────────────────────────
-    if (newStatus === "refunded") {
-      const revenue: number = (before.netTotal ?? 0) + (before.shippingCost ?? 0);
-      const customerId: string = before.customerId ?? "";
-      const refundedProducts: Array<{
-        productId: string;
-        variantKey: string;
-        quantity: number;
-      }> = before.products ?? [];
+        tx.update(productRefs[i], {
+          ...variantUpdates,
+          outOfStockVariants: oosKeys,
+          hasOutOfStockVariants: oosKeys.length > 0,
+          totalStock: F.increment(totalStockDelta),
+          soldQuantity: F.increment(-totalQtyForProduct),
+        });
+      }
+
+      // Write stats + order status
+      tx.set(statsRef, {
+        totalRevenue: F.increment(-revenue),
+        totalOrders: F.increment(-1),
+        ordersByStatus: { [oldStatus]: F.increment(-1), [newStatus]: F.increment(1) },
+        dailyRevenue: newDaily,
+        monthlyRevenue: newMonthly,
+        topSpenders: updatedSpenders,
+        topSelling: updatedSelling,
+        lastUpdatedAt: F.serverTimestamp(),
+      }, { merge: true });
+
+      tx.update(orderRef, { status: newStatus });
+    });
+
+    return { success: true };
+  }
+
+  // ── Refund ────────────────────────────────────────────────────────────────────
+  if (newStatus === "refunded") {
+    await db.runTransaction(async (tx) => {
+      // Read phase
+      const orderSnap = await tx.get(orderRef);
+      const statsSnap = await tx.get(statsRef);
+
+      if (!orderSnap.exists) throw new functions.https.HttpsError("not-found", "Order not found.");
+      const orderData = orderSnap.data()!;
+      const oldStatus: string = orderData.status ?? "pending";
+
+      const allowed = VALID_TRANSITIONS[oldStatus] ?? [];
+      if (!allowed.includes(newStatus)) {
+        throw new functions.https.HttpsError("failed-precondition", `Invalid transition: ${oldStatus} → ${newStatus}`);
+      }
+
+      const revenue: number = (orderData.netTotal ?? 0) + (orderData.shippingCost ?? 0);
+      const customerId: string = orderData.customerId ?? "";
+      const refundedProducts: Array<{ productId: string; variantKey: string; quantity: number }> =
+        orderData.products ?? [];
 
       const productIds = [...new Set(refundedProducts.map((p) => p.productId))];
       const productRefs = productIds.map((id) => db.doc(`products/${id}`));
+      const productSnaps = await Promise.all(productRefs.map((r) => tx.get(r)));
+
+      const statsData = statsSnap.data() ?? {};
       const customerRef = db.doc(`customers/${customerId}`);
 
-      await db.runTransaction(async (tx) => {
-        const statsSnap = await tx.get(statsRef);
-        const productSnaps = await Promise.all(productRefs.map((r) => tx.get(r)));
-        const statsData = statsSnap.data() ?? {};
+      // Roll back topSpenders totalSpent + increment refundCount
+      const updatedSpenders = rollbackSpenderOnRefund(statsData.topSpenders ?? [], customerId, revenue);
 
-        // ── Update topSpenders refundCount ─────────────────────────────────
-        const updatedSpenders = incrementSpenderRefundCount(
-          statsData.topSpenders ?? [],
-          customerId
-        );
+      // Restore product stock + increment refundedQuantity
+      for (let i = 0; i < productIds.length; i++) {
+        if (!productSnaps[i].exists) continue;
+        const productData = productSnaps[i].data()!;
+        const variants: Record<string, { stockQuantity: number }> = { ...productData.variants };
+        const variantUpdates: Record<string, unknown> = {};
+        let totalStockDelta = 0;
+        let totalQtyForProduct = 0;
 
-        // ── Restore product stock ──────────────────────────────────────────
-        for (let i = 0; i < productIds.length; i++) {
-          if (!productSnaps[i].exists) continue;
-          const productData = productSnaps[i].data()!;
-          const variants: Record<string, { stockQuantity: number }> = {
-            ...productData.variants,
-          };
-          const variantUpdates: Record<string, unknown> = {};
-          let totalStockDelta = 0;
-
-          for (const item of refundedProducts.filter((p) => p.productId === productIds[i])) {
-            const v = variants[item.variantKey];
-            if (!v) continue;
-            const restored = v.stockQuantity + item.quantity;
-            variantUpdates[`variants.${item.variantKey}.stockQuantity`] = restored;
-            variants[item.variantKey] = { ...v, stockQuantity: restored };
-            totalStockDelta += item.quantity;
-          }
-
-          const oosKeys = Object.entries(variants)
-            .filter(([, v]) => v.stockQuantity <= 0)
-            .map(([key]) => key);
-
-          tx.update(productRefs[i], {
-            ...variantUpdates,
-            outOfStockVariants: oosKeys,
-            hasOutOfStockVariants: oosKeys.length > 0,
-            totalStock: F.increment(totalStockDelta),
-          });
+        for (const item of refundedProducts.filter((p) => p.productId === productIds[i])) {
+          const v = variants[item.variantKey];
+          if (!v) continue;
+          const restored = v.stockQuantity + item.quantity;
+          variantUpdates[`variants.${item.variantKey}.stockQuantity`] = restored;
+          variants[item.variantKey] = { ...v, stockQuantity: restored };
+          totalStockDelta += item.quantity;
+          totalQtyForProduct += item.quantity;
         }
 
-        // ── Update customer refundCount ─────────────────────────────────────
-        tx.set(
-          customerRef,
-          { refundCount: F.increment(1) },
-          { merge: true }
-        );
+        const oosKeys = Object.entries(variants)
+          .filter(([, v]) => v.stockQuantity <= 0)
+          .map(([key]) => key);
 
-        tx.set(
-          statsRef,
-          {
-            totalRefunded: F.increment(revenue),
-            refundedOrders: F.increment(1),
-            ordersByStatus: {
-              [oldStatus]: F.increment(-1),
-              [newStatus]: F.increment(1),
-            },
-            topSpenders: updatedSpenders,
-            lastUpdatedAt: F.serverTimestamp(),
-          },
-          { merge: true }
-        );
-      });
-      return;
+        tx.update(productRefs[i], {
+          ...variantUpdates,
+          outOfStockVariants: oosKeys,
+          hasOutOfStockVariants: oosKeys.length > 0,
+          totalStock: F.increment(totalStockDelta),
+          refundedQuantity: F.increment(totalQtyForProduct),
+        });
+      }
+
+      // Writes: customer refundCount, stats, order status
+      tx.set(customerRef, { refundCount: F.increment(1) }, { merge: true });
+
+      tx.set(statsRef, {
+        totalRefunded: F.increment(revenue),
+        refundedOrders: F.increment(1),
+        ordersByStatus: { [oldStatus]: F.increment(-1), [newStatus]: F.increment(1) },
+        topSpenders: updatedSpenders,
+        lastUpdatedAt: F.serverTimestamp(),
+      }, { merge: true });
+
+      tx.update(orderRef, { status: newStatus });
+    });
+
+    return { success: true };
+  }
+
+  // ── Other valid transitions (confirmed, shipped, delivered) ───────────────────
+  await db.runTransaction(async (tx) => {
+    const orderSnap = await tx.get(orderRef);
+
+    if (!orderSnap.exists) throw new functions.https.HttpsError("not-found", "Order not found.");
+    const oldStatus: string = orderSnap.data()!.status ?? "pending";
+
+    const allowed = VALID_TRANSITIONS[oldStatus] ?? [];
+    if (!allowed.includes(newStatus)) {
+      throw new functions.https.HttpsError("failed-precondition", `Invalid transition: ${oldStatus} → ${newStatus}`);
     }
 
-    // ── Other valid transitions: swap ordersByStatus counters only ────────────
-    await statsRef.set(
-      {
-        ordersByStatus: {
-          [oldStatus]: F.increment(-1),
-          [newStatus]: F.increment(1),
-        },
-        lastUpdatedAt: F.serverTimestamp(),
-      },
-      { merge: true }
-    );
+    tx.set(statsRef, {
+      ordersByStatus: { [oldStatus]: F.increment(-1), [newStatus]: F.increment(1) },
+      lastUpdatedAt: F.serverTimestamp(),
+    }, { merge: true });
+
+    tx.update(orderRef, { status: newStatus });
   });
+
+  return { success: true };
+});

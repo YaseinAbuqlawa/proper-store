@@ -187,17 +187,24 @@ export function buildVariantStockUpdates(
 }
 
 /**
- * Increments refundCount for a customer in the top spenders list.
- * Does NOT resort — refund count is a stat, not a ranking signal.
+ * Rolls back totalSpent and increments refundCount for a customer in the top spenders list.
  */
-export function incrementSpenderRefundCount(
+export function rollbackSpenderOnRefund(
   existing: SpenderEntry[],
-  customerId: string
+  customerId: string,
+  revenue: number
 ): SpenderEntry[] {
-  return existing.map((s) => {
-    if (s.customerId !== customerId) return s;
-    return { ...s, refundCount: (s.refundCount ?? 0) + 1 };
-  });
+  return existing
+    .map((s) => {
+      if (s.customerId !== customerId) return s;
+      return {
+        ...s,
+        totalSpent: Math.max(0, s.totalSpent - revenue),
+        refundCount: (s.refundCount ?? 0) + 1,
+      };
+    })
+    .sort((a, b) => b.totalSpent - a.totalSpent)
+    .slice(0, TOP_SPENDERS_LIMIT);
 }
 
 // ─── Revenue prep (used in pruneMap wrapper calls) ────────────────────────────

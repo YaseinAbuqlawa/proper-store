@@ -143,6 +143,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i59.FirebaseAuth>(() => externalModules.auth);
     gh.lazySingleton<_i457.FirebaseStorage>(() => externalModules.storage);
     gh.lazySingleton<_i809.FirebaseFunctions>(() => externalModules.functions);
+    gh.lazySingleton<_i837.OrdersRemoteDataSource>(
+      () => _i837.OrdersRemoteDataSource(
+        firestore: gh<_i974.FirebaseFirestore>(),
+        functions: gh<_i809.FirebaseFunctions>(),
+      ),
+    );
     gh.lazySingleton<_i499.StaffRemoteDataSource>(
       () => _i499.StaffRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
@@ -169,11 +175,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i213.CustomersRemoteDataSource>(
       () => _i213.CustomersRemoteDataSource(
-        firestore: gh<_i974.FirebaseFirestore>(),
-      ),
-    );
-    gh.lazySingleton<_i837.OrdersRemoteDataSource>(
-      () => _i837.OrdersRemoteDataSource(
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
     );

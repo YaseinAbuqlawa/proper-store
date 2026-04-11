@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/models/order_model.dart';
@@ -57,8 +56,11 @@ class UpdateStatusButton extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.change_circle_outlined,
-                        color: Colors.white, size: 20),
+                    const Icon(
+                      Icons.change_circle_outlined,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ],
                 ),
         ),
