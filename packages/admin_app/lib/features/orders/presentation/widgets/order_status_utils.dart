@@ -12,6 +12,15 @@ String orderStatusLabel(S l, OrderStatus status) => switch (status) {
   OrderStatus.refunded => l.orderStatusRefunded,
 };
 
+List<OrderStatus> validNextStatuses(OrderStatus current) => switch (current) {
+  OrderStatus.pending => [OrderStatus.confirmed, OrderStatus.cancelled],
+  OrderStatus.confirmed => [OrderStatus.shipped, OrderStatus.cancelled],
+  OrderStatus.shipped => [OrderStatus.delivered, OrderStatus.refunded],
+  OrderStatus.delivered => [OrderStatus.refunded],
+  OrderStatus.cancelled => [],
+  OrderStatus.refunded => [],
+};
+
 (Color, Color) orderStatusColors(OrderStatus status) => switch (status) {
   OrderStatus.pending => (AppColors.statusPendingBg, AppColors.statusPendingFg),
   OrderStatus.confirmed => (

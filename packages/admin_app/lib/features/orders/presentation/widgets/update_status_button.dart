@@ -6,6 +6,7 @@ import 'package:proper_store_shared/models/order_model.dart';
 
 import '../cubit/order_details_cubit.dart';
 import 'order_details_style.dart';
+import 'order_status_utils.dart';
 import 'status_bottom_sheet.dart';
 
 class UpdateStatusButton extends StatelessWidget {
@@ -20,6 +21,7 @@ class UpdateStatusButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (validNextStatuses(order.status).isEmpty) return const SizedBox.shrink();
     final l = S.of(context);
     return Container(
       decoration: orderDetailsCardDecoration(),
