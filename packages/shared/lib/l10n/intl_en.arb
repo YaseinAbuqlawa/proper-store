@@ -285,6 +285,7 @@
   "orderStatusShipped": "Shipped",
   "orderStatusDelivered": "Delivered",
   "orderStatusCancelled": "Cancelled",
+  "orderStatusRefunded": "Refunded",
   "orderTotalLabel": "Total",
   "paymentCOD": "Cash on delivery",
   "orderNumberLabel": "Order number",

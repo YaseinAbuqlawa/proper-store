@@ -186,6 +186,20 @@ export function buildVariantStockUpdates(
   return { variantUpdates, oosKeys: recalcVariantOos(variants), totalStockDelta };
 }
 
+/**
+ * Increments refundCount for a customer in the top spenders list.
+ * Does NOT resort — refund count is a stat, not a ranking signal.
+ */
+export function incrementSpenderRefundCount(
+  existing: SpenderEntry[],
+  customerId: string
+): SpenderEntry[] {
+  return existing.map((s) => {
+    if (s.customerId !== customerId) return s;
+    return { ...s, refundCount: (s.refundCount ?? 0) + 1 };
+  });
+}
+
 // ─── Revenue prep (used in pruneMap wrapper calls) ────────────────────────────
 
 export { MAX_DAILY_DAYS, MAX_MONTHLY_MONTHS };

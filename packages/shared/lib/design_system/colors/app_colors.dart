@@ -42,6 +42,8 @@ class AppColors {
   static const Color statusDeliveredFg = Color(0xFF2E7D32);
   static const Color statusCancelledBg = Color(0xFFFFDAD6);
   static const Color statusCancelledFg = Color(0xFF93000A);
+  static const Color statusRefundedBg = Color(0xFFE0E0E0);
+  static const Color statusRefundedFg = Color(0xFF424242);
 
   static const Gradient goldGradient = LinearGradient(
     colors: [Color(0xFFD4AF37), Color(0xFFF5E0A3), Color(0xFFC5A028)],
