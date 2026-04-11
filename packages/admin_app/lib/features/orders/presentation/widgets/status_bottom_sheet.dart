@@ -4,6 +4,7 @@ import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/models/order_model.dart';
 
 import 'order_details_style.dart';
+import 'order_status_utils.dart';
 
 class StatusBottomSheet extends StatelessWidget {
   final OrderStatus currentStatus;
@@ -15,9 +16,45 @@ class StatusBottomSheet extends StatelessWidget {
     required this.onStatusSelected,
   });
 
+  static ({IconData icon, Color iconBg, Color iconColor}) _styleFor(
+    OrderStatus status,
+  ) => switch (status) {
+    OrderStatus.confirmed => (
+      icon: Icons.sync,
+      iconBg: const Color(0xFFEFF6FF),
+      iconColor: const Color(0xFF2563EB),
+    ),
+    OrderStatus.shipped => (
+      icon: Icons.local_shipping_outlined,
+      iconBg: const Color(0xFFFFFBEB),
+      iconColor: const Color(0xFFD97706),
+    ),
+    OrderStatus.delivered => (
+      icon: Icons.check_circle_outline,
+      iconBg: const Color(0xFFECFDF5),
+      iconColor: const Color(0xFF059669),
+    ),
+    OrderStatus.cancelled => (
+      icon: Icons.cancel_outlined,
+      iconBg: const Color(0xFFFEF2F2),
+      iconColor: const Color(0xFFDC2626),
+    ),
+    OrderStatus.refunded => (
+      icon: Icons.currency_exchange,
+      iconBg: const Color(0xFFF5F3FF),
+      iconColor: const Color(0xFF7C3AED),
+    ),
+    OrderStatus.pending => (
+      icon: Icons.hourglass_empty,
+      iconBg: const Color(0xFFFFF7ED),
+      iconColor: const Color(0xFFEA580C),
+    ),
+  };
+
   @override
   Widget build(BuildContext context) {
     final l = S.of(context);
+    final nextStatuses = validNextStatuses(currentStatus);
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
@@ -57,40 +94,17 @@ class StatusBottomSheet extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
-              children: [
-                _StatusOption(
-                  label: l.orderStatusConfirmed,
-                  iconBg: const Color(0xFFEFF6FF),
-                  iconColor: const Color(0xFF2563EB),
-                  icon: Icons.sync,
-                  isSelected: currentStatus == OrderStatus.confirmed,
-                  onTap: () => onStatusSelected(OrderStatus.confirmed),
-                ),
-                _StatusOption(
-                  label: l.orderStatusShipped,
-                  iconBg: const Color(0xFFFFFBEB),
-                  iconColor: const Color(0xFFD97706),
-                  icon: Icons.local_shipping_outlined,
-                  isSelected: currentStatus == OrderStatus.shipped,
-                  onTap: () => onStatusSelected(OrderStatus.shipped),
-                ),
-                _StatusOption(
-                  label: l.orderStatusDelivered,
-                  iconBg: const Color(0xFFECFDF5),
-                  iconColor: const Color(0xFF059669),
-                  icon: Icons.check_circle_outline,
-                  isSelected: currentStatus == OrderStatus.delivered,
-                  onTap: () => onStatusSelected(OrderStatus.delivered),
-                ),
-                _StatusOption(
-                  label: l.orderStatusCancelled,
-                  iconBg: const Color(0xFFFEF2F2),
-                  iconColor: const Color(0xFFDC2626),
-                  icon: Icons.cancel_outlined,
-                  isSelected: currentStatus == OrderStatus.cancelled,
-                  onTap: () => onStatusSelected(OrderStatus.cancelled),
-                ),
-              ],
+              children: nextStatuses.map((status) {
+                final style = _styleFor(status);
+                return _StatusOption(
+                  label: orderStatusLabel(l, status),
+                  iconBg: style.iconBg,
+                  iconColor: style.iconColor,
+                  icon: style.icon,
+                  isSelected: false,
+                  onTap: () => onStatusSelected(status),
+                );
+              }).toList(),
             ),
           ),
           const SizedBox(height: 8),

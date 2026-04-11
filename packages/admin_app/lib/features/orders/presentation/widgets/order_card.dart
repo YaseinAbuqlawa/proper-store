@@ -64,8 +64,9 @@ class _OrderCardState extends State<OrderCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(AppSpacing.borderRadiusSmall),
+                  borderRadius: BorderRadius.circular(
+                    AppSpacing.borderRadiusSmall,
+                  ),
                   child: _Thumbnail(imageUrl: firstImage),
                 ),
                 const SizedBox(width: AppSpacing.medium),
@@ -124,15 +125,17 @@ class _OrderCardState extends State<OrderCard> {
             const Spacer(),
             Row(
               children: [
-                Expanded(
-                  child: _CardButton(
-                    label: l.updateStatusLabel,
-                    backgroundColor: AppColors.goldRoyal,
-                    foregroundColor: AppColors.blackDeep,
-                    onPressed: () => _showStatusSheet(context),
+                if (validNextStatuses(widget.order.status).isNotEmpty) ...[
+                  Expanded(
+                    child: _CardButton(
+                      label: l.updateStatusLabel,
+                      backgroundColor: AppColors.goldRoyal,
+                      foregroundColor: AppColors.blackDeep,
+                      onPressed: () => _showStatusSheet(context),
+                    ),
                   ),
-                ),
-                const SizedBox(width: AppSpacing.small + 4),
+                  const SizedBox(width: AppSpacing.small + 4),
+                ],
                 Expanded(
                   child: _CardButton(
                     label: l.orderDetails,
