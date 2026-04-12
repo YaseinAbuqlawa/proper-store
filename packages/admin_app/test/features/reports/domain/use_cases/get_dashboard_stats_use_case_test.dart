@@ -29,6 +29,8 @@ DashboardStats _fakeDashboardStats() => DashboardStats(
       ordersByStatus: {'pending': 3, 'confirmed': 2, 'cancelled': 1},
       dailyRevenue: {'2026-03-01': 100.0},
       monthlyRevenue: {'2026-03': 1000.0},
+      dailyRefunded: {'2026-03-01': 20.0},
+      monthlyRefunded: {'2026-03': 200.0},
       topSelling: const [],
       topSpenders: const [],
       lastUpdatedAt: DateTime(2026, 3, 29),
@@ -220,6 +222,69 @@ void main() {
       // Max value is 600. maxY must be strictly above it with some headroom
       // (implementation uses ×1.2 = 720, capped at a round number).
       (s) => expect(s.dailyRevenueMaxY, greaterThan(600.0)),
+    );
+  });
+
+  test('use case prepares dailyRefunded sorted chronologically', () async {
+    final raw = DashboardStats(
+      totalRevenue: 0,
+      totalOrders: 0,
+      totalCustomers: 0,
+      outOfStockCount: 0,
+      ordersByStatus: const {},
+      dailyRevenue: const {},
+      monthlyRevenue: const {},
+      dailyRefunded: {
+        '2026-03-05': 50.0,
+        '2026-03-03': 30.0,
+      },
+      monthlyRefunded: const {},
+      topSelling: const [],
+      topSpenders: const [],
+      lastUpdatedAt: DateTime(2026),
+    );
+
+    final useCase = GetDashboardStatsUseCase(
+      repo: _FakeReportsRepo(Right(raw)),
+    );
+    final result = await useCase();
+
+    result.fold(
+      (_) => fail('expected Right'),
+      (s) {
+        final keys = s.preparedDailyRefunded.map((e) => e.key).toList();
+        expect(keys, ['2026-03-03', '2026-03-04', '2026-03-05']);
+        expect(s.preparedDailyRefunded[0].value, 30.0);
+        expect(s.preparedDailyRefunded[2].value, 50.0);
+      },
+    );
+  });
+
+  test('dailyRevenueMaxY accounts for refund values exceeding revenue', () async {
+    final raw = DashboardStats(
+      totalRevenue: 0,
+      totalOrders: 0,
+      totalCustomers: 0,
+      outOfStockCount: 0,
+      ordersByStatus: const {},
+      dailyRevenue: {'2026-03-01': 100.0},
+      monthlyRevenue: const {},
+      dailyRefunded: {'2026-03-01': 800.0},
+      monthlyRefunded: const {},
+      topSelling: const [],
+      topSpenders: const [],
+      lastUpdatedAt: DateTime(2026),
+    );
+
+    final useCase = GetDashboardStatsUseCase(
+      repo: _FakeReportsRepo(Right(raw)),
+    );
+    final result = await useCase();
+
+    result.fold(
+      (_) => fail('expected Right'),
+      // Max value across both is 800 — maxY must be above that.
+      (s) => expect(s.dailyRevenueMaxY, greaterThan(800.0)),
     );
   });
 

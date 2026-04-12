@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TopSellingItemModel {
 
- String get id; String get productId; String get productName; String get variantKey; String get variantName; String get imageUrl; int get totalSold;
+ String get id; String get productId; String get productName; String get variantKey; String get variantName; String get imageUrl; int get totalSold; int get totalRefunded;
 /// Create a copy of TopSellingItemModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TopSellingItemModelCopyWith<TopSellingItemModel> get copyWith => _$TopSellingIt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TopSellingItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.productId, productId) || other.productId == productId)&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.variantKey, variantKey) || other.variantKey == variantKey)&&(identical(other.variantName, variantName) || other.variantName == variantName)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.totalSold, totalSold) || other.totalSold == totalSold));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TopSellingItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.productId, productId) || other.productId == productId)&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.variantKey, variantKey) || other.variantKey == variantKey)&&(identical(other.variantName, variantName) || other.variantName == variantName)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.totalSold, totalSold) || other.totalSold == totalSold)&&(identical(other.totalRefunded, totalRefunded) || other.totalRefunded == totalRefunded));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,productId,productName,variantKey,variantName,imageUrl,totalSold);
+int get hashCode => Object.hash(runtimeType,id,productId,productName,variantKey,variantName,imageUrl,totalSold,totalRefunded);
 
 @override
 String toString() {
-  return 'TopSellingItemModel(id: $id, productId: $productId, productName: $productName, variantKey: $variantKey, variantName: $variantName, imageUrl: $imageUrl, totalSold: $totalSold)';
+  return 'TopSellingItemModel(id: $id, productId: $productId, productName: $productName, variantKey: $variantKey, variantName: $variantName, imageUrl: $imageUrl, totalSold: $totalSold, totalRefunded: $totalRefunded)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TopSellingItemModelCopyWith<$Res>  {
   factory $TopSellingItemModelCopyWith(TopSellingItemModel value, $Res Function(TopSellingItemModel) _then) = _$TopSellingItemModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String productId, String productName, String variantKey, String variantName, String imageUrl, int totalSold
+ String id, String productId, String productName, String variantKey, String variantName, String imageUrl, int totalSold, int totalRefunded
 });
 
 
@@ -65,7 +65,7 @@ class _$TopSellingItemModelCopyWithImpl<$Res>
 
 /// Create a copy of TopSellingItemModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? productId = null,Object? productName = null,Object? variantKey = null,Object? variantName = null,Object? imageUrl = null,Object? totalSold = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? productId = null,Object? productName = null,Object? variantKey = null,Object? variantName = null,Object? imageUrl = null,Object? totalSold = null,Object? totalRefunded = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,productId: null == productId ? _self.productId : productId // ignore: cast_nullable_to_non_nullable
@@ -74,6 +74,7 @@ as String,variantKey: null == variantKey ? _self.variantKey : variantKey // igno
 as String,variantName: null == variantName ? _self.variantName : variantName // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,totalSold: null == totalSold ? _self.totalSold : totalSold // ignore: cast_nullable_to_non_nullable
+as int,totalRefunded: null == totalRefunded ? _self.totalRefunded : totalRefunded // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -159,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String productId,  String productName,  String variantKey,  String variantName,  String imageUrl,  int totalSold)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String productId,  String productName,  String variantKey,  String variantName,  String imageUrl,  int totalSold,  int totalRefunded)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TopSellingItemModel() when $default != null:
-return $default(_that.id,_that.productId,_that.productName,_that.variantKey,_that.variantName,_that.imageUrl,_that.totalSold);case _:
+return $default(_that.id,_that.productId,_that.productName,_that.variantKey,_that.variantName,_that.imageUrl,_that.totalSold,_that.totalRefunded);case _:
   return orElse();
 
 }
@@ -180,10 +181,10 @@ return $default(_that.id,_that.productId,_that.productName,_that.variantKey,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String productId,  String productName,  String variantKey,  String variantName,  String imageUrl,  int totalSold)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String productId,  String productName,  String variantKey,  String variantName,  String imageUrl,  int totalSold,  int totalRefunded)  $default,) {final _that = this;
 switch (_that) {
 case _TopSellingItemModel():
-return $default(_that.id,_that.productId,_that.productName,_that.variantKey,_that.variantName,_that.imageUrl,_that.totalSold);case _:
+return $default(_that.id,_that.productId,_that.productName,_that.variantKey,_that.variantName,_that.imageUrl,_that.totalSold,_that.totalRefunded);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +201,10 @@ return $default(_that.id,_that.productId,_that.productName,_that.variantKey,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String productId,  String productName,  String variantKey,  String variantName,  String imageUrl,  int totalSold)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String productId,  String productName,  String variantKey,  String variantName,  String imageUrl,  int totalSold,  int totalRefunded)?  $default,) {final _that = this;
 switch (_that) {
 case _TopSellingItemModel() when $default != null:
-return $default(_that.id,_that.productId,_that.productName,_that.variantKey,_that.variantName,_that.imageUrl,_that.totalSold);case _:
+return $default(_that.id,_that.productId,_that.productName,_that.variantKey,_that.variantName,_that.imageUrl,_that.totalSold,_that.totalRefunded);case _:
   return null;
 
 }
@@ -215,7 +216,7 @@ return $default(_that.id,_that.productId,_that.productName,_that.variantKey,_tha
 @JsonSerializable()
 
 class _TopSellingItemModel extends TopSellingItemModel {
-  const _TopSellingItemModel({required this.id, required this.productId, required this.productName, required this.variantKey, required this.variantName, required this.imageUrl, required this.totalSold}): super._();
+  const _TopSellingItemModel({required this.id, required this.productId, required this.productName, required this.variantKey, required this.variantName, required this.imageUrl, required this.totalSold, this.totalRefunded = 0}): super._();
   factory _TopSellingItemModel.fromJson(Map<String, dynamic> json) => _$TopSellingItemModelFromJson(json);
 
 @override final  String id;
@@ -225,6 +226,7 @@ class _TopSellingItemModel extends TopSellingItemModel {
 @override final  String variantName;
 @override final  String imageUrl;
 @override final  int totalSold;
+@override@JsonKey() final  int totalRefunded;
 
 /// Create a copy of TopSellingItemModel
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TopSellingItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.productId, productId) || other.productId == productId)&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.variantKey, variantKey) || other.variantKey == variantKey)&&(identical(other.variantName, variantName) || other.variantName == variantName)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.totalSold, totalSold) || other.totalSold == totalSold));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TopSellingItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.productId, productId) || other.productId == productId)&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.variantKey, variantKey) || other.variantKey == variantKey)&&(identical(other.variantName, variantName) || other.variantName == variantName)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.totalSold, totalSold) || other.totalSold == totalSold)&&(identical(other.totalRefunded, totalRefunded) || other.totalRefunded == totalRefunded));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,productId,productName,variantKey,variantName,imageUrl,totalSold);
+int get hashCode => Object.hash(runtimeType,id,productId,productName,variantKey,variantName,imageUrl,totalSold,totalRefunded);
 
 @override
 String toString() {
-  return 'TopSellingItemModel(id: $id, productId: $productId, productName: $productName, variantKey: $variantKey, variantName: $variantName, imageUrl: $imageUrl, totalSold: $totalSold)';
+  return 'TopSellingItemModel(id: $id, productId: $productId, productName: $productName, variantKey: $variantKey, variantName: $variantName, imageUrl: $imageUrl, totalSold: $totalSold, totalRefunded: $totalRefunded)';
 }
 
 
@@ -259,7 +261,7 @@ abstract mixin class _$TopSellingItemModelCopyWith<$Res> implements $TopSellingI
   factory _$TopSellingItemModelCopyWith(_TopSellingItemModel value, $Res Function(_TopSellingItemModel) _then) = __$TopSellingItemModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String productId, String productName, String variantKey, String variantName, String imageUrl, int totalSold
+ String id, String productId, String productName, String variantKey, String variantName, String imageUrl, int totalSold, int totalRefunded
 });
 
 
@@ -276,7 +278,7 @@ class __$TopSellingItemModelCopyWithImpl<$Res>
 
 /// Create a copy of TopSellingItemModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? productId = null,Object? productName = null,Object? variantKey = null,Object? variantName = null,Object? imageUrl = null,Object? totalSold = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? productId = null,Object? productName = null,Object? variantKey = null,Object? variantName = null,Object? imageUrl = null,Object? totalSold = null,Object? totalRefunded = null,}) {
   return _then(_TopSellingItemModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,productId: null == productId ? _self.productId : productId // ignore: cast_nullable_to_non_nullable
@@ -285,6 +287,7 @@ as String,variantKey: null == variantKey ? _self.variantKey : variantKey // igno
 as String,variantName: null == variantName ? _self.variantName : variantName // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,totalSold: null == totalSold ? _self.totalSold : totalSold // ignore: cast_nullable_to_non_nullable
+as int,totalRefunded: null == totalRefunded ? _self.totalRefunded : totalRefunded // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

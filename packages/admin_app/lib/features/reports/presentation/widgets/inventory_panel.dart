@@ -125,11 +125,27 @@ class _TopSellingRow extends StatelessWidget {
               ],
             ),
           ),
-          Text(
-            S.of(context).totalSoldLabel(item.totalSold),
-            style: AppTextStyles.productName.copyWith(
-              color: AppColors.goldRoyal,
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                S.of(context).totalSoldLabel(item.totalSold),
+                style: AppTextStyles.bodyDescription,
+              ),
+              if (item.totalRefunded > 0)
+                Text(
+                  '${S.of(context).refundChartLabel}: ${item.totalRefunded}',
+                  style: AppTextStyles.bodyDescription.copyWith(
+                    color: AppColors.refundPurple,
+                  ),
+                ),
+              Text(
+                '${S.of(context).actualSoldLabel}: ${item.actualSold}',
+                style: AppTextStyles.productName.copyWith(
+                  color: AppColors.goldRoyal,
+                ),
+              ),
+            ],
           ),
         ],
       ),

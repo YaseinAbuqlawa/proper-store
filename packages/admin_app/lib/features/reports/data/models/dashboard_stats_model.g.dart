@@ -9,7 +9,9 @@ part of 'dashboard_stats_model.dart';
 _DashboardStatsModel _$DashboardStatsModelFromJson(Map<String, dynamic> json) =>
     _DashboardStatsModel(
       totalRevenue: (json['totalRevenue'] as num?)?.toDouble() ?? 0.0,
+      totalRefunded: (json['totalRefunded'] as num?)?.toDouble() ?? 0.0,
       totalOrders: (json['totalOrders'] as num?)?.toInt() ?? 0,
+      refundedOrders: (json['refundedOrders'] as num?)?.toInt() ?? 0,
       totalCustomers: (json['totalCustomers'] as num?)?.toInt() ?? 0,
       outOfStockCount: (json['outOfStockCount'] as num?)?.toInt() ?? 0,
       ordersByStatus:
@@ -24,6 +26,16 @@ _DashboardStatsModel _$DashboardStatsModelFromJson(Map<String, dynamic> json) =>
           const {},
       monthlyRevenue:
           (json['monthlyRevenue'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, (e as num).toDouble()),
+          ) ??
+          const {},
+      dailyRefunded:
+          (json['dailyRefunded'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, (e as num).toDouble()),
+          ) ??
+          const {},
+      monthlyRefunded:
+          (json['monthlyRefunded'] as Map<String, dynamic>?)?.map(
             (k, e) => MapEntry(k, (e as num).toDouble()),
           ) ??
           const {},
@@ -46,12 +58,16 @@ Map<String, dynamic> _$DashboardStatsModelToJson(
   _DashboardStatsModel instance,
 ) => <String, dynamic>{
   'totalRevenue': instance.totalRevenue,
+  'totalRefunded': instance.totalRefunded,
   'totalOrders': instance.totalOrders,
+  'refundedOrders': instance.refundedOrders,
   'totalCustomers': instance.totalCustomers,
   'outOfStockCount': instance.outOfStockCount,
   'ordersByStatus': instance.ordersByStatus,
   'dailyRevenue': instance.dailyRevenue,
   'monthlyRevenue': instance.monthlyRevenue,
+  'dailyRefunded': instance.dailyRefunded,
+  'monthlyRefunded': instance.monthlyRefunded,
   'topSelling': instance.topSelling,
   'topSpenders': instance.topSpenders,
   'lastUpdatedAt': const TimestampConverter().toJson(instance.lastUpdatedAt),

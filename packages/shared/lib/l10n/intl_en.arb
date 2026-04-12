@@ -132,8 +132,8 @@
   "productFormFieldDiscountVal": "Discount Value",
   "@productFormFieldDiscountVal": {},
 
-  "productFormFieldSoldQty": "Units Sold",
-  "@productFormFieldSoldQty": {},
+  "productFormFieldShippedQty": "Units Shipped",
+  "@productFormFieldShippedQty": {},
 
   "productFormFieldRefundedQty": "Units Refunded",
   "@productFormFieldRefundedQty": {},
@@ -676,6 +676,15 @@
   "cancellationRateLabel": "Cancellation Rate",
   "@cancellationRateLabel": {},
 
+  "netRevenueLabel": "Net Revenue",
+  "@netRevenueLabel": {},
+
+  "totalRefundedLabel": "Total Refunded",
+  "@totalRefundedLabel": {},
+
+  "refundRateLabel": "Refund Rate",
+  "@refundRateLabel": {},
+
   "dailyRevenueChartTitle": "Daily Revenue (Last 30 Days)",
   "@dailyRevenueChartTitle": {},
 
@@ -706,5 +715,14 @@
     "placeholders": {
       "count": { "type": "int" }
     }
-  }
+  },
+
+  "revenueChartLabel": "Revenue",
+  "@revenueChartLabel": {},
+
+  "refundChartLabel": "Refund",
+  "@refundChartLabel": {},
+
+  "actualSoldLabel": "Actual",
+  "@actualSoldLabel": {}
 }

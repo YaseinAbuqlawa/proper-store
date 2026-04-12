@@ -31,6 +31,9 @@ class AppColors {
   // Chart grid line — subtle horizontal rule on light backgrounds
   static const Color chartGridLine = Color(0x1A000000);
 
+  // Refund — matches the refunded slice in the order-status pie chart
+  static const Color refundPurple = Color(0xFF7E57C2);
+
   // Order status badge colors
   static const Color statusPendingBg = Color(0xFFF7E1A6);
   static const Color statusPendingFg = Color(0xFF736334);

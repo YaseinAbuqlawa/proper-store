@@ -92,7 +92,7 @@ class _SpenderRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '${spender.totalSpent.toStringAsFixed(0)} ج',
+                '${spender.netSpent.toStringAsFixed(0)} ج',
                 style: AppTextStyles.productName.copyWith(
                   color: AppColors.goldRoyal,
                 ),
@@ -101,6 +101,13 @@ class _SpenderRow extends StatelessWidget {
                 l.orderCountLabel(spender.orderCount),
                 style: AppTextStyles.bodyDescription,
               ),
+              if (spender.refundCount > 0)
+                Text(
+                  '${l.refundChartLabel}: ${spender.refundCount}',
+                  style: AppTextStyles.bodyDescription.copyWith(
+                    color: AppColors.refundPurple,
+                  ),
+                ),
             ],
           ),
         ],

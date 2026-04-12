@@ -419,11 +419,11 @@ class S {
     );
   }
 
-  /// `Units Sold`
-  String get productFormFieldSoldQty {
+  /// `Units Shipped`
+  String get productFormFieldShippedQty {
     return Intl.message(
-      'Units Sold',
-      name: 'productFormFieldSoldQty',
+      'Units Shipped',
+      name: 'productFormFieldShippedQty',
       desc: '',
       args: [],
     );
@@ -2809,6 +2809,36 @@ class S {
     );
   }
 
+  /// `Net Revenue`
+  String get netRevenueLabel {
+    return Intl.message(
+      'Net Revenue',
+      name: 'netRevenueLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Refunded`
+  String get totalRefundedLabel {
+    return Intl.message(
+      'Total Refunded',
+      name: 'totalRefundedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refund Rate`
+  String get refundRateLabel {
+    return Intl.message(
+      'Refund Rate',
+      name: 'refundRateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Daily Revenue (Last 30 Days)`
   String get dailyRevenueChartTitle {
     return Intl.message(
@@ -2887,6 +2917,26 @@ class S {
       desc: '',
       args: [count],
     );
+  }
+
+  /// `Revenue`
+  String get revenueChartLabel {
+    return Intl.message(
+      'Revenue',
+      name: 'revenueChartLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refund`
+  String get refundChartLabel {
+    return Intl.message('Refund', name: 'refundChartLabel', desc: '', args: []);
+  }
+
+  /// `Actual`
+  String get actualSoldLabel {
+    return Intl.message('Actual', name: 'actualSoldLabel', desc: '', args: []);
   }
 }
 

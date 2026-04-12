@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "actionsLabel": MessageLookupByLibrary.simpleMessage("Actions"),
+    "actualSoldLabel": MessageLookupByLibrary.simpleMessage("Actual"),
     "addAddressTitle": MessageLookupByLibrary.simpleMessage("Add address"),
     "addBtn": MessageLookupByLibrary.simpleMessage("Add"),
     "addCategory": MessageLookupByLibrary.simpleMessage("Add Category"),
@@ -358,6 +359,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "navOrders": MessageLookupByLibrary.simpleMessage("Orders"),
     "navProducts": MessageLookupByLibrary.simpleMessage("Products"),
     "navStoreConfig": MessageLookupByLibrary.simpleMessage("Settings"),
+    "netRevenueLabel": MessageLookupByLibrary.simpleMessage("Net Revenue"),
     "noAddressSelected": MessageLookupByLibrary.simpleMessage(
       "Please select a shipping address",
     ),
@@ -530,8 +532,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "productFormFieldRefundedQty": MessageLookupByLibrary.simpleMessage(
       "Units Refunded",
     ),
-    "productFormFieldSoldQty": MessageLookupByLibrary.simpleMessage(
-      "Units Sold",
+    "productFormFieldShippedQty": MessageLookupByLibrary.simpleMessage(
+      "Units Shipped",
     ),
     "productFormPickColor": MessageLookupByLibrary.simpleMessage(
       "Pick a Color",
@@ -571,10 +573,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "productsTitle": MessageLookupByLibrary.simpleMessage("Products"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("My Account"),
     "quantityLabel": m5,
+    "refundChartLabel": MessageLookupByLibrary.simpleMessage("Refund"),
+    "refundRateLabel": MessageLookupByLibrary.simpleMessage("Refund Rate"),
     "reportsTitle": MessageLookupByLibrary.simpleMessage("Reports"),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "retryBtn": MessageLookupByLibrary.simpleMessage("Retry"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("Return policy"),
+    "revenueChartLabel": MessageLookupByLibrary.simpleMessage("Revenue"),
     "saveAddress": MessageLookupByLibrary.simpleMessage("Save address"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
     "searchGovernorateHint": MessageLookupByLibrary.simpleMessage(
@@ -671,6 +676,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Total Customers",
     ),
     "totalOrdersLabel": MessageLookupByLibrary.simpleMessage("Total Orders"),
+    "totalRefundedLabel": MessageLookupByLibrary.simpleMessage(
+      "Total Refunded",
+    ),
     "totalRevenueLabel": MessageLookupByLibrary.simpleMessage("Total Revenue"),
     "totalSoldLabel": m6,
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("Total units"),

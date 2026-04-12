@@ -33,7 +33,7 @@ abstract class ProductModel with _$ProductModel {
     required String section,
     required double sellingPrice,
     required List<double> sizes,
-    required int soldQuantity,
+    required int shippedQuantity,
     required int stockQuantity,
     @Default(0) int totalStock,
     @Default([]) List<String> outOfStockVariants,
@@ -60,7 +60,7 @@ abstract class ProductModel with _$ProductModel {
       section: 'Section',
       sellingPrice: 99.99,
       sizes: const [40, 41, 42],
-      soldQuantity: 0,
+      shippedQuantity: 0,
       stockQuantity: 0,
     );
   }

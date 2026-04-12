@@ -14,6 +14,7 @@ abstract class TopSpenderModel with _$TopSpenderModel {
     required String name,
     required double totalSpent,
     required int orderCount,
+    @Default(0) int refundCount,
   }) = _TopSpenderModel;
 
   factory TopSpenderModel.fromJson(Map<String, dynamic> json) =>
@@ -24,5 +25,6 @@ abstract class TopSpenderModel with _$TopSpenderModel {
         name: name,
         totalSpent: totalSpent,
         orderCount: orderCount,
+        refundCount: refundCount,
       );
 }

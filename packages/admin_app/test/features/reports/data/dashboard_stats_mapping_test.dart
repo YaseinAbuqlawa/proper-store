@@ -15,6 +15,13 @@ DashboardStats mapToDashboardStats(Map<String, dynamic> data) {
   final monthlyRevenue = (data['monthlyRevenue'] as Map<String, dynamic>? ?? {})
       .map((k, v) => MapEntry(k, (v as num).toDouble()));
 
+  final dailyRefunded = (data['dailyRefunded'] as Map<String, dynamic>? ?? {})
+      .map((k, v) => MapEntry(k, (v as num).toDouble()));
+
+  final monthlyRefunded =
+      (data['monthlyRefunded'] as Map<String, dynamic>? ?? {})
+          .map((k, v) => MapEntry(k, (v as num).toDouble()));
+
   final topSelling = (data['topSelling'] as List<dynamic>? ?? [])
       .map((e) => _mapToTopSellingItem(e as Map<String, dynamic>))
       .toList();
@@ -35,6 +42,8 @@ DashboardStats mapToDashboardStats(Map<String, dynamic> data) {
     ordersByStatus: ordersByStatus,
     dailyRevenue: dailyRevenue,
     monthlyRevenue: monthlyRevenue,
+    dailyRefunded: dailyRefunded,
+    monthlyRefunded: monthlyRefunded,
     topSelling: topSelling,
     topSpenders: topSpenders,
     lastUpdatedAt: lastUpdatedAt,
@@ -50,6 +59,7 @@ TopSellingItem _mapToTopSellingItem(Map<String, dynamic> data) {
     variantName: data['variantName'] as String? ?? '',
     imageUrl: data['imageUrl'] as String? ?? '',
     totalSold: (data['totalSold'] as num? ?? 0).toInt(),
+    totalRefunded: (data['totalRefunded'] as num? ?? 0).toInt(),
   );
 }
 
@@ -113,6 +123,8 @@ void main() {
     expect(stats.topSelling.length, 1);
     expect(stats.topSelling.first.variantName, 'Red');
     expect(stats.topSelling.first.totalSold, 25);
+    expect(stats.topSelling.first.totalRefunded, 0);
+    expect(stats.topSelling.first.actualSold, 25);
     expect(stats.topSpenders.length, 1);
     expect(stats.topSpenders.first.name, 'Ahmed');
     expect(stats.topSpenders.first.orderCount, 8);
@@ -128,5 +140,43 @@ void main() {
     expect(stats.cancellationRate, 0);
     expect(stats.topSelling, isEmpty);
     expect(stats.topSpenders, isEmpty);
+    expect(stats.dailyRefunded, isEmpty);
+    expect(stats.monthlyRefunded, isEmpty);
+  });
+
+  test('maps totalRefunded on top selling item and computes actualSold', () {
+    final data = <String, dynamic>{
+      'totalRevenue': 0.0,
+      'totalOrders': 0,
+      'totalCustomers': 0,
+      'outOfStockCount': 0,
+      'ordersByStatus': <String, dynamic>{},
+      'dailyRevenue': <String, dynamic>{},
+      'monthlyRevenue': <String, dynamic>{},
+      'dailyRefunded': {'2026-03-01': 100.0},
+      'monthlyRefunded': {'2026-03': 100.0},
+      'topSelling': [
+        {
+          'id': 'prod1_red',
+          'productId': 'prod1',
+          'productName': 'Bag A',
+          'variantKey': 'red',
+          'variantName': 'Red',
+          'imageUrl': '',
+          'totalSold': 10,
+          'totalRefunded': 3,
+        },
+      ],
+      'topSpenders': <dynamic>[],
+      'lastUpdatedAt': null,
+    };
+
+    final stats = mapToDashboardStats(data);
+
+    expect(stats.topSelling.first.totalSold, 10);
+    expect(stats.topSelling.first.totalRefunded, 3);
+    expect(stats.topSelling.first.actualSold, 7);
+    expect(stats.dailyRefunded['2026-03-01'], 100.0);
+    expect(stats.monthlyRefunded['2026-03'], 100.0);
   });
 }

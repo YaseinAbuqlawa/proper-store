@@ -14,12 +14,16 @@ abstract class DashboardStatsModel with _$DashboardStatsModel {
 
   const factory DashboardStatsModel({
     @Default(0.0) double totalRevenue,
+    @Default(0.0) double totalRefunded,
     @Default(0) int totalOrders,
+    @Default(0) int refundedOrders,
     @Default(0) int totalCustomers,
     @Default(0) int outOfStockCount,
     @Default({}) Map<String, int> ordersByStatus,
     @Default({}) Map<String, double> dailyRevenue,
     @Default({}) Map<String, double> monthlyRevenue,
+    @Default({}) Map<String, double> dailyRefunded,
+    @Default({}) Map<String, double> monthlyRefunded,
     @Default([]) List<TopSellingItemModel> topSelling,
     @Default([]) List<TopSpenderModel> topSpenders,
     @TimestampConverter() required DateTime lastUpdatedAt,
@@ -29,15 +33,19 @@ abstract class DashboardStatsModel with _$DashboardStatsModel {
       _$DashboardStatsModelFromJson(json);
 
   DashboardStats toEntity() => DashboardStats(
-        totalRevenue: totalRevenue,
-        totalOrders: totalOrders,
-        totalCustomers: totalCustomers,
-        outOfStockCount: outOfStockCount,
-        ordersByStatus: ordersByStatus,
-        dailyRevenue: dailyRevenue,
-        monthlyRevenue: monthlyRevenue,
-        topSelling: topSelling.map((m) => m.toEntity()).toList(),
-        topSpenders: topSpenders.map((m) => m.toEntity()).toList(),
-        lastUpdatedAt: lastUpdatedAt,
-      );
+    totalRevenue: totalRevenue,
+    totalRefunded: totalRefunded,
+    totalOrders: totalOrders,
+    refundedOrders: refundedOrders,
+    totalCustomers: totalCustomers,
+    outOfStockCount: outOfStockCount,
+    ordersByStatus: ordersByStatus,
+    dailyRevenue: dailyRevenue,
+    monthlyRevenue: monthlyRevenue,
+    dailyRefunded: dailyRefunded,
+    monthlyRefunded: monthlyRefunded,
+    topSelling: topSelling.map((m) => m.toEntity()).toList(),
+    topSpenders: topSpenders.map((m) => m.toEntity()).toList(),
+    lastUpdatedAt: lastUpdatedAt,
+  );
 }

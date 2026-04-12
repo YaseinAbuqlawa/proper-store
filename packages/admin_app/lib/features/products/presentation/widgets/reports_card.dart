@@ -19,8 +19,8 @@ class ReportsCard extends StatelessWidget {
           builder: (context, constraints) {
             final fields = [
               _StatField(
-                label: l.productFormFieldSoldQty,
-                value: product.soldQuantity.toString(),
+                label: l.productFormFieldShippedQty,
+                value: product.shippedQuantity.toString(),
                 icon: Icons.shopping_cart_checkout_outlined,
               ),
               _StatField(

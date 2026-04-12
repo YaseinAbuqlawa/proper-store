@@ -167,7 +167,7 @@ class SaveProductUseCase {
       discountValue: params.discountValue,
       variants: variantsMap,
       mainImageUrl: mainImageUrl,
-      soldQuantity: params.existingProduct?.soldQuantity ?? 0,
+      shippedQuantity: params.existingProduct?.shippedQuantity ?? 0,
       refundedQuantity: params.existingProduct?.refundedQuantity ?? 0,
       lastPurchaseDate:
           params.existingProduct?.lastPurchaseDate ?? DateTime.now(),

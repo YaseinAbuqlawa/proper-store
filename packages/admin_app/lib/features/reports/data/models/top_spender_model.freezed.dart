@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TopSpenderModel {
 
- String get customerId; String get name; double get totalSpent; int get orderCount;
+ String get customerId; String get name; double get totalSpent; int get orderCount; int get refundCount;
 /// Create a copy of TopSpenderModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TopSpenderModelCopyWith<TopSpenderModel> get copyWith => _$TopSpenderModelCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TopSpenderModel&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.name, name) || other.name == name)&&(identical(other.totalSpent, totalSpent) || other.totalSpent == totalSpent)&&(identical(other.orderCount, orderCount) || other.orderCount == orderCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TopSpenderModel&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.name, name) || other.name == name)&&(identical(other.totalSpent, totalSpent) || other.totalSpent == totalSpent)&&(identical(other.orderCount, orderCount) || other.orderCount == orderCount)&&(identical(other.refundCount, refundCount) || other.refundCount == refundCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,customerId,name,totalSpent,orderCount);
+int get hashCode => Object.hash(runtimeType,customerId,name,totalSpent,orderCount,refundCount);
 
 @override
 String toString() {
-  return 'TopSpenderModel(customerId: $customerId, name: $name, totalSpent: $totalSpent, orderCount: $orderCount)';
+  return 'TopSpenderModel(customerId: $customerId, name: $name, totalSpent: $totalSpent, orderCount: $orderCount, refundCount: $refundCount)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TopSpenderModelCopyWith<$Res>  {
   factory $TopSpenderModelCopyWith(TopSpenderModel value, $Res Function(TopSpenderModel) _then) = _$TopSpenderModelCopyWithImpl;
 @useResult
 $Res call({
- String customerId, String name, double totalSpent, int orderCount
+ String customerId, String name, double totalSpent, int orderCount, int refundCount
 });
 
 
@@ -65,12 +65,13 @@ class _$TopSpenderModelCopyWithImpl<$Res>
 
 /// Create a copy of TopSpenderModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? customerId = null,Object? name = null,Object? totalSpent = null,Object? orderCount = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? customerId = null,Object? name = null,Object? totalSpent = null,Object? orderCount = null,Object? refundCount = null,}) {
   return _then(_self.copyWith(
 customerId: null == customerId ? _self.customerId : customerId // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,totalSpent: null == totalSpent ? _self.totalSpent : totalSpent // ignore: cast_nullable_to_non_nullable
 as double,orderCount: null == orderCount ? _self.orderCount : orderCount // ignore: cast_nullable_to_non_nullable
+as int,refundCount: null == refundCount ? _self.refundCount : refundCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String customerId,  String name,  double totalSpent,  int orderCount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String customerId,  String name,  double totalSpent,  int orderCount,  int refundCount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TopSpenderModel() when $default != null:
-return $default(_that.customerId,_that.name,_that.totalSpent,_that.orderCount);case _:
+return $default(_that.customerId,_that.name,_that.totalSpent,_that.orderCount,_that.refundCount);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.customerId,_that.name,_that.totalSpent,_that.orderCount);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String customerId,  String name,  double totalSpent,  int orderCount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String customerId,  String name,  double totalSpent,  int orderCount,  int refundCount)  $default,) {final _that = this;
 switch (_that) {
 case _TopSpenderModel():
-return $default(_that.customerId,_that.name,_that.totalSpent,_that.orderCount);case _:
+return $default(_that.customerId,_that.name,_that.totalSpent,_that.orderCount,_that.refundCount);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.customerId,_that.name,_that.totalSpent,_that.orderCount);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String customerId,  String name,  double totalSpent,  int orderCount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String customerId,  String name,  double totalSpent,  int orderCount,  int refundCount)?  $default,) {final _that = this;
 switch (_that) {
 case _TopSpenderModel() when $default != null:
-return $default(_that.customerId,_that.name,_that.totalSpent,_that.orderCount);case _:
+return $default(_that.customerId,_that.name,_that.totalSpent,_that.orderCount,_that.refundCount);case _:
   return null;
 
 }
@@ -212,13 +213,14 @@ return $default(_that.customerId,_that.name,_that.totalSpent,_that.orderCount);c
 @JsonSerializable()
 
 class _TopSpenderModel extends TopSpenderModel {
-  const _TopSpenderModel({required this.customerId, required this.name, required this.totalSpent, required this.orderCount}): super._();
+  const _TopSpenderModel({required this.customerId, required this.name, required this.totalSpent, required this.orderCount, this.refundCount = 0}): super._();
   factory _TopSpenderModel.fromJson(Map<String, dynamic> json) => _$TopSpenderModelFromJson(json);
 
 @override final  String customerId;
 @override final  String name;
 @override final  double totalSpent;
 @override final  int orderCount;
+@override@JsonKey() final  int refundCount;
 
 /// Create a copy of TopSpenderModel
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TopSpenderModel&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.name, name) || other.name == name)&&(identical(other.totalSpent, totalSpent) || other.totalSpent == totalSpent)&&(identical(other.orderCount, orderCount) || other.orderCount == orderCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TopSpenderModel&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.name, name) || other.name == name)&&(identical(other.totalSpent, totalSpent) || other.totalSpent == totalSpent)&&(identical(other.orderCount, orderCount) || other.orderCount == orderCount)&&(identical(other.refundCount, refundCount) || other.refundCount == refundCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,customerId,name,totalSpent,orderCount);
+int get hashCode => Object.hash(runtimeType,customerId,name,totalSpent,orderCount,refundCount);
 
 @override
 String toString() {
-  return 'TopSpenderModel(customerId: $customerId, name: $name, totalSpent: $totalSpent, orderCount: $orderCount)';
+  return 'TopSpenderModel(customerId: $customerId, name: $name, totalSpent: $totalSpent, orderCount: $orderCount, refundCount: $refundCount)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$TopSpenderModelCopyWith<$Res> implements $TopSpenderModel
   factory _$TopSpenderModelCopyWith(_TopSpenderModel value, $Res Function(_TopSpenderModel) _then) = __$TopSpenderModelCopyWithImpl;
 @override @useResult
 $Res call({
- String customerId, String name, double totalSpent, int orderCount
+ String customerId, String name, double totalSpent, int orderCount, int refundCount
 });
 
 
@@ -270,12 +272,13 @@ class __$TopSpenderModelCopyWithImpl<$Res>
 
 /// Create a copy of TopSpenderModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? customerId = null,Object? name = null,Object? totalSpent = null,Object? orderCount = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? customerId = null,Object? name = null,Object? totalSpent = null,Object? orderCount = null,Object? refundCount = null,}) {
   return _then(_TopSpenderModel(
 customerId: null == customerId ? _self.customerId : customerId // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,totalSpent: null == totalSpent ? _self.totalSpent : totalSpent // ignore: cast_nullable_to_non_nullable
 as double,orderCount: null == orderCount ? _self.orderCount : orderCount // ignore: cast_nullable_to_non_nullable
+as int,refundCount: null == refundCount ? _self.refundCount : refundCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
