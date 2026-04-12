@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/models/order_model.dart';
 
+import '../../../../core/widgets/confirm_status_update_dialog.dart';
 import '../cubit/order_details_cubit.dart';
 import 'order_details_style.dart';
 import 'order_status_utils.dart';
@@ -57,8 +57,11 @@ class UpdateStatusButton extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.change_circle_outlined,
-                        color: Colors.white, size: 20),
+                    const Icon(
+                      Icons.change_circle_outlined,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ],
                 ),
         ),
@@ -66,9 +69,9 @@ class UpdateStatusButton extends StatelessWidget {
     );
   }
 
-  void _showSheet(BuildContext context) {
+  Future<void> _showSheet(BuildContext context) async {
     final cubit = context.read<OrderDetailsCubit>();
-    showModalBottomSheet(
+    await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.white,
@@ -77,9 +80,14 @@ class UpdateStatusButton extends StatelessWidget {
       ),
       builder: (_) => StatusBottomSheet(
         currentStatus: order.status,
-        onStatusSelected: (s) {
+        onStatusSelected: (s) async {
           Navigator.pop(context);
-          if (s != order.status) cubit.updateStatus(s);
+          if (s == order.status) return;
+          final confirmed = await showDialog<bool>(
+            context: context,
+            builder: (_) => const ConfirmStatusUpdateDialog(),
+          );
+          if (confirmed == true) cubit.updateStatus(s);
         },
       ),
     );

@@ -433,6 +433,15 @@
   "selectNewStatusHint": "Select the new order status",
   "@selectNewStatusHint": {},
 
+  "confirmStatusUpdateTitle": "Confirm Status Update",
+  "@confirmStatusUpdateTitle": {},
+
+  "confirmStatusUpdateMessage": "Are you sure you want to change the order status?",
+  "@confirmStatusUpdateMessage": {},
+
+  "confirmLabel": "Confirm",
+  "@confirmLabel": {},
+
   "cancelLabel": "Cancel",
   "@cancelLabel": {},
 

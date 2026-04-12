@@ -2074,6 +2074,31 @@ class S {
     );
   }
 
+  /// `Confirm Status Update`
+  String get confirmStatusUpdateTitle {
+    return Intl.message(
+      'Confirm Status Update',
+      name: 'confirmStatusUpdateTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to change the order status?`
+  String get confirmStatusUpdateMessage {
+    return Intl.message(
+      'Are you sure you want to change the order status?',
+      name: 'confirmStatusUpdateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirmLabel {
+    return Intl.message('Confirm', name: 'confirmLabel', desc: '', args: []);
+  }
+
   /// `Cancel`
   String get cancelLabel {
     return Intl.message('Cancel', name: 'cancelLabel', desc: '', args: []);

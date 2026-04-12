@@ -1,18 +1,19 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/design_system/spacing/app_spacing.dart';
 import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/models/order_model.dart';
 
+import '../../../../core/widgets/confirm_status_update_dialog.dart';
 import 'order_status_utils.dart';
 import 'status_bottom_sheet.dart';
 
 class OrderCard extends StatefulWidget {
   final OrderModel order;
   final VoidCallback onView;
-  final ValueChanged<OrderStatus> onStatusSelected;
+  final Future<void> Function(OrderStatus) onStatusSelected;
 
   const OrderCard({
     super.key,
@@ -27,6 +28,7 @@ class OrderCard extends StatefulWidget {
 
 class _OrderCardState extends State<OrderCard> {
   bool _hovered = false;
+  bool _isUpdating = false;
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +133,10 @@ class _OrderCardState extends State<OrderCard> {
                       label: l.updateStatusLabel,
                       backgroundColor: AppColors.goldRoyal,
                       foregroundColor: AppColors.blackDeep,
-                      onPressed: () => _showStatusSheet(context),
+                      isLoading: _isUpdating,
+                      onPressed: _isUpdating
+                          ? null
+                          : () => _showStatusSheet(context),
                     ),
                   ),
                   const SizedBox(width: AppSpacing.small + 4),
@@ -155,8 +160,8 @@ class _OrderCardState extends State<OrderCard> {
     );
   }
 
-  void _showStatusSheet(BuildContext context) {
-    showModalBottomSheet<void>(
+  Future<void> _showStatusSheet(BuildContext context) async {
+    await showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
       backgroundColor: AppColors.lightSurface,
@@ -167,9 +172,17 @@ class _OrderCardState extends State<OrderCard> {
       ),
       builder: (_) => StatusBottomSheet(
         currentStatus: widget.order.status,
-        onStatusSelected: (s) {
+        onStatusSelected: (s) async {
           Navigator.pop(context);
-          if (s != widget.order.status) widget.onStatusSelected(s);
+          if (s == widget.order.status) return;
+          final confirmed = await showDialog<bool>(
+            context: context,
+            builder: (_) => const ConfirmStatusUpdateDialog(),
+          );
+          if (confirmed != true || !mounted) return;
+          setState(() => _isUpdating = true);
+          await widget.onStatusSelected(s);
+          if (mounted) setState(() => _isUpdating = false);
         },
       ),
     );
@@ -181,7 +194,8 @@ class _CardButton extends StatelessWidget {
   final Color backgroundColor;
   final Color foregroundColor;
   final BorderSide? border;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+  final bool isLoading;
 
   const _CardButton({
     required this.label,
@@ -189,12 +203,13 @@ class _CardButton extends StatelessWidget {
     required this.foregroundColor,
     required this.onPressed,
     this.border,
+    this.isLoading = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onPressed,
+      onPressed: isLoading ? null : onPressed,
       style: TextButton.styleFrom(
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
@@ -210,7 +225,16 @@ class _CardButton extends StatelessWidget {
         ),
         minimumSize: const Size(0, 44),
       ),
-      child: Text(label),
+      child: isLoading
+          ? SizedBox(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: foregroundColor,
+              ),
+            )
+          : Text(label),
     );
   }
 }

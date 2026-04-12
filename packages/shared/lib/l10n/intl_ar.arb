@@ -433,6 +433,15 @@
   "selectNewStatusHint": "اختر الحالة الجديدة للطلب",
   "@selectNewStatusHint": {},
 
+  "confirmStatusUpdateTitle": "تأكيد تحديث الحالة",
+  "@confirmStatusUpdateTitle": {},
+
+  "confirmStatusUpdateMessage": "هل أنت متأكد من تغيير حالة الطلب؟",
+  "@confirmStatusUpdateMessage": {},
+
+  "confirmLabel": "تأكيد",
+  "@confirmLabel": {},
+
   "cancelLabel": "إلغاء",
   "@cancelLabel": {},
 
