@@ -131,7 +131,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmDeleteImage": MessageLookupByLibrary.simpleMessage(
       "هل تريد حذف هذه الصورة؟",
     ),
+    "confirmLabel": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage("تاكيد الرقم"),
+    "confirmStatusUpdateMessage": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد من تغيير حالة الطلب؟",
+    ),
+    "confirmStatusUpdateTitle": MessageLookupByLibrary.simpleMessage(
+      "تأكيد تحديث الحالة",
+    ),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "continueShopping": MessageLookupByLibrary.simpleMessage("متابعة التسوق"),
     "copyAddressLabel": MessageLookupByLibrary.simpleMessage("نسخ العنوان"),

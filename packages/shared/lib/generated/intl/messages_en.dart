@@ -142,8 +142,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmDeleteImage": MessageLookupByLibrary.simpleMessage(
       "Delete this image?",
     ),
+    "confirmLabel": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Confirm number",
+    ),
+    "confirmStatusUpdateMessage": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to change the order status?",
+    ),
+    "confirmStatusUpdateTitle": MessageLookupByLibrary.simpleMessage(
+      "Confirm Status Update",
     ),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
     "continueShopping": MessageLookupByLibrary.simpleMessage(
