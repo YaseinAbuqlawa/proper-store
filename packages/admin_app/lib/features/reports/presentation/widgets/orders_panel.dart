@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
 import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/design_system/spacing/app_spacing.dart';
 import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
@@ -22,6 +21,7 @@ class OrdersPanel extends StatelessWidget {
     final l = S.of(context);
     final cancellationPct =
         '${stats.cancellationRatePercent.toStringAsFixed(1)}%';
+    final refundPct = '${stats.refundRatePercent.toStringAsFixed(1)}%';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,6 +45,12 @@ class OrdersPanel extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: AppSpacing.medium),
+        StatCard(
+          title: l.refundRateLabel,
+          value: refundPct,
+          icon: Icons.replay_outlined,
+        ),
         const SizedBox(height: AppSpacing.large),
         Text(l.ordersStatusChartTitle, style: AppTextStyles.productName),
         const SizedBox(height: AppSpacing.medium),
@@ -64,6 +70,7 @@ class _OrdersStatusChart extends StatelessWidget {
     'confirmed': Color(0xFF42A5F5),
     'shipped': Color(0xFFFF7043),
     'delivered': Color(0xFF66BB6A),
+    'refunded': Color(0xFF7E57C2),
     'cancelled': Color(0xFFEF5350),
   };
 
@@ -72,18 +79,20 @@ class _OrdersStatusChart extends StatelessWidget {
     'confirmed',
     'shipped',
     'delivered',
+    'refunded',
     'cancelled',
   ];
 
   /// Maps a Firestore status key to its localized display label.
   static String _statusLabel(String key, S l) => switch (key) {
-        'pending' => l.orderStatusPending,
-        'confirmed' => l.orderStatusConfirmed,
-        'shipped' => l.orderStatusShipped,
-        'delivered' => l.orderStatusDelivered,
-        'cancelled' => l.orderStatusCancelled,
-        _ => key,
-      };
+    'pending' => l.orderStatusPending,
+    'confirmed' => l.orderStatusConfirmed,
+    'shipped' => l.orderStatusShipped,
+    'delivered' => l.orderStatusDelivered,
+    'refunded' => l.orderStatusRefunded,
+    'cancelled' => l.orderStatusCancelled,
+    _ => key,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +127,7 @@ class _OrdersStatusChart extends StatelessWidget {
             child: PieChart(
               PieChartData(
                 sections: entries.map((e) {
-                  final color =
-                      _statusColors[e.key] ?? AppColors.textSubtle;
+                  final color = _statusColors[e.key] ?? AppColors.textSubtle;
                   return PieChartSectionData(
                     value: e.value.toDouble(),
                     color: color,
@@ -143,8 +151,7 @@ class _OrdersStatusChart extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: entries.map((e) {
-                final color =
-                    _statusColors[e.key] ?? AppColors.textSubtle;
+                final color = _statusColors[e.key] ?? AppColors.textSubtle;
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 3),
                   child: Row(

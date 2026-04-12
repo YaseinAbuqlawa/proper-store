@@ -132,8 +132,8 @@
   "productFormFieldDiscountVal": "قيمة الخصم",
   "@productFormFieldDiscountVal": {},
 
-  "productFormFieldSoldQty": "الكميات المباعة",
-  "@productFormFieldSoldQty": {},
+  "productFormFieldShippedQty": "الكميات المشحونة",
+  "@productFormFieldShippedQty": {},
 
   "productFormFieldRefundedQty": "الكميات المستردة",
   "@productFormFieldRefundedQty": {},
@@ -676,6 +676,15 @@
   "cancellationRateLabel": "نسبة الإلغاء",
   "@cancellationRateLabel": {},
 
+  "netRevenueLabel": "صافي الإيرادات",
+  "@netRevenueLabel": {},
+
+  "totalRefundedLabel": "إجمالي المسترد",
+  "@totalRefundedLabel": {},
+
+  "refundRateLabel": "نسبة الاسترداد",
+  "@refundRateLabel": {},
+
   "dailyRevenueChartTitle": "الإيرادات اليومية (آخر 30 يوم)",
   "@dailyRevenueChartTitle": {},
 
@@ -706,5 +715,14 @@
     "placeholders": {
       "count": { "type": "int" }
     }
-  }
+  },
+
+  "revenueChartLabel": "مبيعات",
+  "@revenueChartLabel": {},
+
+  "refundChartLabel": "مسترد",
+  "@refundChartLabel": {},
+
+  "actualSoldLabel": "الفعلي",
+  "@actualSoldLabel": {}
 }

@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "actionsLabel": MessageLookupByLibrary.simpleMessage("الإجراءات"),
+    "actualSoldLabel": MessageLookupByLibrary.simpleMessage("الفعلي"),
     "addAddressTitle": MessageLookupByLibrary.simpleMessage("إضافة عنوان"),
     "addBtn": MessageLookupByLibrary.simpleMessage("إضافة"),
     "addCategory": MessageLookupByLibrary.simpleMessage("إضافة قسم"),
@@ -333,6 +334,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "navOrders": MessageLookupByLibrary.simpleMessage("الطلبات"),
     "navProducts": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "navStoreConfig": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "netRevenueLabel": MessageLookupByLibrary.simpleMessage("صافي الإيرادات"),
     "noAddressSelected": MessageLookupByLibrary.simpleMessage(
       "يرجى اختيار عنوان للشحن",
     ),
@@ -495,8 +497,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "productFormFieldRefundedQty": MessageLookupByLibrary.simpleMessage(
       "الكميات المستردة",
     ),
-    "productFormFieldSoldQty": MessageLookupByLibrary.simpleMessage(
-      "الكميات المباعة",
+    "productFormFieldShippedQty": MessageLookupByLibrary.simpleMessage(
+      "الكميات المشحونة",
     ),
     "productFormPickColor": MessageLookupByLibrary.simpleMessage("اختر لوناً"),
     "productFormPickImage": MessageLookupByLibrary.simpleMessage(
@@ -534,10 +536,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "productsTitle": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),
     "quantityLabel": m5,
+    "refundChartLabel": MessageLookupByLibrary.simpleMessage("مسترد"),
+    "refundRateLabel": MessageLookupByLibrary.simpleMessage("نسبة الاسترداد"),
     "reportsTitle": MessageLookupByLibrary.simpleMessage("التقارير"),
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "retryBtn": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "returnPolicy": MessageLookupByLibrary.simpleMessage("سياسة الاسترجاع"),
+    "revenueChartLabel": MessageLookupByLibrary.simpleMessage("مبيعات"),
     "saveAddress": MessageLookupByLibrary.simpleMessage("حفظ العنوان"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
     "searchGovernorateHint": MessageLookupByLibrary.simpleMessage(
@@ -630,6 +635,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "إجمالي العملاء",
     ),
     "totalOrdersLabel": MessageLookupByLibrary.simpleMessage("إجمالي الطلبات"),
+    "totalRefundedLabel": MessageLookupByLibrary.simpleMessage(
+      "إجمالي المسترد",
+    ),
     "totalRevenueLabel": MessageLookupByLibrary.simpleMessage(
       "إجمالي الإيرادات",
     ),

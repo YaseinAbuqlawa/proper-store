@@ -12,6 +12,7 @@ _TopSpenderModel _$TopSpenderModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       totalSpent: (json['totalSpent'] as num).toDouble(),
       orderCount: (json['orderCount'] as num).toInt(),
+      refundCount: (json['refundCount'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$TopSpenderModelToJson(_TopSpenderModel instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$TopSpenderModelToJson(_TopSpenderModel instance) =>
       'name': instance.name,
       'totalSpent': instance.totalSpent,
       'orderCount': instance.orderCount,
+      'refundCount': instance.refundCount,
     };

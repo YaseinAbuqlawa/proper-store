@@ -29,6 +29,7 @@ export interface SellingEntry {
   variantName: string;
   imageUrl: string;
   totalSold: number;
+  totalRefunded?: number;
 }
 
 export type ProductSnap = admin.firestore.DocumentSnapshot;

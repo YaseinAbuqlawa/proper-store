@@ -30,7 +30,7 @@ void main() {
       section: 'bags',
       sellingPrice: 100,
       sizes: const [],
-      soldQuantity: 0,
+      shippedQuantity: 0,
       stockQuantity: 5,
     );
 

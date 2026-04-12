@@ -22,7 +22,11 @@ class GetDashboardStatsUseCase {
   static DashboardStats _withPreparedData(DashboardStats raw) {
     final daily = _prepareDailyRevenue(raw.dailyRevenue);
     final monthly = _prepareMonthlyRevenue(raw.monthlyRevenue);
+    final dailyRefunded = _prepareDailyRevenue(raw.dailyRefunded);
+    final monthlyRefunded = _prepareMonthlyRevenue(raw.monthlyRefunded);
     return DashboardStats(
+      refundedOrders: raw.refundedOrders,
+      totalRefunded: raw.totalRefunded,
       totalRevenue: raw.totalRevenue,
       totalOrders: raw.totalOrders,
       totalCustomers: raw.totalCustomers,
@@ -30,13 +34,17 @@ class GetDashboardStatsUseCase {
       ordersByStatus: raw.ordersByStatus,
       dailyRevenue: raw.dailyRevenue,
       monthlyRevenue: raw.monthlyRevenue,
+      dailyRefunded: raw.dailyRefunded,
+      monthlyRefunded: raw.monthlyRefunded,
       topSelling: raw.topSelling,
       topSpenders: raw.topSpenders,
       lastUpdatedAt: raw.lastUpdatedAt,
       preparedDailyRevenue: daily,
       preparedMonthlyRevenue: monthly,
-      dailyRevenueMaxY: _computeMaxY(daily),
-      monthlyRevenueMaxY: _computeMaxY(monthly),
+      preparedDailyRefunded: dailyRefunded,
+      preparedMonthlyRefunded: monthlyRefunded,
+      dailyRevenueMaxY: _computeMaxY([...daily, ...dailyRefunded]),
+      monthlyRevenueMaxY: _computeMaxY([...monthly, ...monthlyRefunded]),
     );
   }
 
@@ -49,8 +57,9 @@ class GetDashboardStatsUseCase {
     final sorted = dailyRevenue.entries.toList()
       ..sort((a, b) => a.key.compareTo(b.key));
 
-    final last30 =
-        sorted.length > 30 ? sorted.sublist(sorted.length - 30) : sorted;
+    final last30 = sorted.length > 30
+        ? sorted.sublist(sorted.length - 30)
+        : sorted;
 
     final result = <MapEntry<String, double>>[];
     var current = DateTime.parse('${last30.first.key}T00:00:00');
@@ -75,8 +84,9 @@ class GetDashboardStatsUseCase {
     final sorted = monthlyRevenue.entries.toList()
       ..sort((a, b) => a.key.compareTo(b.key));
 
-    final last12 =
-        sorted.length > 12 ? sorted.sublist(sorted.length - 12) : sorted;
+    final last12 = sorted.length > 12
+        ? sorted.sublist(sorted.length - 12)
+        : sorted;
 
     final result = <MapEntry<String, double>>[];
     var currentYear = int.parse(last12.first.key.split('-')[0]);
@@ -86,8 +96,7 @@ class GetDashboardStatsUseCase {
 
     while (currentYear < endYear ||
         (currentYear == endYear && currentMonth <= endMonth)) {
-      final key =
-          '$currentYear-${currentMonth.toString().padLeft(2, '0')}';
+      final key = '$currentYear-${currentMonth.toString().padLeft(2, '0')}';
       result.add(MapEntry(key, monthlyRevenue[key] ?? 0));
       currentMonth++;
       if (currentMonth > 12) {
@@ -102,8 +111,7 @@ class GetDashboardStatsUseCase {
   /// Computes max Y with a 20 % headroom buffer so bar tops don't clip.
   static double _computeMaxY(List<MapEntry<String, double>> entries) {
     if (entries.isEmpty) return 100;
-    final max =
-        entries.map((e) => e.value).fold(0.0, (a, b) => a > b ? a : b);
+    final max = entries.map((e) => e.value).fold(0.0, (a, b) => a > b ? a : b);
     return max == 0 ? 100 : max * 1.2;
   }
 }

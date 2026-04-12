@@ -1,7 +1,7 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions/v1";
 
-import { STATS_DOC, MAX_DAILY_DAYS, MAX_MONTHLY_MONTHS } from "./constants";
+import { STATS_DOC, MAX_DAILY_DAYS, MAX_MONTHLY_MONTHS, TOP_SELLING_LIMIT } from "./constants";
 import {
   todayKey,
   monthKey,
@@ -136,7 +136,7 @@ export const createOrder = functions.https.onCall(async (data, context) => {
         outOfStockVariants: oosKeys,
         hasOutOfStockVariants: oosKeys.length > 0,
         totalStock: F.increment(totalStockDelta),
-        soldQuantity: F.increment(totalQtyForProduct),
+        shippedQuantity: F.increment(totalQtyForProduct),
       });
     }
 
@@ -240,7 +240,7 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
         .sort((a, b) => b.totalSold - a.totalSold)
         .slice(0, 10);
 
-      // Restore product stock + roll back soldQuantity
+      // Restore product stock + roll back shippedQuantity
       for (let i = 0; i < productIds.length; i++) {
         if (!productSnaps[i].exists) continue;
         const productData = productSnaps[i].data()!;
@@ -268,7 +268,7 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
           outOfStockVariants: oosKeys,
           hasOutOfStockVariants: oosKeys.length > 0,
           totalStock: F.increment(totalStockDelta),
-          soldQuantity: F.increment(-totalQtyForProduct),
+          shippedQuantity: F.increment(-totalQtyForProduct),
         });
       }
 
@@ -318,10 +318,36 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
       const statsData = statsSnap.data() ?? {};
       const customerRef = db.doc(`customers/${customerId}`);
 
+      // Use order's original date keys for the refund maps
+      const orderDate = orderData.createdAt?.toDate?.() ?? new Date();
+      const orderDayKey = orderDate.toISOString().slice(0, 10);
+      const orderMonthKey = orderDate.toISOString().slice(0, 7);
+
+      // Parallel refund revenue maps (additive — never subtract from revenue maps)
+      const newDailyRefunded = pruneMap(statsData.dailyRefunded ?? {}, orderDayKey, revenue, MAX_DAILY_DAYS);
+      const newMonthlyRefunded = pruneMap(statsData.monthlyRefunded ?? {}, orderMonthKey, revenue, MAX_MONTHLY_MONTHS);
+
       // Roll back topSpenders totalSpent + increment refundCount
       const updatedSpenders = rollbackSpenderOnRefund(statsData.topSpenders ?? [], customerId, revenue);
 
-      // Restore product stock + increment refundedQuantity
+      // Update topSelling — increment totalRefunded per item, re-sort by actualSold (totalSold - totalRefunded)
+      const existingSelling: SellingEntry[] = statsData.topSelling ?? [];
+      const updatedSelling = existingSelling
+        .map((s) => {
+          const match = refundedProducts.find(
+            (p) => `${p.productId}_${p.variantKey}` === s.id
+          );
+          if (!match) return s;
+          return { ...s, totalRefunded: (s.totalRefunded ?? 0) + match.quantity };
+        })
+        .sort((a, b) => {
+          const actualA = a.totalSold - (a.totalRefunded ?? 0);
+          const actualB = b.totalSold - (b.totalRefunded ?? 0);
+          return actualB - actualA;
+        })
+        .slice(0, TOP_SELLING_LIMIT);
+
+      // Restore product stock + increment refundedQuantity + decrement shippedQuantity
       for (let i = 0; i < productIds.length; i++) {
         if (!productSnaps[i].exists) continue;
         const productData = productSnaps[i].data()!;
@@ -360,7 +386,10 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
         totalRefunded: F.increment(revenue),
         refundedOrders: F.increment(1),
         ordersByStatus: { [oldStatus]: F.increment(-1), [newStatus]: F.increment(1) },
+        dailyRefunded: newDailyRefunded,
+        monthlyRefunded: newMonthlyRefunded,
         topSpenders: updatedSpenders,
+        topSelling: updatedSelling,
         lastUpdatedAt: F.serverTimestamp(),
       }, { merge: true });
 

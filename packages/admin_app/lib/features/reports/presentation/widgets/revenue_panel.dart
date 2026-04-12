@@ -11,13 +11,12 @@ import 'stat_card.dart';
 // Height of each revenue bar chart container.
 const double _kChartHeight = 200;
 
+
 class RevenuePanel extends StatelessWidget {
   final DashboardStats stats;
 
   const RevenuePanel({super.key, required this.stats});
 
-  // Static label builders — extracted here so build() does not allocate
-  // closure objects on every frame.
   static String _dailyLabel(int index, List<MapEntry<String, double>> entries) {
     if (index < 0 || index >= entries.length) return '';
     final day = entries[index].key.split('-').last;
@@ -43,8 +42,8 @@ class RevenuePanel extends StatelessWidget {
           children: [
             Expanded(
               child: StatCard(
-                title: l.totalRevenueLabel,
-                value: '${stats.totalRevenue.toStringAsFixed(0)} ج',
+                title: l.netRevenueLabel,
+                value: '${stats.netRevenue.toStringAsFixed(0)} ج',
                 icon: Icons.attach_money_outlined,
               ),
             ),
@@ -58,19 +57,25 @@ class RevenuePanel extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: AppSpacing.medium),
+        StatCard(
+          title: l.totalRefundedLabel,
+          value: '${stats.totalRefunded.toStringAsFixed(0)} ج',
+          icon: Icons.replay_outlined,
+        ),
         const SizedBox(height: AppSpacing.large),
-        // preparedDailyRevenue and dailyRevenueMaxY are computed once in the
-        // use case and stored on the entity — no work happens in build().
         _RevenueBarChart(
           title: l.dailyRevenueChartTitle,
-          data: stats.preparedDailyRevenue,
+          revenueData: stats.preparedDailyRevenue,
+          refundData: stats.preparedDailyRefunded,
           maxY: stats.dailyRevenueMaxY,
           labelBuilder: _dailyLabel,
         ),
         const SizedBox(height: AppSpacing.large),
         _RevenueBarChart(
           title: l.monthlyRevenueChartTitle,
-          data: stats.preparedMonthlyRevenue,
+          revenueData: stats.preparedMonthlyRevenue,
+          refundData: stats.preparedMonthlyRefunded,
           maxY: stats.monthlyRevenueMaxY,
           labelBuilder: _monthlyLabel,
         ),
@@ -81,24 +86,42 @@ class RevenuePanel extends StatelessWidget {
 
 class _RevenueBarChart extends StatelessWidget {
   final String title;
-  final List<MapEntry<String, double>> data;
+  final List<MapEntry<String, double>> revenueData;
+  final List<MapEntry<String, double>> refundData;
   final double maxY;
   final String Function(int index, List<MapEntry<String, double>> entries)
   labelBuilder;
 
   const _RevenueBarChart({
     required this.title,
-    required this.data,
+    required this.revenueData,
+    required this.refundData,
     required this.maxY,
     required this.labelBuilder,
   });
 
   @override
   Widget build(BuildContext context) {
+    final l = S.of(context);
+    final hasRefund = refundData.isNotEmpty;
+    // Build a lookup for refund values keyed by date string.
+    final refundMap = {for (final e in refundData) e.key: e.value};
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: AppTextStyles.productName),
+        Row(
+          children: [
+            Expanded(
+              child: Text(title, style: AppTextStyles.productName),
+            ),
+            if (hasRefund) ...[
+              _LegendDot(color: AppColors.goldRoyal, label: l.revenueChartLabel),
+              const SizedBox(width: AppSpacing.small),
+              _LegendDot(color: AppColors.refundPurple, label: l.refundChartLabel),
+            ],
+          ],
+        ),
         const SizedBox(height: AppSpacing.medium),
         Container(
           height: _kChartHeight,
@@ -108,10 +131,10 @@ class _RevenueBarChart extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
             boxShadow: AppColors.cardShadow,
           ),
-          child: data.isEmpty
+          child: revenueData.isEmpty
               ? Center(
                   child: Text(
-                    S.of(context).noDataAvailable,
+                    l.noDataAvailable,
                     style: AppTextStyles.bodyDescription,
                   ),
                 )
@@ -122,10 +145,13 @@ class _RevenueBarChart extends StatelessWidget {
                     barTouchData: BarTouchData(
                       touchTooltipData: BarTouchTooltipData(
                         getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                          final label = data[groupIndex].key;
+                          final label = revenueData[groupIndex].key;
                           final value = rod.toY.toStringAsFixed(0);
+                          final suffix = rodIndex == 0
+                              ? l.revenueChartLabel
+                              : l.refundChartLabel;
                           return BarTooltipItem(
-                            '$label\n$value ج',
+                            '$label\n$value ج ($suffix)',
                             AppTextStyles.bodyDescription.copyWith(
                               color: AppColors.whiteColor,
                               fontSize: 11,
@@ -140,7 +166,8 @@ class _RevenueBarChart extends StatelessWidget {
                         sideTitles: SideTitles(
                           showTitles: true,
                           getTitlesWidget: (value, meta) {
-                            final label = labelBuilder(value.toInt(), data);
+                            final label =
+                                labelBuilder(value.toInt(), revenueData);
                             return SideTitleWidget(
                               meta: meta,
                               child: Text(
@@ -199,23 +226,64 @@ class _RevenueBarChart extends StatelessWidget {
                         ),
                       ),
                     ),
-                    barGroups: data.asMap().entries.map((e) {
+                    barGroups: revenueData.asMap().entries.map((e) {
+                      final refundValue = refundMap[e.value.key] ?? 0.0;
+                      final barWidth = revenueData.length > 20 ? 4.0 : 8.0;
                       return BarChartGroupData(
                         x: e.key,
+                        groupVertically: false,
                         barRods: [
                           BarChartRodData(
                             toY: e.value.value,
                             color: AppColors.goldRoyal,
-                            width: data.length > 20 ? 6 : 12,
+                            width: barWidth,
                             borderRadius: const BorderRadius.vertical(
                               top: Radius.circular(4),
                             ),
                           ),
+                          if (hasRefund)
+                            BarChartRodData(
+                              toY: refundValue,
+                              color: AppColors.refundPurple,
+                              width: barWidth,
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(4),
+                              ),
+                            ),
                         ],
                       );
                     }).toList(),
                   ),
                 ),
+        ),
+      ],
+    );
+  }
+}
+
+class _LegendDot extends StatelessWidget {
+  final Color color;
+  final String label;
+
+  const _LegendDot({required this.color, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
+        const SizedBox(width: 4),
+        Text(
+          label,
+          style: AppTextStyles.navLabel.copyWith(
+            color: AppColors.textSubtle,
+            fontSize: 10,
+          ),
         ),
       ],
     );

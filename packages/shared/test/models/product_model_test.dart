@@ -29,7 +29,7 @@ void main() {
           'section': 'bags',
           'sellingPrice': 100.0,
           'sizes': <double>[],
-          'soldQuantity': 0,
+          'shippedQuantity': 0,
           'stockQuantity': 5,
         };
 
@@ -70,7 +70,7 @@ void main() {
         section: 'bags',
         sellingPrice: 100.0,
         sizes: const [],
-        soldQuantity: 0,
+        shippedQuantity: 0,
         stockQuantity: 5,
       );
 
@@ -101,7 +101,7 @@ void main() {
         section: 'bags',
         sellingPrice: 100.0,
         sizes: const [],
-        soldQuantity: 0,
+        shippedQuantity: 0,
         stockQuantity: 5,
       );
 
@@ -145,7 +145,7 @@ void main() {
         section: 'bags',
         sellingPrice: 100.0,
         sizes: const [],
-        soldQuantity: 0,
+        shippedQuantity: 0,
         stockQuantity: 5,
         totalStock: 5,
       );

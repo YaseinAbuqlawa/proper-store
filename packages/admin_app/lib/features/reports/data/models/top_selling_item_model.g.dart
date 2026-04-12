@@ -15,6 +15,7 @@ _TopSellingItemModel _$TopSellingItemModelFromJson(Map<String, dynamic> json) =>
       variantName: json['variantName'] as String,
       imageUrl: json['imageUrl'] as String,
       totalSold: (json['totalSold'] as num).toInt(),
+      totalRefunded: (json['totalRefunded'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$TopSellingItemModelToJson(
@@ -27,4 +28,5 @@ Map<String, dynamic> _$TopSellingItemModelToJson(
   'variantName': instance.variantName,
   'imageUrl': instance.imageUrl,
   'totalSold': instance.totalSold,
+  'totalRefunded': instance.totalRefunded,
 };

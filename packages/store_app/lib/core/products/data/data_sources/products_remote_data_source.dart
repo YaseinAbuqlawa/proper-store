@@ -11,7 +11,7 @@ class ProductsRemoteDataSource {
   Future<List<ProductModel>> getMostSoldProducts() async {
     final productsDocuments = await firestore
         .collection(AppConsts.productsCollection)
-        .orderBy("soldQuantity", descending: true)
+        .orderBy("shippedQuantity", descending: true)
         .limit(10)
         .get();
 

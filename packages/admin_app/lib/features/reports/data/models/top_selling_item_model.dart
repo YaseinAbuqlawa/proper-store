@@ -17,6 +17,7 @@ abstract class TopSellingItemModel with _$TopSellingItemModel {
     required String variantName,
     required String imageUrl,
     required int totalSold,
+    @Default(0) int totalRefunded,
   }) = _TopSellingItemModel;
 
   factory TopSellingItemModel.fromJson(Map<String, dynamic> json) =>
@@ -30,5 +31,6 @@ abstract class TopSellingItemModel with _$TopSellingItemModel {
     variantName: variantName,
     imageUrl: imageUrl,
     totalSold: totalSold,
+    totalRefunded: totalRefunded,
   );
 }
