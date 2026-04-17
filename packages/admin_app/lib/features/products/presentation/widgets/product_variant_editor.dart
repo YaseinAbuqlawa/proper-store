@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
 import 'package:proper_store_shared/helpers/app_consts.dart';
+import 'package:proper_store_shared/helpers/app_snackbar.dart';
 
 import 'package:admin/core/helpers/image_compressor.dart';
 import 'package:admin/core/widgets/admin_button.dart';
@@ -53,7 +54,18 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
     );
     if (files.isEmpty) return;
     final rawList = await Future.wait(files.map((f) => f.readAsBytes()));
-    final bytes = await Future.wait(rawList.map(ImageCompressor.compress));
+    final accepted =
+        rawList.where((b) => !ImageCompressor.exceedsMaxBytes(b)).toList();
+    final rejectedCount = rawList.length - accepted.length;
+    if (rejectedCount > 0 && mounted) {
+      AppSnackbar.errorSnackbar(
+        context: context,
+        failureMessage: S.of(context).imagesSkippedTooLarge(rejectedCount),
+      );
+    }
+    if (accepted.isEmpty) return;
+    final bytes = await Future.wait(accepted.map(ImageCompressor.compress));
+    if (!mounted) return;
     setState(() => widget.entry.newImageBytes.addAll(bytes));
     widget.onChanged();
   }

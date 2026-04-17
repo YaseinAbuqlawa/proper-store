@@ -15,6 +15,10 @@ class ProductFormData {
   /// URLs of images from fully-removed variants, to be deleted from Storage on save.
   final List<String> removedVariantImageUrls;
 
+  /// Transient error surfaced by async cubit operations that can't show a
+  /// snackbar themselves. Listeners must clear it after displaying.
+  final String? transientErrorKey;
+
   const ProductFormData({
     this.selectedCategory,
     this.existingMainImageUrl,
@@ -22,6 +26,7 @@ class ProductFormData {
     this.removedMainImageUrl,
     this.productVariants = const [],
     this.removedVariantImageUrls = const [],
+    this.transientErrorKey,
   });
 
   bool get hasMainImage =>
@@ -34,6 +39,7 @@ class ProductFormData {
     Object? removedMainImageUrl = _unchanged,
     List<ProductVariantEntry>? productVariants,
     List<String>? removedVariantImageUrls,
+    Object? transientErrorKey = _unchanged,
   }) {
     return ProductFormData(
       selectedCategory: identical(selectedCategory, _unchanged)
@@ -51,6 +57,15 @@ class ProductFormData {
       productVariants: productVariants ?? this.productVariants,
       removedVariantImageUrls:
           removedVariantImageUrls ?? this.removedVariantImageUrls,
+      transientErrorKey: identical(transientErrorKey, _unchanged)
+          ? this.transientErrorKey
+          : transientErrorKey as String?,
     );
   }
+}
+
+/// Keys referenced from `S.of(context).<key>`. Cubit surfaces these;
+/// UI maps them to localized strings.
+class ProductFormErrorKeys {
+  static const String imageTooLarge = 'imageTooLarge';
 }

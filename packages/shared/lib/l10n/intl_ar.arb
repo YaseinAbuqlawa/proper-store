@@ -370,6 +370,21 @@
   "categoryImageRequired": "يرجى إضافة صورة للتصنيف",
   "@categoryImageRequired": {},
 
+  "categoryNameInvalid": "اسم التصنيف يجب أن يحتوي فقط على أحرف أو أرقام أو مسافات أو _ أو - (بحد أقصى 40 حرفًا)",
+  "@categoryNameInvalid": {},
+
+  "imageTooLarge": "حجم الصورة كبير جدًا. الحد الأقصى 5 ميجابايت",
+  "@imageTooLarge": {},
+
+  "imagesSkippedTooLarge": "تم تخطي {count} صورة — حجمها أكبر من 5 ميجابايت",
+  "@imagesSkippedTooLarge": {
+      "placeholders": {
+          "count": {
+              "type": "int"
+          }
+      }
+  },
+
   "productFormErrorMainImageRequired": "يرجى إضافة صورة رئيسية للمنتج",
   "@productFormErrorMainImageRequired": {},
 

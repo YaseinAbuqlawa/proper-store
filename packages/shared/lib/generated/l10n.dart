@@ -1884,6 +1884,36 @@ class S {
     );
   }
 
+  /// `Category name may only contain letters, digits, spaces, underscore or hyphen (up to 40 characters)`
+  String get categoryNameInvalid {
+    return Intl.message(
+      'Category name may only contain letters, digits, spaces, underscore or hyphen (up to 40 characters)',
+      name: 'categoryNameInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image is too large. Maximum size is 5 MB`
+  String get imageTooLarge {
+    return Intl.message(
+      'Image is too large. Maximum size is 5 MB',
+      name: 'imageTooLarge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} image(s) skipped — larger than 5 MB`
+  String imagesSkippedTooLarge(int count) {
+    return Intl.message(
+      '$count image(s) skipped — larger than 5 MB',
+      name: 'imagesSkippedTooLarge',
+      desc: '',
+      args: [count],
+    );
+  }
+
   /// `Please add a main image for the product`
   String get productFormErrorMainImageRequired {
     return Intl.message(

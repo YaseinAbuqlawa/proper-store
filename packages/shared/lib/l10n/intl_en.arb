@@ -370,6 +370,21 @@
   "categoryImageRequired": "Please add an image for the category",
   "@categoryImageRequired": {},
 
+  "categoryNameInvalid": "Category name may only contain letters, digits, spaces, underscore or hyphen (up to 40 characters)",
+  "@categoryNameInvalid": {},
+
+  "imageTooLarge": "Image is too large. Maximum size is 5 MB",
+  "@imageTooLarge": {},
+
+  "imagesSkippedTooLarge": "{count} image(s) skipped — larger than 5 MB",
+  "@imagesSkippedTooLarge": {
+      "placeholders": {
+          "count": {
+              "type": "int"
+          }
+      }
+  },
+
   "productFormErrorMainImageRequired": "Please add a main image for the product",
   "@productFormErrorMainImageRequired": {},
 

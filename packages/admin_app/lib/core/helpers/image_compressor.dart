@@ -5,6 +5,10 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 class ImageCompressor {
   static const int _maxDimension = 1200;
   static const int _quality = 85;
+  static const int maxBytes = 5 * 1024 * 1024;
+
+  static bool exceedsMaxBytes(Uint8List bytes) =>
+      bytes.lengthInBytes > maxBytes;
 
   // PNG magic number: 8-byte signature
   static bool isPng(Uint8List bytes) =>

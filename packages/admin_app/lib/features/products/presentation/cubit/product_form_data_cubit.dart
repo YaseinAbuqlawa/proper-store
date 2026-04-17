@@ -34,6 +34,12 @@ class ProductFormDataCubit extends Cubit<ProductFormData> {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (picked == null) return;
     final raw = await picked.readAsBytes();
+    if (ImageCompressor.exceedsMaxBytes(raw)) {
+      emit(
+        state.copyWith(transientErrorKey: ProductFormErrorKeys.imageTooLarge),
+      );
+      return;
+    }
     final bytes = await ImageCompressor.compress(raw);
     emit(
       state.copyWith(
@@ -42,6 +48,11 @@ class ProductFormDataCubit extends Cubit<ProductFormData> {
         newMainImageBytes: bytes,
       ),
     );
+  }
+
+  void clearTransientError() {
+    if (state.transientErrorKey == null) return;
+    emit(state.copyWith(transientErrorKey: null));
   }
 
   void addVariant() {

@@ -11,6 +11,7 @@ import 'package:proper_store_shared/helpers/app_consts.dart';
 import 'package:proper_store_shared/helpers/app_dialog.dart';
 import 'package:proper_store_shared/helpers/app_snackbar.dart';
 
+import 'package:admin/core/helpers/category_name_validator.dart';
 import 'package:admin/core/helpers/image_compressor.dart';
 import 'package:admin/core/widgets/admin_button.dart';
 import 'package:admin/features/products/presentation/cubit/categories_cubit.dart';
@@ -49,6 +50,15 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
     if (!mounted) return;
     AppDialog.showLoading(context);
     final raw = await file.readAsBytes();
+    if (ImageCompressor.exceedsMaxBytes(raw)) {
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      AppSnackbar.errorSnackbar(
+        context: context,
+        failureMessage: S.of(context).imageTooLarge,
+      );
+      return;
+    }
     final bytes = await ImageCompressor.compress(raw);
     if (!mounted) return;
     Navigator.of(context).pop();
@@ -57,11 +67,18 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
 
   void _save() {
     final l = S.of(context);
-    final name = _nameController.text.trim();
-    if (name.isEmpty) {
+    if (_nameController.text.trim().isEmpty) {
       AppSnackbar.errorSnackbar(
         context: context,
         failureMessage: l.errorRequired,
+      );
+      return;
+    }
+    final normalized = CategoryNameValidator.normalize(_nameController.text);
+    if (normalized == null) {
+      AppSnackbar.errorSnackbar(
+        context: context,
+        failureMessage: l.categoryNameInvalid,
       );
       return;
     }
@@ -72,8 +89,8 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
       );
       return;
     }
-    _pendingSaveName = name;
-    widget.cubit.addCategory(name, _imageBytes!);
+    _pendingSaveName = normalized;
+    widget.cubit.addCategory(normalized, _imageBytes!);
   }
 
   @override

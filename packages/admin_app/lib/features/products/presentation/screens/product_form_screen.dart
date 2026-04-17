@@ -246,6 +246,22 @@ class _ProductFormViewState extends State<_ProductFormView> {
             }
           },
         ),
+        BlocListener<ProductFormDataCubit, ProductFormData>(
+          listenWhen: (prev, curr) =>
+              prev.transientErrorKey != curr.transientErrorKey &&
+              curr.transientErrorKey != null,
+          listener: (context, state) {
+            final message = state.transientErrorKey ==
+                    ProductFormErrorKeys.imageTooLarge
+                ? l.imageTooLarge
+                : l.errorUnexpected;
+            AppSnackbar.errorSnackbar(
+              context: context,
+              failureMessage: message,
+            );
+            context.read<ProductFormDataCubit>().clearTransientError();
+          },
+        ),
         BlocListener<ProductFormCubit, ProductFormState>(
           listener: (context, state) {
             state.whenOrNull(
