@@ -37,6 +37,11 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // Audit logs: server-only (Admin SDK bypasses rules). Explicit for clarity.
+    match /auditLogs/{id} {
+      allow read, write: if false;
+    }
+
     // Deny everything else by default.
     match /{document=**} {
       allow read, write: if false;

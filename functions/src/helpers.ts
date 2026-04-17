@@ -15,6 +15,34 @@ export function assertSuperAdmin(context: functions.https.CallableContext): void
   }
 }
 
+// ─── Audit log ────────────────────────────────────────────────────────────────
+
+/**
+ * Writes an append-only entry to `auditLogs/{autoId}`. Best-effort: logging
+ * failures are swallowed so they never fail the originating mutation.
+ * Client writes to auditLogs are denied by Firestore rules; Admin SDK bypasses.
+ */
+export async function writeAuditLog(
+  db: admin.firestore.Firestore,
+  entry: {
+    actorUid: string;
+    actorRole: string;
+    action: string;
+    targetId: string;
+    before?: Record<string, unknown>;
+    after?: Record<string, unknown>;
+  }
+): Promise<void> {
+  try {
+    await db.collection("auditLogs").add({
+      ...entry,
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+    });
+  } catch (err) {
+    functions.logger.warn("auditLog_write_failed", { err, entry });
+  }
+}
+
 // ─── Date keys ────────────────────────────────────────────────────────────────
 
 export function todayKey(): string {

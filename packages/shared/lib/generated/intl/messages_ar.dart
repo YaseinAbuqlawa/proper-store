@@ -22,18 +22,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(percentage) => "خصم ${percentage}%";
 
-  static String m1(productName, available) =>
+  static String m1(count) => "تم تخطي ${count} صورة — حجمها أكبر من 5 ميجابايت";
+
+  static String m2(productName, available) =>
       "المنتج ${productName} متوفر ${available} قطعة فقط";
 
-  static String m2(count) => "+${count} منتجات أخرى";
+  static String m3(count) => "+${count} منتجات أخرى";
 
-  static String m3(count) => "${count} طلبات";
+  static String m4(count) => "${count} طلبات";
 
-  static String m4(productName) => "المنتج ${productName} غير متوفر حالياً";
+  static String m5(productName) => "المنتج ${productName} غير متوفر حالياً";
 
-  static String m5(count) => "الكمية: ${count}";
+  static String m6(count) => "الكمية: ${count}";
 
-  static String m6(count) => "${count} مبيعة";
+  static String m7(count) => "${count} مبيعة";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -111,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "categoryNameHint": MessageLookupByLibrary.simpleMessage(
       "مثلاً: ملابس شتوية",
+    ),
+    "categoryNameInvalid": MessageLookupByLibrary.simpleMessage(
+      "اسم التصنيف يجب أن يحتوي فقط على أحرف أو أرقام أو مسافات أو _ أو - (بحد أقصى 40 حرفًا)",
     ),
     "categoryNameLabel": MessageLookupByLibrary.simpleMessage("اسم القسم"),
     "changePasswordBtn": MessageLookupByLibrary.simpleMessage(
@@ -297,6 +302,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "highQuality": MessageLookupByLibrary.simpleMessage("جودة عالية"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "imageTooLarge": MessageLookupByLibrary.simpleMessage(
+      "حجم الصورة كبير جدًا. الحد الأقصى 5 ميجابايت",
+    ),
+    "imagesSkippedTooLarge": m1,
     "loadOutOfStockBtn": MessageLookupByLibrary.simpleMessage(
       "تحميل المنتجات النافذة",
     ),
@@ -314,14 +323,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "سجلي دخولك لمتابعة طلباتك والاستمتاع بأفضل تجربة تسوق",
     ),
     "logoutButton": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
-    "lowStockProduct": m1,
+    "lowStockProduct": m2,
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "تسوقي الان",
     ),
     "monthlyRevenueChartTitle": MessageLookupByLibrary.simpleMessage(
       "الإيرادات الشهرية",
     ),
-    "moreProductsLabel": m2,
+    "moreProductsLabel": m3,
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
       "الاكثر مبيعاً",
     ),
@@ -363,7 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orderConfirmedTitle": MessageLookupByLibrary.simpleMessage(
       "تم تأكيد طلبك!",
     ),
-    "orderCountLabel": m3,
+    "orderCountLabel": m4,
     "orderCustomerLabel": MessageLookupByLibrary.simpleMessage("العميل"),
     "orderDateLabel": MessageLookupByLibrary.simpleMessage("التاريخ"),
     "orderDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
@@ -418,7 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم ارسال رمز التحقق",
     ),
     "outOfStockLabel": MessageLookupByLibrary.simpleMessage("نفذ المخزون"),
-    "outOfStockProduct": m4,
+    "outOfStockProduct": m5,
     "passwordLabel": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwordValidation": MessageLookupByLibrary.simpleMessage(
       "أدخل كلمة المرور",
@@ -535,7 +544,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "productsTitle": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),
-    "quantityLabel": m5,
+    "quantityLabel": m6,
     "refundChartLabel": MessageLookupByLibrary.simpleMessage("مسترد"),
     "refundRateLabel": MessageLookupByLibrary.simpleMessage("نسبة الاسترداد"),
     "reportsTitle": MessageLookupByLibrary.simpleMessage("التقارير"),
@@ -641,7 +650,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalRevenueLabel": MessageLookupByLibrary.simpleMessage(
       "إجمالي الإيرادات",
     ),
-    "totalSoldLabel": m6,
+    "totalSoldLabel": m7,
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("إجمالي الوحدات"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("تحديث الحالة"),
     "uploadPhoto": MessageLookupByLibrary.simpleMessage("رفع صورة"),

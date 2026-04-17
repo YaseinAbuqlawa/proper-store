@@ -11,6 +11,7 @@ import {
   validateStock,
   buildVariantStockUpdates,
   rollbackSpenderOnRefund,
+  writeAuditLog,
 } from "./helpers";
 import { OrderItem, SellingEntry, SpenderEntry } from "./types";
 
@@ -171,6 +172,7 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
 
   const orderRef = db.doc(`orders/${orderId}`);
   const statsRef = db.doc(STATS_DOC);
+  let oldStatusForAudit = "";
 
   // ── Cancellation ─────────────────────────────────────────────────────────────
   if (newStatus === "cancelled") {
@@ -182,6 +184,7 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
       if (!orderSnap.exists) throw new functions.https.HttpsError("not-found", "Order not found.");
       const orderData = orderSnap.data()!;
       const oldStatus: string = orderData.status ?? "pending";
+      oldStatusForAudit = oldStatus;
 
       // Validate transition (natural idempotency)
       const allowed = VALID_TRANSITIONS[oldStatus] ?? [];
@@ -287,6 +290,15 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
       tx.update(orderRef, { status: newStatus });
     });
 
+    await writeAuditLog(db, {
+      actorUid: context.auth.uid,
+      actorRole: role ?? "unknown",
+      action: "order.statusChange",
+      targetId: orderId,
+      before: { status: oldStatusForAudit },
+      after: { status: newStatus },
+    });
+
     return { success: true };
   }
 
@@ -300,6 +312,7 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
       if (!orderSnap.exists) throw new functions.https.HttpsError("not-found", "Order not found.");
       const orderData = orderSnap.data()!;
       const oldStatus: string = orderData.status ?? "pending";
+      oldStatusForAudit = oldStatus;
 
       const allowed = VALID_TRANSITIONS[oldStatus] ?? [];
       if (!allowed.includes(newStatus)) {
@@ -396,6 +409,15 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
       tx.update(orderRef, { status: newStatus });
     });
 
+    await writeAuditLog(db, {
+      actorUid: context.auth.uid,
+      actorRole: role ?? "unknown",
+      action: "order.statusChange",
+      targetId: orderId,
+      before: { status: oldStatusForAudit },
+      after: { status: newStatus },
+    });
+
     return { success: true };
   }
 
@@ -405,6 +427,7 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
 
     if (!orderSnap.exists) throw new functions.https.HttpsError("not-found", "Order not found.");
     const oldStatus: string = orderSnap.data()!.status ?? "pending";
+    oldStatusForAudit = oldStatus;
 
     const allowed = VALID_TRANSITIONS[oldStatus] ?? [];
     if (!allowed.includes(newStatus)) {
@@ -417,6 +440,15 @@ export const updateOrderStatus = functions.https.onCall(async (data, context) =>
     }, { merge: true });
 
     tx.update(orderRef, { status: newStatus });
+  });
+
+  await writeAuditLog(db, {
+    actorUid: context.auth.uid,
+    actorRole: role ?? "unknown",
+    action: "order.statusChange",
+    targetId: orderId,
+    before: { status: oldStatusForAudit },
+    after: { status: newStatus },
   });
 
   return { success: true };

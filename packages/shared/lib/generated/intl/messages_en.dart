@@ -22,19 +22,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(percentage) => "Discount ${percentage}%";
 
-  static String m1(productName, available) =>
+  static String m1(count) => "${count} image(s) skipped — larger than 5 MB";
+
+  static String m2(productName, available) =>
       "Only ${available} left for ${productName}";
 
-  static String m2(count) => "+${count} more items";
+  static String m3(count) => "+${count} more items";
 
-  static String m3(count) => "${count} orders";
+  static String m4(count) => "${count} orders";
 
-  static String m4(productName) =>
+  static String m5(productName) =>
       "Product ${productName} is currently out of stock";
 
-  static String m5(count) => "Qty: ${count}";
+  static String m6(count) => "Qty: ${count}";
 
-  static String m6(count) => "${count} sold";
+  static String m7(count) => "${count} sold";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -120,6 +122,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "categoryNameHint": MessageLookupByLibrary.simpleMessage(
       "e.g. Winter Clothes",
+    ),
+    "categoryNameInvalid": MessageLookupByLibrary.simpleMessage(
+      "Category name may only contain letters, digits, spaces, underscore or hyphen (up to 40 characters)",
     ),
     "categoryNameLabel": MessageLookupByLibrary.simpleMessage("Category Name"),
     "changePasswordBtn": MessageLookupByLibrary.simpleMessage(
@@ -322,6 +327,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "highQuality": MessageLookupByLibrary.simpleMessage("High quality"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("Home"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "imageTooLarge": MessageLookupByLibrary.simpleMessage(
+      "Image is too large. Maximum size is 5 MB",
+    ),
+    "imagesSkippedTooLarge": m1,
     "loadOutOfStockBtn": MessageLookupByLibrary.simpleMessage(
       "Load Out-of-Stock Products",
     ),
@@ -339,14 +348,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sign in to track your orders and enjoy a better shopping experience",
     ),
     "logoutButton": MessageLookupByLibrary.simpleMessage("Sign Out"),
-    "lowStockProduct": m1,
+    "lowStockProduct": m2,
     "mainCollectionBannerButtonText": MessageLookupByLibrary.simpleMessage(
       "Shop now",
     ),
     "monthlyRevenueChartTitle": MessageLookupByLibrary.simpleMessage(
       "Monthly Revenue",
     ),
-    "moreProductsLabel": m2,
+    "moreProductsLabel": m3,
     "mostSoldSectionTitle": MessageLookupByLibrary.simpleMessage(
       "Best Sellers",
     ),
@@ -386,7 +395,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orderConfirmedTitle": MessageLookupByLibrary.simpleMessage(
       "Order Confirmed!",
     ),
-    "orderCountLabel": m3,
+    "orderCountLabel": m4,
     "orderCustomerLabel": MessageLookupByLibrary.simpleMessage("Customer"),
     "orderDateLabel": MessageLookupByLibrary.simpleMessage("Date"),
     "orderDetails": MessageLookupByLibrary.simpleMessage("View details"),
@@ -441,7 +450,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Verification code sent",
     ),
     "outOfStockLabel": MessageLookupByLibrary.simpleMessage("Out of Stock"),
-    "outOfStockProduct": m4,
+    "outOfStockProduct": m5,
     "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordValidation": MessageLookupByLibrary.simpleMessage(
       "Enter your password",
@@ -572,7 +581,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "productsTitle": MessageLookupByLibrary.simpleMessage("Products"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("My Account"),
-    "quantityLabel": m5,
+    "quantityLabel": m6,
     "refundChartLabel": MessageLookupByLibrary.simpleMessage("Refund"),
     "refundRateLabel": MessageLookupByLibrary.simpleMessage("Refund Rate"),
     "reportsTitle": MessageLookupByLibrary.simpleMessage("Reports"),
@@ -680,7 +689,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Total Refunded",
     ),
     "totalRevenueLabel": MessageLookupByLibrary.simpleMessage("Total Revenue"),
-    "totalSoldLabel": m6,
+    "totalSoldLabel": m7,
     "totalUnitsLabel": MessageLookupByLibrary.simpleMessage("Total units"),
     "updateStatusLabel": MessageLookupByLibrary.simpleMessage("Update Status"),
     "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
