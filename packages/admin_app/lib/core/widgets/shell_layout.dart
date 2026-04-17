@@ -281,14 +281,23 @@ class _MobileLayout extends StatelessWidget {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(
-                items.length,
-                (i) => _BottomNavItem(
-                  item: items[i],
-                  selected: i == currentIndex,
-                  onTap: () => context.go(items[i].route.path),
+            child: LayoutBuilder(
+              builder: (context, constraints) => SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                physics: const ClampingScrollPhysics(),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(
+                      items.length,
+                      (i) => _BottomNavItem(
+                        item: items[i],
+                        selected: i == currentIndex,
+                        onTap: () => context.go(items[i].route.path),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -318,7 +327,7 @@ class _BottomNavItem extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
           color: selected
               ? AppColors.goldRoyal.withValues(alpha: 0.12)

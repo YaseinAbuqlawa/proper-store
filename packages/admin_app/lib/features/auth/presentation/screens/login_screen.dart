@@ -159,14 +159,12 @@ class _Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: 64,
-          height: 64,
-          decoration: BoxDecoration(
-            color: AppColors.goldRoyal,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: const Icon(Icons.store, color: AppColors.darkGray, size: 36),
+        Image.asset(
+          'assets/images/proper_logo.webp',
+          width: 96,
+          height: 96,
+          fit: BoxFit.contain,
+          filterQuality: FilterQuality.medium,
         ),
         const SizedBox(height: 16),
         Text(S.of(context).dashboardTitle, style: AppTextStyles.heroHeadline),
