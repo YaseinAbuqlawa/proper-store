@@ -61,12 +61,22 @@ dev_dependencies:
   json_serializable: ^6.9.5
   build_runner: ^2.4.15
   injectable_generator: ^2.12.1
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: "assets/images/proper_logo.png"
+    background_color: "#1E1E1E"
+    theme_color: "#C9A84C"
+  remove_alpha_ios: true
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/fonts/
+    - assets/images/
 
   fonts:
     - family: Cairo
