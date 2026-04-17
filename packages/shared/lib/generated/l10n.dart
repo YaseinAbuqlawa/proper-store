@@ -1904,6 +1904,16 @@ class S {
     );
   }
 
+  /// `Could not process the selected image. Please try another file.`
+  String get imageProcessingFailed {
+    return Intl.message(
+      'Could not process the selected image. Please try another file.',
+      name: 'imageProcessingFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{count} image(s) skipped — larger than 5 MB`
   String imagesSkippedTooLarge(int count) {
     return Intl.message(

@@ -327,6 +327,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "highQuality": MessageLookupByLibrary.simpleMessage("High quality"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("Home"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "imageProcessingFailed": MessageLookupByLibrary.simpleMessage(
+      "Could not process the selected image. Please try another file.",
+    ),
     "imageTooLarge": MessageLookupByLibrary.simpleMessage(
       "Image is too large. Maximum size is 5 MB",
     ),

@@ -376,6 +376,9 @@
   "imageTooLarge": "Image is too large. Maximum size is 5 MB",
   "@imageTooLarge": {},
 
+  "imageProcessingFailed": "Could not process the selected image. Please try another file.",
+  "@imageProcessingFailed": {},
+
   "imagesSkippedTooLarge": "{count} image(s) skipped — larger than 5 MB",
   "@imagesSkippedTooLarge": {
       "placeholders": {

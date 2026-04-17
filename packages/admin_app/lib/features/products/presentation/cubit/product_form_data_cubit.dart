@@ -33,21 +33,29 @@ class ProductFormDataCubit extends Cubit<ProductFormData> {
   Future<void> pickMainImage() async {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (picked == null) return;
-    final raw = await picked.readAsBytes();
-    if (ImageCompressor.exceedsMaxBytes(raw)) {
+    try {
+      final raw = await picked.readAsBytes();
+      if (ImageCompressor.exceedsMaxBytes(raw)) {
+        emit(
+          state.copyWith(transientErrorKey: ProductFormErrorKeys.imageTooLarge),
+        );
+        return;
+      }
+      final bytes = await ImageCompressor.compress(raw);
       emit(
-        state.copyWith(transientErrorKey: ProductFormErrorKeys.imageTooLarge),
+        state.copyWith(
+          removedMainImageUrl: state.existingMainImageUrl,
+          existingMainImageUrl: null,
+          newMainImageBytes: bytes,
+        ),
       );
-      return;
+    } catch (_) {
+      emit(
+        state.copyWith(
+          transientErrorKey: ProductFormErrorKeys.imageProcessingFailed,
+        ),
+      );
     }
-    final bytes = await ImageCompressor.compress(raw);
-    emit(
-      state.copyWith(
-        removedMainImageUrl: state.existingMainImageUrl,
-        existingMainImageUrl: null,
-        newMainImageBytes: bytes,
-      ),
-    );
   }
 
   void clearTransientError() {

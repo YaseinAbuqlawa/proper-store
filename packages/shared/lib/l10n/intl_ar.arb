@@ -376,6 +376,9 @@
   "imageTooLarge": "حجم الصورة كبير جدًا. الحد الأقصى 5 ميجابايت",
   "@imageTooLarge": {},
 
+  "imageProcessingFailed": "تعذّر معالجة الصورة المحددة. حاول باستخدام ملف آخر.",
+  "@imageProcessingFailed": {},
+
   "imagesSkippedTooLarge": "تم تخطي {count} صورة — حجمها أكبر من 5 ميجابايت",
   "@imagesSkippedTooLarge": {
       "placeholders": {

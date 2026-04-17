@@ -45,6 +45,7 @@
     }
   ],
   "hosting": {
+    "target": "store-app",
     "public": "build/web",
     "ignore": [
       "firebase.json",

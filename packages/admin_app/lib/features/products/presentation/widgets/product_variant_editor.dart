@@ -31,6 +31,7 @@ class ProductVariantEditor extends StatefulWidget {
 class _ProductVariantEditorState extends State<ProductVariantEditor> {
   late final TextEditingController nameCtrl;
   late final TextEditingController stockCtrl;
+  late bool _isLight;
 
   @override
   void initState() {
@@ -39,6 +40,17 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
     stockCtrl = TextEditingController(
       text: widget.entry.stockQuantity.toString(),
     );
+    _isLight = _computeIsLight(widget.entry.color);
+  }
+
+  static bool _computeIsLight(Color color) => color.computeLuminance() > 0.7;
+
+  @override
+  void didUpdateWidget(covariant ProductVariantEditor oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.entry.color != widget.entry.color) {
+      _isLight = _computeIsLight(widget.entry.color);
+    }
   }
 
   @override
@@ -53,21 +65,29 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
       imageQuality: AppConsts.imageQuality,
     );
     if (files.isEmpty) return;
-    final rawList = await Future.wait(files.map((f) => f.readAsBytes()));
-    final accepted =
-        rawList.where((b) => !ImageCompressor.exceedsMaxBytes(b)).toList();
-    final rejectedCount = rawList.length - accepted.length;
-    if (rejectedCount > 0 && mounted) {
+    try {
+      final rawList = await Future.wait(files.map((f) => f.readAsBytes()));
+      final accepted =
+          rawList.where((b) => !ImageCompressor.exceedsMaxBytes(b)).toList();
+      final rejectedCount = rawList.length - accepted.length;
+      if (rejectedCount > 0 && mounted) {
+        AppSnackbar.errorSnackbar(
+          context: context,
+          failureMessage: S.of(context).imagesSkippedTooLarge(rejectedCount),
+        );
+      }
+      if (accepted.isEmpty) return;
+      final bytes = await Future.wait(accepted.map(ImageCompressor.compress));
+      if (!mounted) return;
+      setState(() => widget.entry.newImageBytes.addAll(bytes));
+      widget.onChanged();
+    } catch (_) {
+      if (!mounted) return;
       AppSnackbar.errorSnackbar(
         context: context,
-        failureMessage: S.of(context).imagesSkippedTooLarge(rejectedCount),
+        failureMessage: S.of(context).imageProcessingFailed,
       );
     }
-    if (accepted.isEmpty) return;
-    final bytes = await Future.wait(accepted.map(ImageCompressor.compress));
-    if (!mounted) return;
-    setState(() => widget.entry.newImageBytes.addAll(bytes));
-    widget.onChanged();
   }
 
   void removeExistingImage(int index) {
@@ -129,7 +149,10 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
           AdminButton.primary(
             label: S.of(context).addBtn,
             onPressed: () {
-              setState(() => widget.entry.color = tempColor);
+              setState(() {
+                widget.entry.color = tempColor;
+                _isLight = _computeIsLight(tempColor);
+              });
               widget.onChanged();
               Navigator.of(ctx).pop();
             },
@@ -143,7 +166,7 @@ class _ProductVariantEditorState extends State<ProductVariantEditor> {
   Widget build(BuildContext context) {
     final l = S.of(context);
     final color = widget.entry.color;
-    final isLight = color.computeLuminance() > 0.7;
+    final isLight = _isLight;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
