@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "proper-store-eg"
+  },
+  "targets": {
+    "proper-store-eg": {
+      "hosting": {
+        "admin-app": [
+          "properadmin"
+        ]
+      }
+    }
   }
 }

@@ -49,20 +49,29 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
     if (file == null) return;
     if (!mounted) return;
     AppDialog.showLoading(context);
-    final raw = await file.readAsBytes();
-    if (ImageCompressor.exceedsMaxBytes(raw)) {
+    try {
+      final raw = await file.readAsBytes();
+      if (ImageCompressor.exceedsMaxBytes(raw)) {
+        if (!mounted) return;
+        Navigator.of(context).pop();
+        AppSnackbar.errorSnackbar(
+          context: context,
+          failureMessage: S.of(context).imageTooLarge,
+        );
+        return;
+      }
+      final bytes = await ImageCompressor.compress(raw);
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      setState(() => _imageBytes = bytes);
+    } catch (_) {
       if (!mounted) return;
       Navigator.of(context).pop();
       AppSnackbar.errorSnackbar(
         context: context,
-        failureMessage: S.of(context).imageTooLarge,
+        failureMessage: S.of(context).imageProcessingFailed,
       );
-      return;
     }
-    final bytes = await ImageCompressor.compress(raw);
-    if (!mounted) return;
-    Navigator.of(context).pop();
-    setState(() => _imageBytes = bytes);
   }
 
   void _save() {

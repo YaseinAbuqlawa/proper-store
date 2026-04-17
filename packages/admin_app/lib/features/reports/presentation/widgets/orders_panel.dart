@@ -4,6 +4,7 @@ import 'package:proper_store_shared/design_system/colors/app_colors.dart';
 import 'package:proper_store_shared/design_system/spacing/app_spacing.dart';
 import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
+import 'package:proper_store_shared/models/order_model.dart';
 
 import '../../domain/entities/dashboard_stats.dart';
 import 'stat_card.dart';
@@ -65,40 +66,38 @@ class _OrdersStatusChart extends StatelessWidget {
 
   const _OrdersStatusChart({required this.ordersByStatus});
 
-  static const _statusColors = {
-    'pending': Color(0xFFFFC107),
-    'confirmed': Color(0xFF42A5F5),
-    'shipped': Color(0xFFFF7043),
-    'delivered': Color(0xFF66BB6A),
-    'refunded': Color(0xFF7E57C2),
-    'cancelled': Color(0xFFEF5350),
+  static const _statusColors = <OrderStatus, Color>{
+    OrderStatus.pending: Color(0xFFFFC107),
+    OrderStatus.confirmed: Color(0xFF42A5F5),
+    OrderStatus.shipped: Color(0xFFFF7043),
+    OrderStatus.delivered: Color(0xFF66BB6A),
+    OrderStatus.refunded: Color(0xFF7E57C2),
+    OrderStatus.cancelled: Color(0xFFEF5350),
   };
 
-  static const _statusOrder = [
-    'pending',
-    'confirmed',
-    'shipped',
-    'delivered',
-    'refunded',
-    'cancelled',
+  static const _statusOrder = <OrderStatus>[
+    OrderStatus.pending,
+    OrderStatus.confirmed,
+    OrderStatus.shipped,
+    OrderStatus.delivered,
+    OrderStatus.refunded,
+    OrderStatus.cancelled,
   ];
 
-  /// Maps a Firestore status key to its localized display label.
-  static String _statusLabel(String key, S l) => switch (key) {
-    'pending' => l.orderStatusPending,
-    'confirmed' => l.orderStatusConfirmed,
-    'shipped' => l.orderStatusShipped,
-    'delivered' => l.orderStatusDelivered,
-    'refunded' => l.orderStatusRefunded,
-    'cancelled' => l.orderStatusCancelled,
-    _ => key,
+  static String _statusLabel(OrderStatus status, S l) => switch (status) {
+    OrderStatus.pending => l.orderStatusPending,
+    OrderStatus.confirmed => l.orderStatusConfirmed,
+    OrderStatus.shipped => l.orderStatusShipped,
+    OrderStatus.delivered => l.orderStatusDelivered,
+    OrderStatus.refunded => l.orderStatusRefunded,
+    OrderStatus.cancelled => l.orderStatusCancelled,
   };
 
   @override
   Widget build(BuildContext context) {
     final l = S.of(context);
     final entries = _statusOrder
-        .map((k) => MapEntry(k, ordersByStatus[k] ?? 0))
+        .map((status) => MapEntry(status, ordersByStatus[status.name] ?? 0))
         .toList();
 
     final total = entries.fold(0, (sum, e) => sum + e.value);

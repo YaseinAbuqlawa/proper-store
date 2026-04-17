@@ -302,6 +302,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "highQuality": MessageLookupByLibrary.simpleMessage("جودة عالية"),
     "homeButtonName": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("PROPER"),
+    "imageProcessingFailed": MessageLookupByLibrary.simpleMessage(
+      "تعذّر معالجة الصورة المحددة. حاول باستخدام ملف آخر.",
+    ),
     "imageTooLarge": MessageLookupByLibrary.simpleMessage(
       "حجم الصورة كبير جدًا. الحد الأقصى 5 ميجابايت",
     ),

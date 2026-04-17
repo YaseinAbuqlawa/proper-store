@@ -1,11 +1,13 @@
+import 'dart:typed_data';
+
 import 'package:admin/core/di/injection_container.dart';
 import 'package:admin/core/failures/app_failures.dart';
 import 'package:admin/core/widgets/admin_button.dart';
-import 'package:admin/features/products/domain/use_cases/params/product_save_params.dart';
 import 'package:admin/features/products/presentation/cubit/categories_cubit.dart';
 import 'package:admin/features/products/presentation/cubit/product_form_cubit.dart';
 import 'package:admin/features/products/presentation/cubit/product_form_data_cubit.dart';
 import 'package:admin/features/products/presentation/cubit/product_form_data_state.dart';
+import 'package:admin/features/products/presentation/models/product_variant_entry.dart';
 import 'package:admin/features/products/presentation/widgets/add_category_dialog.dart';
 import 'package:admin/features/products/presentation/widgets/form_basic_info_card.dart';
 import 'package:admin/features/products/presentation/widgets/form_colors_section.dart';
@@ -167,69 +169,41 @@ class _ProductFormViewState extends State<_ProductFormView> {
     );
   }
 
-  void _submit(BuildContext context) {
-    final l = S.of(context);
+  Future<void> _submit(BuildContext context) async {
     final formData = context.read<ProductFormDataCubit>().state;
     if (!(_formKey.currentState?.validate() ?? false) ||
         formData.selectedCategory == null) {
       return;
     }
-    if (!formData.hasMainImage) {
-      AppSnackbar.errorSnackbar(
-        context: context,
-        failureMessage: l.productFormErrorMainImageRequired,
-      );
-      return;
-    }
-    if (formData.productVariants.isEmpty) {
-      AppSnackbar.errorSnackbar(
-        context: context,
-        failureMessage: l.productFormErrorAtLeastOneColor,
-      );
-      return;
-    }
-    final variantWithoutImage = formData.productVariants
-        .where((v) => !v.hasImages)
-        .firstOrNull;
-    if (variantWithoutImage != null) {
-      AppSnackbar.errorSnackbar(
-        context: context,
-        failureMessage: l.productFormErrorColorMustHaveImage,
-      );
-      return;
-    }
-    final collectionText = collectionController.text.trim();
-    context.read<ProductFormCubit>().submit(
-      ProductSaveParams(
-        name: nameController.text.trim(),
-        description: descriptionController.text.trim(),
-        category: formData.selectedCategory!,
-        collection: collectionText.isEmpty ? null : collectionText,
-        sellingPrice: double.tryParse(priceController.text.trim()) ?? 0,
-        discountPercentage:
-            double.tryParse(discountPercentageController.text.trim()) ?? 0,
-        discountValue:
-            double.tryParse(discountValueController.text.trim()) ?? 0,
-        existingMainImageUrl: formData.existingMainImageUrl,
-        removedMainImageUrl: formData.removedMainImageUrl,
-        newMainImageBytes: formData.newMainImageBytes,
-        productVariants: formData.productVariants
-            .map(
-              (e) => ProductVariantSaveParams(
-                name: e.name,
-                color: e.color,
-                stockQuantity: e.stockQuantity,
-                existingImageUrls: e.existingImageUrls,
-                newImageBytes: e.newImageBytes,
-                removedImageUrls: e.removedImageUrls,
-              ),
-            )
-            .toList(),
-        removedVariantImageUrls: formData.removedVariantImageUrls,
-        existingProduct: widget.product,
+    final errorKey = await context.read<ProductFormCubit>().validateAndSubmit(
+      formData: formData,
+      input: ProductFormInput(
+        name: nameController.text,
+        description: descriptionController.text,
+        collection: collectionController.text,
+        sellingPrice: priceController.text,
+        discountPercentage: discountPercentageController.text,
+        discountValue: discountValueController.text,
       ),
+      existingProduct: widget.product,
     );
+    if (errorKey != null && context.mounted) {
+      AppSnackbar.errorSnackbar(
+        context: context,
+        failureMessage: _validationMessage(errorKey, S.of(context)),
+      );
+    }
   }
+
+  String _validationMessage(String key, S l) => switch (key) {
+    ProductFormValidationKeys.mainImageRequired =>
+      l.productFormErrorMainImageRequired,
+    ProductFormValidationKeys.atLeastOneColor =>
+      l.productFormErrorAtLeastOneColor,
+    ProductFormValidationKeys.colorMustHaveImage =>
+      l.productFormErrorColorMustHaveImage,
+    _ => l.errorUnexpected,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -251,10 +225,12 @@ class _ProductFormViewState extends State<_ProductFormView> {
               prev.transientErrorKey != curr.transientErrorKey &&
               curr.transientErrorKey != null,
           listener: (context, state) {
-            final message = state.transientErrorKey ==
-                    ProductFormErrorKeys.imageTooLarge
-                ? l.imageTooLarge
-                : l.errorUnexpected;
+            final message = switch (state.transientErrorKey) {
+              ProductFormErrorKeys.imageTooLarge => l.imageTooLarge,
+              ProductFormErrorKeys.imageProcessingFailed =>
+                l.imageProcessingFailed,
+              _ => l.errorUnexpected,
+            };
             AppSnackbar.errorSnackbar(
               context: context,
               failureMessage: message,
@@ -304,104 +280,146 @@ class _ProductFormViewState extends State<_ProductFormView> {
       child: BlocSelector<ProductFormCubit, ProductFormState, bool>(
         selector: (state) => state.whenOrNull(submitting: () => true) ?? false,
         builder: (context, isSubmitting) {
-          return BlocBuilder<ProductFormDataCubit, ProductFormData>(
-            builder: (context, formData) {
-              final formDataCubit = context.read<ProductFormDataCubit>();
-              return Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    isEdit ? l.productFormEditTitle : l.productFormAddTitle,
-                  ),
-                ),
-                body: Form(
-                  key: _formKey,
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 860),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            FormSectionHeader(
-                              icon: Icons.info_outline_rounded,
-                              title: l.productFormSectionBasicInfo,
-                            ),
-                            const SizedBox(height: 10),
-                            FormBasicInfoCard(
+          final formDataCubit = context.read<ProductFormDataCubit>();
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                isEdit ? l.productFormEditTitle : l.productFormAddTitle,
+              ),
+            ),
+            body: Form(
+              key: _formKey,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 860),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        FormSectionHeader(
+                          icon: Icons.info_outline_rounded,
+                          title: l.productFormSectionBasicInfo,
+                        ),
+                        const SizedBox(height: 10),
+                        BlocSelector<
+                          ProductFormDataCubit,
+                          ProductFormData,
+                          String?
+                        >(
+                          selector: (s) => s.selectedCategory,
+                          builder: (context, selectedCategory) {
+                            return FormBasicInfoCard(
                               nameController: nameController,
                               descriptionController: descriptionController,
                               collectionController: collectionController,
-                              selectedCategory: formData.selectedCategory,
+                              selectedCategory: selectedCategory,
                               onCategoryChanged: formDataCubit.selectCategory,
                               onAddCategoryTap: () =>
                                   _showAddCategoryDialog(context),
-                            ),
-                            const SizedBox(height: 28),
-                            FormSectionHeader(
-                              icon: Icons.sell_outlined,
-                              title: l.productFormSectionPricing,
-                            ),
-                            const SizedBox(height: 10),
-                            FormPricingCard(
-                              priceController: priceController,
-                              discountPercentageController:
-                                  discountPercentageController,
-                              discountValueController: discountValueController,
-                            ),
-                            const SizedBox(height: 28),
-                            FormSectionHeader(
-                              icon: Icons.photo_library_outlined,
-                              title: l.productFormSectionMainImage,
-                            ),
-                            const SizedBox(height: 10),
-                            FormMainImageCard(
-                              existingImageUrl: formData.existingMainImageUrl,
-                              newImageBytes: formData.newMainImageBytes,
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 28),
+                        FormSectionHeader(
+                          icon: Icons.sell_outlined,
+                          title: l.productFormSectionPricing,
+                        ),
+                        const SizedBox(height: 10),
+                        FormPricingCard(
+                          priceController: priceController,
+                          discountPercentageController:
+                              discountPercentageController,
+                          discountValueController: discountValueController,
+                        ),
+                        const SizedBox(height: 28),
+                        FormSectionHeader(
+                          icon: Icons.photo_library_outlined,
+                          title: l.productFormSectionMainImage,
+                        ),
+                        const SizedBox(height: 10),
+                        BlocSelector<
+                          ProductFormDataCubit,
+                          ProductFormData,
+                          _MainImageSelection
+                        >(
+                          selector: (s) => _MainImageSelection(
+                            existingUrl: s.existingMainImageUrl,
+                            newBytes: s.newMainImageBytes,
+                          ),
+                          builder: (context, sel) {
+                            return FormMainImageCard(
+                              existingImageUrl: sel.existingUrl,
+                              newImageBytes: sel.newBytes,
                               onPickImage: formDataCubit.pickMainImage,
-                            ),
-                            const SizedBox(height: 28),
-                            FormSectionHeader(
-                              icon: Icons.palette_outlined,
-                              title: l.productFormSectionColors,
-                            ),
-                            const SizedBox(height: 10),
-                            FormColorsSection(
-                              productVariants: formData.productVariants,
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 28),
+                        FormSectionHeader(
+                          icon: Icons.palette_outlined,
+                          title: l.productFormSectionColors,
+                        ),
+                        const SizedBox(height: 10),
+                        BlocSelector<
+                          ProductFormDataCubit,
+                          ProductFormData,
+                          List<ProductVariantEntry>
+                        >(
+                          selector: (s) => s.productVariants,
+                          builder: (context, variants) {
+                            return FormColorsSection(
+                              productVariants: variants,
                               onAddColor: formDataCubit.addVariant,
                               onRemoveColor: formDataCubit.removeVariant,
                               onChanged: formDataCubit.notifyVariantChanged,
-                            ),
-                            if (isEdit) ...[
-                              const SizedBox(height: 28),
-                              FormSectionHeader(
-                                icon: Icons.bar_chart_outlined,
-                                title: l.productFormSectionReports,
-                              ),
-                              const SizedBox(height: 10),
-                              ReportsCard(product: widget.product!),
-                            ],
-                            const SizedBox(height: 20),
-                            AdminButton.primary(
-                              label: isEdit
-                                  ? l.productFormSave
-                                  : l.productFormAddBtn,
-                              onPressed: isSubmitting
-                                  ? null
-                                  : () => _submit(context),
-                            ),
-                          ],
+                            );
+                          },
                         ),
-                      ),
+                        if (isEdit) ...[
+                          const SizedBox(height: 28),
+                          FormSectionHeader(
+                            icon: Icons.bar_chart_outlined,
+                            title: l.productFormSectionReports,
+                          ),
+                          const SizedBox(height: 10),
+                          ReportsCard(product: widget.product!),
+                        ],
+                        const SizedBox(height: 20),
+                        AdminButton.primary(
+                          label: isEdit
+                              ? l.productFormSave
+                              : l.productFormAddBtn,
+                          onPressed: isSubmitting
+                              ? null
+                              : () => _submit(context),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              );
-            },
+              ),
+            ),
           );
         },
       ),
     );
   }
+}
+
+class _MainImageSelection {
+  final String? existingUrl;
+  final Uint8List? newBytes;
+
+  const _MainImageSelection({this.existingUrl, this.newBytes});
+
+  @override
+  bool operator ==(Object other) =>
+      other is _MainImageSelection &&
+      other.existingUrl == existingUrl &&
+      other.newBytes == newBytes;
+
+  @override
+  int get hashCode => Object.hash(existingUrl, newBytes);
 }

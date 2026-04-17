@@ -6,6 +6,7 @@ import 'package:proper_store_shared/design_system/typography/app_text_styles.dar
 import 'package:proper_store_shared/generated/l10n.dart';
 
 import '../../domain/entities/dashboard_stats.dart';
+import 'revenue_chart_point.dart';
 import 'stat_card.dart';
 
 // Height of each revenue bar chart container.
@@ -16,21 +17,6 @@ class RevenuePanel extends StatelessWidget {
   final DashboardStats stats;
 
   const RevenuePanel({super.key, required this.stats});
-
-  static String _dailyLabel(int index, List<MapEntry<String, double>> entries) {
-    if (index < 0 || index >= entries.length) return '';
-    final day = entries[index].key.split('-').last;
-    return index % 5 == 0 ? day : '';
-  }
-
-  static String _monthlyLabel(
-    int index,
-    List<MapEntry<String, double>> entries,
-  ) {
-    if (index < 0 || index >= entries.length) return '';
-    final parts = entries[index].key.split('-');
-    return parts.length >= 2 ? parts[1] : '';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,18 +52,18 @@ class RevenuePanel extends StatelessWidget {
         const SizedBox(height: AppSpacing.large),
         _RevenueBarChart(
           title: l.dailyRevenueChartTitle,
-          revenueData: stats.preparedDailyRevenue,
+          revenuePoints: RevenueChartPoint.daily(stats.preparedDailyRevenue),
           refundData: stats.preparedDailyRefunded,
           maxY: stats.dailyRevenueMaxY,
-          labelBuilder: _dailyLabel,
         ),
         const SizedBox(height: AppSpacing.large),
         _RevenueBarChart(
           title: l.monthlyRevenueChartTitle,
-          revenueData: stats.preparedMonthlyRevenue,
+          revenuePoints: RevenueChartPoint.monthly(
+            stats.preparedMonthlyRevenue,
+          ),
           refundData: stats.preparedMonthlyRefunded,
           maxY: stats.monthlyRevenueMaxY,
-          labelBuilder: _monthlyLabel,
         ),
       ],
     );
@@ -86,18 +72,15 @@ class RevenuePanel extends StatelessWidget {
 
 class _RevenueBarChart extends StatelessWidget {
   final String title;
-  final List<MapEntry<String, double>> revenueData;
+  final List<RevenueChartPoint> revenuePoints;
   final List<MapEntry<String, double>> refundData;
   final double maxY;
-  final String Function(int index, List<MapEntry<String, double>> entries)
-  labelBuilder;
 
   const _RevenueBarChart({
     required this.title,
-    required this.revenueData,
+    required this.revenuePoints,
     required this.refundData,
     required this.maxY,
-    required this.labelBuilder,
   });
 
   @override
@@ -131,7 +114,7 @@ class _RevenueBarChart extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSpacing.borderRadiusMedium),
             boxShadow: AppColors.cardShadow,
           ),
-          child: revenueData.isEmpty
+          child: revenuePoints.isEmpty
               ? Center(
                   child: Text(
                     l.noDataAvailable,
@@ -145,7 +128,7 @@ class _RevenueBarChart extends StatelessWidget {
                     barTouchData: BarTouchData(
                       touchTooltipData: BarTouchTooltipData(
                         getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                          final label = revenueData[groupIndex].key;
+                          final label = revenuePoints[groupIndex].tooltipKey;
                           final value = rod.toY.toStringAsFixed(0);
                           final suffix = rodIndex == 0
                               ? l.revenueChartLabel
@@ -166,8 +149,11 @@ class _RevenueBarChart extends StatelessWidget {
                         sideTitles: SideTitles(
                           showTitles: true,
                           getTitlesWidget: (value, meta) {
-                            final label =
-                                labelBuilder(value.toInt(), revenueData);
+                            final index = value.toInt();
+                            final label = index >= 0 &&
+                                    index < revenuePoints.length
+                                ? revenuePoints[index].label
+                                : '';
                             return SideTitleWidget(
                               meta: meta,
                               child: Text(
@@ -226,9 +212,9 @@ class _RevenueBarChart extends StatelessWidget {
                         ),
                       ),
                     ),
-                    barGroups: revenueData.asMap().entries.map((e) {
-                      final refundValue = refundMap[e.value.key] ?? 0.0;
-                      final barWidth = revenueData.length > 20 ? 4.0 : 8.0;
+                    barGroups: revenuePoints.asMap().entries.map((e) {
+                      final refundValue = refundMap[e.value.tooltipKey] ?? 0.0;
+                      final barWidth = revenuePoints.length > 20 ? 4.0 : 8.0;
                       return BarChartGroupData(
                         x: e.key,
                         groupVertically: false,
