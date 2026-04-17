@@ -30,7 +30,6 @@ _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
           .map((e) => (e as num).toDouble())
           .toList(),
       shippedQuantity: (json['shippedQuantity'] as num).toInt(),
-      stockQuantity: (json['stockQuantity'] as num).toInt(),
       totalStock: (json['totalStock'] as num?)?.toInt() ?? 0,
       outOfStockVariants:
           (json['outOfStockVariants'] as List<dynamic>?)
@@ -60,7 +59,6 @@ Map<String, dynamic> _$ProductModelToJson(_ProductModel instance) =>
       'sellingPrice': instance.sellingPrice,
       'sizes': instance.sizes,
       'shippedQuantity': instance.shippedQuantity,
-      'stockQuantity': instance.stockQuantity,
       'totalStock': instance.totalStock,
       'outOfStockVariants': instance.outOfStockVariants,
       'hasOutOfStockVariants': instance.hasOutOfStockVariants,
