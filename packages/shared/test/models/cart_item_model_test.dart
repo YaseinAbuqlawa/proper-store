@@ -31,7 +31,6 @@ void main() {
       sellingPrice: 100,
       sizes: const [],
       shippedQuantity: 0,
-      stockQuantity: 5,
     );
 
     test('variantKey matches hexKey of selectedColor', () {

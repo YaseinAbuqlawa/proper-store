@@ -158,7 +158,6 @@ class SaveProductUseCase {
       section: AppConsts.sectionBags,
       material: '',
       sizes: const [],
-      stockQuantity: totalStockQuantity,
       totalStock: totalStockQuantity,
       outOfStockVariants: outOfStockVariants,
       hasOutOfStockVariants: outOfStockVariants.isNotEmpty,

@@ -30,7 +30,6 @@ void main() {
           'sellingPrice': 100.0,
           'sizes': <double>[],
           'shippedQuantity': 0,
-          'stockQuantity': 5,
         };
 
     test('fromJson parses variants map correctly', () {
@@ -71,7 +70,6 @@ void main() {
         sellingPrice: 100.0,
         sizes: const [],
         shippedQuantity: 0,
-        stockQuantity: 5,
       );
 
       final json = product.toJson();
@@ -102,7 +100,6 @@ void main() {
         sellingPrice: 100.0,
         sizes: const [],
         shippedQuantity: 0,
-        stockQuantity: 5,
       );
 
       final json = original.toJson();
@@ -146,7 +143,6 @@ void main() {
         sellingPrice: 100.0,
         sizes: const [],
         shippedQuantity: 0,
-        stockQuantity: 5,
         totalStock: 5,
       );
       expect(product.totalStock, 5);
