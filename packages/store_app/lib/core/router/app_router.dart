@@ -8,7 +8,6 @@ import 'package:proper_store/core/di/injection_container.dart';
 import 'package:proper_store/core/router/app_routes.dart';
 import 'package:proper_store/features/addresses/presentation/screens/add_address_screen.dart';
 import 'package:proper_store/features/addresses/presentation/screens/addresses_screen.dart';
-import 'package:proper_store/features/auth/features/welcome_screen_presentation/welcome_screen.dart';
 import 'package:proper_store_shared/models/cart_item_model.dart';
 import 'package:proper_store/features/cart/presentation/screens/cart_screen.dart';
 import 'package:proper_store/features/categories/presentation/screens/categories_screen.dart';
@@ -36,17 +35,6 @@ final GoRouter appRouter = GoRouter(
   initialLocation: AppRoutes.home.path,
   errorBuilder: (context, state) => const NotFoundScreen(),
   observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-  redirect: (context, state) {
-    if (state.error != null) return null;
-
-    final isLoggedIn = sl<FirebaseAuth>().currentUser != null;
-    final isLoggingIn = state.fullPath == AppRoutes.welcome.path;
-
-    if (isLoggingIn && isLoggedIn) return AppRoutes.home.path;
-    if (!isLoggingIn && !isLoggedIn) return AppRoutes.welcome.path;
-
-    return null;
-  },
   routes: [
     ShellRoute(
       builder: (context, state, child) => BaseScreen(child: child),
@@ -88,11 +76,6 @@ final GoRouter appRouter = GoRouter(
           _buildTransitionPage(state: state, child: const CartScreen()),
     ),
     GoRoute(
-      path: AppRoutes.welcome.path,
-      pageBuilder: (context, state) =>
-          _buildTransitionPage(state: state, child: const WelcomeScreen()),
-    ),
-    GoRoute(
       path: AppRoutes.addresses.path,
       pageBuilder: (context, state) =>
           _buildTransitionPage(state: state, child: const AddressesScreen()),
@@ -106,7 +89,7 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.checkout.path,
       redirect: (context, state) {
         final user = sl<FirebaseAuth>().currentUser;
-        if (user == null || user.isAnonymous) return AppRoutes.welcome.path;
+        if (user == null || user.isAnonymous) return AppRoutes.home.path;
         return null;
       },
       pageBuilder: (context, state) {
