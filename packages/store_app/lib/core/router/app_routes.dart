@@ -1,5 +1,4 @@
 enum AppRoutes {
-  welcome('/welcome'),
   home('/home'),
   orders('/orders'),
   productDetails('/productDetails/:id'),
