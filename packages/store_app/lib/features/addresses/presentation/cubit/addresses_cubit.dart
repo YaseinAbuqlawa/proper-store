@@ -27,7 +27,7 @@ class AddressesCubit extends Cubit<AddressesState> {
 
   Future<void> getAddresses() async {
     final user = auth.currentUser;
-    if (user == null || user.isAnonymous) return;
+    if (user == null) return;
 
     emit(const AddressesState.loading());
     final result = await getAddressesUseCase.call(customerId: user.uid);
@@ -40,7 +40,7 @@ class AddressesCubit extends Cubit<AddressesState> {
 
   Future<void> addAddress(AddressModel address) async {
     final user = auth.currentUser;
-    if (user == null || user.isAnonymous) return;
+    if (user == null) return;
 
     final previousState = state; // Capture before overwriting with loading.
     emit(const AddressesState.loading());
@@ -78,7 +78,7 @@ class AddressesCubit extends Cubit<AddressesState> {
 
   Future<void> deleteAddress(AddressModel address) async {
     final user = auth.currentUser;
-    if (user == null || user.isAnonymous) return;
+    if (user == null) return;
 
     final result = await deleteAddressUseCase.call(
       customerId: user.uid,

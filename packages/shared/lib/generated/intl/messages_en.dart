@@ -159,6 +159,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirm Status Update",
     ),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
+    "continueAsGuest": MessageLookupByLibrary.simpleMessage(
+      "Continue as guest",
+    ),
     "continueShopping": MessageLookupByLibrary.simpleMessage(
       "Continue Shopping",
     ),
@@ -388,6 +391,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noProductsYet": MessageLookupByLibrary.simpleMessage("No products found"),
     "notFoundTitle": MessageLookupByLibrary.simpleMessage("Page not found"),
+    "orDivider": MessageLookupByLibrary.simpleMessage("or"),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage("Or sign in easily"),
     "orderAccountSummaryLabel": MessageLookupByLibrary.simpleMessage(
       "Order Summary",

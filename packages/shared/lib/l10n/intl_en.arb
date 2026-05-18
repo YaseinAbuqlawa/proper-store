@@ -742,5 +742,11 @@
   "@refundChartLabel": {},
 
   "actualSoldLabel": "Actual",
-  "@actualSoldLabel": {}
+  "@actualSoldLabel": {},
+
+  "continueAsGuest": "Continue as guest",
+  "@continueAsGuest": {},
+
+  "orDivider": "or",
+  "@orDivider": {}
 }

@@ -48,11 +48,17 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     required AddressModel shippingAddress,
     required double shippingCost,
   }) async {
+    final currentUser = auth.currentUser;
+    if (currentUser == null) {
+      emit(const CheckoutState.failure(failureMessage: 'unauthenticated'));
+      return;
+    }
+
     emit(const CheckoutState.placing());
 
     final order = OrderModel(
       id: _generateOrderId(),
-      customerId: auth.currentUser!.uid,
+      customerId: currentUser.uid,
       products: products,
       totalPrice: products.totalPriceBeforeDiscount,
       discountTotal: products.totalDiscount,

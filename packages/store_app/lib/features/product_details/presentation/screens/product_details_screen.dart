@@ -73,7 +73,13 @@ class ProductDetailsScreen extends StatelessWidget {
                               productId: id,
                               screenHeight: screenHeight,
                               imageUrls:
-                                  (productDetails!.selectedColor ?? productDetails.variants.values.firstOrNull)?.imageUrls ?? [initialImageUrl],
+                                  (productDetails!.selectedColor ??
+                                          productDetails
+                                              .variants
+                                              .values
+                                              .firstOrNull)
+                                      ?.imageUrls ??
+                                  [initialImageUrl],
                             ),
                           ),
 
@@ -81,7 +87,15 @@ class ProductDetailsScreen extends StatelessWidget {
                             child: Center(
                               child: AnimatedSmoothIndicator(
                                 activeIndex: activeIndex,
-                                count: (productDetails.selectedColor ?? productDetails.variants.values.firstOrNull)?.imageUrls.length ?? 1,
+                                count:
+                                    (productDetails.selectedColor ??
+                                            productDetails
+                                                .variants
+                                                .values
+                                                .firstOrNull)
+                                        ?.imageUrls
+                                        .length ??
+                                    1,
                                 effect: const WormEffect(
                                   dotWidth: 10,
                                   dotHeight: 10,
@@ -174,7 +188,10 @@ class ProductDetailsScreen extends StatelessWidget {
                                       orElse: () => null,
                                       success: (p, _, _) =>
                                           (p?.selectedColor ??
-                                                  p?.variants.values.firstOrNull)
+                                                  p
+                                                      ?.variants
+                                                      .values
+                                                      .firstOrNull)
                                               ?.name,
                                     ),
                                     builder: (context, colorName) {
@@ -201,8 +218,12 @@ class ProductDetailsScreen extends StatelessWidget {
                                   ),
                                   const AppSpacer(height: 8),
                                   ColorsRow(
-                                    productColors: productDetails.variants.values.toList(),
-                                    outOfStockVariants: productDetails.outOfStockVariants,
+                                    productColors: productDetails
+                                        .variants
+                                        .values
+                                        .toList(),
+                                    outOfStockVariants:
+                                        productDetails.outOfStockVariants,
                                   ),
                                   // OOS label for the currently selected variant
                                   BlocSelector<
@@ -213,14 +234,16 @@ class ProductDetailsScreen extends StatelessWidget {
                                     selector: (state) => state.maybeWhen(
                                       orElse: () => false,
                                       success: (p, _, _) {
-                                        final selected = p?.selectedColor ??
+                                        final selected =
+                                            p?.selectedColor ??
                                             p?.variants.values.firstOrNull;
                                         return selected != null &&
                                             selected.stockQuantity == 0;
                                       },
                                     ),
                                     builder: (context, isOos) {
-                                      if (!isOos) return const SizedBox.shrink();
+                                      if (!isOos)
+                                        return const SizedBox.shrink();
                                       return Padding(
                                         padding: const EdgeInsets.only(top: 6),
                                         child: Text(
@@ -333,43 +356,42 @@ class ProductDetailsScreen extends StatelessWidget {
                 );
               },
             ),
-            bottomNavigationBar: BlocSelector<
-              ProductDetailsCubit,
-              ProductDetailsState,
-              bool
-            >(
-              selector: (state) => state.maybeWhen(
-                orElse: () => false,
-                success: (p, _, _) {
-                  final selected =
-                      p?.selectedColor ?? p?.variants.values.firstOrNull;
-                  return selected != null && selected.stockQuantity == 0;
-                },
-              ),
-              builder: (context, isOos) {
-                return Container(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: AddToCartButton(
-                          onPressed: isOos ? null : () => _addToCart(context),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        flex: 4,
-                        child: BuyNowButton(
-                          onPressed: isOos ? null : () => _buyNow(context),
-                        ),
-                      ),
-                    ],
+            bottomNavigationBar:
+                BlocSelector<ProductDetailsCubit, ProductDetailsState, bool>(
+                  selector: (state) => state.maybeWhen(
+                    orElse: () => false,
+                    success: (p, _, _) {
+                      final selected =
+                          p?.selectedColor ?? p?.variants.values.firstOrNull;
+                      return selected != null && selected.stockQuantity == 0;
+                    },
                   ),
-                );
-              },
-            ),
+                  builder: (context, isOos) {
+                    return Container(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: AddToCartButton(
+                              onPressed: isOos
+                                  ? null
+                                  : () => _addToCart(context),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            flex: 4,
+                            child: BuyNowButton(
+                              onPressed: isOos ? null : () => _buyNow(context),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
           );
         },
       ),
@@ -391,7 +413,7 @@ class ProductDetailsScreen extends StatelessWidget {
     final item = cubit.buildCartItem();
     if (item == null) return;
 
-    if (cubit.isUserAnonymous) {
+    if (cubit.needsAuth) {
       final proceed = await AuthGuardDialog.show(context);
       if (!proceed || !context.mounted) return;
     }

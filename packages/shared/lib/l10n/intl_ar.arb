@@ -742,5 +742,11 @@
   "@refundChartLabel": {},
 
   "actualSoldLabel": "الفعلي",
-  "@actualSoldLabel": {}
+  "@actualSoldLabel": {},
+
+  "continueAsGuest": "المتابعة كزائرة",
+  "@continueAsGuest": {},
+
+  "orDivider": "أو",
+  "@orDivider": {}
 }

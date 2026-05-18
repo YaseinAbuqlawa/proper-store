@@ -28,8 +28,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     required this.firebaseAuth,
   }) : super(ProductDetailsState.initial());
 
-  bool get isUserAnonymous =>
-      firebaseAuth.currentUser?.isAnonymous ?? true;
+  bool get needsAuth => firebaseAuth.currentUser == null;
 
   CartItemModel? buildCartItem() {
     return state.maybeWhen(

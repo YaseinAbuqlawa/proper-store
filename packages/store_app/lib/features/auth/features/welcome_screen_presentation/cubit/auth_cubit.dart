@@ -21,7 +21,13 @@ class AuthCubit extends Cubit<AuthState> {
   }) : super(AuthState.initial());
 
   Future<void> signInAnonymously() async {
-    await signInAnonymouslyUseCase.call();
+    emit(AuthState.loading());
+    final result = await signInAnonymouslyUseCase.call();
+    result.fold(
+      (serverFailure) =>
+          emit(AuthState.failure(failureMessage: serverFailure.errorMessage)),
+      (_) => emit(AuthState.success()),
+    );
   }
 
   Future<void> signInWithGoogle() async {

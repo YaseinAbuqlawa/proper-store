@@ -146,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تأكيد تحديث الحالة",
     ),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
+    "continueAsGuest": MessageLookupByLibrary.simpleMessage("المتابعة كزائرة"),
     "continueShopping": MessageLookupByLibrary.simpleMessage("متابعة التسوق"),
     "copyAddressLabel": MessageLookupByLibrary.simpleMessage("نسخ العنوان"),
     "copyLabel": MessageLookupByLibrary.simpleMessage("نسخ"),
@@ -363,6 +364,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noProductsYet": MessageLookupByLibrary.simpleMessage("لا توجد منتجات"),
     "notFoundTitle": MessageLookupByLibrary.simpleMessage("الصفحة غير موجودة"),
+    "orDivider": MessageLookupByLibrary.simpleMessage("أو"),
     "orSignInEasily": MessageLookupByLibrary.simpleMessage(
       "او سجلي الدخول بسهولة",
     ),
