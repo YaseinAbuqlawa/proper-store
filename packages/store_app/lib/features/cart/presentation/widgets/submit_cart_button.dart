@@ -69,8 +69,8 @@ class SubmitCartButton extends StatelessWidget {
     final products = context.read<CartCubit>().state.products;
     if (products.isEmpty) return;
 
-    final isAnonymous = sl<FirebaseAuth>().currentUser?.isAnonymous ?? true;
-    if (isAnonymous) {
+    final needsAuth = sl<FirebaseAuth>().currentUser == null;
+    if (needsAuth) {
       final proceed = await AuthGuardDialog.show(context);
       if (!proceed || !context.mounted) return;
     }

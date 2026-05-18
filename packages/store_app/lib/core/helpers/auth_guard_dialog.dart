@@ -75,6 +75,40 @@ class _AuthGuardDialogContent extends StatelessWidget {
                   text: "سجلي عبر",
                   authCubit: authCubit,
                 ),
+                AppSpacing.verticalSpaceSmall,
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Divider(
+                        color: AppColors.textSecondary,
+                        thickness: .25,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        s.orDivider,
+                        style: AppTextStyles.bodyDescription,
+                      ),
+                    ),
+                    const Expanded(
+                      child: Divider(
+                        color: AppColors.textSecondary,
+                        thickness: .25,
+                      ),
+                    ),
+                  ],
+                ),
+                AppSpacing.verticalSpaceSmall,
+                OutlinedButton(
+                  onPressed: () => authCubit.signInAnonymously(),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.goldMuted,
+                    side: const BorderSide(color: AppColors.goldMuted),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                  child: Text(s.continueAsGuest),
+                ),
               ],
             ],
           ),

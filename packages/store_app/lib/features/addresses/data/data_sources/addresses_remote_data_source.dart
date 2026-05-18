@@ -30,9 +30,9 @@ class AddressesRemoteDataSource {
   }) async {
     if (!address.isDefault) {
       // No default conflict — simple atomic append.
-      await _customerRef(customerId).update({
+      await _customerRef(customerId).set({
         'addresses': FieldValue.arrayUnion([address.toJson()]),
-      });
+      }, SetOptions(merge: true));
       return;
     }
 
@@ -48,7 +48,11 @@ class AddressesRemoteDataSource {
         }),
         address.toJson(),
       ];
-      transaction.update(_customerRef(customerId), {'addresses': updatedList});
+      transaction.set(
+        _customerRef(customerId),
+        {'addresses': updatedList},
+        SetOptions(merge: true),
+      );
     });
   }
 

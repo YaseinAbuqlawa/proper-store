@@ -89,7 +89,7 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.checkout.path,
       redirect: (context, state) {
         final user = sl<FirebaseAuth>().currentUser;
-        if (user == null || user.isAnonymous) return AppRoutes.home.path;
+        if (user == null) return AppRoutes.home.path;
         return null;
       },
       pageBuilder: (context, state) {

@@ -2978,6 +2978,21 @@ class S {
   String get actualSoldLabel {
     return Intl.message('Actual', name: 'actualSoldLabel', desc: '', args: []);
   }
+
+  /// `Continue as guest`
+  String get continueAsGuest {
+    return Intl.message(
+      'Continue as guest',
+      name: 'continueAsGuest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or`
+  String get orDivider {
+    return Intl.message('or', name: 'orDivider', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
