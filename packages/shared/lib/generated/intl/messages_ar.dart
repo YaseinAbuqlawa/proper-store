@@ -102,6 +102,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cannotDeleteYourself": MessageLookupByLibrary.simpleMessage(
       "لا يمكنك حذف حسابك الخاص.",
     ),
+    "cartSyncError": MessageLookupByLibrary.simpleMessage(
+      "فشل حفظ السلة. تحقق من اتصالك بالإنترنت.",
+    ),
     "cartTitle": MessageLookupByLibrary.simpleMessage("السلة"),
     "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
     "categoriesEmpty": MessageLookupByLibrary.simpleMessage(

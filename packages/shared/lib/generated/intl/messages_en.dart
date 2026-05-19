@@ -109,6 +109,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cannotDeleteYourself": MessageLookupByLibrary.simpleMessage(
       "You cannot delete your own account.",
     ),
+    "cartSyncError": MessageLookupByLibrary.simpleMessage(
+      "Failed to save cart. Check your internet connection.",
+    ),
     "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
     "categoriesEmpty": MessageLookupByLibrary.simpleMessage(
