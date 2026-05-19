@@ -748,5 +748,8 @@
   "@continueAsGuest": {},
 
   "orDivider": "or",
-  "@orDivider": {}
+  "@orDivider": {},
+
+  "cartSyncError": "Failed to save cart. Check your internet connection.",
+  "@cartSyncError": {}
 }

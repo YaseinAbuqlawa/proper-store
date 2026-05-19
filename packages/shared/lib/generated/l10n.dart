@@ -2993,6 +2993,16 @@ class S {
   String get orDivider {
     return Intl.message('or', name: 'orDivider', desc: '', args: []);
   }
+
+  /// `Failed to save cart. Check your internet connection.`
+  String get cartSyncError {
+    return Intl.message(
+      'Failed to save cart. Check your internet connection.',
+      name: 'cartSyncError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

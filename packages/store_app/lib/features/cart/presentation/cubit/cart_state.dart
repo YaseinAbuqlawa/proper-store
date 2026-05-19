@@ -6,6 +6,7 @@ abstract class CartState with _$CartState {
     required CartStates cartState,
     @Default([]) List<CartItemModel> products,
     @Default(null) String? errorMessage,
+    @Default(false) bool syncError,
   }) = _CartState;
 }
 

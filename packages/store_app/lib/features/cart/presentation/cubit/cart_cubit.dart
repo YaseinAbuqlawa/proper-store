@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -15,6 +17,8 @@ class CartCubit extends Cubit<CartState> {
   final LoadCartItemsUseCase _loadCartItems;
 
   String? _currentUserId;
+  bool _isAdding = false;
+  Timer? _addDebounceTimer;
 
   CartCubit({
     required SaveCartItemsUseCase saveCartItems,
@@ -59,6 +63,14 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void addProductToCart(CartItemModel product) {
+    if (_isAdding) return;
+    _isAdding = true;
+    _addDebounceTimer?.cancel();
+    _addDebounceTimer = Timer(
+      const Duration(milliseconds: 300),
+      () => _isAdding = false,
+    );
+
     if (state.products.any((p) => p.id == product.id)) {
       changeProductQuantity(
         changeQuantityType: ChangeQuantityType.increase,
@@ -114,14 +126,30 @@ class CartCubit extends Cubit<CartState> {
     _currentUserId = null;
   }
 
+  void _clearSyncError() {
+    if (state.syncError) {
+      emit(state.copyWith(syncError: false));
+    }
+  }
+
   void _syncToFirestore() {
     final uid = _currentUserId;
     if (uid == null) return;
     _saveCartItems(customerId: uid, items: state.products).then(
       (result) => result.fold(
-        (_) {},
-        (_) {},
+        (_) {
+          if (!isClosed) emit(state.copyWith(syncError: true));
+        },
+        (_) {
+          if (!isClosed) _clearSyncError();
+        },
       ),
     );
+  }
+
+  @override
+  Future<void> close() {
+    _addDebounceTimer?.cancel();
+    return super.close();
   }
 }

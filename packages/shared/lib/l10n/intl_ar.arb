@@ -748,5 +748,8 @@
   "@continueAsGuest": {},
 
   "orDivider": "أو",
-  "@orDivider": {}
+  "@orDivider": {},
+
+  "cartSyncError": "فشل حفظ السلة. تحقق من اتصالك بالإنترنت.",
+  "@cartSyncError": {}
 }

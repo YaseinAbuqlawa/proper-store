@@ -12,6 +12,7 @@ import 'package:proper_store_shared/design_system/sizes/app_sizes.dart';
 import 'package:proper_store_shared/design_system/spacing/app_spacing.dart';
 import 'package:proper_store_shared/design_system/typography/app_text_styles.dart';
 import 'package:proper_store_shared/generated/l10n.dart';
+import 'package:proper_store_shared/helpers/app_snackbar.dart';
 import 'package:proper_store_shared/models/cart_item_model.dart';
 
 class CartScreen extends StatelessWidget {
@@ -19,49 +20,61 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<CartCubit, CartState, List<CartItemModel>>(
-      selector: (state) {
-        return state.products.where((p) => p.quantity > 0).toList();
-      },
-      builder: (context, products) {
-        final double screenWidth = MediaQuery.widthOf(context);
-        final deviceType = AppSizes.getDeviceType(screenWidth);
-        return Scaffold(
-          appBar: AppBar(title: Text(S.of(context).cartTitle)),
-          body: SafeArea(
-            child: products.isEmpty
-                ? _EmptyCart()
-                : CustomScrollView(
-                    slivers: [
-                      SliverGrid.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1,
-                          childAspectRatio: deviceType == DeviceType.smallPhone
-                              ? 5 / 2
-                              : 3 / 1,
-                        ),
-                        itemCount: products.length,
-                        itemBuilder: (context, index) {
-                          final product = products[index];
-                          return CartProductCard(product: product);
-                        },
-                      ),
-                      if (products.isNotEmpty)
-                        SliverFillRemaining(
-                          hasScrollBody: false,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [_TotalsCard()],
-                          ),
-                        ),
-                    ],
-                  ),
-          ),
-          bottomNavigationBar: products.isEmpty ? null : SubmitCartButton(),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+    return BlocListener<CartCubit, CartState>(
+      listenWhen: (prev, curr) => !prev.syncError && curr.syncError,
+      listener: (context, state) {
+        AppSnackbar.errorSnackbar(
+          context: context,
+          failureMessage: S.of(context).cartSyncError,
         );
       },
+      child: BlocSelector<CartCubit, CartState, List<CartItemModel>>(
+        selector: (state) {
+          return state.products.where((p) => p.quantity > 0).toList();
+        },
+        builder: (context, products) {
+          final double screenWidth = MediaQuery.widthOf(context);
+          final deviceType = AppSizes.getDeviceType(screenWidth);
+          return Scaffold(
+            appBar: AppBar(title: Text(S.of(context).cartTitle)),
+            body: SafeArea(
+              child: products.isEmpty
+                  ? _EmptyCart()
+                  : CustomScrollView(
+                      slivers: [
+                        SliverGrid.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            childAspectRatio:
+                                deviceType == DeviceType.smallPhone
+                                    ? 5 / 2
+                                    : 3 / 1,
+                          ),
+                          itemCount: products.length,
+                          itemBuilder: (context, index) {
+                            final product = products[index];
+                            return CartProductCard(product: product);
+                          },
+                        ),
+                        if (products.isNotEmpty)
+                          SliverFillRemaining(
+                            hasScrollBody: false,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [_TotalsCard()],
+                            ),
+                          ),
+                      ],
+                    ),
+            ),
+            bottomNavigationBar:
+                products.isEmpty ? null : const SubmitCartButton(),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+          );
+        },
+      ),
     );
   }
 }
