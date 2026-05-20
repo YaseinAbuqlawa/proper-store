@@ -44,7 +44,7 @@
 
 1. Validates auth and input
 2. Reads cart items from `customers/{uid}/cart` — uses server-locked prices (written by addToCart CF, not client-editable per FR-025)
-3. Calculates order total from server-locked cart prices + shipping cost from `storeConfig`
+3. Calculates order total from server-locked cart prices + shipping cost from `storeConfig`. Discounts (if any) are validated and applied server-side — client-provided discount amounts are not trusted
 4. Reads shipping cost from `storeConfig`
 5. Cancels any existing `awaitingPayment` orders for this user (sets to `expired`)
 6. Creates order document in `orders/` with `orderStatus: awaitingPayment`, `paymentStatus: awaitingPayment`

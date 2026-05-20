@@ -43,7 +43,7 @@
 | paymentStatus        | PaymentStatus   | `PaymentStatus.pending`    | No       | COD orders default to "pending"     |
 | paymobOrderId        | int             | —                          | Yes      | Paymob's intention order ID         |
 | paymobTransactionId  | int             | —                          | Yes      | Paymob's transaction ID from webhook |
-| paymentScreenshot    | String          | —                          | Yes      | Firebase Storage URL (InstaPay)     |
+| paymentScreenshot    | String          | —                          | Yes      | Firebase Storage URL at `instapay-screenshots/{uid}/{orderId}/` (InstaPay) |
 | paymentVerifiedBy    | String          | —                          | Yes      | Admin UID who verified InstaPay     |
 | paymentVerifiedAt    | int             | —                          | Yes      | Epoch ms when admin verified        |
 | paymentRejectionReason | String        | —                          | Yes      | Reason for InstaPay rejection       |

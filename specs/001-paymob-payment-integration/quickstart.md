@@ -54,13 +54,25 @@ npm run build
 firebase deploy --only functions
 ```
 
-### 4. Deploy Security Rules
+### 4. Deploy (Order Matters)
+
+**⚠️ CRITICAL DEPLOYMENT ORDER**: Cart CF migration (FR-025) replaces direct Firestore writes with Cloud Functions. You MUST deploy in this order to avoid breaking the store:
 
 ```bash
-# From project root
+# Step 1: Deploy Cloud Functions FIRST (CFs work alongside existing direct writes)
+cd functions/
+npm run build
+firebase deploy --only functions
+
+# Step 2: Update & deploy client code (store_app now calls CFs instead of direct writes)
+# Build and deploy store_app
+
+# Step 3: Deploy restrictive Firestore rules LAST (blocks direct writes — CFs must be live)
 firebase deploy --only firestore:rules
 firebase deploy --only storage
 ```
+
+**Why this order**: If you deploy restrictive Firestore rules before CFs are live, the existing cart flow breaks (direct writes blocked, CFs not available). Deploy CFs first so the new cart endpoints exist, then update the client, then lock down the rules.
 
 ## Test Credentials
 

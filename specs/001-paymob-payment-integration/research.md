@@ -47,7 +47,7 @@
 
 **Original Decision** ~~(invalidated)~~: ~~Use `file_picker` package for selecting images. Upload to Firebase Storage. Client updates order doc with download URL and transitions `paymentStatus` to `pendingVerification`.~~
 
-**Revised Decision**: Use `file_picker`/`image_picker` for file selection on the client. Upload to Firebase Storage at `instapay-screenshots/{orderId}/`. Then call `uploadInstapayScreenshot` Cloud Function which atomically updates the order's `paymentScreenshot` URL and transitions `paymentStatus` to `pendingVerification` server-side.
+**Revised Decision**: Use `file_picker`/`image_picker` for file selection on the client. Upload to Firebase Storage at `instapay-screenshots/{uid}/{orderId}/` (path-based ownership — Storage rules check `request.auth.uid == uid` without querying Firestore). Then call `uploadInstapayScreenshot` Cloud Function which atomically updates the order's `paymentScreenshot` URL and transitions `paymentStatus` to `pendingVerification` server-side.
 
 **Rationale**: All payment field writes must go through Cloud Functions (Admin SDK) per FR-013/FR-025 security model. Client handles file upload to Storage (secured by Storage rules: owner upload only, admin read only), but the Firestore order document update is server-side only.
 

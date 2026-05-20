@@ -66,6 +66,6 @@
 4. Verify currency is EGP
 5. Locate Firestore order via lookup chain: `merchant_order_id` → `paymobOrderId` match → `extras.firestoreOrderId`
 6. Determine new payment status: voided > refunded > success(paid) > failed
-7. For successful payments: verify `amount_cents` matches order total
+7. For successful payments: verify `amount_cents` matches order total. On mismatch: mark `paymentStatus: failed`, log critical alert with expected vs. received amounts to `auditLogs` (action: `payment.webhook.amount_mismatch`), return HTTP 200 (prevent retries). Do NOT confirm the order.
 8. Atomic Firestore transaction: guard against double payments, validate status transition, update payment status + transaction ID
-9. If payment succeeded: set `orderStatus: pending` (triggers inventory deduction)
+9. If payment succeeded and amount matches: set `orderStatus: pending` (triggers inventory deduction)

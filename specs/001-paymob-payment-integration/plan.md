@@ -12,7 +12,7 @@ Add five payment methods (COD, Card, Wallet, Kiosk, InstaPay) to the Proper Stor
 
 **Language/Version**: Dart (null-safe, Flutter 3.x) + TypeScript (Node 20, Cloud Functions)
 
-**Primary Dependencies**: Flutter, flutter_bloc, freezed, json_serializable, injectable, get_it, go_router, fpdart, firebase_core, cloud_firestore, firebase_auth, cloud_functions, firebase_storage, cached_network_image
+**Primary Dependencies**: Flutter, flutter_bloc, freezed, json_serializable, injectable, get_it, go_router, fpdart, firebase_core, cloud_firestore, firebase_auth, cloud_functions, firebase_storage, cached_network_image, @google-cloud/tasks (Cloud Functions — per-order delayed reconciliation via Google Cloud Tasks, justified by FR-014)
 
 **Storage**: Firebase Firestore (orders, storeConfig, customers), Firebase Storage (payment screenshots)
 
